@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.activity.ActivityMain">
 
@@ -25,13 +26,44 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
             >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <fragment
-                android:id="@+id/frg_slider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.FragmentMainSlider"
-                tools:layout="@layout/fragment_main_slider"/>
+
+
+                <fragment
+                    android:id="@+id/frg_slider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.MianMenu.FragmentSlider"
+                    tools:layout="@layout/fragment_main_slider"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="جدیدترین اخبار"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:padding="5dp"
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"/>
+
+                <fragment
+                    android:id="@+id/frg_main_posts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.MianMenu.FragmentPosts"
+                    tools:layout="@layout/fragment_main_posts"/>
+
+
+            </LinearLayout>
+
 
 
 
@@ -50,11 +82,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="right"
-        android:background="@color/colorPrimaryLight"
+        android:background="@color/colorPrimary"
         android:layoutDirection="rtl"
         >
 
-        <include layout="@layout/main_navigation"/>
+        <fragment
+            android:id="@+id/frg_main_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.MianMenu.FragmentNavigation"
+            tools:layout="@layout/fragment_main_navigation"/>
+
+
 
     </android.support.design.widget.NavigationView>
 

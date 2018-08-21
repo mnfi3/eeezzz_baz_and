@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--fragment_slider-->
-    <dimen name="fragment_main_slider_height">175sp</dimen>
+    <dimen name="fragment_main_slider_height">200sp</dimen>
 
 
     <!--toolbar_main-->
     <dimen name="toolbar_main_height">56dp</dimen>
 
 
+    <!--navigation bar-->
+    <dimen name="navigation_cover_height">150sp</dimen>
+
+
+    <!--item fragment main news-->
+    <dimen name="item_fragment_main_news_height">180dp</dimen>
+    <dimen name="item_fragment_main_news_width">140dp</dimen>
 </resources>

@@ -18,9 +18,9 @@ import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
 
-public class MainSliderService {
+public class SliderMainService {
   private Context context;
-  public MainSliderService(Context context){
+  public SliderMainService(Context context){
     this.context = context;
   }
 
