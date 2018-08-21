@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--fragment_slider-->
+    <dimen name="fragment_main_slider_height">175sp</dimen>
+
+
+    <!--toolbar_main-->
+    <dimen name="toolbar_main_height">56dp</dimen>
+
+
+</resources>

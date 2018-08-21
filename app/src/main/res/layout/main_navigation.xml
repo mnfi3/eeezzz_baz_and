@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150sp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/navigation_cover"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
+            android:id="@+id/lyt_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:paddingBottom="10sp"
+            android:paddingTop="10sp"
+            android:background="#5f000a12"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="0sp"
+
+            >
+
+
+
+            <TextView
+                android:id="@+id/txt_users_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10sp"
+                android:text="کاربر مهمان"
+                android:gravity="center"
+                android:typeface="serif"
+                android:textColor="#fffeff"
+                android:textStyle="italic|bold"
+                android:textSize="16dp"
+                />
+
+            <ImageView
+                android:layout_width="36sp"
+                android:layout_height="36sp"
+                android:src="@drawable/profile"
+                android:layout_marginRight="5sp"
+                android:layout_gravity="center_vertical"
+                android:padding="5sp"/>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+
+            <LinearLayout
+                android:id="@+id/lyt_sing_in"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:orientation="horizontal"
+                android:gravity="right"
+                >
+
+                <TextView
+                    android:id="@+id/txt_register_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10sp"
+                    android:text="ثبت نام / ورود"
+                    android:gravity="center"
+                    android:textColor="#fffeff"
+                    android:textSize="13dp"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/register_login_icon"
+                    android:layout_marginRight="5sp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="5sp"/>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0.5sp"
+                android:background="@color/colorPrimary"/>
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/lyt_blog"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:clickable="true"
+                android:focusable="true"
+                >
+
+                <TextView
+                    android:id="@+id/txt_blog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10sp"
+                    android:text="تازه های دنیای بازی"
+                    android:gravity="center"
+                    android:textColor="#fffeff"
+                    android:textSize="13dp"/>
+
+                <ImageView
+                    android:padding="5sp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/blog_icon"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5sp"/>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
+
+
+
+
+

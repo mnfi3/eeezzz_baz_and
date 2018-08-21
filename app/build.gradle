@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "mohtasham.paydar.sabalan.ezbazi"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:23.4.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //slider
+    implementation 'com.daimajia.slider:library:1.1.5@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
+
+    //recyclerview
+    //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:23.4.0'
+
+    //volley
+    implementation 'com.android.volley:volley:1.0.0'
+
+    //support design
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:23.4.0'
+    implementation 'com.android.support:support-v4:+'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-v4:23.4.0'
+
+    //glide
+//    implementation 'com.github.bumptech.glide:glide:4.8.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+//    implementation 'com.squareup.picasso:picasso:2.71828'
+}

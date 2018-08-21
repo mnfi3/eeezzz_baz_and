@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context=".view.fragment.FragmentMainSlider">
+
+
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_main_slider_height"
+        android:fitsSystemWindows="true"
+        android:background="#aa44dd"
+        />
+
+    <TextView
+        android:id="@+id/txt_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Mohsen"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
