@@ -1,4 +1,4 @@
-package mohtasham.paydar.sabalan.ezbazi.view.fragment.MianMenu;
+package mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +14,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.SliderMainService;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.SliderMainService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
 

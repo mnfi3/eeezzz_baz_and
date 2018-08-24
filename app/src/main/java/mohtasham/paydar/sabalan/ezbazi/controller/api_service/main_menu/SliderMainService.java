@@ -1,4 +1,4 @@
-package mohtasham.paydar.sabalan.ezbazi.controller.api_service;
+package mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu;
 
 import android.content.Context;
 
@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
 import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
 
 public class SliderMainService {

@@ -1,4 +1,4 @@
-package mohtasham.paydar.sabalan.ezbazi.view.fragment.MianMenu;
+package mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

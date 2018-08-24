@@ -44,6 +44,11 @@ public class MyViews extends AppCompatActivity {
     toast.show();
   }
 
+
+
+
+
+
   public static Typeface getIranSansFont(Context context){
     return Typeface.createFromAsset(context.getAssets(), "fonts/IRAN_Sans.ttf");
   }
