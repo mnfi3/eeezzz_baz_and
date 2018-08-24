@@ -1,5 +1,9 @@
 package mohtasham.paydar.sabalan.ezbazi.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainSlider {
   private int id;
   private String title;
@@ -7,6 +11,20 @@ public class MainSlider {
   private String on_click;
   private String image_url;
 
+
+  public static class Parser{
+    public static MainSlider parse(JSONObject sliderObject) throws JSONException {
+      MainSlider slider = new MainSlider();
+      slider.setId(sliderObject.getInt("id"));
+      slider.setTitle(sliderObject.getString("title"));
+      slider.setContent(sliderObject.getString("content"));
+      slider.setOn_click(sliderObject.getString("on_click"));
+      JSONArray photo = sliderObject.getJSONArray("photos");
+      slider.setImage_url(photo.getJSONObject(0).getString("url"));
+
+      return slider;
+    }
+  }
 
 
   public int getId() {

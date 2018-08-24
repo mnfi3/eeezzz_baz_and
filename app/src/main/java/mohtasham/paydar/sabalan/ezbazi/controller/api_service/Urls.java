@@ -10,6 +10,7 @@ public class Urls {
   public static final String POST_INDEX = G.MAIN_URL + "/post";
 
   public static final String SHOP_INDEX = G.MAIN_URL + "/game-for-shop";
+  public static final String RENT_INDEX = G.MAIN_URL + "/game-for-rent";
 
   //======Main Menu=====//
 }

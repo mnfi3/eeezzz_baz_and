@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Video;
 
-public class GameForShop {
+public class GameForRent {
   private int id;
   private int game_info_id;
   private int price;
@@ -27,15 +27,15 @@ public class GameForShop {
 
   public static class Parser{
 
-    public static GameForShop parse(JSONObject jsonObject){
-      GameForShop game = new GameForShop();
+    public static GameForRent parse(JSONObject jsonObject){
+      GameForRent game = new GameForRent();
       try {
         JSONObject game_info_obj= new JSONObject();
         game_info_obj = jsonObject.getJSONObject("game_info");
 
         game.setId(jsonObject.getInt("id"));
         game.setGame_info_id(jsonObject.getInt("game_info_id"));
-        game.setPrice(jsonObject.getInt("price"));
+        game.setPrice(jsonObject.getInt("game_price"));
         game.setIs_pending(jsonObject.getInt("is_pending"));
 
         //game_info

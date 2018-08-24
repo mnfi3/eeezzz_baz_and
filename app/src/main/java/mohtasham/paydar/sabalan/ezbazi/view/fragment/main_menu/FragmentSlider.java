@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -27,43 +28,50 @@ public class FragmentSlider extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_main_slider, container, false);
     sliderLayout = view.findViewById(R.id.slider);
-    setSlider();
+    getSlider();
 
     return view;
   }
 
 
-  private void setSlider(){
-    SliderMainService apiService = new SliderMainService(G.context);
-    apiService.getMainSlider(new SliderMainService.onSliderReceived() {
-      @Override
-      public void onReceived(String message, final List<MainSlider> sliders) {
-        for (int i=0 ; i<sliders.size() ; i++){
-          TextSliderView textSliderView = new TextSliderView(G.context);
-          final int finalI = i;
-          textSliderView
-            .description(sliders.get(i).getTitle())
-            .image(sliders.get(i).getImage_url())
-            .setScaleType(BaseSliderView.ScaleType.Fit)
-            .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-              @Override
-              public void onSliderClick(BaseSliderView slider) {
-                Toast.makeText(G.context, "slider " + sliders.get(finalI).getId(), Toast.LENGTH_SHORT).show();
-              }
-            });
+  private void setSlider(List<MainSlider> sliders){
+    for (int i=0;i<sliders.size();i++){
+      TextSliderView textSliderView = new TextSliderView(G.context);
+     // final int finalI = i;
+      textSliderView
+        .description(sliders.get(i).getTitle())
+        .image(sliders.get(i).getImage_url())
+        .setScaleType(BaseSliderView.ScaleType.Fit)
+        .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+          @Override
+          public void onSliderClick(BaseSliderView slider) {
+           // Toast.makeText(G.context, "slider " + sliders.get(finalI).getId(), Toast.LENGTH_SHORT).show();
+          }
+        });
 
 //          textSliderView
 //            .bundle(new Bundle())
 //            .getBundle().putInt("extra", sliders.get(i).getId());
 
+      sliderLayout.addSlider(textSliderView);
+    }
 
-          sliderLayout.addSlider(textSliderView);
-        }
+    sliderLayout.startAutoCycle();
+    sliderLayout.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+    sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+    sliderLayout.setCustomAnimation(new DescriptionAnimation());
+    sliderLayout.setDuration(6000);
 
+  }
 
+  private void getSlider(){
+    SliderMainService apiService = new SliderMainService(G.context);
+    apiService.getMainSlider(new SliderMainService.onSliderReceived() {
+      @Override
+      public void onReceived(String message, final List<MainSlider> sliders) {
+        setSlider(sliders);
       }
     });
-
   }
 
 

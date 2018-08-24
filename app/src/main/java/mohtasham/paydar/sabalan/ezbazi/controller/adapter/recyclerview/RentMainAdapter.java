@@ -14,16 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
+import mohtasham.paydar.sabalan.ezbazi.model.GameForRent;
 import mohtasham.paydar.sabalan.ezbazi.model.GameForShop;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 
-public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListViewHolder>{
+public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListViewHolder>{
 
 
   private Context context;
-  private List<GameForShop> games;
+  private List<GameForRent> games;
 
-  public ShopMainAdapter(Context context, List<GameForShop> games){
+  public RentMainAdapter(Context context, List<GameForRent> games){
 
     this.context = context;
     this.games = games;
@@ -37,7 +38,7 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
 
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
-    final GameForShop game = games.get(position);
+    final GameForRent game = games.get(position);
     ArrayList<Photo> photos = game.getPhotos();
     if(photos != null) {
       Picasso.with(context).
@@ -99,7 +100,7 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
   }
 
 
-  public void notifyData(List<GameForShop> games1) {
+  public void notifyData(List<GameForRent> games1) {
     //Log.d("notifyData ", myList.size() + "");
     if (games1.size() > 0) {
       for (int i = 0; i < games1.size(); i++) {

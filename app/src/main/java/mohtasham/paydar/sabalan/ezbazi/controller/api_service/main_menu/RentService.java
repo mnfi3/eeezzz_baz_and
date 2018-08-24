@@ -17,36 +17,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
-import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
+import mohtasham.paydar.sabalan.ezbazi.model.GameForRent;
+import mohtasham.paydar.sabalan.ezbazi.model.GameForShop;
+import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 
-public class SliderMainService {
+public class RentService {
   private Context context;
-  public SliderMainService(Context context){
+  public RentService(Context context){
     this.context = context;
   }
 
 
-  public void getMainSlider(final onSliderReceived onSliderReceived){
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.MAIN_SLIDER, null, new Response.Listener<JSONObject>() {
+  public void getRents(final int page_num, final onRentsReceived onRentsReceived){
+    String url = Urls.RENT_INDEX + "?page=" + page_num;
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
-        List<MainSlider> sliders = new ArrayList<>();
         int status = 0;
         String message = "";
         try {
           status = response.getInt("status");
           message = response.getString("message");
-          if (status == 0){
-            onSliderReceived.onReceived(message, sliders);
-          }else {
-            //parse json object
-            JSONArray data = response.getJSONArray("data");
-            for (int i=0 ; i<data.length() ; i++){
-              JSONObject sliderObject = data.getJSONObject(i);
-              sliders.add(MainSlider.Parser.parse(sliderObject));
-            }
-            onSliderReceived.onReceived(message, sliders);
+          List<GameForRent> games =  new ArrayList<>();
+          JSONObject jsonData = response.getJSONObject("data");
+          Paginate paginate = Paginate.Parser.parse(jsonData);
+          JSONArray data = jsonData.getJSONArray("data");
+          for (int i=0 ; i<data.length() ; i++){
+            JSONObject gameObj = data.getJSONObject(i);
+            games.add( GameForRent.Parser.parse(gameObj));
           }
+
+          onRentsReceived.onReceived(status, message, games, paginate);
+
         } catch (JSONException e) {
           e.printStackTrace();
         }
@@ -55,7 +57,7 @@ public class SliderMainService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onSliderReceived.onReceived("", new ArrayList<MainSlider>());
+        onRentsReceived.onReceived(0, "", new ArrayList<GameForRent>(), new Paginate());
       }
     });
 
@@ -63,8 +65,8 @@ public class SliderMainService {
     Volley.newRequestQueue(context).add(request);
   }
 
-  public interface onSliderReceived{
-    void onReceived(String message, List<MainSlider> sliders);
+  public interface onRentsReceived{
+    void onReceived(int status, String message, List<GameForRent> games, Paginate paginate);
   }
 
 
