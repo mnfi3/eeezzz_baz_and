@@ -2,6 +2,7 @@ package mohtasham.paydar.sabalan.ezbazi.controller.system;
 
 import android.app.Application;
 import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.provider.Settings.Secure;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -23,16 +24,12 @@ import javax.crypto.spec.SecretKeySpec;
 public class G extends Application {
 
   public static Context context;
-//  public static final String MAIN_URL="http://pinterest.ud";
-//  public static final String MAIN_URL="http://192.168.10.107/pinterest";
-  public static final String MAIN_URL="http://192.168.1.8/izi-bazi.ud/api";
-//  public static final String MAIN_URL="http://192.168.43.225/pinterest";
+  public static final String MAIN_URL="http://192.168.10.83/izi-bazi.ud/api";
   public static final String SALT="7c3d596ed03ab9116c547b0eb678b247";
 
   public static final String SALT_COPY="7c3d596ed03ab9116c547b0eb678b247";
 
   private static final String AES = "AES";
-  public static final String APP_NAME = "pinterest";
 
   public static  boolean isLoggedIn = false;
 
@@ -87,6 +84,11 @@ public class G extends Application {
     return android.os.Build.MODEL;
   }
 
+  private static String getWifiMac(){
+    WifiManager wm = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+    return wm.getConnectionInfo().getMacAddress();
+  }
+
 
 
   public static String getAndroidId(Context context){
@@ -127,8 +129,8 @@ public class G extends Application {
   public static String getClientKey(String username){
     return G.getHashedString(
         G.SALT +
-       // G.getDeviceId(G.context) +
-        username +
+        G.getWifiMac() +
+//        username +
         G.getDeviceModel()
        // G.getSubscriberId(G.context)
        // G.getAndroidId(G.context)
@@ -175,24 +177,26 @@ public class G extends Application {
 
 
   public static SecretKeySpec generateKey() {
-    byte[] ENCRYPTION_KEY = new byte[]{
-        '0',(byte)getHashedString(SALT).charAt(20),
-        '4',(byte)getHashedString(SALT).charAt(16),
-        '3',(byte)getHashedString(SALT).charAt(14),
-        'i',(byte)getHashedString(SALT).charAt(4) ,
-        'm',(byte)getHashedString(SALT).charAt(0) ,
-        'a',(byte)getHashedString(SALT).charAt(6) ,
-        'j',(byte)getHashedString(SALT).charAt(13),
-        'r',(byte)getHashedString(SALT).charAt(15),
-        'a',(byte)getHashedString(SALT).charAt(26),
-        'F',(byte)getHashedString(SALT).charAt(30),
-        'n',(byte)getHashedString(SALT).charAt(18),
-        'e',(byte)getHashedString(SALT).charAt(7) ,
-        's',(byte)getHashedString(SALT).charAt(2) ,
-        'h',(byte)getHashedString(SALT).charAt(25),
-        'o',(byte)getHashedString(SALT).charAt(30),
-        'M',(byte)getHashedString(SALT).charAt(29),
-      };
+//    byte[] ENCRYPTION_KEY = new byte[]{
+//        '0',(byte)getHashedString(SALT).charAt(20),
+//        '4',(byte)getHashedString(SALT).charAt(16),
+//        '3',(byte)getHashedString(SALT).charAt(14),
+//        'i',(byte)getHashedString(SALT).charAt(4) ,
+//        'm',(byte)getHashedString(SALT).charAt(0) ,
+//        'a',(byte)getHashedString(SALT).charAt(6) ,
+//        'j',(byte)getHashedString(SALT).charAt(13),
+//        'r',(byte)getHashedString(SALT).charAt(15),
+//        'a',(byte)getHashedString(SALT).charAt(26),
+//        'F',(byte)getHashedString(SALT).charAt(30),
+//        'n',(byte)getHashedString(SALT).charAt(18),
+//        'e',(byte)getHashedString(SALT).charAt(7) ,
+//        's',(byte)getHashedString(SALT).charAt(2) ,
+//        'h',(byte)getHashedString(SALT).charAt(25),
+//        'o',(byte)getHashedString(SALT).charAt(30),
+//        'M',(byte)getHashedString(SALT).charAt(29),
+//      };
+//
+    byte[] ENCRYPTION_KEY = getHashedString(MAIN_URL).getBytes();
     return new SecretKeySpec(ENCRYPTION_KEY, AES);
   }
 

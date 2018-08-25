@@ -51,7 +51,7 @@
             <ImageView
                 android:layout_width="36sp"
                 android:layout_height="36sp"
-                android:src="@drawable/profile"
+                android:src="@drawable/ic_profile"
                 android:layout_marginRight="5sp"
                 android:layout_gravity="center_vertical"
                 android:padding="5sp"/>
@@ -78,7 +78,7 @@
 
 
             <LinearLayout
-                android:id="@+id/lyt_sing_in"
+                android:id="@+id/lyt_login"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:orientation="horizontal"
@@ -165,8 +165,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10sp"
-                    android:text="فروشی ها"
                     android:gravity="center"
+                    android:text="بازی های فروشی"
                     android:textColor="#fffeff"
                     android:textSize="13dp"/>
 
@@ -194,7 +194,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10sp"
                     android:gravity="center"
-                    android:text="کرایه"
+                    android:text="بازی های کرایه ای"
                     android:textColor="#fffeff"
                     android:textSize="13dp"/>
 
@@ -221,8 +221,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10sp"
-                    android:text="اشتراک"
                     android:gravity="center"
+                    android:text="بازی های به اشتراک گذاشته شده"
                     android:textColor="#fffeff"
                     android:textSize="13dp"/>
 
@@ -347,8 +347,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10sp"
-                    android:text="درباره ما"
                     android:gravity="center"
+                    android:text="نظرات و پیشنهادات"
                     android:textColor="#fffeff"
                     android:textSize="13dp"/>
 
@@ -401,8 +401,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10sp"
-                    android:text="نظرات و پیشنهادات"
                     android:gravity="center"
+                    android:text="درباره ما"
                     android:textColor="#fffeff"
                     android:textSize="13dp"/>
 

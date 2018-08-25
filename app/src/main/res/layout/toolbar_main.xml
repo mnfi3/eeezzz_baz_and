@@ -12,6 +12,8 @@
         android:layout_height="@dimen/toolbar_main_height"
         android:background="@color/colorPrimaryDark"
         app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_behavior=".view.ToolbarBackgroundAlphaBehavior"
         >
 
         <LinearLayout
@@ -22,10 +24,9 @@
             <ImageView
                 android:layout_width="36sp"
                 android:layout_height="36sp"
+                android:baselineAligned="false"
                 android:padding="8sp"
-                android:src="@drawable/ic_search"
-                />
-
+                android:src="@drawable/ic_search"/>
 
 
             <LinearLayout
@@ -37,12 +38,11 @@
                 android:id="@+id/img_open_navigation"
                 android:layout_width="36sp"
                 android:layout_height="36sp"
-                android:padding="8sp"
                 android:layout_marginRight="10sp"
-                android:src="@drawable/ic_menu"
                 android:background="@drawable/back_buttons_ripple_effect"
+                android:padding="8sp"
+                android:src="@drawable/ic_menu"
                 />
-
 
 
         </LinearLayout>

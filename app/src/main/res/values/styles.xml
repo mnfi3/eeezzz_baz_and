@@ -11,6 +11,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowFullscreen">false</item>
 
+        <item name="android:textColorHint">@color/main_text_color</item>
+
 
 
 

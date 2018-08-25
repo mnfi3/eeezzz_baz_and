@@ -13,8 +13,8 @@
 
 
     <!--item fragment main news-->
-    <dimen name="item_fragment_main_news_height">200dp</dimen>
-    <dimen name="item_fragment_main_news_width">170dp</dimen>
+    <dimen name="item_fragment_main_news_height">140dp</dimen>
+    <dimen name="item_fragment_main_news_width">300dp</dimen>
 
     <dimen name="item_fragment_main_games_height">140dp</dimen>
     <dimen name="item_fragment_main_games_width">100dp</dimen>

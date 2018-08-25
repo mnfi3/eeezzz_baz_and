@@ -3,10 +3,16 @@
     <color name="colorPrimary">#12262c</color>
     <color name="colorPrimaryDark">#12262c</color>
     <color name="colorPrimaryLight">#4f5b62</color>
-    <color name="colorAccent">#6056f1</color>
+    <color name="colorAccent">#6fae3d</color>
 
     <color name="status_bar_color">#0e1323</color>
     <color name="text_color">#fafafa</color>
+
+    <color name="main_text_color">#fefefe</color>
+    <color name="main_button_color">#0099cc</color>
+    <color name="main_link_color">#0382ad</color>
+
+
 
 
 </resources>

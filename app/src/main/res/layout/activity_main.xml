@@ -117,6 +117,7 @@
 
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="right"
@@ -124,12 +125,11 @@
         android:layoutDirection="rtl"
         >
 
-        <fragment
-            android:id="@+id/frg_main_navigation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentNavigation"
-            tools:layout="@layout/fragment_main_navigation"/>
+        <FrameLayout
+            android:id="@+id/lyt_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
 
 
 
