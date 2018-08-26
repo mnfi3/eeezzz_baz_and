@@ -32,6 +32,7 @@ public class FragmentPosts extends Fragment {
     rcv_posts = view.findViewById(R.id.rcv_posts);
     rcv_posts.setLayoutManager((new LinearLayoutManager(G.context,LinearLayoutManager.HORIZONTAL,true)));
     getPosts();
+
     return view;
   }
 

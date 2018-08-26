@@ -13,4 +13,15 @@ public class Urls {
   public static final String RENT_INDEX = G.MAIN_URL + "/game-for-rent";
 
   //======Main Menu=====//
+
+
+  //---passport service---//
+
+  public static final String LOGIN = G.MAIN_URL + "/login";
+  public static final String REGISTER = G.MAIN_URL + "/register";
+  public static final String USER = G.MAIN_URL + "/user";
+  public static final String LOGOUT = G.MAIN_URL + "/logout";
+
+  //===passport service===//
+
 }

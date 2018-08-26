@@ -16,7 +16,8 @@
         android:id="@+id/txt_toast_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/main_text_color"
+        android:textSize="@dimen/font_size_medium"
         />
 
 </LinearLayout>

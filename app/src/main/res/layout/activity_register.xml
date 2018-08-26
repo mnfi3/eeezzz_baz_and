@@ -34,7 +34,7 @@
                 android:layout_marginTop="20sp">
 
                 <EditText
-                    android:id="@+id/first_name"
+                    android:id="@+id/edt_first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30sp"
@@ -44,7 +44,8 @@
                     android:hint="نام"
                     android:inputType=""
                     android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"/>
+                    android:textColorHint="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"/>
 
 
             </android.support.design.widget.TextInputLayout>
@@ -65,7 +66,32 @@
                     android:hint="نام خانوادگی"
                     android:inputType=""
                     android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"/>
+                    android:textColorHint="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp">
+
+                <EditText
+                    android:id="@+id/edt_mobile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30sp"
+                    android:layout_marginLeft="16sp"
+                    android:layout_marginRight="16sp"
+                    android:drawablePadding="16sp"
+                    android:hint="شماره موبایل"
+                    android:inputType="phone"
+                    android:textColor="@color/main_text_color"
+                    android:textColorHint="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -86,7 +112,8 @@
                     android:hint="نام کاربری"
                     android:inputType=""
                     android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"/>
+                    android:textColorHint="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"/>
 
 
             </android.support.design.widget.TextInputLayout>
@@ -107,7 +134,8 @@
                     android:hint="ایمیل"
                     android:inputType=""
                     android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"/>
+                    android:textColorHint="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"/>
 
 
             </android.support.design.widget.TextInputLayout>
@@ -125,7 +153,8 @@
                     android:hint="کلمه عبور"
                     android:inputType="textPassword"
                     android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"/>
+                    android:textColorHint="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"/>
 
 
             </android.support.design.widget.TextInputLayout>
@@ -143,7 +172,8 @@
                     android:hint="تکرار کلمه عبور"
                     android:inputType="textPassword"
                     android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"/>
+                    android:textColorHint="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"/>
 
 
             </android.support.design.widget.TextInputLayout>
@@ -176,7 +206,7 @@
 
 
             <Button
-                android:id="@+id/btn_sign_in"
+                android:id="@+id/btn_register"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20sp"
@@ -187,7 +217,7 @@
 
 
             <ProgressBar
-                android:id="@+id/prg_login"
+                android:id="@+id/prg_register"
                 style="@style/AppTheme"
                 android:layout_width="48dp"
                 android:layout_height="48dp"

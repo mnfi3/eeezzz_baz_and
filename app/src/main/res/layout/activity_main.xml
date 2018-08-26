@@ -38,40 +38,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentSlider"
-                    tools:layout="@layout/fragment_main_slider"/>
+                    tools:layout="@layout/fragment_main_slider"
+                    />
 
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:text="جدیدترین اخبار"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:padding="5dp"
-                    android:textColor="@color/text_color"
-                    android:textStyle="bold"/>
 
                 <fragment
                     android:id="@+id/frg_main_posts"
+                    android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentPosts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentPosts"
                     tools:layout="@layout/fragment_main_posts"/>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:text="بازی های فروشی"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:padding="5dp"
-                    android:textColor="@color/text_color"
-                    android:textStyle="bold"/>
+
 
                 <fragment
                     android:id="@+id/frg_main_shops"
@@ -81,17 +60,7 @@
                     tools:layout="@layout/fragment_main_shops"/>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:text="بازی های اجاره ای"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:padding="5dp"
-                    android:textColor="@color/text_color"
-                    android:textStyle="bold"/>
+
 
                 <fragment
                     android:id="@+id/frg_main_rents"

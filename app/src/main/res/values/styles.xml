@@ -16,6 +16,22 @@
 
 
 
+
+    </style>
+
+    <style name="AppThemeFullScreen" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowFullscreen">true</item>
+
+        <item name="android:textColorHint">@color/main_text_color</item>
+
+
+
+
+
     </style>
 
 </resources>

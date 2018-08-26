@@ -83,6 +83,7 @@
                 android:layout_height="42dp"
                 android:orientation="horizontal"
                 android:gravity="right"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -122,6 +123,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -159,6 +161,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -186,6 +189,7 @@
                 android:focusable="true"
                 android:gravity="right"
                 android:orientation="horizontal"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -215,6 +219,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -251,6 +256,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -278,6 +284,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -305,6 +312,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -341,6 +349,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -368,6 +377,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView
@@ -395,6 +405,7 @@
                 android:gravity="right"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@drawable/back_buttons_ripple_effect"
                 >
 
                 <TextView

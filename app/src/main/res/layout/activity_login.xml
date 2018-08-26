@@ -25,7 +25,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:layout_marginTop="20dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
@@ -44,7 +45,8 @@
                     android:textColor="@color/main_text_color"
                     android:drawableRight="@drawable/ic_email"
                     android:drawablePadding="16sp"
-                    android:inputType=""/>
+                    android:textSize="@dimen/font_size_medium"
+                    />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -63,7 +65,8 @@
                     android:textColorHint="@color/main_text_color"
                     android:drawableRight="@drawable/ic_lock"
                     android:drawablePadding="16sp"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/font_size_medium"/>
 
 
             </android.support.design.widget.TextInputLayout>
@@ -98,7 +101,7 @@
 
 
             <Button
-                android:id="@+id/btn_sign_in"
+                android:id="@+id/btn_login"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:text="ورود"
@@ -114,17 +117,18 @@
                 android:id="@+id/txt_forget_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15sp"
+                android:layout_marginTop="30dp"
                 android:text="کلمه عبور را فراموش کرده ام"
                 android:textStyle="bold"
                 android:textColor="@color/main_link_color"
-                android:padding="4dp"/>
+                android:padding="4dp"
+                />
 
             <TextView
                 android:id="@+id/txt_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10sp"
+                android:layout_marginTop="15sp"
                 android:textStyle="bold"
                 android:text="ایجاد حساب کاربری"
                 android:textColor="@color/main_link_color"

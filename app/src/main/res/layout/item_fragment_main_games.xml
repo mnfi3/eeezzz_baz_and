@@ -48,7 +48,6 @@
             android:padding="1dp"
             android:typeface="serif"
             android:textColor="#fffeff"
-            android:textStyle="italic|bold"
             android:textSize="10dp"
             />
 
