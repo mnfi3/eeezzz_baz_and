@@ -30,11 +30,14 @@ public class AccountService {
         int status = 0;
         String message = "";
         String token = "";
+        User user = new User();
         try {
           status = response.getInt("status");
           message = response.getString("message");
-
-          onLoginComplete.onComplete(status, message, token);
+          token = response.getJSONObject("data").getString("token");
+          JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
+          user = User.Parser.parse(userObj);
+          onLoginComplete.onComplete(status, message, token, user);
 
         } catch (JSONException e) {
           e.printStackTrace();
@@ -44,7 +47,7 @@ public class AccountService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onLoginComplete.onComplete(0, "", "");
+        onLoginComplete.onComplete(0, "", "", new User());
       }
     });
 
@@ -65,6 +68,10 @@ public class AccountService {
         try {
           status = response.getInt("status");
           message = response.getString("message");
+          token = response.getJSONObject("data").getString("token");
+          JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
+
+          user = User.Parser.parse(userObj);
 
           onRegisterComplete.onComplete(status, message, token, user);
 
@@ -77,7 +84,7 @@ public class AccountService {
       @Override
       public void onErrorResponse(VolleyError error) {
 
-        onRegisterComplete.onComplete(0, "fdfd", "", new User());
+        onRegisterComplete.onComplete(0, "مشکل در ارتباط با سرور", "", new User());
       }
     });
 
@@ -96,7 +103,7 @@ public class AccountService {
 
 
   public interface onLoginComplete{
-    void onComplete(int status, String message, String token);
+    void onComplete(int status, String message, String token, User user);
   }
 
 

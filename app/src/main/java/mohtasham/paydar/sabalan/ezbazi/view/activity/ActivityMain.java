@@ -1,7 +1,6 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;

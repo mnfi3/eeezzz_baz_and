@@ -14,16 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.model.GameForShop;
+import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 
 public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListViewHolder>{
 
 
   private Context context;
-  private List<GameForShop> games;
+  private List<Game> games;
 
-  public ShopMainAdapter(Context context, List<GameForShop> games){
+  public ShopMainAdapter(Context context, List<Game> games){
 
     this.context = context;
     this.games = games;
@@ -37,9 +37,8 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
 
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
-    final GameForShop game = games.get(position);
+    final Game game = games.get(position);
     ArrayList<Photo> photos = game.getPhotos();
-    if(photos != null) {
       Picasso.with(context).
         load(photos.get(0).getUrl())
 //      .noFade()
@@ -48,11 +47,9 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
         //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
         //.error(context.getResources().getDrawable(R.drawable.default_no_image))
         .into(holder.img_game);
-    }
 
-    if(game.getName().length() > 0) {
-      holder.txt_game_name.setText(game.getName());
-    }
+    holder.txt_game_name.setText(game.getName());
+    holder.txt_release_date.setText(game.getProduction_date());
 
 
 
@@ -87,11 +84,13 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
 
     private ImageView img_game;
     private TextView txt_game_name;
+    private TextView txt_release_date;
 
     public ListViewHolder(View itemView) {
       super(itemView);
       img_game = itemView.findViewById(R.id.img_game);
-      txt_game_name= itemView.findViewById(R.id.txt_game_name);
+      txt_game_name = itemView.findViewById(R.id.txt_game_name);
+      txt_release_date = itemView.findViewById(R.id.txt_release_date);
 
     }
 
@@ -99,7 +98,7 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
   }
 
 
-  public void notifyData(List<GameForShop> games1) {
+  public void notifyData(List<Game> games1) {
     //Log.d("notifyData ", myList.size() + "");
     if (games1.size() > 0) {
       for (int i = 0; i < games1.size(); i++) {

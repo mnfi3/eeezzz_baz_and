@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
-import mohtasham.paydar.sabalan.ezbazi.model.GameForRent;
-import mohtasham.paydar.sabalan.ezbazi.model.GameForShop;
+import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 
 public class RentService {
@@ -38,13 +37,13 @@ public class RentService {
         try {
           status = response.getInt("status");
           message = response.getString("message");
-          List<GameForRent> games =  new ArrayList<>();
+          List<Game> games =  new ArrayList<>();
           JSONObject jsonData = response.getJSONObject("data");
           Paginate paginate = Paginate.Parser.parse(jsonData);
           JSONArray data = jsonData.getJSONArray("data");
           for (int i=0 ; i<data.length() ; i++){
             JSONObject gameObj = data.getJSONObject(i);
-            games.add( GameForRent.Parser.parse(gameObj));
+            games.add( Game.Parser.parse(gameObj));
           }
 
           onRentsReceived.onReceived(status, message, games, paginate);
@@ -57,7 +56,7 @@ public class RentService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onRentsReceived.onReceived(0, "", new ArrayList<GameForRent>(), new Paginate());
+        onRentsReceived.onReceived(0, "", new ArrayList<Game>(), new Paginate());
       }
     });
 
@@ -66,7 +65,7 @@ public class RentService {
   }
 
   public interface onRentsReceived{
-    void onReceived(int status, String message, List<GameForRent> games, Paginate paginate);
+    void onReceived(int status, String message, List<Game> games, Paginate paginate);
   }
 
 

@@ -31,9 +31,15 @@
         </activity>
         <activity android:name=".view.activity.ActivityPhoneAccept">
         </activity>
-        <activity android:name=".view.activity.ActivityShowGame"
+        <activity
+            android:name=".view.activity.ActivityShowGame"
             android:theme="@style/AppThemeFullScreen">
         </activity>
+        <activity android:name=".view.activity.ActivityListShop">
+        </activity>
+        <activity android:name=".view.activity.ActivityListRent">
+        </activity>
+        <activity android:name=".view.activity.ActivityListPost"/>
     </application>
 
 </manifest>

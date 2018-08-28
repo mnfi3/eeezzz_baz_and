@@ -9,6 +9,7 @@ public class Post {
   private String title;
   private String content;
   private String image_url;
+  private String created_at;
 
   public static class Parser{
     public static Post parse(JSONObject postObj){
@@ -17,6 +18,7 @@ public class Post {
         post.setId(postObj.getInt("id"));
         post.setTitle(postObj.getString("title"));
         post.setContent(postObj.getString("content"));
+        post.setCreated_at(postObj.getString("created_at"));
         post.setImage_url(postObj.getJSONArray("photos").getJSONObject(0).getString("url"));
       } catch (JSONException e) {
         e.printStackTrace();
@@ -26,6 +28,15 @@ public class Post {
     }
   }
 
+
+
+  public String getCreated_at() {
+    return created_at;
+  }
+
+  public void setCreated_at(String created_at) {
+    this.created_at = created_at;
+  }
 
   public int getId() {
     return id;

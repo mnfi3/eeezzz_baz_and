@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Video;
 
-public class GameForShop {
+public class Game {
   private int id;
   private int game_info_id;
   private int price;
@@ -24,11 +24,13 @@ public class GameForShop {
   private String description;
   private ArrayList<Photo> photos;
   private ArrayList<Video> videos;
+  private ArrayList<String> genres;
+  private String console_name;
 
   public static class Parser{
 
-    public static GameForShop parse(JSONObject jsonObject){
-      GameForShop game = new GameForShop();
+    public static Game parse(JSONObject jsonObject){
+      Game game = new Game();
       try {
         JSONObject game_info_obj= new JSONObject();
         game_info_obj = jsonObject.getJSONObject("game_info");
@@ -65,6 +67,17 @@ public class GameForShop {
         }
         game.setVideos(videos);
 
+        JSONArray genreArray = game_info_obj.getJSONArray("genres");
+        ArrayList<String> genres = new ArrayList<>();
+        for (int i=0 ; i<genreArray.length() ; i++){
+          String genre;
+          genre = genreArray.getJSONObject(i).getString("name");
+          genres.add(genre);
+        }
+        game.setGenres(genres);
+
+        game.setConsole_name(game_info_obj.getJSONObject("console").getString("name"));
+
       } catch (JSONException e) {
         e.printStackTrace();
       }
@@ -72,6 +85,17 @@ public class GameForShop {
     }
   }
 
+
+
+
+
+  public String getConsole_name() {
+    return console_name;
+  }
+
+  public void setConsole_name(String console_name) {
+    this.console_name = console_name;
+  }
 
   public int getId() {
     return id;
@@ -185,6 +209,23 @@ public class GameForShop {
 
   public void setVideos(ArrayList<Video> videos) {
     this.videos = videos;
+  }
+
+
+  public int getIs_pending() {
+    return is_pending;
+  }
+
+  public int getCan_play_online() {
+    return can_play_online;
+  }
+
+  public ArrayList<String> getGenres() {
+    return genres;
+  }
+
+  public void setGenres(ArrayList<String> genres) {
+    this.genres = genres;
   }
 
 

@@ -14,20 +14,21 @@
 
     <!--item fragment main news-->
     <dimen name="item_fragment_main_posts_height">160dp</dimen>
-    <dimen name="item_fragment_main_posts_width">300dp</dimen>
+    <dimen name="item_fragment_main_posts_width">200dp</dimen>
 
-    <dimen name="item_fragment_main_games_height">140dp</dimen>
+    <dimen name="item_fragment_main_games_height">120dp</dimen>
     <dimen name="item_fragment_main_games_width">100dp</dimen>
 
 
     <!--font size-->
+    <dimen name="font_size_very_small">9dp</dimen>
     <dimen name="font_size_small">12dp</dimen>
     <dimen name="font_size_medium">15dp</dimen>
     <dimen name="font_size_large">16dp</dimen>
 
     <!--item list games-->
-    <dimen name="item_list_games_height">160dp</dimen>
+    <dimen name="item_list_games_height">120dp</dimen>
 
-    <dimen name="item_list_games_image_height">160dp</dimen>
-    <dimen name="item_list_games_image_width">120dp</dimen>
+    <dimen name="item_list_games_image_height">120dp</dimen>
+    <dimen name="item_list_games_image_width">100dp</dimen>
 </resources>

@@ -21,6 +21,8 @@ import java.util.regex.Pattern;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.AccountService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
+import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class ActivityLogin extends AppCompatActivity {
@@ -111,9 +113,13 @@ public class ActivityLogin extends AppCompatActivity {
         service = new AccountService(ActivityLogin.this);
         service.login(object, new AccountService.onLoginComplete() {
           @Override
-          public void onComplete(int status, String message, String token) {
+          public void onComplete(int status, String message, String token, User user) {
             prg_login.setVisibility(View.INVISIBLE);
             MyViews.makeText(ActivityLogin.this, message, Toast.LENGTH_SHORT);
+            if(status == 1){
+              UserSharedPrefManager prefManager = new UserSharedPrefManager(ActivityLogin.this);
+              prefManager.saveUser(user);
+            }
           }
         });
 

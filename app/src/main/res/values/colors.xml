@@ -9,6 +9,7 @@
     <color name="text_color">#fefefe</color>
 
     <color name="main_text_color">#fefefe</color>
+    <color name="gray_text_color">#c4c3c3</color>
     <color name="main_button_color">#0099cc</color>
     <color name="main_link_color">#0382ad</color>
 

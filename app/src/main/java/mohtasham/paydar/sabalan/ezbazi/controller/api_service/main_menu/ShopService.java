@@ -17,10 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
-import mohtasham.paydar.sabalan.ezbazi.model.GameForShop;
-import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
+import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
-import mohtasham.paydar.sabalan.ezbazi.model.Post;
 
 public class ShopService {
   private Context context;
@@ -39,13 +37,13 @@ public class ShopService {
         try {
           status = response.getInt("status");
           message = response.getString("message");
-          List<GameForShop> games =  new ArrayList<>();
+          List<Game> games =  new ArrayList<>();
           JSONObject jsonData = response.getJSONObject("data");
           Paginate paginate = Paginate.Parser.parse(jsonData);
           JSONArray data = jsonData.getJSONArray("data");
           for (int i=0 ; i<data.length() ; i++){
             JSONObject gameObj = data.getJSONObject(i);
-            games.add( GameForShop.Parser.parse(gameObj));
+            games.add( Game.Parser.parse(gameObj));
           }
 
 
@@ -59,7 +57,7 @@ public class ShopService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onShopsReceived.onReceived(0, "", new ArrayList<GameForShop>(), new Paginate());
+        onShopsReceived.onReceived(0, "", new ArrayList<Game>(), new Paginate());
       }
     });
 
@@ -68,7 +66,7 @@ public class ShopService {
   }
 
   public interface onShopsReceived{
-    void onReceived(int status, String message, List<GameForShop> games, Paginate paginate);
+    void onReceived(int status, String message, List<Game> games, Paginate paginate);
   }
 
 

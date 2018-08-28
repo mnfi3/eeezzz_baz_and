@@ -17,13 +17,13 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 
-public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListViewHolder>{
+public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ListViewHolder>{
 
 
   private Context context;
   private List<Game> games;
 
-  public RentMainAdapter(Context context, List<Game> games){
+  public GameListAdapter(Context context, List<Game> games){
 
     this.context = context;
     this.games = games;
@@ -31,7 +31,7 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
 
   @Override
   public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view= LayoutInflater.from(context).inflate(R.layout.item_fragment_main_games,parent,false);
+    View view= LayoutInflater.from(context).inflate(R.layout.item_list_games,parent,false);
     return new ListViewHolder(view);
   }
 
@@ -48,8 +48,9 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
         //.error(context.getResources().getDrawable(R.drawable.default_no_image))
         .into(holder.img_game);
 
-    holder.txt_game_name.setText(game.getName());
-    holder.txt_release_date.setText(game.getProduction_date());
+      holder.txt_name.setText(game.getName());
+      holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
+      holder.txt_rating.setText("امتیاز : " + "4.5");
 
 
 
@@ -83,14 +84,16 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
   public class ListViewHolder extends RecyclerView.ViewHolder{
 
     private ImageView img_game;
-    private TextView txt_game_name;
+    private TextView txt_name;
+    private TextView txt_rating;
     private TextView txt_release_date;
 
     public ListViewHolder(View itemView) {
       super(itemView);
       img_game = itemView.findViewById(R.id.img_game);
-      txt_game_name = itemView.findViewById(R.id.txt_game_name);
-      txt_release_date = itemView.findViewById(R.id.txt_release_date);
+      txt_name= itemView.findViewById(R.id.txt_name);
+      txt_rating= itemView.findViewById(R.id.txt_rating);
+      txt_release_date= itemView.findViewById(R.id.txt_release_date);
 
     }
 

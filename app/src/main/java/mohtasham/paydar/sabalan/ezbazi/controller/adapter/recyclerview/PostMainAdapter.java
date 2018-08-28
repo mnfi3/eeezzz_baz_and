@@ -49,6 +49,7 @@ public class PostMainAdapter extends RecyclerView.Adapter<PostMainAdapter.ListVi
       .into(holder.img_post);
 
     holder.txt_post_title.setText(post.getTitle());
+    holder.txt_post_date.setText(post.getCreated_at());
 
 
 
@@ -83,11 +84,13 @@ public class PostMainAdapter extends RecyclerView.Adapter<PostMainAdapter.ListVi
 
     private ImageView img_post;
     private TextView txt_post_title;
+    private TextView txt_post_date;
 
     public ListViewHolder(View itemView) {
       super(itemView);
       img_post = itemView.findViewById(R.id.img_post);
-      txt_post_title= itemView.findViewById(R.id.txt_post_title);
+      txt_post_title = itemView.findViewById(R.id.txt_post_title);
+      txt_post_date = itemView.findViewById(R.id.txt_post_date);
 
     }
 

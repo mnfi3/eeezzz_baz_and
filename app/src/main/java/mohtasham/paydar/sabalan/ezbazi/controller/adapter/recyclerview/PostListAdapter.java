@@ -10,46 +10,43 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.model.Game;
-import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
+import mohtasham.paydar.sabalan.ezbazi.model.Post;
 
-public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListViewHolder>{
+public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ListViewHolder>{
 
 
   private Context context;
-  private List<Game> games;
+  private List<Post> posts;
 
-  public RentMainAdapter(Context context, List<Game> games){
+  public PostListAdapter(Context context, List<Post> posts){
 
     this.context = context;
-    this.games = games;
+    this.posts = posts;
   }
 
   @Override
   public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view= LayoutInflater.from(context).inflate(R.layout.item_fragment_main_games,parent,false);
+    View view= LayoutInflater.from(context).inflate(R.layout.item_list_posts,parent,false);
     return new ListViewHolder(view);
   }
 
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
-    final Game game = games.get(position);
-    ArrayList<Photo> photos = game.getPhotos();
-      Picasso.with(context).
-        load(photos.get(0).getUrl())
+    final Post post = posts.get(position);
+    Picasso.with(context).
+      load(post.getImage_url())
 //      .noFade()
 //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
 //      .skipMemoryCache()
-        //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
-        //.error(context.getResources().getDrawable(R.drawable.default_no_image))
-        .into(holder.img_game);
+      //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
+      //.error(context.getResources().getDrawable(R.drawable.default_no_image))
+      .into(holder.img_post);
 
-    holder.txt_game_name.setText(game.getName());
-    holder.txt_release_date.setText(game.getProduction_date());
+    holder.txt_post_title.setText(post.getTitle());
+    holder.txt_post_date.setText(post.getCreated_at());
 
 
 
@@ -77,20 +74,20 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
 
   @Override
   public int getItemCount() {
-    return games.size();
+    return posts.size();
   }
 
   public class ListViewHolder extends RecyclerView.ViewHolder{
 
-    private ImageView img_game;
-    private TextView txt_game_name;
-    private TextView txt_release_date;
+    private ImageView img_post;
+    private TextView txt_post_title;
+    private TextView txt_post_date;
 
     public ListViewHolder(View itemView) {
       super(itemView);
-      img_game = itemView.findViewById(R.id.img_game);
-      txt_game_name = itemView.findViewById(R.id.txt_game_name);
-      txt_release_date = itemView.findViewById(R.id.txt_release_date);
+      img_post = itemView.findViewById(R.id.img_post);
+      txt_post_title = itemView.findViewById(R.id.txt_post_title);
+      txt_post_date = itemView.findViewById(R.id.txt_post_date);
 
     }
 
@@ -98,13 +95,13 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
   }
 
 
-  public void notifyData(List<Game> games1) {
+  public void notifyData(List<Post> newPosts) {
     //Log.d("notifyData ", myList.size() + "");
-    if (games1.size() > 0) {
-      for (int i = 0; i < games1.size(); i++) {
-        this.games.add(games1.get(i));
+    if (newPosts.size() > 0) {
+      for (int i = 0; i < newPosts.size(); i++) {
+        this.posts.add(newPosts.get(i));
       }
-      this.notifyItemInserted(games.size() - 1);
+      this.notifyItemInserted(posts.size() - 1);
 
       //notifyDataSetChanged();
     }
@@ -112,8 +109,8 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
 
 
   public void clear() {
-    final int size = games.size();
-    games.clear();
+    final int size = posts.size();
+    posts.clear();
     notifyItemRangeRemoved(0, size);
   }
 

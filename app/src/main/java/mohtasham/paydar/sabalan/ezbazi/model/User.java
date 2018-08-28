@@ -1,5 +1,8 @@
 package mohtasham.paydar.sabalan.ezbazi.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class User {
   private int id;
   private String first_name;
@@ -8,6 +11,52 @@ public class User {
   private String mobile_number;
   private String email;
   private String password;
+  private String invite_code;
+
+  private String client_key;
+  private String token;
+
+
+
+  public String getInvite_code() {
+    return invite_code;
+  }
+
+  public void setInvite_code(String invite_code) {
+    this.invite_code = invite_code;
+  }
+
+  public String getClient_key() {
+    return client_key;
+  }
+
+  public void setClient_key(String client_key) {
+    this.client_key = client_key;
+  }
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
+
+
+  public static class Parser{
+    public static User parse(JSONObject object) throws JSONException {
+      User user = new User();
+      user.setId(object.getInt("id"));
+      user.setFirst_name(object.getString("first_name"));
+      user.setLast_name(object.getString("last_name"));
+      user.setUser_name(object.getString("user_name"));
+      user.setMobile_number(object.getString("mobile_number"));
+      user.setEmail(object.getString("email"));
+      user.setInvite_code(object.getString("invite_code"));
+      return user;
+    }
+  }
+
 
   public int getId() {
     return id;
