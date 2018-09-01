@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.ActivityShowGame"
+    tools:context=".view.activity.ActivityShowRent"
     android:theme="@style/AppThemeFullScreen">
 
     <fragment
@@ -20,26 +20,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:clipToPadding="false"
+
         >
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="500sp"
            android:orientation="vertical"
            android:background="#ff0000">
 
            <TextView
                android:layout_width="match_parent"
-               android:layout_height="1000sp"/>
+               android:layout_height="500dp"
+               android:background="@color/colorPrimary"/>
+
 
            <TextView
                android:layout_width="match_parent"
-               android:layout_height="1000sp"/>
-
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="1000sp"/>
+               android:layout_height="500dp"
+               android:background="#0000ff"/>
 
 
 

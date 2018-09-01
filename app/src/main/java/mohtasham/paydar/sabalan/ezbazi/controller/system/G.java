@@ -7,9 +7,12 @@ import android.provider.Settings.Secure;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Request;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.math.BigInteger;
@@ -19,6 +22,9 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.LoginCheckerService;
+import mohtasham.paydar.sabalan.ezbazi.model.User;
 
 
 public class G extends Application {
@@ -31,7 +37,7 @@ public class G extends Application {
 
   private static final String AES = "AES";
 
-  public static  boolean isLoggedIn = false;
+  public static  boolean isLoggedIn;
 
 
   @Override
@@ -126,7 +132,7 @@ public class G extends Application {
   }
 
 
-  public static String getClientKey(String username){
+  public static String getClientKey(){
     return G.getHashedString(
         G.SALT +
         G.getWifiMac() +
@@ -141,13 +147,13 @@ public class G extends Application {
 
   public static String encrypt(String strClearText){
     try {
-      SecretKey secretKey=generateKey();
-      for (int i = 0; i< Character.getNumericValue(getHashedString(SALT).charAt(10))-1; i++) {
+      SecretKey secretKey = generateKey();
+//      for (int i = 0; i< Character.getNumericValue(getHashedString(SALT).charAt(10))-1; i++) {
         Cipher cipher = Cipher.getInstance(AES);
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] encrypted = cipher.doFinal(strClearText.getBytes("UTF-8"));
         strClearText= Base64.encodeToString(encrypted, Base64.DEFAULT);
-      }
+//      }
       return strClearText;
 
     } catch (Exception e) {
@@ -160,13 +166,13 @@ public class G extends Application {
 
   public static String decrypt(String strEncrypted){
     try {
-      SecretKey secretKey=generateKey();
-      for (int i = 0; i< Character.getNumericValue(getHashedString(SALT).charAt(10))-1; i++) {
+      SecretKey secretKey = generateKey();
+//      for (int i = 0; i< Character.getNumericValue(getHashedString(SALT).charAt(10))-1; i++) {
         Cipher cipher = Cipher.getInstance(AES);
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         byte[] decrypted = cipher.doFinal(Base64.decode(strEncrypted, Base64.DEFAULT));
         strEncrypted= new String(decrypted, "UTF-8");
-      }
+//      }
       return strEncrypted;
     } catch (Exception e) {
       e.printStackTrace();
@@ -196,9 +202,27 @@ public class G extends Application {
 //        'M',(byte)getHashedString(SALT).charAt(29),
 //      };
 //
-    byte[] ENCRYPTION_KEY = getHashedString(MAIN_URL).getBytes();
+    byte[] ENCRYPTION_KEY = getHashedString(getClientKey()).getBytes();
     return new SecretKeySpec(ENCRYPTION_KEY, AES);
   }
 
+
+
+  public static void loginCheck(final onLoginCheck onLoginCheck){
+    UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
+    final User user = prefManager.getUser();
+    LoginCheckerService service = new LoginCheckerService(context);
+    service.check(user, new LoginCheckerService.onLoginCheckComplete() {
+      @Override
+      public void onComplete(boolean isLoggedIn, String user_name) {
+        user.setUser_name(user_name);
+        onLoginCheck.onCheck(user, isLoggedIn);
+      }
+    });
+  }
+
+  public interface onLoginCheck{
+    void onCheck(User user, boolean isLoggedIn);
+  }
 
 }

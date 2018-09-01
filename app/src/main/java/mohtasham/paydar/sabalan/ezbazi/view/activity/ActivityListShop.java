@@ -9,7 +9,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.GameListAdapter;
+import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListShopAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
@@ -48,7 +48,7 @@ public class ActivityListShop extends AppCompatActivity {
         if(status == 0){
           Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
         }else {
-          GameListAdapter listAdapter=new GameListAdapter(G.context, games);
+          ListShopAdapter listAdapter=new ListShopAdapter(G.context, games);
 //          AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
           SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(listAdapter);
 //          rcv_list_shops.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));

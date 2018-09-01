@@ -20,7 +20,4 @@
         app:layout_collapseMode="parallax"
         app:layout_scrollFlags="scroll|enterAlways"
         />
-
-
-
 </android.support.design.widget.CoordinatorLayout>

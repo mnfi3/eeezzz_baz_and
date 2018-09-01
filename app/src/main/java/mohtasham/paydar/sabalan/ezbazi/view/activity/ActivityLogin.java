@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -119,6 +120,7 @@ public class ActivityLogin extends AppCompatActivity {
             if(status == 1){
               UserSharedPrefManager prefManager = new UserSharedPrefManager(ActivityLogin.this);
               prefManager.saveUser(user);
+              ActivityLogin.this.finish();
             }
           }
         });
@@ -156,9 +158,6 @@ public class ActivityLogin extends AppCompatActivity {
       MyViews.makeText(ActivityLogin.this,"ایمیل وارد شده صحیح نمی باشد",Toast.LENGTH_SHORT);
       return false;
     }
-
-
-
     return true;
   }
 

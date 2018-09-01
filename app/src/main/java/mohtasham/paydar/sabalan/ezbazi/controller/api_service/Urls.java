@@ -21,6 +21,7 @@ public class Urls {
   public static final String REGISTER = G.MAIN_URL + "/register";
   public static final String USER = G.MAIN_URL + "/user";
   public static final String LOGOUT = G.MAIN_URL + "/logout";
+  public static final String LOGIN_CHECK = G.MAIN_URL + "/login-check";
 
   //===passport service===//
 

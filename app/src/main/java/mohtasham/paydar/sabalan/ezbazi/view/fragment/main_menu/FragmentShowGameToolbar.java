@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 
 import mohtasham.paydar.sabalan.ezbazi.R;
@@ -21,6 +22,7 @@ public class FragmentShowGameToolbar extends Fragment {
   Toolbar toolbar;
   View view;
   ImageView img_game;
+  RelativeLayout lyt_game_info_head;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class FragmentShowGameToolbar extends Fragment {
         //Log.i(TAG, "onOffsetChanged: offsetAlpha = "+offsetAlpha);
         //collapsing_toolbar.setAlpha(offsetAlpha* -1);
         //toolbar.setAlpha(offsetAlpha* -1);
-        img_game.setAlpha( 1 - (offsetAlpha * -1));
+        lyt_game_info_head.setAlpha( 1 - (offsetAlpha * -1));
       }
     });
 
@@ -47,6 +49,7 @@ public class FragmentShowGameToolbar extends Fragment {
     collapsing_toolbar= (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
     toolbar= (Toolbar) view.findViewById(R.id.toolbar);
     img_game = view.findViewById(R.id.img_game);
+    lyt_game_info_head = view.findViewById(R.id.lyt_game_info_head);
   }
 
 

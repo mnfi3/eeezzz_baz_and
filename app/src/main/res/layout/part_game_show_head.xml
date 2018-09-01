@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="330dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_collapseMode="parallax"
+    android:id="@+id/lyt_game_info_head">
+
+
+
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider_game"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test"
+        app:auto_cycle="true"
+        android:visibility="invisible"
+        />
+
+    <VideoView
+        android:id="@+id/vdo_game"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop"
+        android:visibility="invisible"
+        />
+
+    <ImageView
+        android:id="@+id/img_game"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
+        android:src="@drawable/test"
+        />
+
+
+    <ImageView
+        android:layout_width="@dimen/item_list_games_image_width"
+        android:layout_height="@dimen/item_list_games_image_height"
+        android:layout_alignBottom="@+id/txt_release_date"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/test"
+        android:contentDescription="TODO"/>
+
+
+
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_console"
+        android:layout_alignParentStart="true"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:text="Portal2"
+        android:textSize="@dimen/font_size_medium"
+        android:textColor="@color/main_text_color"
+        android:background="#8f000000"
+        android:layout_margin="3dp"/>
+
+    <TextView
+        android:id="@+id/txt_console"
+        android:layout_width="47dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_genres"
+        android:layout_alignParentStart="true"
+        android:padding="5dp"
+        android:text="PS3"
+        android:textColor="@color/main_text_color"
+        android:textSize="@dimen/font_size_small"
+        android:background="#8f000000"
+        android:layout_margin="3dp"/>
+
+
+    <TextView
+        android:id="@+id/txt_genres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/img_game"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/main_text_color"
+        android:padding="5dp"
+        android:text="shooter"
+        android:textSize="@dimen/font_size_small"
+        android:background="#8f000000"
+        android:layout_margin="3dp"/>
+
+
+    <TextView
+        android:id="@+id/txt_release_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/img_game"
+        android:layout_marginTop="0dp"
+        android:padding="5dp"
+        android:textColor="@color/gray_text_color"
+        android:text="release date : 2018-05-09"
+        android:textSize="@dimen/font_size_small"
+        android:layout_margin="3dp"
+        />
+
+
+</RelativeLayout>

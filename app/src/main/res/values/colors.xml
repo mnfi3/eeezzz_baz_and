@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#12262c</color>
     <color name="colorPrimaryDark">#12262c</color>
-    <color name="colorPrimaryLight">#4f5b62</color>
+    <color name="colorPrimaryLight">#2c4046</color>
     <color name="colorAccent">#6fae3d</color>
 
     <color name="status_bar_color">#0e1323</color>

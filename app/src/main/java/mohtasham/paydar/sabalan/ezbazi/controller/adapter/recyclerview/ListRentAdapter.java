@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,17 +14,18 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import mohtasham.paydar.sabalan.ezbazi.BuildConfig;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 
-public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ListViewHolder>{
+public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListViewHolder>{
 
 
   private Context context;
   private List<Game> games;
 
-  public GameListAdapter(Context context, List<Game> games){
+  public ListRentAdapter(Context context, List<Game> games){
 
     this.context = context;
     this.games = games;
@@ -51,6 +53,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ListVi
       holder.txt_name.setText(game.getName());
       holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
       holder.txt_rating.setText("امتیاز : " + "4.5");
+      holder.btn_action.setText("اجاره");
 
 
 
@@ -87,13 +90,15 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ListVi
     private TextView txt_name;
     private TextView txt_rating;
     private TextView txt_release_date;
+    private Button btn_action;
 
     public ListViewHolder(View itemView) {
       super(itemView);
       img_game = itemView.findViewById(R.id.img_game);
-      txt_name= itemView.findViewById(R.id.txt_name);
-      txt_rating= itemView.findViewById(R.id.txt_rating);
-      txt_release_date= itemView.findViewById(R.id.txt_release_date);
+      txt_name = itemView.findViewById(R.id.txt_name);
+      txt_rating = itemView.findViewById(R.id.txt_rating);
+      txt_release_date = itemView.findViewById(R.id.txt_release_date);
+      btn_action = itemView.findViewById(R.id.btn_action);
 
     }
 

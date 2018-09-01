@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 
-public class ActivityShowGame extends AppCompatActivity {
+public class ActivityTicket extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_show_game);
+    setContentView(R.layout.activity_ticket);
   }
 }

@@ -9,7 +9,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.GameListAdapter;
+import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListRentAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
@@ -46,7 +46,7 @@ public class ActivityListRent extends AppCompatActivity {
         if(status == 0){
           Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
         }else {
-          GameListAdapter listAdapter = new GameListAdapter(G.context, games);
+          ListRentAdapter listAdapter = new ListRentAdapter(G.context, games);
           SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(listAdapter);
           rcv_list_rents.setAdapter(new ScaleInAnimationAdapter(alphaAdapter));
         }
