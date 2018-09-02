@@ -17,5 +17,8 @@ public class ActivityShowRent extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_show_rent);
 
+
+
+
   }
 }

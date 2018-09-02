@@ -1,5 +1,6 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.system;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.net.wifi.WifiManager;
@@ -149,7 +150,7 @@ public class G extends Application {
     try {
       SecretKey secretKey = generateKey();
 //      for (int i = 0; i< Character.getNumericValue(getHashedString(SALT).charAt(10))-1; i++) {
-        Cipher cipher = Cipher.getInstance(AES);
+        @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance(AES);
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] encrypted = cipher.doFinal(strClearText.getBytes("UTF-8"));
         strClearText= Base64.encodeToString(encrypted, Base64.DEFAULT);
@@ -168,7 +169,7 @@ public class G extends Application {
     try {
       SecretKey secretKey = generateKey();
 //      for (int i = 0; i< Character.getNumericValue(getHashedString(SALT).charAt(10))-1; i++) {
-        Cipher cipher = Cipher.getInstance(AES);
+        @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance(AES);
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         byte[] decrypted = cipher.doFinal(Base64.decode(strEncrypted, Base64.DEFAULT));
         strEncrypted= new String(decrypted, "UTF-8");

@@ -12,8 +12,8 @@
         android:id="@+id/frg_show_game_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentShowGameToolbar"
-        tools:layout="@layout/fragment_show_game_toolbar"
+        android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.show_detail.FragmentShowGameMedia"
+        tools:layout="@layout/fragment_show_game_media"
         />
 
     <android.support.v4.widget.NestedScrollView

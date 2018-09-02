@@ -46,7 +46,7 @@ public class ActivityListRent extends AppCompatActivity {
         if(status == 0){
           Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
         }else {
-          ListRentAdapter listAdapter = new ListRentAdapter(G.context, games);
+          ListRentAdapter listAdapter = new ListRentAdapter(ActivityListRent.this, games);
           SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(listAdapter);
           rcv_list_rents.setAdapter(new ScaleInAnimationAdapter(alphaAdapter));
         }

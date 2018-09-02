@@ -1,6 +1,9 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,7 @@ import mohtasham.paydar.sabalan.ezbazi.BuildConfig;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
+import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityShowRent;
 
 public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListViewHolder>{
 
@@ -61,17 +65,22 @@ public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListVi
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-//        Intent intent=new Intent(context, ActivityShowPost.class);
-//        intent.putExtra("ID", post.getId());
-//        intent.putExtra("IMAGE", post.getImageUrl());
-//        intent.putExtra("MAIN_IMAGE", post.getMainImageUrl());
-//        intent.putExtra("DESCRIPTION", post.getDescription());
-//        intent.putExtra("TAGS", post.getTags());
-//        intent.putExtra("SAVE_COUNT", post.getSaveCount());
-//        intent.putExtra("SHARE_COUNT", post.getShareCount());
-//        intent.putExtra("USERNAME", post.getUsername());
-//        intent.putExtra("DESCRIPTION", post.getDescription());
-//        context.startActivity(intent);
+        Intent intent = new Intent(context, ActivityShowRent.class);
+//        intent.putExtra("ID", game.getId());
+//        intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
+//        intent.putExtra("NAME", game.getName());
+//        intent.putExtra("AGE_CLASS", game.getAge_class());
+//        intent.putExtra("PRODUCTION_DATE", game.getProduction_date());
+//        intent.putExtra("REGION", game.getRegion());
+//        intent.putExtra("CAN_PLAY_ONLINE", game.getCan_play_online());
+//        intent.putExtra("COMPANY_NAME", game.getCompany_name());
+//        intent.putExtra("DESCRIPTION", game.getDescription());
+//        intent.putExtra("PHOTOS", game.getPhotos());
+//        intent.putExtra("VIDEOS", game.getVideos());
+//        intent.putExtra("GENRES", game.getGenres());
+//        intent.putExtra("CONSOLE_NAME", game.getConsole_name());
+
+        context.startActivity(intent);
 
       }
     });

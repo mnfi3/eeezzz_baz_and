@@ -2,11 +2,16 @@ package mohtasham.paydar.sabalan.ezbazi.controller.system;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 
 public class UserSharedPrefManager {
+
+  private static final String TAG = "UserSharedPrefManager";
+
+
   private static final String USER_SHARED_PREF_NAME = "user_shared_pref";
   private static final String USER_NAME = "user_name";
   private static final String TOKEN = "token";
@@ -22,6 +27,7 @@ public class UserSharedPrefManager {
     if (user != null) {
       String newToken = G.encrypt(user.getToken());
       user.setToken(newToken);
+      Log.i(TAG, "saveUser: new_token = " + newToken);
       SharedPreferences.Editor editor = sharedPreferences.edit();
       editor.putString(USER_NAME, user.getUser_name());
       editor.putString(TOKEN, user.getToken());

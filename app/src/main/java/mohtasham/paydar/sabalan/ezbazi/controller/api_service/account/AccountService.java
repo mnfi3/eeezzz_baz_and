@@ -37,6 +37,7 @@ public class AccountService {
           token = response.getJSONObject("data").getString("token");
           JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
           user = User.Parser.parse(userObj);
+          user.setToken(token);
           onLoginComplete.onComplete(status, message, token, user);
 
         } catch (JSONException e) {

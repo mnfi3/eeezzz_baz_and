@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -14,9 +15,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
+import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentNavigation;
 
 public class ActivityMain extends AppCompatActivity {
+
+  private static final String TAG = "ActivityMain";
 
   ImageView img_open_navigation;
   DrawerLayout drawerLayout;
@@ -29,8 +35,37 @@ public class ActivityMain extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    Thread thread = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        for (int i=0 ; i<10000 ; i++){
+          Log.i(TAG, "from thread a#" + i);
+        }
+      }
+    });
 
-    setupViews();
+    Thread thread2 = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        for (int i=0 ; i<10000 ; i++){
+          Log.i(TAG, "from thread b#" + i);
+        }
+      }
+    });
+
+    thread.start();
+    thread2.start();
+
+      //Log.i(TAG, "onCreate: user_token = " + new UserSharedPrefManager(this).getUser().getToken());
+
+      G.loginCheck(new G.onLoginCheck() {
+        @Override
+        public void onCheck(User user, boolean isLoggedIn) {
+          Log.i(TAG, "onCheck: user_name = " + user.getUser_name() + "is_logged_in = " + isLoggedIn);
+        }
+      });
+
+      setupViews();
 
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     ft.replace(R.id.lyt_navigation, new FragmentNavigation());

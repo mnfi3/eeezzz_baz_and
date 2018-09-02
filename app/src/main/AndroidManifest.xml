@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.ActivityShowRent"
+        <activity android:name=".view.activity.ActivityMain"
             android:theme="@style/AppThemeFullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -33,7 +33,7 @@
         <activity android:name=".view.activity.ActivityPhoneAccept">
         </activity>
         <activity
-            android:name=".view.activity.ActivityMain"
+            android:name=".view.activity.ActivityShowRent"
             android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity android:name=".view.activity.ActivityListShop">
