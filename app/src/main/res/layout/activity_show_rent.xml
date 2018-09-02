@@ -8,18 +8,257 @@
     tools:context=".view.activity.ActivityShowRent"
     android:theme="@style/AppThemeFullScreen">
 
-    <fragment
-        android:id="@+id/frg_show_game_toolbar"
+
+
+
+
+
+
+
+    <android.support.design.widget.AppBarLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.show_detail.FragmentShowGameMedia"
-        tools:layout="@layout/fragment_show_game_media"
-        />
+        android:layoutDirection="rtl"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimaryDark"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            >
+
+
+
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                app:layout_collapseMode="parallax"
+                android:id="@+id/lyt_game_info_head"
+                android:fitsSystemWindows="true">
+
+
+
+
+                <!--<com.daimajia.slider.library.SliderLayout-->
+                <!--android:id="@+id/slider_game"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="300sp"-->
+                <!--android:fitsSystemWindows="true"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:src="@drawable/test"-->
+                <!--app:auto_cycle="true"-->
+                <!--android:visibility="invisible"-->
+                <!--/>-->
+
+                <VideoView
+                    android:id="@+id/vdo_game"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:scaleType="fitXY"
+                    android:fitsSystemWindows="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="30dp"
+                    />
+
+
+
+                <ImageView
+                    android:id="@+id/img_game"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/test"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="30dp"
+                    android:visibility="gone"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/img_game_cover"
+                    android:layout_width="@dimen/item_list_games_image_width"
+                    android:layout_height="@dimen/item_list_games_image_height"
+                    android:layout_alignBottom="@+id/vdo_game"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="-30dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/test"/>
+
+
+
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/txt_console"
+                    android:layout_alignParentStart="true"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="Portal2"
+                    android:textSize="@dimen/font_size_medium"
+                    android:textColor="@color/main_text_color"
+                    android:background="#8f000000"
+                    android:layout_margin="3dp"/>
+
+                <TextView
+                    android:id="@+id/txt_console"
+                    android:layout_width="47dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/txt_genres"
+                    android:layout_alignParentStart="true"
+                    android:padding="5dp"
+                    android:text="PS3"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/font_size_small"
+                    android:background="#8f000000"
+                    android:layout_margin="3dp"/>
+
+
+                <TextView
+                    android:id="@+id/txt_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/vdo_game"
+                    android:layout_alignParentStart="true"
+                    android:background="#8f000000"
+                    android:padding="5dp"
+                    android:text="shooter"
+                    android:layout_marginStart="3dp"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/font_size_small"/>
+
+
+                <TextView
+                    android:id="@+id/txt_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:padding="5dp"
+                    android:text="release date : 2018-05-09"
+                    android:textColor="@color/gray_text_color"
+                    android:textSize="@dimen/font_size_small"/>
+
+
+            </RelativeLayout>
+
+
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_behavior=".view.ToolbarBackgroundAlphaBehavior"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+
+                        <TextView
+                            android:id="@+id/txt_page_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right"
+                            android:gravity="center"
+                            android:text="page name"
+                            android:textColor="#ffffff"
+                            android:textSize="14dp"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="48sp"
+                        android:layout_height="48sp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10sp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_back"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/back_buttons_ripple_effect"
+                            android:padding="10sp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_back"
+                            />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:clickable="true"
 
         >
 
@@ -27,12 +266,13 @@
            android:layout_width="match_parent"
            android:layout_height="500sp"
            android:orientation="vertical"
-           android:background="#ff0000">
+           android:background="#ff0000"
+           android:clickable="true">
 
            <TextView
                android:layout_width="match_parent"
                android:layout_height="500dp"
-               android:background="@color/colorPrimary"/>
+               android:background="#00ff00"/>
 
 
            <TextView

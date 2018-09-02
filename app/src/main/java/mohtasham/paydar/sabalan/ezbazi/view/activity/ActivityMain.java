@@ -35,26 +35,7 @@ public class ActivityMain extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    Thread thread = new Thread(new Runnable() {
-      @Override
-      public void run() {
-        for (int i=0 ; i<10000 ; i++){
-          Log.i(TAG, "from thread a#" + i);
-        }
-      }
-    });
 
-    Thread thread2 = new Thread(new Runnable() {
-      @Override
-      public void run() {
-        for (int i=0 ; i<10000 ; i++){
-          Log.i(TAG, "from thread b#" + i);
-        }
-      }
-    });
-
-    thread.start();
-    thread2.start();
 
       //Log.i(TAG, "onCreate: user_token = " + new UserSharedPrefManager(this).getUser().getToken());
 
