@@ -48,6 +48,13 @@ public class G extends Application {
   }
 
 
+  public static String getUserToken(){
+    UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
+    User user = prefManager.getUser();
+    return user.getToken();
+  }
+
+
   public static Context getActivityContext(AppCompatActivity activity){
     return activity.getApplicationContext();
   }

@@ -14,11 +14,53 @@
 
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_tickets"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:padding="3dp">
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="48dp"
+        />
 
-    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="#ee262a33">
+
+
+
+            <EditText
+                android:id="@+id/edt_message"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:hint="ارسال پیام ..."
+                android:textColor="@color/main_text_color"
+                android:textColorHint="@color/main_text_color"
+                android:textSize="@dimen/font_size_medium"
+
+
+                />
+
+
+
+        <ImageButton
+            android:id="@+id/imb_send_message"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_send_message"
+            android:scaleType="fitXY"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/back_buttons_ripple_effect"
+            />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

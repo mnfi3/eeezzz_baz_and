@@ -25,4 +25,12 @@ public class Urls {
 
   //===passport service===//
 
+
+
+
+  //tickets
+  public static final String TICKET_INDEX = G.MAIN_URL + "/ticket";
+  public static final String TICKET_SEEN = G.MAIN_URL + "/ticket-user-seen";
+
+
 }

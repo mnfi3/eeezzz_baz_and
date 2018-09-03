@@ -15,12 +15,13 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityLogin;
+import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityTicket;
 
 
 public class FragmentNavigation extends Fragment {
 
   View view;
-  LinearLayout lyt_login;
+  LinearLayout lyt_login, lyt_ticket;
   DrawerLayout drawerLayout;
   TextView txt_users_name;
   TextView txt_register_login;
@@ -60,6 +61,18 @@ public class FragmentNavigation extends Fragment {
         }
       });
 
+    lyt_ticket.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if(isLoggedIn) {
+          Intent intent = new Intent(G.context, ActivityTicket.class);
+          startActivity(intent);
+          drawerLayout.closeDrawers();
+        }
+      }
+    });
+
+
 
 
 
@@ -68,6 +81,7 @@ public class FragmentNavigation extends Fragment {
 
   private void setupViews(){
     lyt_login = view.findViewById(R.id.lyt_login);
+    lyt_ticket = view.findViewById(R.id.lyt_ticket);
     txt_users_name = view.findViewById(R.id.txt_users_name);
     txt_register_login = view.findViewById(R.id.txt_register_login);
   }

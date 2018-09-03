@@ -1,21 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/lyt_ticket_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="20dp"
+    android:padding="5dp"
+    android:gravity="right"
     >
+
+
 
     <TextView
         android:id="@+id/txt_message"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        tools:text="سلام\nبیبیبیبیبیبیبیبیابی هعاایب عاقثاقث"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/back_ticket_item1"
         android:padding="5dp"
-        android:textDirection="rtl"
-        android:background="@drawable/back_ticket_item"
         android:textColor="@color/main_text_color"
 
+        android:textDirection="rtl"
+        tools:text="hello how are you?\n are you good? \n what do you do today?"/>
+
+    <ImageView
+        android:id="@+id/img_is_seen"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_centerVertical="true"
+        android:padding="3dp"
+        android:src="@drawable/ic_seen_message"
+        android:visibility="invisible"
+        android:layout_below="@+id/txt_message"
+        android:layout_marginLeft="5dp"
+        />
+
+    <TextView
+        android:id="@+id/txt_created_at"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_message"
+        tools:text="hello"
+        android:gravity="center"
+        android:textSize="@dimen/font_size_very_small"
+        android:textColor="@color/gray_text_color"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         />
 
 
