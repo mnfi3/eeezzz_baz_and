@@ -42,13 +42,17 @@
                     />
 
 
-                <fragment
-                    android:id="@+id/frg_main_posts"
-                    android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentPosts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:layout="@layout/fragment_main_posts"/>
+                <!--<fragment-->
+                    <!--android:id="@+id/frg_main_posts"-->
+                    <!--android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentPosts"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--tools:layout="@layout/fragment_main_posts"/>-->
 
+                <FrameLayout
+                    android:id="@+id/lyt_main_posts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
 
 
@@ -62,12 +66,19 @@
 
 
 
-                <fragment
-                    android:id="@+id/frg_main_rents"
+                <!--<fragment-->
+                    <!--android:id="@+id/frg_main_rents"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentRents"-->
+                    <!--tools:layout="@layout/fragment_main_rents"/>-->
+
+                <FrameLayout
+                    android:id="@+id/lyt_main_rents"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentRents"
-                    tools:layout="@layout/fragment_main_rents"/>
+                    android:layout_height="wrap_content">
+                </FrameLayout>
+
 
             </LinearLayout>
 

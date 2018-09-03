@@ -1,8 +1,11 @@
 package mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +27,11 @@ import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.
 
 
 public class FragmentRents extends Fragment {
+  AppCompatActivity activity;
+
+//  public FragmentRents(AppCompatActivity activity) {
+//    this.activity = activity;
+//  }
 
   RecyclerView rcv_rents;
   RentService apiService;
@@ -65,7 +73,7 @@ public class FragmentRents extends Fragment {
         if(status == 0){
           Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
         }else {
-          RentMainAdapter listAdapter = new RentMainAdapter(G.context, games);
+          RentMainAdapter listAdapter = new RentMainAdapter(getActivity(), games);
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
           rcv_rents.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
         }

@@ -3,7 +3,9 @@ package mohtasham.paydar.sabalan.ezbazi.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Post {
+import java.io.Serializable;
+
+public class Post  implements Serializable {
 
   private int id;
   private String title;
@@ -11,7 +13,7 @@ public class Post {
   private String image_url;
   private String created_at;
 
-  public static class Parser{
+  public static class Parser implements Serializable{
     public static Post parse(JSONObject postObj){
       Post post = new Post();
       try {

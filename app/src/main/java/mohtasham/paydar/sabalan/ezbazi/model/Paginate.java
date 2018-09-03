@@ -3,7 +3,9 @@ package mohtasham.paydar.sabalan.ezbazi.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Paginate {
+import java.io.Serializable;
+
+public class Paginate implements Serializable {
 
   private int current_page;
   private String first_page_url;
@@ -17,7 +19,7 @@ public class Paginate {
   private int to;
   private int total;
 
-  public static class Parser{
+  public static class Parser  implements Serializable{
     public static Paginate parse(JSONObject response){
       Paginate paginate = new Paginate();
       try {

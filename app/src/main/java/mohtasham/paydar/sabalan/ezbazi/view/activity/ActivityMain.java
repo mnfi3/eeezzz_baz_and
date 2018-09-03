@@ -19,6 +19,8 @@ import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentNavigation;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentPosts;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentRents;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -50,7 +52,11 @@ public class ActivityMain extends AppCompatActivity {
 
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     ft.replace(R.id.lyt_navigation, new FragmentNavigation());
+    ft.replace(R.id.lyt_main_rents, new FragmentRents());
+    ft.replace(R.id.lyt_main_posts, new FragmentPosts());
     ft.commit();
+
+//    ft.commit();
 
 
     img_open_navigation.setOnClickListener(new View.OnClickListener() {

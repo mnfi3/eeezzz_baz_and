@@ -64,9 +64,50 @@ public class RentService {
     Volley.newRequestQueue(context).add(request);
   }
 
+
+
+  public void getSpecialRent(int id, final onSpecialRentReceived onSpecialRentReceived){
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.RENT_INDEX + "/" + id, null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        Game game = new Game();
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          JSONObject gameObj = response.getJSONObject("data");
+
+          game = Game.Parser.parse(gameObj);
+
+          onSpecialRentReceived.onReceived(status, message, game);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onSpecialRentReceived.onReceived(0, "خطا در ارتباط با سرور", new Game());
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+
+
+
+
+
   public interface onRentsReceived{
     void onReceived(int status, String message, List<Game> games, Paginate paginate);
   }
 
+  public interface onSpecialRentReceived{
+    void onReceived(int status, String message, Game game);
+  }
 
 }

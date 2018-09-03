@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layoutDirection="rtl"
+    android:background="@color/colorPrimary">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_scrollFlags="scroll|enterAlways"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="48sp"
+                android:layout_height="48sp"
+                android:layout_marginRight="10sp"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/img_finish"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:src="@drawable/ic_finish"
+                    android:scaleType="fitCenter"
+                    android:padding="10sp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/back_buttons_ripple_effect"
+                    />
+
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/txt_page_name"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginRight="28dp"
+                android:gravity="left|center_vertical"
+                android:textSize="14dp"
+                android:textColor="@color/main_text_color"
+                android:padding="4dp"
+                tools:text="page name"
+                android:maxLines="1"
+                />
+
+            <LinearLayout
+                android:layout_width="48sp"
+                android:layout_height="48sp"
+                android:layout_marginRight="10sp"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:src="@drawable/ic_back"
+                    android:scaleType="fitCenter"
+                    android:padding="10sp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/back_buttons_ripple_effect"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+</android.support.v7.widget.Toolbar>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+

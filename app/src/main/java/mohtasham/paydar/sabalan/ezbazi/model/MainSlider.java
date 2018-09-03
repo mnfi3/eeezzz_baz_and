@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainSlider {
+import java.io.Serializable;
+
+public class MainSlider implements Serializable {
   private int id;
   private String title;
   private String content;
@@ -12,7 +14,7 @@ public class MainSlider {
   private String image_url;
 
 
-  public static class Parser{
+  public static class Parser  implements Serializable{
     public static MainSlider parse(JSONObject sliderObject) throws JSONException {
       MainSlider slider = new MainSlider();
       slider.setId(sliderObject.getInt("id"));

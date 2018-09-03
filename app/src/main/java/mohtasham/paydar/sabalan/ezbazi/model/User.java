@@ -3,7 +3,9 @@ package mohtasham.paydar.sabalan.ezbazi.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
   private int id;
   private String first_name;
   private String last_name;
@@ -15,6 +17,25 @@ public class User {
 
   private String client_key;
   private String token;
+
+
+
+
+
+
+  public static class Parser implements Serializable{
+    public static User parse(JSONObject object) throws JSONException {
+      User user = new User();
+      user.setId(object.getInt("id"));
+      user.setFirst_name(object.getString("first_name"));
+      user.setLast_name(object.getString("last_name"));
+      user.setUser_name(object.getString("user_name"));
+      user.setMobile_number(object.getString("mobile_number"));
+      user.setEmail(object.getString("email"));
+      user.setInvite_code(object.getString("invite_code"));
+      return user;
+    }
+  }
 
 
 
@@ -41,22 +62,6 @@ public class User {
   public void setToken(String token) {
     this.token = token;
   }
-
-
-  public static class Parser{
-    public static User parse(JSONObject object) throws JSONException {
-      User user = new User();
-      user.setId(object.getInt("id"));
-      user.setFirst_name(object.getString("first_name"));
-      user.setLast_name(object.getString("last_name"));
-      user.setUser_name(object.getString("user_name"));
-      user.setMobile_number(object.getString("mobile_number"));
-      user.setEmail(object.getString("email"));
-      user.setInvite_code(object.getString("invite_code"));
-      return user;
-    }
-  }
-
 
   public int getId() {
     return id;

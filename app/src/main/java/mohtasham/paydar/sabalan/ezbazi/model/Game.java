@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Video;
 
-public class Game{
+public class Game {
   private int id;
   private int game_info_id;
   private int price;
@@ -33,7 +33,7 @@ public class Game{
     public static Game parse(JSONObject jsonObject){
       Game game = new Game();
       try {
-        JSONObject game_info_obj= new JSONObject();
+        JSONObject game_info_obj = new JSONObject();
         game_info_obj = jsonObject.getJSONObject("game_info");
 
         game.setId(jsonObject.getInt("id"));

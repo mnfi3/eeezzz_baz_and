@@ -3,7 +3,9 @@ package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,22 +68,8 @@ public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListVi
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(context, ActivityShowRent.class);
-//        intent.putExtra("ID", game.getId());
-//        intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
-//        intent.putExtra("NAME", game.getName());
-//        intent.putExtra("AGE_CLASS", game.getAge_class());
-//        intent.putExtra("PRODUCTION_DATE", game.getProduction_date());
-//        intent.putExtra("REGION", game.getRegion());
-//        intent.putExtra("CAN_PLAY_ONLINE", game.getCan_play_online());
-//        intent.putExtra("COMPANY_NAME", game.getCompany_name());
-//        intent.putExtra("DESCRIPTION", game.getDescription());
-//        intent.putExtra("PHOTOS", game.getPhotos());
-//        intent.putExtra("VIDEOS", game.getVideos());
-//        intent.putExtra("GENRES", game.getGenres());
-//        intent.putExtra("CONSOLE_NAME", game.getConsole_name());
-
+        intent.putExtra("ID", game.getId());
         context.startActivity(intent);
-
       }
     });
 

@@ -17,6 +17,7 @@ import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Post;
+import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityWebView;
 
 public class PostMainAdapter extends RecyclerView.Adapter<PostMainAdapter.ListViewHolder>{
 
@@ -57,7 +58,7 @@ public class PostMainAdapter extends RecyclerView.Adapter<PostMainAdapter.ListVi
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-//        Intent intent=new Intent(context, ActivityShowPost.class);
+        Intent intent = new Intent(context, ActivityWebView.class);
 //        intent.putExtra("ID", post.getId());
 //        intent.putExtra("IMAGE", post.getImageUrl());
 //        intent.putExtra("MAIN_IMAGE", post.getMainImageUrl());
@@ -67,7 +68,7 @@ public class PostMainAdapter extends RecyclerView.Adapter<PostMainAdapter.ListVi
 //        intent.putExtra("SHARE_COUNT", post.getShareCount());
 //        intent.putExtra("USERNAME", post.getUsername());
 //        intent.putExtra("DESCRIPTION", post.getDescription());
-//        context.startActivity(intent);
+        context.startActivity(intent);
 
       }
     });

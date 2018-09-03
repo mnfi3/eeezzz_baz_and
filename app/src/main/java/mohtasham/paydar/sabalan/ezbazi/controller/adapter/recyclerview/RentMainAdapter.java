@@ -1,6 +1,7 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.List;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
+import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityShowRent;
 
 public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListViewHolder>{
 
@@ -57,18 +59,10 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-//        Intent intent=new Intent(context, ActivityShowPost.class);
-//        intent.putExtra("ID", post.getId());
-//        intent.putExtra("IMAGE", post.getImageUrl());
-//        intent.putExtra("MAIN_IMAGE", post.getMainImageUrl());
-//        intent.putExtra("DESCRIPTION", post.getDescription());
-//        intent.putExtra("TAGS", post.getTags());
-//        intent.putExtra("SAVE_COUNT", post.getSaveCount());
-//        intent.putExtra("SHARE_COUNT", post.getShareCount());
-//        intent.putExtra("USERNAME", post.getUsername());
-//        intent.putExtra("DESCRIPTION", post.getDescription());
-//        context.startActivity(intent);
-
+        Intent intent = new Intent(context, ActivityShowRent.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("ID", game.getId());
+        context.startActivity(intent);
       }
     });
 

@@ -64,7 +64,7 @@ public class FragmentPosts extends Fragment {
         if(status == 0){
 //          MyViews.makeText( ActivityMain, message, Toast.LENGTH_SHORT);
         }else {
-          PostMainAdapter listAdapter=new PostMainAdapter(G.context, posts);
+          PostMainAdapter listAdapter = new PostMainAdapter(getActivity(), posts);
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
           rcv_posts.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
         }
