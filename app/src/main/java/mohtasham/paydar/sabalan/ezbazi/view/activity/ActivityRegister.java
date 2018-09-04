@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +32,7 @@ public class ActivityRegister extends AppCompatActivity {
   Button btn_register;
   AccountService service;
   CheckBox chk_show_pass;
-  ProgressBar prg_register;
+  AVLoadingIndicatorView avl_register;
 
 
   @Override
@@ -67,7 +69,7 @@ public class ActivityRegister extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         if (!checkEntry()) return;
-        prg_register.setVisibility(View.VISIBLE);
+        avl_register.setVisibility(View.VISIBLE);
         String first_name = edt_first_name.getText().toString();
         String last_name = edt_last_name.getText().toString();
         String mobile_number = edt_mobile_number.getText().toString();
@@ -91,7 +93,7 @@ public class ActivityRegister extends AppCompatActivity {
         service.register(object, new AccountService.onRegisterComplete() {
           @Override
           public void onComplete(int status, String message, String token, User user) {
-            prg_register.setVisibility(View.INVISIBLE);
+            avl_register.setVisibility(View.INVISIBLE);
             MyViews.makeText(ActivityRegister.this, message, Toast.LENGTH_SHORT);
             if(status == 1){
               MyViews.makeText(ActivityRegister.this, "لطفا وارد حساب کاربری خود شوید", Toast.LENGTH_SHORT);
@@ -121,7 +123,7 @@ public class ActivityRegister extends AppCompatActivity {
     edt_re_password = (EditText) findViewById(R.id.edt_re_password);
     btn_register = (Button) findViewById(R.id.btn_register);
     chk_show_pass = (CheckBox) findViewById(R.id.chk_show_pass);
-    prg_register = (ProgressBar) findViewById(R.id.prg_register);
+    avl_register = (AVLoadingIndicatorView) findViewById(R.id.avl_register);
   }
 
 

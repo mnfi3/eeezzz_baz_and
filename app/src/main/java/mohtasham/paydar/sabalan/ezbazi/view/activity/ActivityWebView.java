@@ -11,6 +11,8 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import mohtasham.paydar.sabalan.ezbazi.R;
 
 public class ActivityWebView extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class ActivityWebView extends AppCompatActivity {
   TextView txt_page_name;
   ImageView img_back, img_finish;
   String url;
+  AVLoadingIndicatorView avl_webview;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class ActivityWebView extends AppCompatActivity {
 
     setupViews();
 
-    url = "https://www.google.com/";
+    url = "https://www.digikala.com";
 
 
 
@@ -51,9 +54,11 @@ public class ActivityWebView extends AppCompatActivity {
       }
     });
 
+    swipe.setColorSchemeResources(R.color.colorAccent);
     swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
       public void onRefresh() {
+        swipe.setRefreshing(true);
         WebAction();
       }
     });
@@ -68,10 +73,11 @@ public class ActivityWebView extends AppCompatActivity {
     img_finish = (ImageView) findViewById(R.id.img_finish);
     web_view = (WebView) findViewById(R.id.web_view);
     swipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
+    avl_webview = (AVLoadingIndicatorView) findViewById(R.id.avl_webview);
   }
 
 
-  @SuppressLint("SetJavaScriptEnabled")
+//  @SuppressLint("SetJavaScriptEnabled")
   public void WebAction(){
 
     web_view = (WebView) findViewById(R.id.web_view);
@@ -80,9 +86,9 @@ public class ActivityWebView extends AppCompatActivity {
 
     web_view.loadUrl(url);
 
-//    url = web_view.getUrl();
-
-    swipe.setRefreshing(true);
+    if(!swipe.isRefreshing()) {
+      avl_webview.setVisibility(View.VISIBLE);
+    }
 
     web_view.setWebViewClient(new WebViewClient(){
       public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
@@ -90,7 +96,7 @@ public class ActivityWebView extends AppCompatActivity {
       }
       public void onPageFinished(WebView view, String url) {
         swipe.setRefreshing(false);
-
+        avl_webview.setVisibility(View.INVISIBLE);
       }
 
       @Override

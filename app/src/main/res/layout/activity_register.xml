@@ -216,14 +216,26 @@
                 />
 
 
-            <ProgressBar
-                android:id="@+id/prg_register"
-                style="@style/AppTheme"
+            <!--<ProgressBar-->
+                <!--android:id="@+id/prg_register"-->
+                <!--style="@style/AppTheme"-->
+                <!--android:layout_width="48dp"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:padding="10dp"-->
+                <!--android:visibility="invisible"-->
+                <!--/>-->
+
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avl_register"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                app:indicatorName="LineSpinFadeLoaderIndicator"
+                app:indicatorColor="@color/colorAccent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:padding="10dp"
                 android:visibility="invisible"
                 />
 

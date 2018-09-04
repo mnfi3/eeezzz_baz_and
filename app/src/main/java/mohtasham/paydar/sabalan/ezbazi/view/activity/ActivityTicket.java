@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +33,7 @@ public class ActivityTicket extends AppCompatActivity {
   ImageButton imb_send_message;
   TicketService apiService;
   TicketAdapter adapter;
+  AVLoadingIndicatorView avl_send_message;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +44,14 @@ public class ActivityTicket extends AppCompatActivity {
     LinearLayoutManager layoutManager = new LinearLayoutManager(ActivityTicket.this, LinearLayoutManager.VERTICAL, false);
     rcv_tickets.setLayoutManager(layoutManager);
     getTickets();
+    avl_send_message.setVisibility(View.VISIBLE);
     setSeenTickets();
 
     imb_send_message.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         if(checkEntry()){
+          avl_send_message.setVisibility(View.VISIBLE);
           sendTicket();
         }
       }
@@ -57,20 +63,24 @@ public class ActivityTicket extends AppCompatActivity {
     rcv_tickets = (RecyclerView) findViewById(R.id.rcv_tickets);
     edt_message = (EditText) findViewById(R.id.edt_message);
     imb_send_message = (ImageButton) findViewById(R.id.imb_send_message);
+    avl_send_message = (AVLoadingIndicatorView) findViewById(R.id.avl_send_message);
   }
+
+
 
   private void getTickets(){
     apiService = new TicketService(ActivityTicket.this);
     apiService.getTickets(new TicketService.onTicketsReceived() {
       @Override
       public void onReceived(int status, String message, Paginate paginate, final List<Ticket> tickets) {
+        avl_send_message.setVisibility(View.INVISIBLE);
         if (status == 0){
           MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
         }else {
-          adapter = new TicketAdapter(G.context, tickets);
+          adapter = new TicketAdapter(G.context, new ArrayList<Ticket>());
           rcv_tickets.setAdapter(adapter);
+          adapter.notifyData(tickets);
           if (tickets.size() > 0) {
-//            rcv_tickets.smoothScrollToPosition(tickets.size() - 1);
             rcv_tickets.smoothScrollToPosition(adapter.getItemCount());
           }
         }
@@ -107,16 +117,17 @@ public class ActivityTicket extends AppCompatActivity {
     try {
       object.put("text", edt_message.getText().toString());
       object.put("is_user_sent",1);
+      edt_message.setText("");
       apiService = new TicketService(ActivityTicket.this);
       apiService.sendTicket(object, new TicketService.onSendTicket() {
         @Override
         public void onReceived(int status, String message, Ticket ticket) {
+          avl_send_message.setVisibility(View.INVISIBLE);
           if (status == 1){
-            edt_message.setText("");
             List<Ticket> tickets = new ArrayList<>();
             tickets.add(ticket);
             adapter.notifyData(tickets);
-            rcv_tickets.smoothScrollToPosition(adapter.getItemCount());
+            rcv_tickets.smoothScrollToPosition(adapter.getItemCount() - 1);
           }else {
             MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
           }

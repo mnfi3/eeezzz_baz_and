@@ -26,4 +26,15 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avl_webview"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorAccent"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        />
+
 </android.support.design.widget.CoordinatorLayout>

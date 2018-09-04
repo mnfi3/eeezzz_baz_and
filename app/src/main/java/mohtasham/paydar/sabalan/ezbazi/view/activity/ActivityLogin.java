@@ -15,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,7 +37,7 @@ public class ActivityLogin extends AppCompatActivity {
   Button btn_login;
   AccountService service;
   CheckBox chk_show_pass;
-  ProgressBar prg_login;
+  AVLoadingIndicatorView avl_login;
 
 
   @Override
@@ -98,7 +100,7 @@ public class ActivityLogin extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         if (!checkEntry()) return;
-        prg_login.setVisibility(View.VISIBLE);
+        avl_login.setVisibility(View.VISIBLE);
 
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
@@ -115,7 +117,7 @@ public class ActivityLogin extends AppCompatActivity {
         service.login(object, new AccountService.onLoginComplete() {
           @Override
           public void onComplete(int status, String message, String token, User user) {
-            prg_login.setVisibility(View.INVISIBLE);
+            avl_login.setVisibility(View.INVISIBLE);
             MyViews.makeText(ActivityLogin.this, message, Toast.LENGTH_SHORT);
             if(status == 1){
               UserSharedPrefManager prefManager = new UserSharedPrefManager(ActivityLogin.this);
@@ -137,7 +139,7 @@ public class ActivityLogin extends AppCompatActivity {
     edt_password = (EditText) findViewById(R.id.edt_password);
     btn_login = (Button) findViewById(R.id.btn_login);
     chk_show_pass = (CheckBox) findViewById(R.id.chk_show_pass);
-    prg_login = (ProgressBar) findViewById(R.id.prg_login);
+    avl_login = (AVLoadingIndicatorView) findViewById(R.id.avl_login);
   }
 
 
