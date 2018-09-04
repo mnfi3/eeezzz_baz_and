@@ -59,6 +59,7 @@ public class ActivityWebView extends AppCompatActivity {
       @Override
       public void onRefresh() {
         swipe.setRefreshing(true);
+        avl_webview.setVisibility(View.INVISIBLE);
         WebAction();
       }
     });

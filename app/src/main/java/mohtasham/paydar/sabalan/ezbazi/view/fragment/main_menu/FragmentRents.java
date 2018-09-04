@@ -1,7 +1,5 @@
 package mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,10 +30,8 @@ import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.
 public class FragmentRents extends Fragment {
   AppCompatActivity activity;
 
-//  public FragmentRents(AppCompatActivity activity) {
-//    this.activity = activity;
-//  }
 
+  LinearLayout lyt_rents;
   RecyclerView rcv_rents;
   RentService apiService;
   int page_num = 1;
@@ -43,6 +42,7 @@ public class FragmentRents extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_main_rents, container, false);
     setupViews();
+    lyt_rents.setVisibility(View.INVISIBLE);
 
     rcv_rents.setLayoutManager((new LinearLayoutManager(G.context,LinearLayoutManager.HORIZONTAL,true)));
     getRents();
@@ -62,6 +62,7 @@ public class FragmentRents extends Fragment {
   private void setupViews(){
     rcv_rents = view.findViewById(R.id.rcv_rents);
     txt_show_rent_list = view.findViewById(R.id.txt_show_rent_list);
+    lyt_rents = view.findViewById(R.id.lyt_rents);
   }
 
 
@@ -76,9 +77,17 @@ public class FragmentRents extends Fragment {
           RentMainAdapter listAdapter = new RentMainAdapter(getActivity(), games);
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
           rcv_rents.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
+          setAnimation();
+          lyt_rents.setVisibility(View.VISIBLE);
         }
       }
     });
+  }
+
+  private void setAnimation(){
+    Animation anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_right);
+    lyt_rents.setAnimation(anim);
+    anim.start();
   }
 
 

@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.TicketAdapter;
@@ -34,6 +35,7 @@ public class ActivityTicket extends AppCompatActivity {
   TicketService apiService;
   TicketAdapter adapter;
   AVLoadingIndicatorView avl_send_message;
+  int first_ticket_id = -1;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class ActivityTicket extends AppCompatActivity {
 
     setupViews();
     LinearLayoutManager layoutManager = new LinearLayoutManager(ActivityTicket.this, LinearLayoutManager.VERTICAL, false);
+//    layoutManager.setReverseLayout(true);
     rcv_tickets.setLayoutManager(layoutManager);
     getTickets();
     avl_send_message.setVisibility(View.VISIBLE);
@@ -56,6 +59,24 @@ public class ActivityTicket extends AppCompatActivity {
         }
       }
     });
+
+
+    Thread thread = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        while (true) {
+          try {
+            Thread.sleep(4000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          getTickets();
+        }
+      }
+    });
+
+    thread.start();
+
 
   }
 
@@ -77,12 +98,19 @@ public class ActivityTicket extends AppCompatActivity {
         if (status == 0){
           MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
         }else {
-          adapter = new TicketAdapter(G.context, new ArrayList<Ticket>());
-          rcv_tickets.setAdapter(adapter);
-          adapter.notifyData(tickets);
-          if (tickets.size() > 0) {
-            rcv_tickets.smoothScrollToPosition(adapter.getItemCount());
+
+          if (tickets.size()>0) {
+
+            if(first_ticket_id != tickets.get(0).getId()) {
+              first_ticket_id = tickets.get(0).getId();
+              Collections.reverse(tickets);
+              adapter = new TicketAdapter(G.context, new ArrayList<Ticket>());
+              rcv_tickets.setAdapter(adapter);
+              adapter.notifyData(tickets);
+              rcv_tickets.scrollToPosition(adapter.getItemCount() - 1);
+            }
           }
+
         }
       }
     });
@@ -124,6 +152,8 @@ public class ActivityTicket extends AppCompatActivity {
         public void onReceived(int status, String message, Ticket ticket) {
           avl_send_message.setVisibility(View.INVISIBLE);
           if (status == 1){
+//            getTickets();
+            first_ticket_id = ticket.getId();
             List<Ticket> tickets = new ArrayList<>();
             tickets.add(ticket);
             adapter.notifyData(tickets);
@@ -137,4 +167,6 @@ public class ActivityTicket extends AppCompatActivity {
       e.printStackTrace();
     }
   }
+
+
 }

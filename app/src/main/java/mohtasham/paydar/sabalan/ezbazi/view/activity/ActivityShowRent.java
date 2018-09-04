@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
@@ -36,6 +37,7 @@ public class ActivityShowRent extends AppCompatActivity {
   ImageView img_game;
   ImageView img_game_cover;
   TextView txt_name, txt_console, txt_genres, txt_release_date;
+  ExpandableTextView expand_text_view;
 
   Game game;
 
@@ -68,6 +70,9 @@ public class ActivityShowRent extends AppCompatActivity {
     txt_console = (TextView) findViewById(R.id.txt_console);
     txt_genres = (TextView) findViewById(R.id.txt_genres);
     txt_release_date = (TextView) findViewById(R.id.txt_release_date);
+
+    expand_text_view = (ExpandableTextView) findViewById(R.id.expand_text_view);
+
   }
 
   private void prepareGame(Bundle extras, Bundle savedInstanceState){
@@ -131,6 +136,8 @@ public class ActivityShowRent extends AppCompatActivity {
 //        }
       }
     }
+
+    expand_text_view.setText(game.getDescription());
   }
 
 

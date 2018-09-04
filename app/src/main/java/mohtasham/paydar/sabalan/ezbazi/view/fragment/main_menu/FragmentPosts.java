@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -24,6 +27,7 @@ import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.
 
 public class FragmentPosts extends Fragment {
 
+  LinearLayout lyt_posts;
   RecyclerView rcv_posts;
   PostService apiService;
   int page_num = 1;
@@ -35,6 +39,7 @@ public class FragmentPosts extends Fragment {
     view = inflater.inflate(R.layout.fragment_main_posts, container, false);
 
     setupViews();
+    lyt_posts.setVisibility(View.INVISIBLE);
 
     rcv_posts.setLayoutManager((new LinearLayoutManager(G.context,LinearLayoutManager.HORIZONTAL,true)));
     getPosts();
@@ -54,6 +59,7 @@ public class FragmentPosts extends Fragment {
   private void setupViews() {
     rcv_posts = view.findViewById(R.id.rcv_posts);
     txt_show_posts = view.findViewById(R.id.txt_show_posts);
+    lyt_posts = view.findViewById(R.id.lyt_posts);
   }
 
   private void getPosts(){
@@ -67,9 +73,17 @@ public class FragmentPosts extends Fragment {
           PostMainAdapter listAdapter = new PostMainAdapter(getActivity(), posts);
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
           rcv_posts.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
+          setAnimation();
+          lyt_posts.setVisibility(View.VISIBLE);
         }
       }
     });
+  }
+
+  private void setAnimation(){
+    Animation anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_left);
+    lyt_posts.setAnimation(anim);
+    anim.start();
   }
 
 

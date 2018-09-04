@@ -52,7 +52,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
       holder.txt_name.setText(game.getName());
       holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
       holder.txt_rating.setText("امتیاز : " + "4.5");
-      holder.btn_action.setText("خرید");
+      holder.btn_price.setText(game.getPrice() + " تومان ");
 
 
 
@@ -89,7 +89,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
     private TextView txt_name;
     private TextView txt_rating;
     private TextView txt_release_date;
-    private Button btn_action;
+    private Button btn_price;
 
     public ListViewHolder(View itemView) {
       super(itemView);
@@ -97,7 +97,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
       txt_name = itemView.findViewById(R.id.txt_name);
       txt_rating = itemView.findViewById(R.id.txt_rating);
       txt_release_date = itemView.findViewById(R.id.txt_release_date);
-      btn_action = itemView.findViewById(R.id.btn_action);
+      btn_price = itemView.findViewById(R.id.btn_price);
 
     }
 

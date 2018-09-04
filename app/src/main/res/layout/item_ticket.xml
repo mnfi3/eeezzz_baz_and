@@ -31,7 +31,7 @@
         android:layout_height="15dp"
         android:layout_centerVertical="true"
         android:padding="3dp"
-        android:src="@drawable/ic_seen_message"
+        android:src="@drawable/ic_seen"
         android:visibility="invisible"
         android:layout_below="@+id/txt_message"
         android:layout_marginLeft="5dp"

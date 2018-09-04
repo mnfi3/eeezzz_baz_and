@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.
 
 public class FragmentShops extends Fragment {
 
+  LinearLayout lyt_shops;
   RecyclerView rcv_shops;
   ShopService apiService;
   int page_num = 1;
@@ -36,6 +40,7 @@ public class FragmentShops extends Fragment {
     view = inflater.inflate(R.layout.fragment_main_shops, container, false);
 
     setupViews();
+    lyt_shops.setVisibility(View.INVISIBLE);
 
     rcv_shops.setLayoutManager((new LinearLayoutManager(G.context,LinearLayoutManager.HORIZONTAL,true)));
     getShops();
@@ -55,6 +60,7 @@ public class FragmentShops extends Fragment {
   private void setupViews(){
     rcv_shops = view.findViewById(R.id.rcv_shops);
     txt_show_shops_list = view.findViewById(R.id.txt_show_shops_list);
+    lyt_shops = view.findViewById(R.id.lyt_shops);
   }
 
   private void getShops(){
@@ -68,9 +74,17 @@ public class FragmentShops extends Fragment {
           ShopMainAdapter listAdapter=new ShopMainAdapter(G.context, games);
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
           rcv_shops.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
+          setAnimation();
+          lyt_shops.setVisibility(View.VISIBLE);
         }
       }
     });
+  }
+
+  private void setAnimation(){
+    Animation anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_left);
+    lyt_shops.setAnimation(anim);
+    anim.start();
   }
 
 

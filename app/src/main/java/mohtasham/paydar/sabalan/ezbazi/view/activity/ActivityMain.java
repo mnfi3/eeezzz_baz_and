@@ -21,6 +21,7 @@ import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentNavigation;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentPosts;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentRents;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentShops;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -51,12 +52,16 @@ public class ActivityMain extends AppCompatActivity {
       setupViews();
 
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//    ft.setCustomAnimations(R.anim.anim_enter_from_left, R.anim.anim_exit_to_right);
     ft.replace(R.id.lyt_navigation, new FragmentNavigation());
-    ft.replace(R.id.lyt_main_rents, new FragmentRents());
+    ft.replace(R.id.lyt_main_shops, new FragmentRents());
+    ft.replace(R.id.lyt_main_rents, new FragmentShops());
     ft.replace(R.id.lyt_main_posts, new FragmentPosts());
     ft.commit();
 
-//    ft.commit();
+//    FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
+//    ft2.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
+//    ft2.commit();
 
 
     img_open_navigation.setOnClickListener(new View.OnClickListener() {

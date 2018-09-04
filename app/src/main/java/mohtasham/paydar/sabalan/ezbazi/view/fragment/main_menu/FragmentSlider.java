@@ -1,10 +1,13 @@
 package mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -23,11 +26,13 @@ import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
 public class FragmentSlider extends Fragment {
 
   SliderLayout sliderLayout;
+  CoordinatorLayout lyt_slider;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_main_slider, container, false);
     sliderLayout = view.findViewById(R.id.slider);
+    lyt_slider = view.findViewById(R.id.lyt_slider);
     getSlider();
 
     return view;
@@ -70,9 +75,16 @@ public class FragmentSlider extends Fragment {
       @Override
       public void onReceived(String message, final List<MainSlider> sliders) {
         setSlider(sliders);
+        setAnimation();
       }
     });
   }
 
+
+  private void setAnimation(){
+    Animation anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_right);
+    lyt_slider.setAnimation(anim);
+    anim.start();
+  }
 
 }
