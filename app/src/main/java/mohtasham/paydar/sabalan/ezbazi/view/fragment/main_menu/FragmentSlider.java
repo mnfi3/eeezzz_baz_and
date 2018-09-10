@@ -75,7 +75,7 @@ public class FragmentSlider extends Fragment {
       @Override
       public void onReceived(String message, final List<MainSlider> sliders) {
         setSlider(sliders);
-        setAnimation();
+//        setAnimation();
       }
     });
   }

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.ActivityShowRent"
+    android:theme="@style/AppThemeFullScreen"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorPrimaryDark"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlwaysCollapsed"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/show_detail_media_height"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7"
+                android:id="@+id/lyt_game_info_head"
+                android:fitsSystemWindows="true">
+
+
+                <VideoView
+                    android:id="@+id/vdo_game"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:scaleType="fitXY"
+                    android:fitsSystemWindows="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="30dp"
+                    />
+
+
+
+                <ImageView
+                    android:id="@+id/img_game_cover"
+                    android:layout_width="@dimen/item_list_games_image_width"
+                    android:layout_height="@dimen/item_list_games_image_height"
+                    android:layout_alignBottom="@+id/vdo_game"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="-30dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/test"/>
+
+
+
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/txt_console"
+                    android:layout_alignParentStart="true"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="test1"
+                    android:textSize="@dimen/font_size_medium"
+                    android:textColor="@color/main_text_color"
+                    android:background="#8f000000"
+                    android:layout_margin="3dp"/>
+
+                <TextView
+                    android:id="@+id/txt_console"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/txt_genres"
+                    android:layout_alignParentStart="true"
+                    android:padding="5dp"
+                    android:text="test2"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/font_size_small"
+                    android:background="#8f000000"
+                    android:layout_margin="3dp"/>
+
+
+                <TextView
+                    android:id="@+id/txt_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/vdo_game"
+                    android:layout_alignParentStart="true"
+                    android:background="#8f000000"
+                    android:padding="5dp"
+                    android:text="test3"
+                    android:layout_marginStart="3dp"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/font_size_small"/>
+
+
+                <TextView
+                    android:id="@+id/txt_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:padding="5dp"
+                    android:text="test4"
+                    android:textColor="@color/gray_text_color"
+                    android:textSize="@dimen/font_size_small"/>
+
+
+            </RelativeLayout>
+
+
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_behavior=".view.ToolbarBackgroundAlphaBehavior"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+
+                        <TextView
+                            android:id="@+id/txt_page_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right"
+                            android:gravity="center"
+                            android:text="page name"
+                            android:textColor="#ffffff"
+                            android:textSize="14dp"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="48sp"
+                        android:layout_height="48sp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10sp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_back"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/back_buttons_ripple_effect"
+                            android:padding="10sp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_back"
+                            />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/back_buttons"
+                android:text="play"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_size_very_large"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/main_text_color"
+                android:padding="5dp"
+                android:text="Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text. It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the classical author and philosopher Cicero. Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin, these, and others are often inserted randomly to mimic the typographic appearence of European languages, as are digraphs not to be found in the original.
+
+In a professional context it often happens that private or corporate clients corder a publication to be made and presented with the actual content still not being ready. Think of a news blog that's filled with content hourly on the day of going live. However, reviewers tend to be distracted by comprehensible content, say, a random text copied from a newspaper or the internet. The are likely to focus on the text, disregarding the layout and its elements. Besides, random text risks to be unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and its many variants have been employed since the early 1960ies, and quite likely since the sixteenth century."/>
+
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
