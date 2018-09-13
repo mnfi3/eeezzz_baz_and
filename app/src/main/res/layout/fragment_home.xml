@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/toolbar_main"/>
+
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+            <fragment
+                android:id="@+id/frg_slider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentSlider"
+                tools:layout="@layout/fragment_main_slider"
+                />
+
+
+            <!--<fragment-->
+            <!--android:id="@+id/frg_main_posts"-->
+            <!--android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentPosts"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--tools:layout="@layout/fragment_main_posts"/>-->
+
+            <FrameLayout
+                android:id="@+id/lyt_main_posts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+            <!--<fragment-->
+            <!--android:id="@+id/frg_main_shops"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentShops"-->
+            <!--tools:layout="@layout/fragment_main_shops"/>-->
+
+            <FrameLayout
+                android:id="@+id/lyt_main_shops"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+
+            <!--<fragment-->
+            <!--android:id="@+id/frg_main_rents"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentRents"-->
+            <!--tools:layout="@layout/fragment_main_rents"/>-->
+
+            <FrameLayout
+                android:id="@+id/lyt_main_rents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
+
+

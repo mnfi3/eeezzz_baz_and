@@ -1,4 +1,4 @@
-package mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu;
+package mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub;
 
 import android.content.Intent;
 import android.os.Bundle;

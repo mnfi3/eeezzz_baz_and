@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.activity.ActivityMain">
+    tools:context=".view.activity.ActivityHome">
 
 
     <android.support.design.widget.CoordinatorLayout
@@ -37,7 +37,7 @@
                     android:id="@+id/frg_slider"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentSlider"
+                    android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentSlider"
                     tools:layout="@layout/fragment_main_slider"
                     />
 

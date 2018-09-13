@@ -1,4 +1,4 @@
-package mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu;
+package mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub;
 
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;

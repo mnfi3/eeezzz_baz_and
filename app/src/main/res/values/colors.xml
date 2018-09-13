@@ -5,6 +5,8 @@
     <color name="colorPrimaryLight">#2c4046</color>
     <color name="colorAccent">#6fae3d</color>
 
+    <color name="colorAccent2">#D65611</color>
+
 
     <color name="status_bar_color">#0e1323</color>
     <color name="text_color">#fefefe</color>
