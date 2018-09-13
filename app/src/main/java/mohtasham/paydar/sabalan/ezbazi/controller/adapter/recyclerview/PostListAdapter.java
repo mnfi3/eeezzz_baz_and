@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Post;
+import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ListViewHolder>{
 
@@ -79,7 +81,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ListVi
 
   public class ListViewHolder extends RecyclerView.ViewHolder{
 
-    private ImageView img_post;
+    private RoundedImageView img_post;
     private TextView txt_post_title;
     private TextView txt_post_date;
 
@@ -89,6 +91,13 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ListVi
       txt_post_title = itemView.findViewById(R.id.txt_post_title);
       txt_post_date = itemView.findViewById(R.id.txt_post_date);
 
+
+      setTypeFace();
+    }
+
+    private void setTypeFace(){
+      txt_post_title.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_post_date.setTypeface(MyViews.getIranSansMediumFont(context));
     }
 
 

@@ -1,13 +1,16 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +46,9 @@ public class ActivityShowRent extends AppCompatActivity {
 
   RentService service;
 
+  NestedScrollView nested_scroll;
+
+  @SuppressLint("ClickableViewAccessibility")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -52,6 +58,28 @@ public class ActivityShowRent extends AppCompatActivity {
 
     Bundle extras = getIntent().getExtras();
     prepareGame(extras ,savedInstanceState);
+
+
+    nested_scroll.setOnTouchListener(new View.OnTouchListener() {
+      @Override
+      public boolean onTouch(View v, MotionEvent event) {
+        int action = event.getAction();
+        switch (action) {
+          case MotionEvent.ACTION_DOWN:
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            break;
+
+          case MotionEvent.ACTION_UP:
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            break;
+        }
+        // Handle nestedScrollView touch events.
+        v.onTouchEvent(event);
+        return true;
+      }
+    });
+
+
 
   }
 
@@ -72,6 +100,8 @@ public class ActivityShowRent extends AppCompatActivity {
     txt_release_date = (TextView) findViewById(R.id.txt_release_date);
 
     expand_text_view = (ExpandableTextView) findViewById(R.id.expand_text_view);
+
+    nested_scroll = (NestedScrollView) findViewById(R.id.nested_scroll);
 
   }
 

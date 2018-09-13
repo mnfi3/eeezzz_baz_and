@@ -21,7 +21,7 @@
         android:background="@drawable/back_ticket_item1"
         android:padding="5dp"
         android:textColor="@color/main_text_color"
-
+        android:textSize="@dimen/font_size_small"
         android:textDirection="rtl"
         tools:text="hello how are you?\n are you good? \n what do you do today?"/>
 

@@ -24,6 +24,7 @@ import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityListRent;
+import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.adapters.AlphaInAnimationAdapter;
 
 
@@ -42,6 +43,7 @@ public class FragmentRents extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_main_rents, container, false);
     setupViews();
+    setTypeFace();
     lyt_rents.setVisibility(View.INVISIBLE);
 
     rcv_rents.setLayoutManager((new LinearLayoutManager(G.context,LinearLayoutManager.HORIZONTAL,true)));
@@ -90,6 +92,10 @@ public class FragmentRents extends Fragment {
     anim.start();
   }
 
+
+  private void setTypeFace(){
+    txt_show_rent_list.setTypeface(MyViews.getIranSansMediumFont(getContext()));
+  }
 
 
 

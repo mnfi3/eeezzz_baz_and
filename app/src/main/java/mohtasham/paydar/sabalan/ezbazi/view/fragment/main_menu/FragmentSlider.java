@@ -54,6 +54,7 @@ public class FragmentSlider extends Fragment {
           }
         });
 
+
 //          textSliderView
 //            .bundle(new Bundle())
 //            .getBundle().putInt("extra", sliders.get(i).getId());

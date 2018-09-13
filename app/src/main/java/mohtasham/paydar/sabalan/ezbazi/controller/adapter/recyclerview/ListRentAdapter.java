@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityShowRent;
+import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListViewHolder>{
 
@@ -57,8 +59,8 @@ public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListVi
         .into(holder.img_game);
 
       holder.txt_name.setText(game.getName());
-      holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
-      holder.txt_rating.setText("امتیاز : " + "4.5");
+//      holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
+      holder.txt_rating.setText("rate : " + "4.5");
       holder.btn_price.setText(game.getPrice() + " تومان ");
 
 
@@ -83,7 +85,7 @@ public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListVi
 
   public class ListViewHolder extends RecyclerView.ViewHolder{
 
-    private ImageView img_game;
+    private RoundedImageView img_game;
     private TextView txt_name;
     private TextView txt_rating;
     private TextView txt_release_date;
@@ -97,6 +99,15 @@ public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListVi
       txt_release_date = itemView.findViewById(R.id.txt_release_date);
       btn_price = itemView.findViewById(R.id.btn_price);
 
+
+      setTypeFace();
+    }
+
+    private void setTypeFace(){
+      txt_name.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_rating.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));
+      btn_price.setTypeface(MyViews.getIranSansMediumFont(context));
     }
 
 
@@ -121,6 +132,8 @@ public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListVi
     games.clear();
     notifyItemRangeRemoved(0, size);
   }
+
+
 
 
 

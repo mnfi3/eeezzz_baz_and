@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
+import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListViewHolder>{
 
@@ -82,7 +84,7 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
 
   public class ListViewHolder extends RecyclerView.ViewHolder{
 
-    private ImageView img_game;
+    private RoundedImageView img_game;
     private TextView txt_game_name;
     private TextView txt_release_date;
 
@@ -92,7 +94,16 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
       txt_game_name = itemView.findViewById(R.id.txt_game_name);
       txt_release_date = itemView.findViewById(R.id.txt_release_date);
 
+
+      setTypeFace();
     }
+
+
+    private void setTypeFace(){
+      txt_game_name.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));
+    }
+
 
 
   }

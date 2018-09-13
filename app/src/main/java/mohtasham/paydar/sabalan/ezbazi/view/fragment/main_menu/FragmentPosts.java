@@ -22,6 +22,7 @@ import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 import mohtasham.paydar.sabalan.ezbazi.model.Post;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityListPost;
+import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.adapters.AlphaInAnimationAdapter;
 
 
@@ -39,6 +40,7 @@ public class FragmentPosts extends Fragment {
     view = inflater.inflate(R.layout.fragment_main_posts, container, false);
 
     setupViews();
+    setTypeFace();
     lyt_posts.setVisibility(View.INVISIBLE);
 
     rcv_posts.setLayoutManager((new LinearLayoutManager(G.context,LinearLayoutManager.HORIZONTAL,true)));
@@ -84,6 +86,11 @@ public class FragmentPosts extends Fragment {
     Animation anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_left);
     lyt_posts.setAnimation(anim);
     anim.start();
+  }
+
+
+  private void setTypeFace(){
+    txt_show_posts.setTypeface(MyViews.getIranSansMediumFont(getContext()));
   }
 
 

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
+import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListViewHolder>{
 
@@ -85,7 +87,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
 
   public class ListViewHolder extends RecyclerView.ViewHolder{
 
-    private ImageView img_game;
+    private RoundedImageView img_game;
     private TextView txt_name;
     private TextView txt_rating;
     private TextView txt_release_date;
@@ -99,8 +101,17 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
       txt_release_date = itemView.findViewById(R.id.txt_release_date);
       btn_price = itemView.findViewById(R.id.btn_price);
 
+
+      setTypeFace();
     }
 
+
+    private void setTypeFace(){
+      txt_name.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_rating.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));
+      btn_price.setTypeface(MyViews.getIranSansMediumFont(context));
+    }
 
   }
 

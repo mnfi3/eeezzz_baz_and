@@ -19,11 +19,7 @@
         <activity
             android:name=".view.activity.ActivityMain"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".view.activity.ActivityLogin">
         </activity>
@@ -45,6 +41,15 @@
         <activity android:name=".view.activity.ActivityTicket">
         </activity>
         <activity android:name=".view.activity.ActivityWebView">
+        </activity>
+        <activity android:name=".view.activity.ActivityMenu">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
         </activity>
     </application>
 

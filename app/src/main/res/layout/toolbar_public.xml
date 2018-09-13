@@ -27,10 +27,10 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginRight="28dp"
-                android:gravity="center"
+                android:gravity="right|center_vertical"
                 android:textSize="14dp"
                 android:textColor="@color/main_text_color"
-                android:padding="3dp"
+                android:paddingRight="20dp"
                 tools:text="page name"/>
 
             <LinearLayout

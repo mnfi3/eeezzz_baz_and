@@ -23,6 +23,7 @@ import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityListShop;
+import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.adapters.AlphaInAnimationAdapter;
 
 
@@ -40,6 +41,7 @@ public class FragmentShops extends Fragment {
     view = inflater.inflate(R.layout.fragment_main_shops, container, false);
 
     setupViews();
+    setTypeFace();
     lyt_shops.setVisibility(View.INVISIBLE);
 
     rcv_shops.setLayoutManager((new LinearLayoutManager(G.context,LinearLayoutManager.HORIZONTAL,true)));
@@ -88,6 +90,9 @@ public class FragmentShops extends Fragment {
   }
 
 
+  private void setTypeFace(){
+    txt_show_shops_list.setTypeface(MyViews.getIranSansMediumFont(getContext()));
+  }
 
 
 

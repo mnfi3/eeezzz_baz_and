@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <!--<include layout="@layout/toolbar_main"/>-->
+
+    <FrameLayout
+        android:id="@+id/lyt_action"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+
+
+
+
+    <android.support.design.widget.AppBarLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="bottom">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            >
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="2dp"
+                app:layout_scrollFlags="snap"
+                android:id="@+id/lyt_bottom_buttons">
+
+
+                <Button
+                    android:id="@+id/btn_profile"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/back_buttons_ripple_effect"
+                    android:drawableTop="@drawable/ic_home"
+                    android:text="پروفایل"
+                    android:padding="2dp"
+                    android:textColor="@color/gray_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    />
+                <!--android:drawableTop="@drawable/ic_login"-->
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#448f8080"/>
+
+                <Button
+                    android:id="@+id/btn_suggest"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/back_buttons_ripple_effect"
+                    android:text="پیشنهادات"
+                    android:padding="2dp"
+                    android:drawableTop="@drawable/ic_offer"
+                    android:textColor="@color/gray_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    />
+
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#448f8080"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"/>
+
+
+                <Button
+                    android:id="@+id/btn_report"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/back_buttons_ripple_effect"
+                    android:text="گزارش"
+                    android:padding="2dp"
+                    android:textColor="@color/gray_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    android:drawableTop="@drawable/ic_report"
+                    />
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#448f8080"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"/>
+
+                <Button
+                    android:id="@+id/btn_finance"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/back_buttons_ripple_effect"
+                    android:text="مالی"
+                    android:padding="2dp"
+                    android:textColor="@color/gray_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    android:drawableTop="@drawable/ic_finance"/>
+
+            </LinearLayout>
+
+
+
+
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

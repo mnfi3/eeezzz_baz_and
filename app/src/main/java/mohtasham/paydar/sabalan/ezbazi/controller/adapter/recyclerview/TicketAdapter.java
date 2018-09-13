@@ -18,6 +18,7 @@ import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Ticket;
+import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ListViewHolder>{
 
@@ -92,7 +93,16 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ListViewHo
       txt_created_at = itemView.findViewById(R.id.txt_created_at);
       lyt_ticket_item = itemView.findViewById(R.id.lyt_ticket_item);
 
+
+
+      setTypeFace();
     }
+
+    private void setTypeFace(){
+      txt_message.setTypeface(MyViews.getIranSansLightFont(context));
+      txt_created_at.setTypeface(MyViews.getIranSansMediumFont(context));
+    }
+
 
 
   }

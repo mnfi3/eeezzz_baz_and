@@ -20,6 +20,7 @@
         android:layout_marginLeft="5dp"
         android:padding="5dp"
         android:textColor="@color/text_color"
+        android:textSize="@dimen/font_size_medium"
         android:textStyle="bold"
         android:clickable="true"
         android:focusable="true"

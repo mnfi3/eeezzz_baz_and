@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentScrim="@color/colorPrimaryDark"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlwaysCollapsed"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
         >
         <!--app:expandedTitleMarginStart="48dp"-->
         <!--app:expandedTitleMarginEnd="64dp"-->
@@ -166,7 +166,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
 
                 <LinearLayout
@@ -180,7 +181,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="right"
-                        android:gravity="center"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="20dp"
                         android:text="page name"
                         android:textColor="#ffffff"
                         android:textSize="14dp"/>
