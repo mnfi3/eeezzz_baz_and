@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_person" />
-                            <entry key="sourceFile" value="C:\Users\Mohsen\Desktop\EzBazi\icons\open-iconic-master\svg\person.svg" />
+                            <entry key="outputName" value="ic_star" />
+                            <entry key="sourceFile" value="C:\Users\Mohsen\Desktop\EzBazi\icons\open-iconic-master\svg\star.svg" />
                           </map>
                         </option>
                       </PersistentState>

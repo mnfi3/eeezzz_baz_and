@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -34,7 +33,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
 
   @Override
   public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(context).inflate(R.layout.item_list_games,parent,false);
+    View view = LayoutInflater.from(context).inflate(R.layout.item_list_game_shop,parent,false);
     return new ListViewHolder(view);
   }
 
@@ -53,7 +52,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
 
       holder.txt_name.setText(game.getName());
       holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
-      holder.txt_rating.setText("امتیاز : " + "4.5");
+      holder.txt_rating.setText("rate : 4.8");
       holder.btn_price.setText(game.getPrice() + " تومان ");
 
 
@@ -107,8 +106,8 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
 
 
     private void setTypeFace(){
-      txt_name.setTypeface(MyViews.getIranSansMediumFont(context));
-      txt_rating.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_name.setTypeface(MyViews.getIranSansLightFont(context));
+      txt_rating.setTypeface(MyViews.getIranSansLightFont(context));
       txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));
       btn_price.setTypeface(MyViews.getIranSansMediumFont(context));
     }

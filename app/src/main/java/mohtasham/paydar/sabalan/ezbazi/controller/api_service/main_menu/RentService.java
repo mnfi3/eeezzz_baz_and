@@ -56,7 +56,8 @@ public class RentService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onRentsReceived.onReceived(0, "", new ArrayList<Game>(), new Paginate());
+        onRentsReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<Game>(), new Paginate());
+
       }
     });
 

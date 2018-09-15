@@ -11,7 +11,8 @@
 
 
 
-    <include layout="@layout/part_show_game_media"/>
+    <include layout="@layout/part_show_game_media"
+        android:visibility="visible"/>
 
 
 
@@ -38,58 +39,223 @@
 
            <!--<include layout="@layout/part_show_game_media"/>-->
 
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="48dp"
+               android:orientation="horizontal"
+               android:gravity="center"
+               android:padding="2dp">
+
+               <TextView
+                   android:id="@+id/txt_rent_period"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:padding="2dp"
+                   android:text="بازه زمانی که می خواهید اجاره کنید(روز)"
+                   android:gravity="center"
+                   android:textColor="@color/main_text_color"/>
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:adjustViewBounds="true"
+                   android:src="@drawable/ic_calendar_clock"
+                   android:padding="10dp"/>
+
+           </LinearLayout>
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="48dp"
+               android:gravity="center"
+               android:padding="4dp">
+
+               <Button
+                   android:id="@+id/btn_rent_day_count_30"
+                   android:layout_width="60dp"
+                   android:layout_height="match_parent"
+                   android:background="@drawable/back_rent_day_count"
+                   android:layout_marginRight="20dp"
+                   android:layout_marginLeft="20dp"
+                   android:text="30"
+                   android:textColor="@color/main_text_color"/>
+
+               <Button
+                   android:id="@+id/btn_rent_day_count_20"
+                   android:layout_width="60dp"
+                   android:layout_height="match_parent"
+                   android:background="@drawable/back_rent_day_count"
+                   android:layout_marginRight="20dp"
+                   android:layout_marginLeft="20dp"
+                   android:text="20"
+                   android:textColor="@color/main_text_color"/>
+
+               <Button
+                   android:id="@+id/btn_rent_day_count_10"
+                   android:layout_width="60dp"
+                   android:layout_height="match_parent"
+                   android:background="@drawable/back_rent_day_count_ch"
+                   android:layout_marginRight="20dp"
+                   android:layout_marginLeft="20dp"
+                   android:text="10"
+                   android:textColor="@color/main_text_color"/>
+
+
+
+           </LinearLayout>
 
 
 
            <Button
+               android:id="@+id/btn_rent"
                android:layout_width="match_parent"
                android:layout_height="48dp"
-               android:layout_margin="20dp"
-               android:background="@drawable/back_buttons"
-               android:text="اجاره این بازی"
-               android:textColor="@color/colorPrimary"
-               android:textSize="@dimen/font_size_very_large"
-               android:textStyle="bold"
+               android:layout_marginLeft="60dp"
+               android:layout_marginRight="60dp"
+               android:layout_marginTop="20dp"
+               android:layout_marginBottom="20dp"
+               android:background="@drawable/back_list_game_price"
+               android:text="اجاره با قیمت 20000 تومان"
+               android:textColor="@color/main_text_color"
+               android:textSize="@dimen/font_size_large"
                />
 
 
 
 
-           <com.ms.square.android.expandabletextview.ExpandableTextView
-               xmlns:android="http://schemas.android.com/apk/res/android"
-               xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-               android:id="@+id/expand_text_view"
+
+
+           <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               expandableTextView:maxCollapsedLines="5"
-               expandableTextView:animDuration="300"
-               android:layout_margin="10dp"
-               android:background="@color/colorPrimaryLight"
+               android:background="@drawable/back_game_detail_description"
+               android:orientation="vertical"
+               android:padding="20dp"
+               android:layout_margin="10dp">
 
-               >
-
-               <TextView
-                   android:id="@id/expandable_text"
+               <com.ms.square.android.expandabletextview.ExpandableTextView
+                   xmlns:android="http://schemas.android.com/apk/res/android"
+                   xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+                   android:id="@+id/expand_text_view"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_marginRight="7dp"
-                   android:layout_marginLeft="7dp"
-                   android:layout_marginTop="5dp"
-                   android:padding="5dp"
-                   android:textSize="@dimen/font_size_medium"
-                   tools:text="picture description"
-                   android:textColor="@color/main_text_color"
-                   android:lineSpacingExtra="5dp"
-                   />
-               <ImageButton
-                   android:id="@id/expand_collapse"
-                   android:layout_width="wrap_content"
-                   android:layout_height="30dp"
-                   android:padding="5dp"
-                   android:layout_gravity="center|bottom"
-                   android:background="@android:color/transparent"
-                   android:layout_marginBottom="10dp"/>
-           </com.ms.square.android.expandabletextview.ExpandableTextView>
+                   expandableTextView:maxCollapsedLines="5"
+                   expandableTextView:animDuration="300"
+                   android:layout_margin="10dp"
+
+                   >
+                   <!--android:background="@color/colorPrimaryLight"-->
+
+                   <TextView
+                       android:id="@id/expandable_text"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginRight="7dp"
+                       android:layout_marginLeft="7dp"
+                       android:layout_marginTop="5dp"
+                       android:padding="5dp"
+                       android:textSize="@dimen/font_size_medium"
+                       tools:text="picture description"
+                       android:textColor="@color/main_text_color"
+                       android:lineSpacingExtra="5dp"
+                       />
+                   <ImageButton
+                       android:id="@id/expand_collapse"
+                       android:layout_width="wrap_content"
+                       android:layout_height="30dp"
+                       android:padding="5dp"
+                       android:layout_gravity="center|bottom"
+                       android:layout_marginBottom="10dp"
+                       android:background="@android:color/transparent"
+                       />
+               </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="48dp"
+                   android:layout_gravity="bottom"
+                   android:orientation="horizontal"
+                   android:paddingRight="10dp"
+                   android:paddingLeft="10dp"
+                   >
+
+                   <Button
+                       android:layout_width="85dp"
+                       android:layout_height="match_parent"
+                       android:background="@drawable/back_button_game_comment"
+                       android:text="نظرات"
+                       android:textColor="@color/main_text_color"
+                       android:textSize="@dimen/font_size_medium"
+                       android:layout_marginTop="5dp"
+                       android:layout_marginBottom="5dp"/>
+
+                   <LinearLayout
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"/>
+
+
+                   <TextView
+                       android:id="@+id/txt_detail_age_class"
+                       android:layout_width="48dp"
+                       android:layout_height="match_parent"
+                       android:layout_marginRight="5dp"
+                       android:layout_marginLeft="5dp"
+                       android:background="@drawable/back_game_detail_circle"
+                       android:text="+16"
+                       android:textColor="@color/main_text_color"
+                       android:textSize="@dimen/font_size_small"
+                       android:gravity="center"
+                       />
+
+                   <com.makeramen.roundedimageview.RoundedImageView
+                       android:id="@+id/img_detail_console_icon"
+                       android:layout_width="48dp"
+                       android:layout_height="match_parent"
+                       android:layout_marginRight="5dp"
+                       android:layout_marginLeft="5dp"
+                       android:background="@drawable/back_game_detail_circle"
+                       android:gravity="center"
+                       android:src="@drawable/ic_xbox"
+                       app:riv_corner_radius="48dp"
+                       android:padding="10dp"
+                       />
+
+                   <TextView
+                       android:id="@+id/txt_detail_release_date"
+                       android:layout_width="48dp"
+                       android:layout_height="match_parent"
+                       android:layout_marginRight="5dp"
+                       android:layout_marginLeft="5dp"
+                       android:background="@drawable/back_game_detail_circle"
+                       android:text="2018"
+                       android:textColor="@color/main_text_color"
+                       android:textSize="@dimen/font_size_small"
+                       android:gravity="center"
+                       />
+
+               </LinearLayout>
+
+
+
+           </LinearLayout>
+
+
+
+
+
+           <FrameLayout
+               android:id="@+id/lyt_related_games"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+
+           <FrameLayout
+                android:id="@+id/lyt_related_posts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
 

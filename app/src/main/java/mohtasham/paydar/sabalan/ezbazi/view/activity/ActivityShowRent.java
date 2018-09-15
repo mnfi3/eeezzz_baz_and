@@ -6,18 +6,21 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 
@@ -25,6 +28,9 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentPosts;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentRents;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentShops;
 
 
 public class ActivityShowRent extends AppCompatActivity {
@@ -38,8 +44,9 @@ public class ActivityShowRent extends AppCompatActivity {
 
   VideoView vdo_game;
   ImageView img_game;
-  ImageView img_game_cover;
-  TextView txt_name, txt_console, txt_genres, txt_release_date;
+  RoundedImageView img_game_cover;
+  TextView txt_name, txt_console, txt_genres, txt_release_date, txt_rate;
+  ImageView img_rate_star;
   ExpandableTextView expand_text_view;
 
   Game game;
@@ -47,6 +54,9 @@ public class ActivityShowRent extends AppCompatActivity {
   RentService service;
 
   NestedScrollView nested_scroll;
+  TextView txt_rent_period;
+  Button btn_rent;
+  Button btn_rent_day_count_10, btn_rent_day_count_20, btn_rent_day_count_30;
 
   @SuppressLint("ClickableViewAccessibility")
   @Override
@@ -55,6 +65,7 @@ public class ActivityShowRent extends AppCompatActivity {
     setContentView(R.layout.activity_show_rent);
 
     setupViews();
+    setTypeFace();
 
     Bundle extras = getIntent().getExtras();
     prepareGame(extras ,savedInstanceState);
@@ -81,6 +92,14 @@ public class ActivityShowRent extends AppCompatActivity {
 
 
 
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//    ft.setCustomAnimations(R.anim.anim_enter_from_left, R.anim.anim_exit_to_right);
+    ft.replace(R.id.lyt_related_games, new FragmentRents());
+    ft.replace(R.id.lyt_related_posts, new FragmentPosts());
+    ft.commit();
+
+
+
   }
 
   private void setupViews(){
@@ -93,15 +112,22 @@ public class ActivityShowRent extends AppCompatActivity {
 
     vdo_game = (VideoView) findViewById(R.id.vdo_game);
     img_game = (ImageView) findViewById(R.id.img_game);
-    img_game_cover = (ImageView) findViewById(R.id.img_game_cover);
+    img_game_cover = (RoundedImageView) findViewById(R.id.img_game_cover);
     txt_name = (TextView) findViewById(R.id.txt_name);
     txt_console = (TextView) findViewById(R.id.txt_console);
     txt_genres = (TextView) findViewById(R.id.txt_genres);
     txt_release_date = (TextView) findViewById(R.id.txt_release_date);
+    txt_rate = (TextView) findViewById(R.id.txt_rate);
+    img_rate_star = (ImageView) findViewById(R.id.img_rate_star);
 
     expand_text_view = (ExpandableTextView) findViewById(R.id.expand_text_view);
 
     nested_scroll = (NestedScrollView) findViewById(R.id.nested_scroll);
+    txt_rent_period = (TextView) findViewById(R.id.txt_rent_period);
+    btn_rent = findViewById(R.id.btn_rent);
+    btn_rent_day_count_10 = findViewById(R.id.btn_rent_day_count_10);
+    btn_rent_day_count_20 = findViewById(R.id.btn_rent_day_count_20);
+    btn_rent_day_count_30 = findViewById(R.id.btn_rent_day_count_30);
 
   }
 
@@ -129,6 +155,19 @@ public class ActivityShowRent extends AppCompatActivity {
   }
 
 
+  private void setTypeFace(){
+    txt_name.setTypeface(MyViews.getIranSansMediumFont(ActivityShowRent.this));
+    txt_rate.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+
+    txt_rent_period.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    btn_rent.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+    btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+    btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+  }
+
+
+
   private void fillViews(){
     txt_name.setText(game.getName());
     txt_console.setText(game.getConsole_name());
@@ -139,6 +178,7 @@ public class ActivityShowRent extends AppCompatActivity {
     }
     txt_genres.setText(genres);
     txt_release_date.setText("تاریخ عرضه: " + game.getProduction_date());
+    txt_rate.setText("rate : 4.6");
 
     String cover_image = "";
     for (int i=0 ; i<game.getPhotos().size() ; i++){

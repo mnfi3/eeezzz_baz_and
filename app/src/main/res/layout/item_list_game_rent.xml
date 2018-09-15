@@ -2,12 +2,16 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_list_games_height"
+    android:layout_height="@dimen/item_list_game_rent_height"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
-    android:padding="2dp"
-    android:background="@drawable/back_buttons_ripple_effect">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="50dp"
+    android:background="@drawable/back_card_game_list"
+    >
 
     <!--<ImageView-->
         <!--android:id="@+id/img_game"-->
@@ -24,51 +28,72 @@
         android:layout_height="@dimen/item_list_games_image_height"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_marginRight="0dp"
         android:scaleType="fitXY"
         tools:src="@drawable/test"
         app:riv_corner_radius="8dp"
         />
 
 
-
-
     <TextView
         android:id="@+id/txt_rating"
-        android:layout_width="98dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/img_game"
+        android:layout_alignTop="@+id/txt_release_date"
         android:gravity="left"
         android:padding="2dp"
         android:textColor="@color/main_text_color"
-        android:textSize="@dimen/font_size_medium"
+        android:textSize="@dimen/font_size_large"
         tools:text="rating : 4"/>
 
     <TextView
         android:id="@+id/txt_release_date"
-        android:layout_width="144dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txt_name"
-        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/img_game"
+        android:layout_below="@+id/txt_name"
         android:gravity="right"
         android:padding="2dp"
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/font_size_small"
-        tools:name="2018/10/2"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        tools:name="2018/10/2"/>
 
     <TextView
         android:id="@+id/txt_name"
-        android:layout_width="142dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
+        android:layout_alignStart="@+id/txt_rating"
         android:gravity="left"
         android:padding="2dp"
         android:textColor="@color/main_text_color"
+        android:textSize="@dimen/font_size_very_large"
+        tools:text="BATMAN"
+        />
+
+
+    <ImageView
+        android:id="@+id/img_calendar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignStart="@+id/txt_rating"
+        android:layout_below="@+id/txt_rating"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_calendar_clock"/>
+
+
+    <TextView
+        android:id="@+id/txt_rent_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_rating"
+        android:layout_toEndOf="@+id/img_calendar"
+        android:text="اجاره 10 روزه"
+        android:textColor="@color/main_text_color"
         android:textSize="@dimen/font_size_medium"
-        tools:name="BATMAN"/>
+        android:layout_marginLeft="5dp"/>
 
     <Button
         android:id="@+id/btn_price"

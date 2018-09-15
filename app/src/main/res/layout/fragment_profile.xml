@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/lyt_posts"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <include layout="@layout/toolbar_main"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_logout"
+                    />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:text="خروج"
+                    android:textColor="@color/main_text_color"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical|left"
+                    android:textSize="@dimen/font_size_small"/>
+
+                <TextView
+                    android:id="@+id/txt_user_full_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="محسن فرجامی"
+                    android:layout_marginLeft="30dp"
+                    android:textColor="@color/main_text_color"
+                    android:gravity="center_vertical|right"
+                    android:textSize="@dimen/font_size_medium"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_support"
+                    />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:text="پشتیبانی"
+                    android:textColor="@color/main_text_color"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical|left"
+                    android:textSize="@dimen/font_size_small"/>
+
+                <TextView
+                    android:id="@+id/txt_user_rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="امتیاز شما : 100"
+                    android:layout_marginLeft="30dp"
+                    android:textColor="@color/main_text_color"
+                    android:gravity="center_vertical|right"
+                    android:textSize="@dimen/font_size_medium"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_user"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/test"
+            app:riv_corner_radius="10dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:layout_marginRight="10dp"
+                android:text="مانده حساب شما "
+                android:textColor="@color/main_text_color"
+                android:textSize="@dimen/font_size_small"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_wallet"
+                android:padding="2dp"
+                />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:gravity="center_vertical|right"
+            >
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="شارژ حساب کاربری"
+                android:textColor="@color/main_text_color"
+                android:background="@drawable/back_list_game_price"
+                android:textSize="@dimen/font_size_medium"
+                android:layout_marginRight="40dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="50000 تومان"
+                android:textColor="@color/main_text_color"
+                android:background="@drawable/back_profile_gray_field"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/font_size_medium"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:layout_marginRight="10dp"
+                android:text="شما میتوانید حداکثر تا مبلغ بالا بازی اجاره کنید"
+                android:textColor="@color/main_text_color"
+                android:textSize="@dimen/font_size_very_small"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:text="لیست بازی های شما"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_bookmark"
+            android:padding="2dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layoutDirection="ltr"
+        android:padding="5dp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        android:layout_marginTop="20dp"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_profile_gray_field"
+            android:text="G8j32"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"
+            />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:text="دوستات رو با کد دعوت مقابل دعوت کن"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_invite"
+            android:padding="2dp"
+            />
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:text="ما را دنبال کن"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_share"
+            android:padding="2dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp">
+
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_telegram"
+            android:padding="2dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_instagram"
+            android:padding="2dp"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:text="قوانین"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_law"
+            android:padding="2dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

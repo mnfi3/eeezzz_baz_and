@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/lyt_posts"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    >
+
+
+    <include layout="@layout/toolbar_main"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/back_search_edit_text"
+        android:layout_margin="20dp">
+
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_search_small"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="10dp"
+            android:padding="1dp"/>
+
+        <EditText
+            android:id="@+id/edt_search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:textColor="@color/search_text_color"
+            android:hint="جستجو"
+            android:maxLines="1"
+            android:textSize="@dimen/font_size_medium"
+            android:textColorHint="@color/search_text_color"
+
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+
+    </LinearLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+    android:id="@+id/rcv_posts"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="ltr"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    />
+
+
+
+
+
+
+
+
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/txt_show_posts"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:text="جدیدترین اخبار"-->
+        <!--android:gravity="right|center_vertical"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:padding="5dp"-->
+        <!--android:textColor="@color/text_color"-->
+        <!--android:textSize="@dimen/font_size_small"-->
+        <!--android:textStyle="bold"-->
+        <!--android:clickable="true"-->
+        <!--android:focusable="true"-->
+        <!--android:background="@drawable/back_buttons_ripple_effect"-->
+        <!--/>-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rcv_posts"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layoutDirection="ltr"-->
+        <!--&gt;-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+
+</LinearLayout>

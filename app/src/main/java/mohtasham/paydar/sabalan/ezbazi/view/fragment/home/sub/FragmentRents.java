@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.List;
 
@@ -58,6 +59,9 @@ public class FragmentRents extends Fragment {
     });
 
 
+
+
+
     return view;
   }
 
@@ -74,7 +78,7 @@ public class FragmentRents extends Fragment {
       @Override
       public void onReceived(int status, String message, List<Game> games, Paginate paginate) {
         if(status == 0){
-          Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
+          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
         }else {
           RentMainAdapter listAdapter = new RentMainAdapter(getActivity(), games);
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);

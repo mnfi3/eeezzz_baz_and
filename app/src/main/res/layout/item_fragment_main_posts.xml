@@ -43,7 +43,7 @@
         android:layout_marginTop="2dp"
         android:typeface="serif"
         android:textColor="@color/main_text_color"
-        android:textSize="@dimen/font_size_small"
+        android:textSize="@dimen/font_size_very_small"
         />
 
     <TextView
@@ -59,6 +59,7 @@
         android:typeface="serif"
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/font_size_very_small"
+        android:visibility="gone"
         />
 
 

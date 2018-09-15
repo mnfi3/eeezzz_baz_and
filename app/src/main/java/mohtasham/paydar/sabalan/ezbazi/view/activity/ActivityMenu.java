@@ -12,6 +12,8 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.layout_behavior.BottomNavigationViewBehavior;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.activity.FragmentActivity;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.FragmentHome;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.profile.FragmentProfile;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.search.FragmentSearch;
 
 public class ActivityMenu extends AppCompatActivity {
 
@@ -41,8 +43,8 @@ public class ActivityMenu extends AppCompatActivity {
 
     setupViews();
 
-    CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottom_nav.getLayoutParams();
-    layoutParams.setBehavior(new BottomNavigationViewBehavior());
+//    CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottom_nav.getLayoutParams();
+//    layoutParams.setBehavior(new BottomNavigationViewBehavior());
 
 
 
@@ -63,7 +65,8 @@ public class ActivityMenu extends AppCompatActivity {
         if(current_fragment == frgProfile){
           setFragment(frgProfile);
         }else {
-          restoreFragment(frgProfile);
+//          restoreFragment(frgProfile);
+          setFragment(frgProfile);
         }
       }
     });
@@ -77,7 +80,8 @@ public class ActivityMenu extends AppCompatActivity {
         if(current_fragment == frgSearch){
           setFragment(frgSearch);
         }else {
-          restoreFragment(frgSearch);
+//          restoreFragment(frgSearch);
+          setFragment(frgSearch);
         }
       }
     });
@@ -127,12 +131,25 @@ public class ActivityMenu extends AppCompatActivity {
   private void setFragment(int fragment){
     switch (fragment){
       case frgProfile :
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
+//        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
+        ft.replace(R.id.lyt_action, new FragmentProfile());
+        ft.commit();
+        current_fragment = frgProfile;
 
         break;
 
 
 
       case frgSearch:
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
+//        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
+        ft.replace(R.id.lyt_action, new FragmentSearch());
+        ft.commit();
+        current_fragment = frgSearch;
+
 
         break;
 
