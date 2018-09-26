@@ -67,9 +67,57 @@ public class PostService {
     Volley.newRequestQueue(context).add(request);
   }
 
+
+  public void getRelatedPosts(final int game_id, final onRelatedPostsReceived onRelatedPostsReceived){
+    String url = Urls.GAME_RELATED_POSTS + "/" + Integer.toString(game_id);
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        List<MainSlider> sliders = new ArrayList<>();
+        int status = 0;
+        String message = "";
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          List<Post> posts =  new ArrayList<Post>();
+          JSONArray data = response.getJSONArray("data");
+          for (int i=0;i<data.length();i++){
+            posts.add(Post.Parser.parse(data.getJSONObject(i)));
+          }
+
+
+
+
+          onRelatedPostsReceived.onReceived(status, message, posts);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onRelatedPostsReceived.onReceived(0, "خطا در ارتیاط با سرور", new ArrayList<Post>());
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+
+
+
   public interface onPostsReceived{
     void onReceived(int status, String message, List<Post> posts, Paginate paginate);
   }
+
+
+  public interface onRelatedPostsReceived{
+    void onReceived(int status, String message, List<Post> posts);
+  }
+
 
 
 }

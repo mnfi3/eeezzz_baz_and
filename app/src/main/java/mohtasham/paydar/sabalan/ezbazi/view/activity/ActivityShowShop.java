@@ -1,15 +1,14 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,21 +18,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopService;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedPost;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedRents;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedShops;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentPosts;
+import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentRents;
 
 
-public class ActivityShowRent extends AppCompatActivity {
+public class ActivityShowShop extends AppCompatActivity {
   private static final String TAG = "ActivityShowRent";
 
   ImageView img_back;
@@ -51,7 +51,7 @@ public class ActivityShowRent extends AppCompatActivity {
 
   Game game;
 
-  RentService service;
+  ShopService service;
 
   NestedScrollView nested_scroll;
   TextView txt_rent_period;
@@ -60,11 +60,13 @@ public class ActivityShowRent extends AppCompatActivity {
 
   FragmentTransaction ft;
 
+
+
   @SuppressLint("ClickableViewAccessibility")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_show_rent);
+    setContentView(R.layout.activity_show_shop);
 
     setupViews();
     setTypeFace();
@@ -96,12 +98,9 @@ public class ActivityShowRent extends AppCompatActivity {
     img_back.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        ActivityShowRent.this.finish();
+        ActivityShowShop.this.finish();
       }
     });
-
-
-
 
 
 
@@ -142,19 +141,19 @@ public class ActivityShowRent extends AppCompatActivity {
   private void prepareGame(Bundle extras, Bundle savedInstanceState){
     int id ;
     if(extras != null) {
-      id = extras.getInt("ID");
+     id = extras.getInt("ID");
     }else {
-      id = (int) savedInstanceState.getSerializable("ID");
+     id = (int) savedInstanceState.getSerializable("ID");
     }
 
-    service = new RentService(ActivityShowRent.this);
-    service.getSpecialRent(id, new RentService.onSpecialRentReceived() {
+    service = new ShopService(ActivityShowShop.this);
+    service.getSpecialShop(id, new ShopService.onSpecialShopReceived() {
       @Override
       public void onReceived(int status, String message, Game game) {
         if(status != 1){
-          MyViews.makeText(ActivityShowRent.this, message, Toast.LENGTH_SHORT);
+          MyViews.makeText(ActivityShowShop.this, message, Toast.LENGTH_SHORT);
         }else {
-          ActivityShowRent.this.game = game;
+          ActivityShowShop.this.game = game;
           fillViews();
           setRelatedFragments();
         }
@@ -164,43 +163,23 @@ public class ActivityShowRent extends AppCompatActivity {
   }
 
 
-  private void setRelatedFragments(){
-    ft = getSupportFragmentManager().beginTransaction();
-//    ft.setCustomAnimations(R.anim.anim_enter_from_left, R.anim.anim_exit_to_right);
-    FragmentRelatedRents relatedRents = new FragmentRelatedRents();
-    Bundle args = new Bundle();
-    args.putInt("game_id", game.getId());
-    relatedRents.setArguments(args);
-
-
-    FragmentRelatedPost relatedPost = new FragmentRelatedPost();
-    Bundle args2 = new Bundle();
-    args2.putInt("game_info_id", game.getGame_info_id());
-    relatedPost.setArguments(args2);
-
-
-    ft.replace(R.id.lyt_related_rents, relatedRents);
-    ft.replace(R.id.lyt_related_posts, relatedPost);
-    ft.commit();
-  }
-
-
   private void setTypeFace(){
-    txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
-    txt_name.setTypeface(MyViews.getIranSansMediumFont(ActivityShowRent.this));
-    txt_rate.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    txt_name.setTypeface(MyViews.getIranSansMediumFont(ActivityShowShop.this));
+    txt_rate.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
 
-    txt_rent_period.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
-    btn_rent.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
-    btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
-    btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
-    btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+    txt_rent_period.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    btn_rent.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
+    btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
+    btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
   }
 
 
 
   private void fillViews(){
     txt_page_name.setText(game.getName());
+
     txt_name.setText(game.getName());
     txt_console.setText(game.getConsole_name());
 
@@ -215,11 +194,11 @@ public class ActivityShowRent extends AppCompatActivity {
     String cover_image = "";
     for (int i=0 ; i<game.getPhotos().size() ; i++){
 //      if (game.getPhotos().get(i).getHeight() == R.dimen.photo_cover_height){
-      cover_image = game.getPhotos().get(0).getUrl();
-      break;
+        cover_image = game.getPhotos().get(0).getUrl();
+        break;
 //      }
     }
-    Picasso.with(ActivityShowRent.this).
+    Picasso.with(ActivityShowShop.this).
       load(cover_image)
 //      .placeholder()
       .into(img_game_cover);
@@ -233,13 +212,33 @@ public class ActivityShowRent extends AppCompatActivity {
       String main_image = "";
       for (int i=0 ; i<game.getPhotos().size() ; i++){
 //        if (game.getPhotos().get(i).getHeight() == R.dimen.photo_main_height){
-        cover_image = game.getPhotos().get(0).getUrl();
-        break;
+          cover_image = game.getPhotos().get(0).getUrl();
+          break;
 //        }
       }
     }
 
     expand_text_view.setText(game.getDescription());
+  }
+
+  private void setRelatedFragments(){
+    ft = getSupportFragmentManager().beginTransaction();
+//    ft.setCustomAnimations(R.anim.anim_enter_from_left, R.anim.anim_exit_to_right);
+    FragmentRelatedShops relatedShops = new FragmentRelatedShops();
+    Bundle args = new Bundle();
+    args.putInt("game_id", game.getId());
+    relatedShops.setArguments(args);
+//    relatedRents.setId(game.getId());
+
+    FragmentRelatedPost relatedPost = new FragmentRelatedPost();
+    Bundle args2 = new Bundle();
+    args2.putInt("game_info_id", game.getGame_info_id());
+    relatedPost.setArguments(args2);
+
+
+    ft.replace(R.id.lyt_related_shops, relatedShops);
+    ft.replace(R.id.lyt_related_posts, relatedPost);
+    ft.commit();
   }
 
 

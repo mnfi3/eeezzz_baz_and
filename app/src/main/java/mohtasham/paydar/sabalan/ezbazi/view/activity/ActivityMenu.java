@@ -1,7 +1,8 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.view.custom_views.layout_behavior.BottomNavigationViewBehavior;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.activity.FragmentActivity;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.FragmentHome;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.profile.FragmentProfile;
@@ -22,19 +22,22 @@ public class ActivityMenu extends AppCompatActivity {
   BottomNavigationView bottom_nav;
   FragmentTransaction ft;
 
-  private final int frgProfile = 1;
-  private final int frgSearch = 2;
-  private final int frgActivity = 3;
-  private final int frgHome = 4;
+  private final int frg_profile_num = 1;
+  private final int frg_search_num = 2;
+  private final int frg_activity_num = 3;
+  private final int frg_home_num = 4;
 
-  int current_fragment;
+  int current_fragment_num;
 
 
+  final FragmentHome fragmentHome = new FragmentHome();
+  final FragmentActivity fragmentActivity = new FragmentActivity();
+  final FragmentSearch fragmentSearch = new FragmentSearch();
+  final FragmentProfile fragmentProfile = new FragmentProfile();
 
-  FragmentHome fragmentHome = new FragmentHome();
-  FragmentActivity fragmentActivity = new FragmentActivity();
-//  FragmentHome fragmentHome = new FragmentHome();;
-//  FragmentHome fragmentHome = new FragmentHome();;
+  Fragment active;
+
+  final FragmentManager fm = getSupportFragmentManager();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,31 +46,26 @@ public class ActivityMenu extends AppCompatActivity {
 
     setupViews();
 
+    //initialize home fragment as active
+    initializeFragments();
+
 //    CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottom_nav.getLayoutParams();
 //    layoutParams.setBehavior(new BottomNavigationViewBehavior());
 
 
 
-    //initialize first time
-    setFragment(frgHome);
-    resetChoose(frgHome);
 
-
-
-
-
-
-
-    img_profile.setOnClickListener(new View.OnClickListener() {
+    img_home.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        resetChoose(frgProfile);
-        if(current_fragment == frgProfile){
-          setFragment(frgProfile);
-        }else {
-//          restoreFragment(frgProfile);
-          setFragment(frgProfile);
-        }
+        setFragment(frg_home_num);
+      }
+    });
+
+    img_activity.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        setFragment(frg_activity_num);
       }
     });
 
@@ -76,46 +74,26 @@ public class ActivityMenu extends AppCompatActivity {
     img_search.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        resetChoose(frgSearch);
-        if(current_fragment == frgSearch){
-          setFragment(frgSearch);
-        }else {
-//          restoreFragment(frgSearch);
-          setFragment(frgSearch);
-        }
+        setFragment(frg_search_num);
       }
     });
 
-    img_activity.setOnClickListener(new View.OnClickListener() {
+
+    img_profile.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        resetChoose(frgActivity);
-        if(current_fragment == frgActivity){
-          setFragment(frgActivity);
-        }else {
-          setFragment(frgActivity);
-//          restoreFragment(frgActivity);
-        }
+        setFragment(frg_profile_num);
       }
     });
 
-    img_home.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        resetChoose(frgHome);
-        if(current_fragment == frgHome){
-          setFragment(frgHome);
-        }else {
-          setFragment(frgHome);
-//          restoreFragment(frgHome);
-        }
-      }
-    });
+
+
+
+
+
 
 
   }
-
-
 
 
   private void setupViews(){
@@ -126,122 +104,122 @@ public class ActivityMenu extends AppCompatActivity {
     img_home = findViewById(R.id.img_home);
   }
 
-
-
-  private void setFragment(int fragment){
-    switch (fragment){
-      case frgProfile :
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
-//        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
-        ft.replace(R.id.lyt_action, new FragmentProfile());
-        ft.commit();
-        current_fragment = frgProfile;
-
-        break;
-
-
-
-      case frgSearch:
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
-//        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
-        ft.replace(R.id.lyt_action, new FragmentSearch());
-        ft.commit();
-        current_fragment = frgSearch;
-
-
-        break;
-
-
-
-      case frgActivity:
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
-//        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
-        ft.replace(R.id.lyt_action, fragmentActivity);
-        ft.commit();
-        current_fragment = frgActivity;
-
-        break;
-
-
-
-      case frgHome:
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
-//        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
-        ft.replace(R.id.lyt_action, fragmentHome);
-        ft.commit();
-        current_fragment = frgHome;
-        break;
-    }
+  private void initializeFragments(){
+    fm.beginTransaction().add(R.id.lyt_action, fragmentHome, "1").commit();
+    fm.beginTransaction().add(R.id.lyt_action, fragmentActivity, "2").hide(fragmentActivity).commit();
+    fm.beginTransaction().add(R.id.lyt_action,fragmentSearch, "3").hide(fragmentSearch).commit();
+    fm.beginTransaction().add(R.id.lyt_action,fragmentProfile, "4").hide(fragmentProfile).commit();
+    active = fragmentHome;
+    current_fragment_num = 1;
+    resetChoose(frg_home_num);
   }
 
 
 
-  private void restoreFragment(int fragment){
-    switch (fragment){
-      case frgProfile :
+  private void setFragment(int fragment_num){
+
+    switch (fragment_num){
+      case frg_home_num:
+//        ft = getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
+////        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
+//        ft.replace(R.id.lyt_action, fragmentHome);
+//        ft.commit();
+
+        if(current_fragment_num != frg_home_num){
+          fm.beginTransaction().hide(active).show(fragmentHome).commit();
+          active = fragmentHome;
+          current_fragment_num = frg_home_num;
+          resetChoose(fragment_num);
+        }
+        break;
+
+
+      case frg_activity_num:
+//        ft = getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
+////        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
+//        ft.replace(R.id.lyt_action, fragmentActivity);
+//        ft.commit();
+
+        if(current_fragment_num != frg_activity_num){
+          fm.beginTransaction().hide(active).show(fragmentActivity).commit();
+          active = fragmentActivity;
+          current_fragment_num = frg_activity_num;
+          resetChoose(fragment_num);
+        }
 
         break;
 
 
 
-      case frgSearch:
+
+
+      case frg_search_num:
+//        ft = getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
+////        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
+//        ft.replace(R.id.lyt_action, new FragmentSearch());
+//        ft.commit();
+
+
+        if(current_fragment_num != frg_search_num){
+          fm.beginTransaction().hide(active).show(fragmentSearch).commit();
+          active = fragmentSearch;
+          current_fragment_num = frg_search_num;
+          resetChoose(fragment_num);
+        }
+        break;
+
+
+      case frg_profile_num:
+//        ft = getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(R.anim.anim_fragment_enter_from_right, R.anim.anim_fragment_exit_to_left);
+////        ft.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left);
+//        ft.replace(R.id.lyt_action, new FragmentProfile());
+//        ft.commit();
+
+
+        if(current_fragment_num != frg_profile_num){
+          fm.beginTransaction().hide(active).show(fragmentProfile).commit();
+          active = fragmentProfile;
+          current_fragment_num = frg_profile_num;
+          resetChoose(fragment_num);
+        }
 
         break;
 
 
 
-      case frgActivity:
-
-        break;
 
 
 
-      case frgHome:
 
-        break;
+
     }
   }
-
-
 
 
   private void resetChoose(int frg){
-//    img_profile.setAlpha(0.6f);
     img_profile.setImageResource(R.drawable.ic_person);
-
-//    img_search.setAlpha(0.6f);
     img_search.setImageResource(R.drawable.ic_search);
-
-//    img_activity.setAlpha(0.6f);
     img_activity.setImageResource(R.drawable.ic_activity);
-
-//    img_home.setAlpha(0.6f);
     img_home.setImageResource(R.drawable.ic_home);
 
     switch (frg){
-      case frgProfile :
-//        img_profile.setAlpha(1f);
+      case frg_profile_num:
         img_profile.setImageResource(R.drawable.ic_person_ch);
         break;
 
-      case frgSearch :
-//        img_search.setAlpha(1f);
+      case frg_search_num:
         img_search.setImageResource(R.drawable.ic_search_ch);
         break;
 
-
-      case frgActivity :
-//        img_activity.setAlpha(1f);
+      case frg_activity_num:
         img_activity.setImageResource(R.drawable.ic_activity_ch);
         break;
 
-
-      case frgHome :
-//        img_home.setAlpha(1f);
+      case frg_home_num:
         img_home.setImageResource(R.drawable.ic_home_ch);
         break;
     }

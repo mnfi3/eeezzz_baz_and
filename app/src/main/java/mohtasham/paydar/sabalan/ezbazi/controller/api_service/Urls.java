@@ -9,8 +9,18 @@ public class Urls {
   //posts
   public static final String POST_INDEX = G.MAIN_URL + "/post";
 
+  //games
   public static final String SHOP_INDEX = G.MAIN_URL + "/game-for-shop";
+  public static final String SHOP_INDEX0 = G.MAIN_URL + "/game-for-shop-index/329";
   public static final String RENT_INDEX = G.MAIN_URL + "/game-for-rent";
+  public static final String RENT_INDEX0 = G.MAIN_URL + "/game-for-rent-index/329";
+
+  public static final String GAME_INFO_COMMENTS = G.MAIN_URL + "/game-info-comments";
+
+  public static final String GAME_RELATED_GAME_FOR_RENT = G.MAIN_URL + "/game-for-rent-related";
+  public static final String GAME_RELATED_GAME_FOR_SHOP = G.MAIN_URL + "/game-for-shop-related";
+  public static final String GAME_RELATED_POSTS = G.MAIN_URL + "/game-info-related-posts";
+
 
   //======Main Menu=====//
 

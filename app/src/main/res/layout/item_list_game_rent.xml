@@ -30,9 +30,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="0dp"
         android:scaleType="fitXY"
-        tools:src="@drawable/test"
         app:riv_corner_radius="8dp"
         />
+        <!--tools:src="@drawable/test"-->
 
 
     <TextView

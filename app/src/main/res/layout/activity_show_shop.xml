@@ -12,7 +12,7 @@
 
 
     <include layout="@layout/part_show_game_media"
-        android:visibility="visible"/>
+        />
 
 
 
@@ -44,7 +44,8 @@
                android:layout_height="48dp"
                android:orientation="horizontal"
                android:gravity="center"
-               android:padding="2dp">
+               android:padding="2dp"
+               android:visibility="gone">
 
                <TextView
                    android:id="@+id/txt_rent_period"
@@ -69,7 +70,8 @@
                android:layout_width="match_parent"
                android:layout_height="48dp"
                android:gravity="center"
-               android:padding="4dp">
+               android:padding="4dp"
+               android:visibility="gone">
 
                <Button
                    android:id="@+id/btn_rent_day_count_30"
@@ -116,7 +118,7 @@
                android:layout_marginTop="20dp"
                android:layout_marginBottom="20dp"
                android:background="@drawable/back_list_game_price"
-               android:text="اجاره با قیمت 20000 تومان"
+               android:text="خرید با قیمت 20000 تومان"
                android:textColor="@color/main_text_color"
                android:textSize="@dimen/font_size_large"
                />
@@ -248,11 +250,9 @@
 
 
            <FrameLayout
-               android:id="@+id/lyt_related_rents"
+               android:id="@+id/lyt_related_shops"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"/>
-
-
 
            <FrameLayout
                 android:id="@+id/lyt_related_posts"

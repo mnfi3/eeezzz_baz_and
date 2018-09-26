@@ -32,6 +32,7 @@ public class G extends Application {
 
   public static Context context;
   public static final String MAIN_URL="http://192.168.10.83/izi-bazi.ud/api";
+//  public static final String MAIN_URL="http://ittiktak.com/ezibazi/public/api";
   public static final String SALT="7c3d596ed03ab9116c547b0eb678b247";
 
   public static final String SALT_COPY="7c3d596ed03ab9116c547b0eb678b247";
