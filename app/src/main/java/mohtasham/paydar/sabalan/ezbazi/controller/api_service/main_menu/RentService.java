@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 
@@ -65,6 +64,48 @@ public class RentService {
     request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     Volley.newRequestQueue(context).add(request);
   }
+
+
+
+  public void getSearchedRents(JSONObject obj, final onSearchedRentsReceived onSearchedRentsReceived){
+    String url = Urls.RENT_SEARCH;
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          List<Game> games =  new ArrayList<>();
+          if(status == 1) {
+            JSONArray data = response.getJSONArray("data");
+            for (int i = 0; i < data.length(); i++) {
+              games.add(Game.Parser.parse(data.getJSONObject(i)));
+            }
+          }
+
+
+          onSearchedRentsReceived.onReceived(status, message, games);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onSearchedRentsReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<Game>());
+
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+
 
   public void getRelatedRents(final int game_id, final onRelatedRentsReceived onRelatedRentsReceived){
     String url = Urls.GAME_RELATED_GAME_FOR_RENT + "/"+Integer.toString(game_id) ;
@@ -141,6 +182,10 @@ public class RentService {
 
   public interface onRentsReceived{
     void onReceived(int status, String message, List<Game> games, Paginate paginate);
+  }
+
+  public interface onSearchedRentsReceived{
+    void onReceived(int status, String message, List<Game> games);
   }
 
   public interface onRelatedRentsReceived{

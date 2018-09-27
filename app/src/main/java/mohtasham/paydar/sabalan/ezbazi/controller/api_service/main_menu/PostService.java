@@ -67,6 +67,43 @@ public class PostService {
     Volley.newRequestQueue(context).add(request);
   }
 
+  public void getSearchedPosts(JSONObject object, final onSearchedPostsReceived onSearchedPostsReceived){
+    String url = Urls.POST_SEARCH;
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          List<Post> posts =  new ArrayList<Post>();
+          if(status == 1) {
+            JSONArray data = response.getJSONArray("data");
+            for (int i = 0; i < data.length(); i++) {
+              posts.add(Post.Parser.parse(data.getJSONObject(i)));
+            }
+          }
+
+
+          onSearchedPostsReceived.onReceived(status, message, posts);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onSearchedPostsReceived.onReceived(0, "", new ArrayList<Post>());
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
 
   public void getRelatedPosts(final int game_id, final onRelatedPostsReceived onRelatedPostsReceived){
     String url = Urls.GAME_RELATED_POSTS + "/" + Integer.toString(game_id);
@@ -111,6 +148,10 @@ public class PostService {
 
   public interface onPostsReceived{
     void onReceived(int status, String message, List<Post> posts, Paginate paginate);
+  }
+
+  public interface onSearchedPostsReceived{
+    void onReceived(int status, String message, List<Post> posts);
   }
 
 

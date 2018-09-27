@@ -1,6 +1,7 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,10 +28,7 @@ import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopServ
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedPost;
-import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedRents;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedShops;
-import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentPosts;
-import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentRents;
 
 
 public class ActivityShowShop extends AppCompatActivity {
@@ -57,6 +55,7 @@ public class ActivityShowShop extends AppCompatActivity {
   TextView txt_rent_period;
   Button btn_rent;
   Button btn_rent_day_count_10, btn_rent_day_count_20, btn_rent_day_count_30;
+  Button btn_comments;
 
   FragmentTransaction ft;
 
@@ -103,6 +102,15 @@ public class ActivityShowShop extends AppCompatActivity {
     });
 
 
+    btn_comments.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(ActivityShowShop.this, ActivityComment.class);
+        intent.putExtra("GAME_INFO_ID", game.getId());
+        ActivityShowShop.this.startActivity(intent);
+      }
+    });
+
 
 
 
@@ -135,6 +143,8 @@ public class ActivityShowShop extends AppCompatActivity {
     btn_rent_day_count_10 = findViewById(R.id.btn_rent_day_count_10);
     btn_rent_day_count_20 = findViewById(R.id.btn_rent_day_count_20);
     btn_rent_day_count_30 = findViewById(R.id.btn_rent_day_count_30);
+
+    btn_comments = findViewById(R.id.btn_comments);
 
   }
 
@@ -173,6 +183,10 @@ public class ActivityShowShop extends AppCompatActivity {
     btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
     btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
     btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
+    
+    btn_comments.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
+
+
   }
 
 

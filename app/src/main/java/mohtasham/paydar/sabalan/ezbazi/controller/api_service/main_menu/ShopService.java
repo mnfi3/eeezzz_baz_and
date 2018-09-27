@@ -66,6 +66,43 @@ public class ShopService {
   }
 
 
+  public void getSearchedShops(JSONObject obj, final onSearchedShopsReceived onSearchedShopsReceived){
+    String url = Urls.SHOP_SEARCH;
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          List<Game> games =  new ArrayList<>();
+          if(status == 1) {
+            JSONArray data = response.getJSONArray("data");
+            for (int i = 0; i < data.length(); i++) {
+              games.add(Game.Parser.parse(data.getJSONObject(i)));
+            }
+          }
+
+          onSearchedShopsReceived.onReceived(status, message, games);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onSearchedShopsReceived.onReceived(0, "خطا در ارتباط با سرور", new ArrayList<Game>());
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+
   public void getRelatedShops(final int game_id, final onRelatedShopsReceived onRelatedShopsReceived){
     String url = Urls.GAME_RELATED_GAME_FOR_SHOP + "/"+Integer.toString(game_id) ;
     final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -137,6 +174,10 @@ public class ShopService {
 
   public interface onShopsReceived{
     void onReceived(int status, String message, List<Game> games, Paginate paginate);
+  }
+
+  public interface onSearchedShopsReceived{
+    void onReceived(int status, String message, List<Game> games);
   }
 
   public interface onRelatedShopsReceived{

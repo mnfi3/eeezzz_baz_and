@@ -30,7 +30,6 @@ import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedPost;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedRents;
-import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentPosts;
 
 
 public class ActivityShowRent extends AppCompatActivity {
@@ -57,6 +56,7 @@ public class ActivityShowRent extends AppCompatActivity {
   TextView txt_rent_period;
   Button btn_rent;
   Button btn_rent_day_count_10, btn_rent_day_count_20, btn_rent_day_count_30;
+  Button btn_comments;
 
   FragmentTransaction ft;
 
@@ -103,8 +103,14 @@ public class ActivityShowRent extends AppCompatActivity {
 
 
 
-
-
+    btn_comments.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(ActivityShowRent.this, ActivityComment.class);
+        intent.putExtra("GAME_INFO_ID", game.getId());
+        ActivityShowRent.this.startActivity(intent);
+      }
+    });
 
 
 
@@ -136,6 +142,8 @@ public class ActivityShowRent extends AppCompatActivity {
     btn_rent_day_count_10 = findViewById(R.id.btn_rent_day_count_10);
     btn_rent_day_count_20 = findViewById(R.id.btn_rent_day_count_20);
     btn_rent_day_count_30 = findViewById(R.id.btn_rent_day_count_30);
+
+    btn_comments = findViewById(R.id.btn_comments);
 
   }
 
@@ -254,12 +262,14 @@ public class ActivityShowRent extends AppCompatActivity {
     vdo_game.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
       @Override
       public void onPrepared(MediaPlayer mediaPlayer) {
+        mediaPlayer.setVolume(0,0);
         vdo_game.start();
       }
     });
     vdo_game.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
       @Override
       public void onCompletion(MediaPlayer mediaPlayer) {
+        mediaPlayer.setVolume(0,0);
         vdo_game.start();
       }
     });

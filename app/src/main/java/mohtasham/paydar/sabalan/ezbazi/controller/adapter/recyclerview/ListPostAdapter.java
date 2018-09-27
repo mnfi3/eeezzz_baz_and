@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -17,13 +16,13 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Post;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
-public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ListViewHolder>{
+public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListViewHolder>{
 
 
   private Context context;
   private List<Post> posts;
 
-  public PostListAdapter(Context context, List<Post> posts){
+  public ListPostAdapter(Context context, List<Post> posts){
 
     this.context = context;
     this.posts = posts;

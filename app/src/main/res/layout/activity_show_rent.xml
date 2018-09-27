@@ -183,6 +183,7 @@
                    >
 
                    <Button
+                       android:id="@+id/btn_comments"
                        android:layout_width="85dp"
                        android:layout_height="match_parent"
                        android:background="@drawable/back_button_game_comment"

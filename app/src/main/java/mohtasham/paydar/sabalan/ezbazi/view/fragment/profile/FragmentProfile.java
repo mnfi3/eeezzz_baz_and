@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
 
 
 public class FragmentProfile extends Fragment {
@@ -24,6 +24,10 @@ public class FragmentProfile extends Fragment {
 
     setupViews();
     setTypeFace();
+
+    UserSharedPrefManager prefManager = new UserSharedPrefManager(getContext());
+    prefManager.saveCityId(329);
+
 
     return view;
   }

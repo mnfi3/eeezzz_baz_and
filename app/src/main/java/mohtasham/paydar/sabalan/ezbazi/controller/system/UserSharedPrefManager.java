@@ -15,6 +15,7 @@ public class UserSharedPrefManager {
   private static final String USER_SHARED_PREF_NAME = "user_shared_pref";
   private static final String USER_NAME = "user_name";
   private static final String TOKEN = "token";
+  private static final String CITY_ID = "city_id";
 //  private static final String CLIENT_KEY = "client_key";
 
   private SharedPreferences sharedPreferences;
@@ -43,6 +44,17 @@ public class UserSharedPrefManager {
     user.setToken(main_token);
 //    user.setClient_key(sharedPreferences.getString(CLIENT_KEY , ""));
     return user;
+  }
+
+
+  public void saveCityId(int id){
+    SharedPreferences.Editor editor = sharedPreferences.edit();
+    editor.putInt(CITY_ID, id);
+    editor.apply();
+  }
+
+  public int getCityId(){
+    return sharedPreferences.getInt(CITY_ID, 0);
   }
 
 }

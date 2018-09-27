@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.PostListAdapter;
+import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListPostAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.PostService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
@@ -46,7 +46,7 @@ public class ActivityListPost extends AppCompatActivity {
         if(status == 0){
 //          MyViews.makeText( ActivityMain, message, Toast.LENGTH_SHORT);
         }else {
-          PostListAdapter listAdapter = new PostListAdapter(G.context, posts);
+          ListPostAdapter listAdapter = new ListPostAdapter(G.context, posts);
           SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(listAdapter);
           rcv_list_post.setAdapter(new ScaleInAnimationAdapter(alphaAdapter));
         }

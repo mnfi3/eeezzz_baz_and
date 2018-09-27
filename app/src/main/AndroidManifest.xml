@@ -16,50 +16,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".view.activity.ActivityMenu"
             android:launchMode="singleTop">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
-
-
         <activity
             android:name=".view.activity.ActivityHome"
             android:theme="@style/AppTheme">
         </activity>
-
         <activity android:name=".view.activity.ActivityLogin">
         </activity>
-
         <activity android:name=".view.activity.ActivityPhoneValidation">
         </activity>
-
         <activity android:name=".view.activity.ActivityRegister">
         </activity>
-
         <activity android:name=".view.activity.ActivityPhoneAccept">
         </activity>
-
         <activity
             android:name=".view.activity.ActivityShowRent"
             android:theme="@style/AppThemeFullScreen">
         </activity>
-
         <activity
             android:name=".view.activity.ActivityShowShop"
             android:theme="@style/AppThemeFullScreen">
         </activity>
-
         <activity android:name=".view.activity.ActivityListShop">
         </activity>
-
         <activity android:name=".view.activity.ActivityListRent">
         </activity>
         <activity android:name=".view.activity.ActivityListPost"/>
@@ -67,7 +54,8 @@
         </activity>
         <activity android:name=".view.activity.ActivityWebView">
         </activity>
-
+        <activity android:name=".view.activity.ActivityComment">
+        </activity>
     </application>
 
 </manifest>

@@ -36,6 +36,8 @@ public class MyViews extends AppCompatActivity {
       (ViewGroup) appCompatActivity.findViewById(R.id.lyt_toast));
     TextView txt_toast_text = (TextView) layout.findViewById(R.id.txt_toast_text);
     txt_toast_text.setText(text);
+    //add new
+    txt_toast_text.setTypeface(MyViews.getIranSansLightFont(appCompatActivity));
 
     Toast toast = new Toast(contextWrapper.getApplicationContext());
     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);

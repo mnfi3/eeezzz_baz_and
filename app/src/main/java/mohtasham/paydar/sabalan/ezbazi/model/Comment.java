@@ -10,11 +10,14 @@ public class Comment {
   private String commentable_type;
   private String text;
   private String created_at;
+  private User user;
 
   public static class Parser{
     public static Comment parse(JSONObject jsonObject){
       Comment comment = new Comment();
       try {
+        JSONObject userObj = jsonObject.getJSONObject("user");
+        comment.setUser(User.Parser.parse(userObj));
         comment.setId(jsonObject.getInt("id"));
         comment.setUser_id(jsonObject.getInt("user_id"));
         comment.setCommentable_id(jsonObject.getInt("commentable_id"));
@@ -74,5 +77,13 @@ public class Comment {
 
   public void setCreated_at(String created_at) {
     this.created_at = created_at;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 }
