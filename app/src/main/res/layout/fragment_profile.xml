@@ -114,14 +114,14 @@
 
 
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/img_user"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_instagram"
-                    app:riv_corner_radius="10dp"
-                    />
+                <!--<com.makeramen.roundedimageview.RoundedImageView-->
+                    <!--android:id="@+id/img_user"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/ic_instagram"-->
+                    <!--app:riv_corner_radius="10dp"-->
+                    <!--/>-->
 
             </LinearLayout>
 
@@ -215,40 +215,40 @@
 
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="right"
-                android:orientation="horizontal"
-                android:paddingRight="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="right"
-                    android:layout_marginRight="10dp"
-                    android:text="لیست بازی های شما"
-                    android:textColor="@color/main_text_color"
-                    android:textSize="@dimen/font_size_small"/>
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:gravity="right"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingRight="10dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="right"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:text="لیست بازی های شما"-->
+                    <!--android:textColor="@color/main_text_color"-->
+                    <!--android:textSize="@dimen/font_size_small"/>-->
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_bookmark"
-                    android:padding="2dp"
-                    />
-
-
-
-            </LinearLayout>
+                <!--<ImageView-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:src="@drawable/ic_bookmark"-->
+                    <!--android:padding="2dp"-->
+                    <!--/>-->
 
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="horizontal"
-                android:layoutDirection="ltr"
-                android:padding="5dp"
-                />
+
+            <!--</LinearLayout>-->
+
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layoutDirection="ltr"-->
+                <!--android:padding="5dp"-->
+                <!--/>-->
 
 
             <LinearLayout

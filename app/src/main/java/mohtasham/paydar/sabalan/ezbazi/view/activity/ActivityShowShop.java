@@ -183,8 +183,8 @@ public class ActivityShowShop extends AppCompatActivity {
     btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
     btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
     btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
-    
-    btn_comments.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
+
+    btn_comments.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
 
 
   }

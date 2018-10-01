@@ -13,12 +13,119 @@
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="this is fragment activity"
-        android:textColor="@color/main_text_color"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_rents"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="بازی هایی که تا به الان اجاره کرده اید"
+                android:layout_gravity="right"
+                android:gravity="right|center_vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:padding="5dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcv_rents"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_list_rent_request_height"
+                    android:orientation="horizontal"
+                    android:layoutDirection="ltr"
+                    />
+
+                <com.wang.avi.AVLoadingIndicatorView
+                    android:id="@+id/avl_rents"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    app:indicatorColor="@color/colorAccent"
+                    app:indicatorName="LineSpinFadeLoaderIndicator"
+                    android:visibility="invisible"
+                    />
+
+            </RelativeLayout>
+
+
+
+
+            <TextView
+                android:id="@+id/txt_buys"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="بازی هایی که تا به الان خریده اید"
+                android:layout_gravity="right"
+                android:gravity="right|center_vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:padding="5dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcv_buys"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_list_shop_request_height"
+                    android:orientation="horizontal"
+                    android:layoutDirection="ltr"
+                    />
+
+                <com.wang.avi.AVLoadingIndicatorView
+                    android:id="@+id/avl_buys"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    app:indicatorColor="@color/colorAccent"
+                    app:indicatorName="LineSpinFadeLoaderIndicator"
+                    android:visibility="invisible"
+                    />
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+
 
 
 

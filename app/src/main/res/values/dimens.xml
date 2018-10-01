@@ -31,6 +31,12 @@
     <dimen name="item_list_game_shop_height">140dp</dimen>
     <dimen name="item_list_game_rent_height">160dp</dimen>
 
+    <dimen name="item_list_rent_request_height">190dp</dimen>
+    <dimen name="item_list_rent_request_width">300dp</dimen>
+
+    <dimen name="item_list_shop_request_height">190dp</dimen>
+    <dimen name="item_list_shop_request_width">300dp</dimen>
+
     <dimen name="item_list_games_image_height">120dp</dimen>
     <dimen name="item_list_games_image_width">100dp</dimen>
 

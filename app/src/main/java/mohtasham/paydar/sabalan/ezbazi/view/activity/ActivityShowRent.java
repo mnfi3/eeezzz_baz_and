@@ -203,6 +203,8 @@ public class ActivityShowRent extends AppCompatActivity {
     btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
     btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
     btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+
+    btn_comments.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
   }
 
 

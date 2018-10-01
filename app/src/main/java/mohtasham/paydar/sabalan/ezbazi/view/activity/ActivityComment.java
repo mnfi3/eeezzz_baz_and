@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListCommentAdapter;
-import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListPostAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.comment.CommentService;
 import mohtasham.paydar.sabalan.ezbazi.model.Comment;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;

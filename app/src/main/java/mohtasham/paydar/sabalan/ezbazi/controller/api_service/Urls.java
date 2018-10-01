@@ -26,6 +26,11 @@ public class Urls {
   public static final String GAME_RELATED_POSTS = G.MAIN_URL + "/game-info-related-posts";
 
 
+
+  //user requests
+  public static final String USER_RENT_REQUESTS = G.MAIN_URL + "/user-game-for-rent-requests";
+  public static final String USER_BUY_REQUESTS = G.MAIN_URL + "/user-game-for-shop-requests";
+
   //======Main Menu=====//
 
 

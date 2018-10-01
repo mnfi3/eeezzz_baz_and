@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.activity.FragmentActivity;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.FragmentHome;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.profile.FragmentProfile;
@@ -117,6 +118,7 @@ public class ActivityMenu extends AppCompatActivity {
 
 
   private void setFragment(int fragment_num){
+    G.hideKeyboard(ActivityMenu.this);
 
     switch (fragment_num){
       case frg_home_num:

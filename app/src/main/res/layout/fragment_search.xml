@@ -10,80 +10,7 @@
     >
 
 
-    <include layout="@layout/toolbar_main"/>
-
-
-
-    <TextView
-        android:id="@+id/txt_search_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="جستجو در :"
-        android:textColor="@color/main_text_color"
-        android:gravity="right"
-        android:layout_gravity="right"
-        android:layout_marginRight="30dp"
-        android:textSize="@dimen/font_size_medium"
-
-        />
-
-
-    <RadioGroup
-            android:id="@+id/rdg_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:gravity="center_vertical"
-            >
-
-        <RadioButton
-            android:id="@+id/rdo_post"
-            android:layout_width="0dp"
-            android:layout_weight="0.3"
-            android:layout_height="wrap_content"
-            android:text="پست ها"
-            android:textColor="@color/main_text_color"
-            android:textSize="@dimen/font_size_very_small"
-            android:layout_margin="10dp"
-            android:buttonTint="@color/colorAccent2"
-            android:checked="false"/>
-
-
-
-            <RadioButton
-                android:id="@+id/rdo_shop"
-                android:layout_width="0dp"
-                android:layout_weight="0.3"
-                android:layout_height="wrap_content"
-                android:text="بازی های فروشی"
-                android:shadowColor="#ffffff"
-                android:textColor="@color/main_text_color"
-                android:textSize="@dimen/font_size_very_small"
-                android:layout_margin="10dp"
-                android:checked="false"
-                android:buttonTint="@color/colorAccent2"/>
-
-
-
-        <RadioButton
-            android:id="@+id/rdo_rent"
-            android:layout_width="0dp"
-            android:layout_weight="0.3"
-            android:layout_height="wrap_content"
-            android:text="بازی های اجاره ای"
-            android:checked="true"
-            android:textColor="@color/main_text_color"
-            android:textSize="@dimen/font_size_very_small"
-            android:layout_margin="10dp"
-            android:buttonTint="@color/colorAccent2"
-            />
-
-        </RadioGroup>
-
-
-
+    <!--<include layout="@layout/toolbar_main"/>-->
 
 
 
@@ -97,7 +24,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/back_search_edit_text"
-        android:layout_margin="20dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
 
 
         <ImageView
@@ -131,6 +61,86 @@
             />
 
     </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/txt_search_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="جستجو در :"
+        android:textColor="@color/main_text_color"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:layout_marginRight="30dp"
+        android:textSize="@dimen/font_size_medium"
+
+        />
+
+
+    <RadioGroup
+        android:id="@+id/rdg_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
+        >
+
+        <RadioButton
+            android:id="@+id/rdo_post"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content"
+            android:text="پست ها"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_very_small"
+            android:layout_margin="10dp"
+            android:buttonTint="@color/colorAccent2"
+            android:checked="false"/>
+
+
+
+        <RadioButton
+            android:id="@+id/rdo_shop"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content"
+            android:text="بازی های فروشی"
+            android:shadowColor="#ffffff"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_very_small"
+            android:layout_margin="10dp"
+            android:checked="false"
+            android:buttonTint="@color/colorAccent2"/>
+
+
+
+        <RadioButton
+            android:id="@+id/rdo_rent"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content"
+            android:text="بازی های اجاره ای"
+            android:checked="true"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_very_small"
+            android:layout_margin="10dp"
+            android:buttonTint="@color/colorAccent2"
+            />
+
+    </RadioGroup>
+
+
+
+
+
+
+
+
+
 
 
 

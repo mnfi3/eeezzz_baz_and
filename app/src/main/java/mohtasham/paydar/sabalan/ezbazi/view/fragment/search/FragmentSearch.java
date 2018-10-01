@@ -37,7 +37,6 @@ import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Post;
-import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityListRent;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.adapters.ScaleInAnimationAdapter;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.adapters.SlideInBottomAnimationAdapter;
@@ -76,6 +75,7 @@ public class FragmentSearch extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_search, container, false);
 
+//    View view1 = getActivity().findViewById();
     setupViews();
     setTypeFace();
 
@@ -105,13 +105,20 @@ public class FragmentSearch extends Fragment {
 //         Toast.makeText(getContext(), "post",Toast.LENGTH_SHORT).show();
         }
         if (edt_search.getText().toString().length() >= 3) {
-          search(); } }});
+          search();
+        }
+      }
+    });
 
     edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-          search(); }return false; }});
+          search();
+        }
+        return false;
+      }
+    });
 
 
     return view;
@@ -143,6 +150,7 @@ public class FragmentSearch extends Fragment {
 
   private void search() {
     if(checkEntry()) {
+      G.hideKeyboard(getActivity());
       prefManager = new UserSharedPrefManager(getContext());
       int city_id = prefManager.getCityId();
       String text = edt_search.getText().toString();

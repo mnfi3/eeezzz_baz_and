@@ -1,19 +1,16 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.system;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.provider.Settings.Secure;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.squareup.picasso.LruCache;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Request;
-
-import org.json.JSONObject;
 
 import java.io.File;
 import java.math.BigInteger;
@@ -33,6 +30,7 @@ public class G extends Application {
   public static Context context;
   public static final String MAIN_URL="http://192.168.10.83/izi-bazi.ud/api";
 //  public static final String MAIN_URL="http://ittiktak.com/ezibazi/public/api";
+//  public static final String MAIN_URL="http://192.168.1.5/izi-bazi.ud/api";
   public static final String SALT="7c3d596ed03ab9116c547b0eb678b247";
 
   public static final String SALT_COPY="7c3d596ed03ab9116c547b0eb678b247";
@@ -83,6 +81,17 @@ public class G extends Application {
     }
   }
 
+  public static void hideKeyboard(Activity activity) {
+    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+    //Find the currently focused view, so we can grab the correct window token from it.
+    View view = activity.getCurrentFocus();
+    //If no view currently has focus, create a new one, just so we can grab a window token from it
+    if (view == null) {
+      view = new View(activity);
+    }
+    assert imm != null;
+    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+  }
 
  /* public static String getDeviceId(Context context){
     TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
