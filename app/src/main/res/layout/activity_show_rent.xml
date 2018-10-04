@@ -73,32 +73,46 @@
 
                <Button
                    android:id="@+id/btn_rent_day_count_30"
-                   android:layout_width="60dp"
+                   android:layout_width="0dp"
+                   android:layout_weight="0.25"
                    android:layout_height="match_parent"
                    android:background="@drawable/back_rent_day_count"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginLeft="20dp"
                    android:text="30"
+                   android:layout_marginRight="5dp"
+                   android:layout_marginLeft="5dp"
                    android:textColor="@color/main_text_color"/>
 
                <Button
                    android:id="@+id/btn_rent_day_count_20"
-                   android:layout_width="60dp"
+                   android:layout_width="0dp"
+                   android:layout_weight="0.25"
                    android:layout_height="match_parent"
                    android:background="@drawable/back_rent_day_count"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginLeft="20dp"
                    android:text="20"
+                   android:layout_marginRight="5dp"
+                   android:layout_marginLeft="5dp"
                    android:textColor="@color/main_text_color"/>
 
                <Button
                    android:id="@+id/btn_rent_day_count_10"
-                   android:layout_width="60dp"
+                   android:layout_width="0dp"
+                   android:layout_weight="0.25"
+                   android:layout_height="match_parent"
+                   android:background="@drawable/back_rent_day_count"
+                   android:text="10"
+                   android:layout_marginRight="5dp"
+                   android:layout_marginLeft="5dp"
+                   android:textColor="@color/main_text_color"/>
+
+               <Button
+                   android:id="@+id/btn_rent_day_count_7"
+                   android:layout_width="0dp"
+                   android:layout_weight="0.25"
                    android:layout_height="match_parent"
                    android:background="@drawable/back_rent_day_count_ch"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginLeft="20dp"
-                   android:text="10"
+                   android:text="7"
+                   android:layout_marginRight="5dp"
+                   android:layout_marginLeft="5dp"
                    android:textColor="@color/main_text_color"/>
 
 
@@ -206,7 +220,7 @@
                        android:layout_marginRight="5dp"
                        android:layout_marginLeft="5dp"
                        android:background="@drawable/back_game_detail_circle"
-                       android:text="+16"
+                       tools:text="+16"
                        android:textColor="@color/main_text_color"
                        android:textSize="@dimen/font_size_small"
                        android:gravity="center"
@@ -220,7 +234,7 @@
                        android:layout_marginLeft="5dp"
                        android:background="@drawable/back_game_detail_circle"
                        android:gravity="center"
-                       android:src="@drawable/ic_xbox"
+                       tools:src="@drawable/ic_xbox"
                        app:riv_corner_radius="48dp"
                        android:padding="10dp"
                        />
@@ -232,7 +246,7 @@
                        android:layout_marginRight="5dp"
                        android:layout_marginLeft="5dp"
                        android:background="@drawable/back_game_detail_circle"
-                       android:text="2018"
+                       tools:text="2018"
                        android:textColor="@color/main_text_color"
                        android:textSize="@dimen/font_size_small"
                        android:gravity="center"

@@ -6,11 +6,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.activity.FragmentActivity;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.FragmentHome;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.profile.FragmentProfile;
@@ -18,6 +20,8 @@ import mohtasham.paydar.sabalan.ezbazi.view.fragment.search.FragmentSearch;
 
 public class ActivityMenu extends AppCompatActivity {
 
+
+  private static ActivityMenu activity;
 
   ImageView img_profile, img_search, img_activity, img_home;
   BottomNavigationView bottom_nav;
@@ -45,7 +49,12 @@ public class ActivityMenu extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_menu);
 
+    activity = this;
+
+
     setupViews();
+
+    UserSharedPrefManager prefManager = new UserSharedPrefManager(ActivityMenu.this);
 
     //initialize home fragment as active
     initializeFragments();
@@ -96,6 +105,10 @@ public class ActivityMenu extends AppCompatActivity {
 
   }
 
+  public static ActivityMenu getInstance(){
+    return   activity;
+  }
+
 
   private void setupViews(){
     bottom_nav = findViewById(R.id.bottom_nav);
@@ -111,7 +124,7 @@ public class ActivityMenu extends AppCompatActivity {
     fm.beginTransaction().add(R.id.lyt_action,fragmentSearch, "3").hide(fragmentSearch).commit();
     fm.beginTransaction().add(R.id.lyt_action,fragmentProfile, "4").hide(fragmentProfile).commit();
     active = fragmentHome;
-    current_fragment_num = 1;
+    current_fragment_num = frg_home_num;
     resetChoose(frg_home_num);
   }
 

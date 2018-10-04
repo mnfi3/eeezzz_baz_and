@@ -28,9 +28,9 @@ import mohtasham.paydar.sabalan.ezbazi.model.User;
 public class G extends Application {
 
   public static Context context;
-  public static final String MAIN_URL="http://192.168.10.83/izi-bazi.ud/api";
+//  public static final String MAIN_URL="http://192.168.10.83/izi-bazi.ud/api";
 //  public static final String MAIN_URL="http://ittiktak.com/ezibazi/public/api";
-//  public static final String MAIN_URL="http://192.168.1.5/izi-bazi.ud/api";
+  public static final String MAIN_URL="http://192.168.1.3/izi-bazi.ud/api";
   public static final String SALT="7c3d596ed03ab9116c547b0eb678b247";
 
   public static final String SALT_COPY="7c3d596ed03ab9116c547b0eb678b247";
@@ -44,12 +44,15 @@ public class G extends Application {
   public void onCreate() {
     super.onCreate();
     context = getApplicationContext();
+    initializeLogin();
   }
 
 
   public static String getUserToken(){
-    UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
-    User user = prefManager.getUser();
+    User user = getUser();
+    if(user.getToken() == null){
+      user.setToken("");
+    }
     return user.getToken();
   }
 
@@ -57,6 +60,7 @@ public class G extends Application {
   public static Context getActivityContext(AppCompatActivity activity){
     return activity.getApplicationContext();
   }
+
   public static void deleteCache(Context context) {
     try {
       File dir = context.getCacheDir();
@@ -225,19 +229,49 @@ public class G extends Application {
   }
 
 
+  public static void initializeLogin(){
+    loginCheck(new onLoginCheck() {
+      @Override
+      public void onCheck(User user, boolean isLoggedIn) {
+        G.isLoggedIn = isLoggedIn;
+//        if(isLoggedIn){
+//          UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
+//          prefManager.saveUser(user);
+//        }
+      }
+    });
+  }
+
 
   public static void loginCheck(final onLoginCheck onLoginCheck){
-    UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
-    final User user = prefManager.getUser();
+    final User user = getUser();
     LoginCheckerService service = new LoginCheckerService(context);
     service.check(user, new LoginCheckerService.onLoginCheckComplete() {
       @Override
       public void onComplete(boolean isLoggedIn, String user_name) {
         user.setUser_name(user_name);
         onLoginCheck.onCheck(user, isLoggedIn);
+        G.isLoggedIn = isLoggedIn;
       }
     });
   }
+
+
+  public static User getUser(){
+    UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
+    User user = prefManager.getUser();
+    if(user.getUser_name() == null || user.getToken() == null){
+      user.setUser_name("");
+      user.setToken("");
+    }
+    return user;
+  }
+
+
+
+
+
+
 
   public interface onLoginCheck{
     void onCheck(User user, boolean isLoggedIn);

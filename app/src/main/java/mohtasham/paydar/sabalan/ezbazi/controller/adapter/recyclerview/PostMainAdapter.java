@@ -59,15 +59,7 @@ public class PostMainAdapter extends RecyclerView.Adapter<PostMainAdapter.ListVi
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(context, ActivityWebView.class);
-//        intent.putExtra("ID", post.getId());
-//        intent.putExtra("IMAGE", post.getImageUrl());
-//        intent.putExtra("MAIN_IMAGE", post.getMainImageUrl());
-//        intent.putExtra("DESCRIPTION", post.getDescription());
-//        intent.putExtra("TAGS", post.getTags());
-//        intent.putExtra("SAVE_COUNT", post.getSaveCount());
-//        intent.putExtra("SHARE_COUNT", post.getShareCount());
-//        intent.putExtra("USERNAME", post.getUsername());
-//        intent.putExtra("DESCRIPTION", post.getDescription());
+        intent.putExtra("URL", "https://www.google.com");
         context.startActivity(intent);
 
       }

@@ -1,5 +1,6 @@
 package mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,8 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.SliderMainService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
+import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityShowRent;
+import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityWebView;
 
 
 public class FragmentSlider extends Fragment {
@@ -38,10 +41,10 @@ public class FragmentSlider extends Fragment {
   }
 
 
-  private void setSlider(List<MainSlider> sliders){
+  private void setSlider(final List<MainSlider> sliders){
     for (int i=0;i<sliders.size();i++){
       TextSliderView textSliderView = new TextSliderView(G.context);
-     // final int finalI = i;
+      final int finalI = i;
       textSliderView
         .description(sliders.get(i).getTitle())
         .image(sliders.get(i).getImage_url())
@@ -50,6 +53,9 @@ public class FragmentSlider extends Fragment {
           @Override
           public void onSliderClick(BaseSliderView slider) {
            // Toast.makeText(G.context, "slider " + sliders.get(finalI).getId(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), ActivityWebView.class);
+            intent.putExtra("URL", sliders.get(finalI).getOn_click());
+            startActivity(intent);
           }
         });
 

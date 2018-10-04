@@ -19,6 +19,7 @@ import java.util.List;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
+import mohtasham.paydar.sabalan.ezbazi.model.RentType;
 
 public class RentService {
   private Context context;
@@ -178,6 +179,43 @@ public class RentService {
 
 
 
+  public void getRentTypes(final onRentTypesReceived onRentTypesReceived){
+    String url = Urls.RENT_TYPE_INDEX ;
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        List<RentType> rentTypes = new ArrayList<>();
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          JSONArray data = response.getJSONArray("data");
+          for (int i=0 ; i<data.length() ; i++){
+            JSONObject rentTypeObj = data.getJSONObject(i);
+            rentTypes.add( RentType.Parser.parse(rentTypeObj));
+          }
+
+          onRentTypesReceived.onReceived(status, message, rentTypes);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onRentTypesReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<RentType>());
+
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+
 
 
   public interface onRentsReceived{
@@ -194,6 +232,10 @@ public class RentService {
 
   public interface onSpecialRentReceived{
     void onReceived(int status, String message, Game game);
+  }
+
+  public interface onRentTypesReceived{
+    void onReceived(int status, String message, List<RentType> rentTypes);
   }
 
 }

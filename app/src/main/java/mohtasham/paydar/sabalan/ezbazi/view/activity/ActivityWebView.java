@@ -32,7 +32,14 @@ public class ActivityWebView extends AppCompatActivity {
 
     setupViews();
 
-    url = "https://www.google.com";
+    Bundle extras = getIntent().getExtras();
+    if(extras != null) {
+      url = extras.getString("URL");
+    }else {
+      url = (String) savedInstanceState.getSerializable("URL");
+    }
+
+//    url = "https://www.google.com";
 
 
 

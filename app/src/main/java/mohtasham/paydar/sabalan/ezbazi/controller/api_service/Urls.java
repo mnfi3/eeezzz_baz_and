@@ -18,6 +18,7 @@ public class Urls {
   public static final String RENT_INDEX = G.MAIN_URL + "/game-for-rent";
   public static final String RENT_INDEX0 = G.MAIN_URL + "/game-for-rent-index/329";
   public static final String RENT_SEARCH = G.MAIN_URL + "/game-for-rent-search";
+  public static final String RENT_TYPE_INDEX = G.MAIN_URL + "/rent-type";
 
   public static final String GAME_INFO_COMMENTS = G.MAIN_URL + "/game-info-comments";
 

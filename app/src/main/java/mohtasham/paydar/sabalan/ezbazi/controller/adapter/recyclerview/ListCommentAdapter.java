@@ -7,15 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.model.Comment;
-import mohtasham.paydar.sabalan.ezbazi.model.Post;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.ListViewHolder>{
@@ -94,7 +91,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
     }
 
     private void setTypeFace(){
-      txt_user_name.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_user_name.setTypeface(MyViews.getIranSansBoldFont(context));
       txt_date.setTypeface(MyViews.getIranSansMediumFont(context));
       expandable_text.setTypeface(MyViews.getIranSansLightFont(context));
     }

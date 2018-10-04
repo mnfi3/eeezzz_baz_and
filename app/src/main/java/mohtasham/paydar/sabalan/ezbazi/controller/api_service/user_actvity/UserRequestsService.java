@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.RentRequest;
 import mohtasham.paydar.sabalan.ezbazi.model.ShopRequest;
 
@@ -66,9 +67,9 @@ public class UserRequestsService {
         Map<String, String> params = new HashMap<String, String>();
         params.put("Accept", "application/json");
         //user_id=3
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU1YmJhYjdhNzJmYTBiMGM5YTE5ZWM2YTRkMTE3MTI0ZDgwODBlZjBmMmQ3MDgxMTBhYTE0MWVlZTMyNzRlODI1OTc5MDUwMmM1OTAwMjliIn0.eyJhdWQiOiIzIiwianRpIjoiNTViYmFiN2E3MmZhMGIwYzlhMTllYzZhNGQxMTcxMjRkODA4MGVmMGYyZDcwODExMGFhMTQxZWVlMzI3NGU4MjU5NzkwNTAyYzU5MDAyOWIiLCJpYXQiOjE1Mzc5NTI0MzIsIm5iZiI6MTUzNzk1MjQzMiwiZXhwIjoxNTY5NDg4NDMyLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.g_ZI4s6K3wQTVjEQtFRlibiCVdMA9fB7CHxKtqw--aAhE_Lb_kH2cmOeuSei9CSNzVWOvLHRLy6obuOpsxdKs0qiqeutkIVsxybQoVyMLhhRwgNKGU7YIJiuYMmUV7noWRDHacVaEaM0FtnWmL42ub-mkVie-V37LaEtSl9miXTh3ck8mFt5gj1LxNdl_N5_pjrjHG3Dc9D9XzrJ4OPAaGEqIi4__iEG9S_Z2s4S1_03KvObu0ygcw2Yd7NZjzqWN7JkDKQxTt-R46nCTPPfwUnoWBffR2nsHzcqf6woidJKKO15hmgbcTETOC-bce-VVgW2tU6MVxOlUoDeQ1LaUZ6aOtPvEkmPcbZgT8eswg-1W_bQnZ6SlsJunwLCT8HJeCifqD1_O1GHlAHxt_ZFGryCm1r4PwDQEDtd5Tt_S1vGthJ01Ev2jqrVXX7Ta2tn_G6kBMS24ItUboNKkVUFdULLEr-am-v5DSdKxtxvhz_sBqcOxgLmrubjzBmIOoH1IcqNlTw129rghGG8O3OQxyzizdo9pcBjQODB3QYZ5in6tl5j---3BNolu2LAeLutmFv3GZJMO4d54dOZeMbD375KdiXH80SZAY93lq-13iuzaw-MHKAdwU1J3eMqjGmr20gTI9RRqvACxXrQHctdyYdvMG1AQfHI4UVKOEUbO9k";
+//        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU1YmJhYjdhNzJmYTBiMGM5YTE5ZWM2YTRkMTE3MTI0ZDgwODBlZjBmMmQ3MDgxMTBhYTE0MWVlZTMyNzRlODI1OTc5MDUwMmM1OTAwMjliIn0.eyJhdWQiOiIzIiwianRpIjoiNTViYmFiN2E3MmZhMGIwYzlhMTllYzZhNGQxMTcxMjRkODA4MGVmMGYyZDcwODExMGFhMTQxZWVlMzI3NGU4MjU5NzkwNTAyYzU5MDAyOWIiLCJpYXQiOjE1Mzc5NTI0MzIsIm5iZiI6MTUzNzk1MjQzMiwiZXhwIjoxNTY5NDg4NDMyLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.g_ZI4s6K3wQTVjEQtFRlibiCVdMA9fB7CHxKtqw--aAhE_Lb_kH2cmOeuSei9CSNzVWOvLHRLy6obuOpsxdKs0qiqeutkIVsxybQoVyMLhhRwgNKGU7YIJiuYMmUV7noWRDHacVaEaM0FtnWmL42ub-mkVie-V37LaEtSl9miXTh3ck8mFt5gj1LxNdl_N5_pjrjHG3Dc9D9XzrJ4OPAaGEqIi4__iEG9S_Z2s4S1_03KvObu0ygcw2Yd7NZjzqWN7JkDKQxTt-R46nCTPPfwUnoWBffR2nsHzcqf6woidJKKO15hmgbcTETOC-bce-VVgW2tU6MVxOlUoDeQ1LaUZ6aOtPvEkmPcbZgT8eswg-1W_bQnZ6SlsJunwLCT8HJeCifqD1_O1GHlAHxt_ZFGryCm1r4PwDQEDtd5Tt_S1vGthJ01Ev2jqrVXX7Ta2tn_G6kBMS24ItUboNKkVUFdULLEr-am-v5DSdKxtxvhz_sBqcOxgLmrubjzBmIOoH1IcqNlTw129rghGG8O3OQxyzizdo9pcBjQODB3QYZ5in6tl5j---3BNolu2LAeLutmFv3GZJMO4d54dOZeMbD375KdiXH80SZAY93lq-13iuzaw-MHKAdwU1J3eMqjGmr20gTI9RRqvACxXrQHctdyYdvMG1AQfHI4UVKOEUbO9k";
 //        params.put("Authorization", "Bearer " + user.getToken());
-        params.put("Authorization", "Bearer " + token);
+        params.put("Authorization", "Bearer " + G.getUserToken());
         return params;
       }
     };
@@ -115,9 +116,9 @@ public class UserRequestsService {
         Map<String, String> params = new HashMap<String, String>();
         params.put("Accept", "application/json");
         //user_id=3
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU1YmJhYjdhNzJmYTBiMGM5YTE5ZWM2YTRkMTE3MTI0ZDgwODBlZjBmMmQ3MDgxMTBhYTE0MWVlZTMyNzRlODI1OTc5MDUwMmM1OTAwMjliIn0.eyJhdWQiOiIzIiwianRpIjoiNTViYmFiN2E3MmZhMGIwYzlhMTllYzZhNGQxMTcxMjRkODA4MGVmMGYyZDcwODExMGFhMTQxZWVlMzI3NGU4MjU5NzkwNTAyYzU5MDAyOWIiLCJpYXQiOjE1Mzc5NTI0MzIsIm5iZiI6MTUzNzk1MjQzMiwiZXhwIjoxNTY5NDg4NDMyLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.g_ZI4s6K3wQTVjEQtFRlibiCVdMA9fB7CHxKtqw--aAhE_Lb_kH2cmOeuSei9CSNzVWOvLHRLy6obuOpsxdKs0qiqeutkIVsxybQoVyMLhhRwgNKGU7YIJiuYMmUV7noWRDHacVaEaM0FtnWmL42ub-mkVie-V37LaEtSl9miXTh3ck8mFt5gj1LxNdl_N5_pjrjHG3Dc9D9XzrJ4OPAaGEqIi4__iEG9S_Z2s4S1_03KvObu0ygcw2Yd7NZjzqWN7JkDKQxTt-R46nCTPPfwUnoWBffR2nsHzcqf6woidJKKO15hmgbcTETOC-bce-VVgW2tU6MVxOlUoDeQ1LaUZ6aOtPvEkmPcbZgT8eswg-1W_bQnZ6SlsJunwLCT8HJeCifqD1_O1GHlAHxt_ZFGryCm1r4PwDQEDtd5Tt_S1vGthJ01Ev2jqrVXX7Ta2tn_G6kBMS24ItUboNKkVUFdULLEr-am-v5DSdKxtxvhz_sBqcOxgLmrubjzBmIOoH1IcqNlTw129rghGG8O3OQxyzizdo9pcBjQODB3QYZ5in6tl5j---3BNolu2LAeLutmFv3GZJMO4d54dOZeMbD375KdiXH80SZAY93lq-13iuzaw-MHKAdwU1J3eMqjGmr20gTI9RRqvACxXrQHctdyYdvMG1AQfHI4UVKOEUbO9k";
+//        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU1YmJhYjdhNzJmYTBiMGM5YTE5ZWM2YTRkMTE3MTI0ZDgwODBlZjBmMmQ3MDgxMTBhYTE0MWVlZTMyNzRlODI1OTc5MDUwMmM1OTAwMjliIn0.eyJhdWQiOiIzIiwianRpIjoiNTViYmFiN2E3MmZhMGIwYzlhMTllYzZhNGQxMTcxMjRkODA4MGVmMGYyZDcwODExMGFhMTQxZWVlMzI3NGU4MjU5NzkwNTAyYzU5MDAyOWIiLCJpYXQiOjE1Mzc5NTI0MzIsIm5iZiI6MTUzNzk1MjQzMiwiZXhwIjoxNTY5NDg4NDMyLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.g_ZI4s6K3wQTVjEQtFRlibiCVdMA9fB7CHxKtqw--aAhE_Lb_kH2cmOeuSei9CSNzVWOvLHRLy6obuOpsxdKs0qiqeutkIVsxybQoVyMLhhRwgNKGU7YIJiuYMmUV7noWRDHacVaEaM0FtnWmL42ub-mkVie-V37LaEtSl9miXTh3ck8mFt5gj1LxNdl_N5_pjrjHG3Dc9D9XzrJ4OPAaGEqIi4__iEG9S_Z2s4S1_03KvObu0ygcw2Yd7NZjzqWN7JkDKQxTt-R46nCTPPfwUnoWBffR2nsHzcqf6woidJKKO15hmgbcTETOC-bce-VVgW2tU6MVxOlUoDeQ1LaUZ6aOtPvEkmPcbZgT8eswg-1W_bQnZ6SlsJunwLCT8HJeCifqD1_O1GHlAHxt_ZFGryCm1r4PwDQEDtd5Tt_S1vGthJ01Ev2jqrVXX7Ta2tn_G6kBMS24ItUboNKkVUFdULLEr-am-v5DSdKxtxvhz_sBqcOxgLmrubjzBmIOoH1IcqNlTw129rghGG8O3OQxyzizdo9pcBjQODB3QYZ5in6tl5j---3BNolu2LAeLutmFv3GZJMO4d54dOZeMbD375KdiXH80SZAY93lq-13iuzaw-MHKAdwU1J3eMqjGmr20gTI9RRqvACxXrQHctdyYdvMG1AQfHI4UVKOEUbO9k";
 //        params.put("Authorization", "Bearer " + user.getToken());
-        params.put("Authorization", "Bearer " + token);
+        params.put("Authorization", "Bearer " + G.getUserToken());
         return params;
       }
     };

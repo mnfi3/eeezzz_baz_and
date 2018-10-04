@@ -44,7 +44,9 @@ public class ActivityShowRent extends AppCompatActivity {
   VideoView vdo_game;
   ImageView img_game;
   RoundedImageView img_game_cover;
-  TextView txt_name, txt_console, txt_genres, txt_release_date, txt_rate;
+  TextView txt_name, txt_console, txt_genres, txt_release_date, txt_rate, txt_detail_age_class;
+  RoundedImageView img_detail_console_icon;
+  TextView txt_detail_release_date;
   ImageView img_rate_star;
   ExpandableTextView expand_text_view;
 
@@ -107,7 +109,7 @@ public class ActivityShowRent extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(ActivityShowRent.this, ActivityComment.class);
-        intent.putExtra("GAME_INFO_ID", game.getId());
+        intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
         ActivityShowRent.this.startActivity(intent);
       }
     });
@@ -133,6 +135,11 @@ public class ActivityShowRent extends AppCompatActivity {
     txt_release_date = (TextView) findViewById(R.id.txt_release_date);
     txt_rate = (TextView) findViewById(R.id.txt_rate);
     img_rate_star = (ImageView) findViewById(R.id.img_rate_star);
+
+    //bottom of detail
+    txt_detail_age_class = (TextView) findViewById(R.id.txt_detail_age_class);
+    img_detail_console_icon = findViewById(R.id.img_detail_console_icon);
+    txt_detail_release_date = findViewById(R.id.txt_detail_release_date);
 
     expand_text_view = (ExpandableTextView) findViewById(R.id.expand_text_view);
 
@@ -249,7 +256,18 @@ public class ActivityShowRent extends AppCompatActivity {
       }
     }
 
+
+    //game detail
     expand_text_view.setText(game.getDescription());
+    txt_detail_age_class.setText("+"+game.getAge_class());
+    if(game.getConsole_name().contains("xbox")){
+      img_detail_console_icon.setImageResource(R.drawable.ic_xbox);
+    }else if(game.getConsole_name().contains("ps")){
+      img_detail_console_icon.setImageResource(R.drawable.ic_playstation);
+    }
+
+    txt_detail_release_date.setText(game.getProduction_date().substring(0,4));
+
   }
 
 

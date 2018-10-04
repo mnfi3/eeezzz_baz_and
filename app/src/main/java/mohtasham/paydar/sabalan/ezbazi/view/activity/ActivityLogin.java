@@ -1,17 +1,17 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.AccountService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
@@ -122,6 +123,12 @@ public class ActivityLogin extends AppCompatActivity {
             if(status == 1){
               UserSharedPrefManager prefManager = new UserSharedPrefManager(ActivityLogin.this);
               prefManager.saveUser(user);
+              G.isLoggedIn = true;
+              G.initializeLogin();
+              //restart ActivityMenu
+              ActivityMenu.getInstance().finish();
+              Intent intent = new Intent(ActivityLogin.this, ActivityMenu.class);
+              startActivity(intent);
               ActivityLogin.this.finish();
             }
           }
@@ -131,6 +138,19 @@ public class ActivityLogin extends AppCompatActivity {
     });
 
   }
+
+
+//  private void restartFragments(){
+//    Fragment frg, frg2 = null;
+//    frg = getSupportFragmentManager().findFragmentByTag("2");
+//    frg2 = getSupportFragmentManager().findFragmentByTag("4");
+//    final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//    ft.detach(frg);
+//    ft.detach(frg2);
+//    ft.attach(frg);
+//    ft.attach(frg2);
+//    ft.commit();
+//  }
 
   private void setupViews(){
     txt_register = (TextView) findViewById(R.id.txt_register);

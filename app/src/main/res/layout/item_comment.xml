@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48sp"
+        android:layout_height="48dp"
         android:orientation="horizontal"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/back_item_comment_header"
         android:gravity="center">
 
 
@@ -27,13 +28,13 @@
             android:gravity="center"
             android:layout_gravity="center_vertical"
             tools:text="1395.1.24"
-            android:textSize="8sp"
+            android:textSize="@dimen/font_size_small"
             android:textColor="@color/text_color"
-            android:layout_marginTop="5sp"
-            android:layout_marginLeft="3sp"
-            android:layout_marginBottom="5sp"
-            android:layout_marginRight="5sp"
-            android:padding="2sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="2dp"
             android:textStyle="italic"/>
 
 
@@ -45,78 +46,67 @@
             android:gravity="center"
             android:layout_gravity="center_vertical"
             tools:text="محسن"
-            android:textSize="9sp"
+            android:textSize="@dimen/font_size_small"
             android:textStyle="bold"
             android:textColor="@color/text_color"
-            android:layout_marginLeft="5sp"
-            android:layout_marginRight="5sp"
-            android:layout_marginBottom="5sp"
-            android:layout_marginTop="5sp"
-            android:padding="2sp"/>
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:padding="2dp"/>
     </LinearLayout>
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/back_item_comment"
-            android:layout_marginBottom="5sp"
-            >
-
-
-
-
-
-
-
-
-
-
-            <com.ms.square.android.expandabletextview.ExpandableTextView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/expand_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                expandableTextView:maxCollapsedLines="3"
-                expandableTextView:animDuration="300">
-                <TextView
-                    android:id="@id/expandable_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15sp"
-                    android:layout_marginLeft="15sp"
-                    android:layout_marginTop="5sp"
-                    android:padding="20sp"
-                    android:textSize="10sp"
-                    tools:text="عالیه عالی، 3برابر قیمتش کیفیت داره، فوق العاده قویه و کارایی داره "
-                    android:textColor="#666666" />
-                <ImageButton
-                    android:id="@id/expand_collapse"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:layout_gravity="center|bottom"
-                    android:background="@android:color/transparent"/>
-            </com.ms.square.android.expandabletextview.ExpandableTextView>
-
-
-
-
-        </LinearLayout>
 
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimaryLight"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/back_item_comment"
+        android:layout_marginBottom="5dp"
+        >
+
+
+
+
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/expand_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            expandableTextView:maxCollapsedLines="3"
+            expandableTextView:animDuration="300">
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15sp"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="5sp"
+                android:padding="20sp"
+                android:textSize="@dimen/font_size_small"
+                tools:text="عالیه عالی، 3برابر قیمتش کیفیت داره، فوق العاده قویه و کارایی داره "
+                android:textColor="@color/main_text_color" />
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_gravity="center|bottom"
+                android:background="@android:color/transparent"/>
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
 
 
 

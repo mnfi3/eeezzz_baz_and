@@ -70,12 +70,16 @@ public class ActivityTicket extends AppCompatActivity {
           } catch (InterruptedException e) {
             e.printStackTrace();
           }
-          getTickets();
+          if(G.isLoggedIn){
+            getTickets();
+          }
         }
       }
     });
 
-    thread.start();
+//    if(G.isLoggedIn) {
+//      thread.start();
+//    }
 
 
   }
@@ -108,6 +112,7 @@ public class ActivityTicket extends AppCompatActivity {
               rcv_tickets.setAdapter(adapter);
               adapter.notifyData(tickets);
               rcv_tickets.scrollToPosition(adapter.getItemCount() - 1);
+              setSeenTickets();
             }
           }
 

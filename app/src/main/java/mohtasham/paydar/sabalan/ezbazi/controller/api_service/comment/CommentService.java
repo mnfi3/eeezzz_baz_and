@@ -59,7 +59,48 @@ public class CommentService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onCommentsReceived.onReceived(0, "", new ArrayList<Comment>(), new Paginate());
+        onCommentsReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<Comment>(), new Paginate());
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+  public void addComment(String commentable_type, int commentable_id, final onAddCommentReceived onAddCommentReceived){
+    String url = Urls.GAME_INFO_COMMENTS ;
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        List<MainSlider> sliders = new ArrayList<>();
+        int status = 0;
+        String message = "";
+        Comment comment;
+        try {
+          comment = new Comment();
+          status = response.getInt("status");
+          message = response.getString("message");
+//          List<Comment> comments =  new ArrayList<Comment>();
+//          JSONObject jsonData = response.getJSONObject("data");
+//          Paginate paginate = Paginate.Parser.parse(jsonData);
+//          JSONArray data = jsonData.getJSONArray("data");
+//          for (int i=0 ; i<data.length() ; i++){
+//            JSONObject commentObj = data.getJSONObject(i);
+//            comments.add( Comment.Parser.parse(commentObj));
+//          }
+
+
+          onAddCommentReceived.onReceived(status, message, comment);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onAddCommentReceived.onReceived(0, "خطا در اتصال به سرور", new Comment());
       }
     });
 
@@ -68,8 +109,13 @@ public class CommentService {
   }
 
 
+
   public interface onCommentsReceived{
     void onReceived(int status, String message, List<Comment> comments, Paginate paginate);
+  }
+
+  public interface onAddCommentReceived{
+    void onReceived(int status, String message, Comment comment);
   }
 
 

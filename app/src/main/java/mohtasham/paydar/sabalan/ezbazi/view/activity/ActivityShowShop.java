@@ -106,7 +106,7 @@ public class ActivityShowShop extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(ActivityShowShop.this, ActivityComment.class);
-        intent.putExtra("GAME_INFO_ID", game.getId());
+        intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
         ActivityShowShop.this.startActivity(intent);
       }
     });

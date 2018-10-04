@@ -17,12 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:padding="2dp">
+        android:padding="2dp"
+        android:paddingBottom="20dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/txt_rents"
@@ -49,7 +52,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rcv_rents"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/item_list_rent_request_height"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
                     android:orientation="horizontal"
                     android:layoutDirection="ltr"
                     />
@@ -89,13 +93,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:layout_marginBottom="20dp">
 
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rcv_buys"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/item_list_shop_request_height"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
                     android:orientation="horizontal"
                     android:layoutDirection="ltr"
                     />

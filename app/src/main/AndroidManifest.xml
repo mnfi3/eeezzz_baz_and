@@ -10,21 +10,24 @@
 
     <application
         android:name=".controller.system.G"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".view.activity.ActivityMenu"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/AppThemeFullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.activity.ActivityHome"
             android:theme="@style/AppTheme">
@@ -39,10 +42,12 @@
         </activity>
         <activity
             android:name=".view.activity.ActivityShowRent"
+            android:launchMode="singleTop"
             android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".view.activity.ActivityShowShop"
+            android:launchMode="singleTop"
             android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity android:name=".view.activity.ActivityListShop">
@@ -53,6 +58,9 @@
         <activity android:name=".view.activity.ActivityTicket">
         </activity>
         <activity android:name=".view.activity.ActivityWebView">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
         </activity>
         <activity android:name=".view.activity.ActivityComment">
         </activity>
