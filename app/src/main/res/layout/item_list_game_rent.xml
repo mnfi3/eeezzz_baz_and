@@ -45,7 +45,20 @@
         android:padding="2dp"
         android:textColor="@color/main_text_color"
         android:textSize="@dimen/font_size_large"
-        tools:text="rating : 4"/>
+        tools:text="rating : 4"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/txt_region"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/img_game"
+        android:layout_alignTop="@+id/txt_release_date"
+        android:gravity="left"
+        android:padding="2dp"
+        android:textColor="@color/main_text_color"
+        android:textSize="@dimen/font_size_large"
+        tools:text="Region : all"/>
 
     <TextView
         android:id="@+id/txt_release_date"
@@ -65,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/txt_rating"
+        android:layout_alignStart="@+id/txt_region"
         android:gravity="left"
         android:padding="2dp"
         android:textColor="@color/main_text_color"
@@ -78,8 +91,8 @@
         android:id="@+id/img_calendar"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_alignStart="@+id/txt_rating"
-        android:layout_below="@+id/txt_rating"
+        android:layout_alignStart="@+id/txt_region"
+        android:layout_below="@+id/txt_region"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_calendar_clock"/>
 
@@ -88,9 +101,9 @@
         android:id="@+id/txt_rent_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_rating"
+        android:layout_below="@+id/txt_region"
         android:layout_toEndOf="@+id/img_calendar"
-        android:text="اجاره 10 روزه"
+        android:text="اجاره 7 روزه"
         android:textColor="@color/main_text_color"
         android:textSize="@dimen/font_size_medium"
         android:layout_marginLeft="5dp"/>

@@ -1,9 +1,6 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,6 +14,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperDate;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Ticket;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
@@ -43,7 +42,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ListViewHo
     final Ticket ticket = tickets.get(position);
 
     holder.txt_message.setText(ticket.getText());
-    holder.txt_created_at.setText(ticket.getCreated_at());
+    holder.txt_created_at.setText(HelperText.toPersianNumber(new HelperDate().timestampToPersianFull(ticket.getCreated_at())));
 
     if (ticket.getIs_user_sent() == 0) {
       holder.txt_message.setBackgroundResource(R.drawable.back_ticket_item2);
@@ -99,7 +98,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ListViewHo
     }
 
     private void setTypeFace(){
-      txt_message.setTypeface(MyViews.getIranSansLightFont(context));
+      txt_message.setTypeface(MyViews.getIranSansUltraLightFont(context));
       txt_created_at.setTypeface(MyViews.getIranSansMediumFont(context));
     }
 

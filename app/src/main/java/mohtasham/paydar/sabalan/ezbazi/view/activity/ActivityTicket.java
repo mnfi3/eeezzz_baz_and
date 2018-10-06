@@ -1,14 +1,13 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wang.avi.AVLoadingIndicatorView;
@@ -29,6 +28,8 @@ import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class ActivityTicket extends AppCompatActivity {
 
+  TextView txt_page_name;
+  ImageView img_back;
   RecyclerView rcv_tickets;
   EditText edt_message;
   ImageButton imb_send_message;
@@ -36,6 +37,7 @@ public class ActivityTicket extends AppCompatActivity {
   TicketAdapter adapter;
   AVLoadingIndicatorView avl_send_message;
   int first_ticket_id = -1;
+  boolean is_create_adapter = false;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +45,23 @@ public class ActivityTicket extends AppCompatActivity {
     setContentView(R.layout.activity_ticket);
 
     setupViews();
+    setTypeFace();
+
+
+    txt_page_name.setText("ارتباط با پشتیبانی");
     LinearLayoutManager layoutManager = new LinearLayoutManager(ActivityTicket.this, LinearLayoutManager.VERTICAL, false);
 //    layoutManager.setReverseLayout(true);
     rcv_tickets.setLayoutManager(layoutManager);
     getTickets();
     avl_send_message.setVisibility(View.VISIBLE);
     setSeenTickets();
+
+    img_back.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        finish();
+      }
+    });
 
     imb_send_message.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -61,34 +74,41 @@ public class ActivityTicket extends AppCompatActivity {
     });
 
 
-    Thread thread = new Thread(new Runnable() {
-      @Override
-      public void run() {
-        while (true) {
-          try {
-            Thread.sleep(4000);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-          if(G.isLoggedIn){
-            getTickets();
+
+      Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+          while (true) {
+            try {
+              Thread.sleep(4000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+            if (G.isLoggedIn) {
+              getTickets();
+            }
           }
         }
-      }
-    });
+      });
 
-//    if(G.isLoggedIn) {
-//      thread.start();
-//    }
+    if(G.isLoggedIn) {
+      thread.start();
+    }
 
 
   }
 
   private void setupViews(){
-    rcv_tickets = (RecyclerView) findViewById(R.id.rcv_tickets);
-    edt_message = (EditText) findViewById(R.id.edt_message);
-    imb_send_message = (ImageButton) findViewById(R.id.imb_send_message);
-    avl_send_message = (AVLoadingIndicatorView) findViewById(R.id.avl_send_message);
+    img_back = findViewById(R.id.img_back);
+    txt_page_name = findViewById(R.id.txt_page_name);
+    rcv_tickets = findViewById(R.id.rcv_tickets);
+    edt_message =  findViewById(R.id.edt_message);
+    imb_send_message =  findViewById(R.id.imb_send_message);
+    avl_send_message = findViewById(R.id.avl_send_message);
+  }
+
+  private void setTypeFace(){
+    txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityTicket.this));
   }
 
 
@@ -99,16 +119,19 @@ public class ActivityTicket extends AppCompatActivity {
       @Override
       public void onReceived(int status, String message, Paginate paginate, final List<Ticket> tickets) {
         avl_send_message.setVisibility(View.INVISIBLE);
+
         if (status == 0){
           MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
         }else {
+
 
           if (tickets.size()>0) {
 
             if(first_ticket_id != tickets.get(0).getId()) {
               first_ticket_id = tickets.get(0).getId();
               Collections.reverse(tickets);
-              adapter = new TicketAdapter(G.context, new ArrayList<Ticket>());
+              adapter = new TicketAdapter(ActivityTicket.this, new ArrayList<Ticket>());
+              is_create_adapter = true;
               rcv_tickets.setAdapter(adapter);
               adapter.notifyData(tickets);
               rcv_tickets.scrollToPosition(adapter.getItemCount() - 1);
@@ -158,10 +181,20 @@ public class ActivityTicket extends AppCompatActivity {
           avl_send_message.setVisibility(View.INVISIBLE);
           if (status == 1){
 //            getTickets();
-            first_ticket_id = ticket.getId();
+
             List<Ticket> tickets = new ArrayList<>();
             tickets.add(ticket);
+
+            //for first ticket send
+            if(!is_create_adapter){
+              adapter = new TicketAdapter(ActivityTicket.this, new ArrayList<Ticket>());
+              getTickets();
+              return;
+            }
+
+            first_ticket_id = ticket.getId();
             adapter.notifyData(tickets);
+
             rcv_tickets.smoothScrollToPosition(adapter.getItemCount() - 1);
           }else {
             MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);

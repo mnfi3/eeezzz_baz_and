@@ -107,7 +107,7 @@
                 android:layout_height="40dp"
                 android:text="ورود"
                 android:layout_marginTop="20sp"
-                android:background="@drawable/back_buttons"
+                android:background="@drawable/back_button_game_comment"
                 android:textColor="@color/main_text_color"
                 />
 

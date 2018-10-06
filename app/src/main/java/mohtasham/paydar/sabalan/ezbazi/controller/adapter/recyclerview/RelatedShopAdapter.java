@@ -1,13 +1,14 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -16,19 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityShowShop;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
-public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListViewHolder>{
+public class RelatedShopAdapter extends RecyclerView.Adapter<RelatedShopAdapter.ListViewHolder>{
 
 
   private Context context;
   private List<Game> games;
 
-  public ListShopAdapter(Context context, List<Game> games){
+  public RelatedShopAdapter(Context context, List<Game> games){
 
     this.context = context;
     this.games = games;
@@ -36,13 +36,14 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
 
   @Override
   public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(context).inflate(R.layout.item_list_game_shop,parent,false);
+    View view= LayoutInflater.from(context).inflate(R.layout.item_fragment_main_games,parent,false);
     return new ListViewHolder(view);
   }
 
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
     final Game game = games.get(position);
+    final int id = game.getId();
     ArrayList<Photo> photos = game.getPhotos();
       Picasso.with(context).
         load(photos.get(0).getUrl())
@@ -53,12 +54,8 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
         //.error(context.getResources().getDrawable(R.drawable.default_no_image))
         .into(holder.img_game);
 
-      holder.txt_name.setText(game.getName());
-      holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
-//      holder.txt_rating.setText("rate : 4.8");
-      holder.txt_region.setText(" Region : " + game.getRegion());
-
-      holder.btn_price.setText(HelperText.split_price(game.getPrice()) + " تومان ");
+    holder.txt_game_name.setText(game.getName());
+    holder.txt_release_date.setText(game.getProduction_date());
 
 
 
@@ -67,8 +64,12 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(context, ActivityShowShop.class);
-        intent.putExtra("ID", game.getId());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.putExtra("ID", id);
+        ((Activity)context).finish();
         context.startActivity(intent);
+//        Toast.makeText(context, "shop id = "+ game.getId() + " gameInfoId = " + game.getGame_info_id(),Toast.LENGTH_LONG).show();
       }
     });
 
@@ -83,20 +84,14 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
   public class ListViewHolder extends RecyclerView.ViewHolder{
 
     private RoundedImageView img_game;
-    private TextView txt_name;
-    private TextView txt_rating;
-    private TextView txt_region;
+    private TextView txt_game_name;
     private TextView txt_release_date;
-    private Button btn_price;
 
     public ListViewHolder(View itemView) {
       super(itemView);
       img_game = itemView.findViewById(R.id.img_game);
-      txt_name = itemView.findViewById(R.id.txt_name);
-      txt_rating = itemView.findViewById(R.id.txt_rating);
-      txt_region = itemView.findViewById(R.id.txt_region);
+      txt_game_name = itemView.findViewById(R.id.txt_game_name);
       txt_release_date = itemView.findViewById(R.id.txt_release_date);
-      btn_price = itemView.findViewById(R.id.btn_price);
 
 
       setTypeFace();
@@ -104,12 +99,11 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
 
 
     private void setTypeFace(){
-      txt_name.setTypeface(MyViews.getIranSansLightFont(context));
-      txt_rating.setTypeface(MyViews.getIranSansLightFont(context));
-      txt_region.setTypeface(MyViews.getIranSansLightFont(context));
+      txt_game_name.setTypeface(MyViews.getIranSansMediumFont(context));
       txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));
-      btn_price.setTypeface(MyViews.getIranSansMediumFont(context));
     }
+
+
 
   }
 

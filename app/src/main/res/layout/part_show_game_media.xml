@@ -131,11 +131,12 @@
                     android:id="@+id/img_rate_star"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="40dp"
-                    android:padding="1dp"
+                    android:layout_marginTop="5dp"
                     android:adjustViewBounds="true"
+                    android:padding="1dp"
                     android:src="@drawable/ic_star"
+                    android:visibility="gone"
                     />
 
                 <TextView
@@ -146,15 +147,48 @@
                     android:textColor="@color/main_text_color"
                     android:textSize="@dimen/font_size_medium"
                     tools:text="rate : 4.6"
+                    android:visibility="gone"
                     />
 
+                <TextView
+                    android:id="@+id/txt_show_region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    android:text=" Region : "
+                    android:layout_marginLeft="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    tools:text="all"
+                    />
+
+
+                <TextView
+                    android:id="@+id/txt_show_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_toEndOf="@+id/txt_rate"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/font_size_medium"
+                    android:visibility="visible"
+                    android:text=" Genres : "/>
 
                 <TextView
                     android:id="@+id/txt_genres"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_toEndOf="@+id/txt_rate"
-                    android:layout_marginLeft="30dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/main_text_color"
                     android:textSize="@dimen/font_size_medium"

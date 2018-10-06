@@ -19,6 +19,28 @@
         android:padding="2dp"/>
 
 
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avl_center"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorAccent"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avl_bottom"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorAccent"
+        android:layout_gravity="center_horizontal|bottom"
+        android:visibility="invisible"
+        android:layout_marginBottom="16dp"
+        />
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_comment"
         android:layout_width="wrap_content"
@@ -27,6 +49,11 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_plus"
         app:layout_anchor="@id/rcv_comments"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        app:backgroundTint="@color/colorAccent2"
+        app:fabSize="normal"
+        android:elevation="6dp"
+        app:rippleColor="@color/colorAccent"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedPost;
@@ -43,7 +44,8 @@ public class ActivityShowShop extends AppCompatActivity {
   VideoView vdo_game;
   ImageView img_game;
   RoundedImageView img_game_cover;
-  TextView txt_name, txt_console, txt_genres, txt_release_date, txt_rate;
+  TextView txt_name, txt_console, txt_genres, txt_show_genres, txt_release_date, txt_rate;
+  TextView txt_region, txt_show_region;
   ImageView img_rate_star;
   ExpandableTextView expand_text_view;
 
@@ -52,9 +54,9 @@ public class ActivityShowShop extends AppCompatActivity {
   ShopService service;
 
   NestedScrollView nested_scroll;
-  TextView txt_rent_period;
-  Button btn_rent;
-  Button btn_rent_day_count_10, btn_rent_day_count_20, btn_rent_day_count_30;
+//  TextView txt_rent_period;
+  Button btn_shop;
+//  Button btn_rent_day_count_10, btn_rent_day_count_20, btn_rent_day_count_30;
   Button btn_comments;
 
   FragmentTransaction ft;
@@ -74,24 +76,24 @@ public class ActivityShowShop extends AppCompatActivity {
     prepareGame(extras ,savedInstanceState);
 
 
-    nested_scroll.setOnTouchListener(new View.OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
-        int action = event.getAction();
-        switch (action) {
-          case MotionEvent.ACTION_DOWN:
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            break;
-
-          case MotionEvent.ACTION_UP:
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            break;
-        }
-        // Handle nestedScrollView touch events.
-        v.onTouchEvent(event);
-        return true;
-      }
-    });
+//    nested_scroll.setOnTouchListener(new View.OnTouchListener() {
+//      @Override
+//      public boolean onTouch(View v, MotionEvent event) {
+//        int action = event.getAction();
+//        switch (action) {
+//          case MotionEvent.ACTION_DOWN:
+//            v.getParent().requestDisallowInterceptTouchEvent(true);
+//            break;
+//
+//          case MotionEvent.ACTION_UP:
+//            v.getParent().requestDisallowInterceptTouchEvent(true);
+//            break;
+//        }
+//        // Handle nestedScrollView touch events.
+//        v.onTouchEvent(event);
+//        return true;
+//      }
+//    });
 
 
     img_back.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +109,7 @@ public class ActivityShowShop extends AppCompatActivity {
       public void onClick(View view) {
         Intent intent = new Intent(ActivityShowShop.this, ActivityComment.class);
         intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
+        intent.putExtra("GAME_NAME", game.getName());
         ActivityShowShop.this.startActivity(intent);
       }
     });
@@ -130,19 +133,19 @@ public class ActivityShowShop extends AppCompatActivity {
     img_game_cover = (RoundedImageView) findViewById(R.id.img_game_cover);
     txt_name = (TextView) findViewById(R.id.txt_name);
     txt_console = (TextView) findViewById(R.id.txt_console);
+    txt_show_genres = (TextView) findViewById(R.id.txt_show_genres);
     txt_genres = (TextView) findViewById(R.id.txt_genres);
     txt_release_date = (TextView) findViewById(R.id.txt_release_date);
     txt_rate = (TextView) findViewById(R.id.txt_rate);
     img_rate_star = (ImageView) findViewById(R.id.img_rate_star);
+    txt_show_region = findViewById(R.id.txt_show_region);
+    txt_region = findViewById(R.id.txt_region);
 
     expand_text_view = (ExpandableTextView) findViewById(R.id.expand_text_view);
 
     nested_scroll = (NestedScrollView) findViewById(R.id.nested_scroll);
-    txt_rent_period = (TextView) findViewById(R.id.txt_rent_period);
-    btn_rent = findViewById(R.id.btn_rent);
-    btn_rent_day_count_10 = findViewById(R.id.btn_rent_day_count_10);
-    btn_rent_day_count_20 = findViewById(R.id.btn_rent_day_count_20);
-    btn_rent_day_count_30 = findViewById(R.id.btn_rent_day_count_30);
+//    txt_rent_period = (TextView) findViewById(R.id.txt_rent_period);
+    btn_shop = findViewById(R.id.btn_shop);
 
     btn_comments = findViewById(R.id.btn_comments);
 
@@ -177,12 +180,16 @@ public class ActivityShowShop extends AppCompatActivity {
     txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
     txt_name.setTypeface(MyViews.getIranSansMediumFont(ActivityShowShop.this));
     txt_rate.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    txt_show_region.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    txt_region.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    txt_show_genres.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    txt_genres.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
 
-    txt_rent_period.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
-    btn_rent.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
-    btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
-    btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
-    btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
+//    txt_rent_period.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    btn_shop.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+//    btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
+//    btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
+//    btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowShop.this));
 
     btn_comments.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
 
@@ -203,8 +210,8 @@ public class ActivityShowShop extends AppCompatActivity {
     }
     txt_genres.setText(genres);
     txt_release_date.setText("تاریخ عرضه: " + game.getProduction_date());
-    txt_rate.setText("rate : 4.6");
-
+//    txt_rate.setText("rate : 4.6");
+    txt_region.setText(game.getRegion());
     String cover_image = "";
     for (int i=0 ; i<game.getPhotos().size() ; i++){
 //      if (game.getPhotos().get(i).getHeight() == R.dimen.photo_cover_height){
@@ -232,6 +239,8 @@ public class ActivityShowShop extends AppCompatActivity {
       }
     }
 
+
+    btn_shop.setText(" خرید با قیمت " + HelperText.split_price(game.getPrice()) + " تومان ");
     expand_text_view.setText(game.getDescription());
   }
 
@@ -267,12 +276,14 @@ public class ActivityShowShop extends AppCompatActivity {
     vdo_game.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
       @Override
       public void onPrepared(MediaPlayer mediaPlayer) {
+        mediaPlayer.setVolume(0,0);
         vdo_game.start();
       }
     });
     vdo_game.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
       @Override
       public void onCompletion(MediaPlayer mediaPlayer) {
+        mediaPlayer.setVolume(0,0);
         vdo_game.start();
       }
     });

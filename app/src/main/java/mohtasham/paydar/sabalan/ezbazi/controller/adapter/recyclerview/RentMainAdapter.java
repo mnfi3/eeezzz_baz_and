@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -40,7 +41,8 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
 
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
-    final Game game = games.get(position);
+    Game game = games.get(position);
+    final int id = game.getId();
     ArrayList<Photo> photos = game.getPhotos();
       Picasso.with(context).
         load(photos.get(0).getUrl())
@@ -61,8 +63,8 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(context, ActivityShowRent.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("ID", game.getId());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("ID", id);
         context.startActivity(intent);
       }
     });

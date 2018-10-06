@@ -33,6 +33,7 @@ public class ActivityLogin extends AppCompatActivity {
 
 
   TextView txt_register;
+  TextView txt_page_name;
   ImageView img_back;
   EditText edt_email, edt_password;
   Button btn_login;
@@ -47,6 +48,9 @@ public class ActivityLogin extends AppCompatActivity {
     setContentView(R.layout.activity_login);
 
     setupViews();
+    setTypeFace();
+
+    txt_page_name.setText("ورود به حساب کاربری");
 
 
     if (savedInstanceState == null) {
@@ -153,13 +157,18 @@ public class ActivityLogin extends AppCompatActivity {
 //  }
 
   private void setupViews(){
-    txt_register = (TextView) findViewById(R.id.txt_register);
-    img_back = (ImageView) findViewById(R.id.img_back);
-    edt_email = (EditText) findViewById(R.id.edt_email);
-    edt_password = (EditText) findViewById(R.id.edt_password);
-    btn_login = (Button) findViewById(R.id.btn_login);
-    chk_show_pass = (CheckBox) findViewById(R.id.chk_show_pass);
-    avl_login = (AVLoadingIndicatorView) findViewById(R.id.avl_login);
+    txt_register = findViewById(R.id.txt_register);
+    img_back = findViewById(R.id.img_back);
+    edt_email = findViewById(R.id.edt_email);
+    edt_password = findViewById(R.id.edt_password);
+    btn_login = findViewById(R.id.btn_login);
+    chk_show_pass = findViewById(R.id.chk_show_pass);
+    avl_login =  findViewById(R.id.avl_login);
+    txt_page_name = findViewById(R.id.txt_page_name);
+  }
+
+  private void setTypeFace(){
+    txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityLogin.this));
   }
 
 

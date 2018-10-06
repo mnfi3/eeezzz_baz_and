@@ -1,5 +1,6 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.user_activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperDate;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.ShopRequest;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityShowShop;
@@ -39,36 +42,39 @@ public class ListShopRequestAdapter extends RecyclerView.Adapter<ListShopRequest
     return new ListViewHolder(view);
   }
 
+  @SuppressLint("SetTextI18n")
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
     final ShopRequest request = requests.get(position);
     ArrayList<Photo> photos = request.getGame().getPhotos();
-      Picasso.with(context).
-        load(photos.get(0).getUrl())
+    Picasso.with(context).
+      load(photos.get(0).getUrl())
 //      .noFade()
 //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
 //      .skipMemoryCache()
-        //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
-        //.error(context.getResources().getDrawable(R.drawable.default_no_image))
-        .into(holder.img_game);
+      //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
+      //.error(context.getResources().getDrawable(R.drawable.default_no_image))
+      .into(holder.img_game);
 
-      holder.txt_name.setText(request.getGame().getName());
+    holder.txt_name.setText(request.getGame().getName());
 //      holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
-      holder.txt_rating.setText("rate : " + "4.5");
-      holder.btn_price.setText(request.getGame_price() + " تومان ");
+//      holder.txt_rating.setText("rate : " + "4.5");
+    holder.txt_region.setText("Region : " + request.getGame().getRegion());
 
-      if(request.getIs_finish() == 1) {
-        holder.txt_status.setText("تمام شده");
-      }else if(request.getIs_finish() == 0 && request.getIs_success() == 1){
-        holder.txt_status.setText("دریافت شده");
-      }
-      else if(request.getIs_finish() == 0 && request.getIs_success() == 0 && request.getIs_sent() == 1){
-        holder.txt_status.setText("ارسال شده");
-      }else if(request.getIs_finish() == 0 && request.getIs_success() == 0 && request.getIs_sent() == 0){
-        holder.txt_status.setText("در حال ارسال");
-      }
+    holder.btn_price.setText(HelperText.split_price(request.getGame_price()) + " تومان ");
 
-      holder.txt_date.setText(request.getCreated_at());
+    if(request.getIs_finish() == 1) {
+      holder.txt_status.setText("تمام شده");
+    }else if(request.getIs_finish() == 0 && request.getIs_success() == 1){
+      holder.txt_status.setText("دریافت شده");
+    }
+    else if(request.getIs_finish() == 0 && request.getIs_success() == 0 && request.getIs_sent() == 1){
+      holder.txt_status.setText("ارسال شده");
+    }else if(request.getIs_finish() == 0 && request.getIs_success() == 0 && request.getIs_sent() == 0){
+      holder.txt_status.setText("در حال ارسال");
+    }
+
+    holder.txt_date.setText(new HelperDate().timestampToPersian(request.getCreated_at()));
 
 
 
@@ -97,6 +103,7 @@ public class ListShopRequestAdapter extends RecyclerView.Adapter<ListShopRequest
     private RoundedImageView img_game;
     private TextView txt_name;
     private TextView txt_rating;
+    private TextView txt_region;
     private TextView txt_release_date;
     private Button btn_price;
     private TextView txt_show_status, txt_status, txt_date, txt_show_date;
@@ -106,6 +113,7 @@ public class ListShopRequestAdapter extends RecyclerView.Adapter<ListShopRequest
       img_game = itemView.findViewById(R.id.img_game);
       txt_name = itemView.findViewById(R.id.txt_name);
       txt_rating = itemView.findViewById(R.id.txt_rating);
+      txt_region = itemView.findViewById(R.id.txt_region);
       txt_release_date = itemView.findViewById(R.id.txt_release_date);
       btn_price = itemView.findViewById(R.id.btn_price);
       txt_show_status = itemView.findViewById(R.id.txt_show_status);
@@ -120,6 +128,7 @@ public class ListShopRequestAdapter extends RecyclerView.Adapter<ListShopRequest
     private void setTypeFace(){
       txt_name.setTypeface(MyViews.getIranSansLightFont(context));
       txt_rating.setTypeface(MyViews.getIranSansLightFont(context));
+      txt_region.setTypeface(MyViews.getIranSansLightFont(context));
       txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));
       btn_price.setTypeface(MyViews.getIranSansLightFont(context));
 

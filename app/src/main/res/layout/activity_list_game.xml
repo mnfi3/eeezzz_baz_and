@@ -17,8 +17,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:padding="2dp">
+        android:padding="2dp"/>
 
-    </android.support.v7.widget.RecyclerView>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avl_center"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorAccent"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avl_bottom"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorAccent"
+        android:layout_gravity="center_horizontal|bottom"
+        android:visibility="invisible"
+        android:layout_marginBottom="16dp"
+        />
+
 
 </android.support.design.widget.CoordinatorLayout>

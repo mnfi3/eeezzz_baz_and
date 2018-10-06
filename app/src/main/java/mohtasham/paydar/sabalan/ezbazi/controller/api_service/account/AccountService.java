@@ -2,6 +2,7 @@ package mohtasham.paydar.sabalan.ezbazi.controller.api_service.account;
 
 import android.content.Context;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -13,7 +14,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 
 public class AccountService {
@@ -34,10 +39,12 @@ public class AccountService {
         try {
           status = response.getInt("status");
           message = response.getString("message");
-          token = response.getJSONObject("data").getString("token");
-          JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
-          user = User.Parser.parse(userObj);
-          user.setToken(token);
+          if(status == 1) {
+            token = response.getJSONObject("data").getString("token");
+            JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
+            user = User.Parser.parse(userObj);
+            user.setToken(token);
+          }
           onLoginComplete.onComplete(status, message, token, user);
 
         } catch (JSONException e) {
@@ -95,7 +102,41 @@ public class AccountService {
 
 
 
+  public void logout(final onLogoutComplete onLogoutComplete){
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.LOGOUT, null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          onLogoutComplete.onComplete(status, message);
 
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onLogoutComplete.onComplete(0, "خطا در ارتباط با سرور");
+      }
+    })
+    {
+      @Override
+      public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("Accept", "application/json");
+        params.put("Authorization", "Bearer " + G.getUserToken());
+        return params;
+      }
+    };
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
 
 
 
@@ -105,6 +146,10 @@ public class AccountService {
 
   public interface onLoginComplete{
     void onComplete(int status, String message, String token, User user);
+  }
+
+  public interface onLogoutComplete{
+    void onComplete(int status, String message);
   }
 
 

@@ -7,7 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class ActivityListShop extends AppCompatActivity {
   ImageView img_back;
   TextView txt_page_name;
 
+  AVLoadingIndicatorView avl_center, avl_bottom;
+  int page_num = 1;
+  Paginate paginate;
+  ListShopAdapter listAdapter;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -48,12 +54,34 @@ public class ActivityListShop extends AppCompatActivity {
       }
     });
 
+
+
+    rcv_list_shops.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override
+      public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
+
+        if (!recyclerView.canScrollVertically(1)) {
+          if (paginate != null) {
+            if (page_num != paginate.getLast_page()) {
+              page_num++;
+              avl_bottom.setVisibility(View.VISIBLE);
+              getShops();
+            }
+          }
+        }
+      }
+    });
+
   }
 
   private void setupViews(){
     rcv_list_shops = (RecyclerView) findViewById(R.id.rcv_list_game);
     img_back = findViewById(R.id.img_back);
     txt_page_name = findViewById(R.id.txt_page_name);
+
+    avl_center = findViewById(R.id.avl_center);
+    avl_bottom = findViewById(R.id.avl_bottom);
   }
 
   private void setTypeFace(){
@@ -63,17 +91,24 @@ public class ActivityListShop extends AppCompatActivity {
 
   private void getShops(){
     apiService = new ShopService(G.context);
-    apiService.getMainShops(1, new ShopService.onShopsReceived() {
+    apiService.getMainShops(page_num, new ShopService.onShopsReceived() {
       @Override
       public void onReceived(int status, String message, List<Game> games, Paginate paginate) {
+        avl_center.setVisibility(View.INVISIBLE);
+        avl_bottom.setVisibility(View.INVISIBLE);
         if(status == 0){
-          Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
+//          Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
         }else {
-          ListShopAdapter listAdapter=new ListShopAdapter(ActivityListShop.this, games);
+          ActivityListShop.this.paginate = paginate;
+          if(page_num == 1) {
+            listAdapter = new ListShopAdapter(ActivityListShop.this, games);
 //          AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
-          SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(listAdapter);
+            SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(listAdapter);
 //          rcv_list_shops.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
-          rcv_list_shops.setAdapter(new ScaleInAnimationAdapter(alphaAdapter));
+            rcv_list_shops.setAdapter(new ScaleInAnimationAdapter(alphaAdapter));
+          }else {
+            listAdapter.notifyData(games);
+          }
 
         }
       }

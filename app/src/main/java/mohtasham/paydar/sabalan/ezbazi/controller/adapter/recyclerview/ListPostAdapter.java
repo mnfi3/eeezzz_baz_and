@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperDate;
 import mohtasham.paydar.sabalan.ezbazi.model.Post;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
@@ -47,7 +48,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
       .into(holder.img_post);
 
     holder.txt_post_title.setText(post.getTitle());
-    holder.txt_post_date.setText(post.getCreated_at());
+    holder.txt_post_date.setText(new HelperDate().timestampToPersianFull(post.getCreated_at()));
 
 
 

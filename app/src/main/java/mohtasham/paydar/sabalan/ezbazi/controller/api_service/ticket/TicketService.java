@@ -1,6 +1,7 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.api_service.ticket;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -33,6 +34,8 @@ public class TicketService {
 
 
   public void getTickets(final onTicketsReceived onTicketsReceived){
+    Volley.newRequestQueue(context).cancelAll("get_tickets");
+    Log.i("getTickets", "getTickets: " + "request");
     final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.TICKET_INDEX, null, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
@@ -79,7 +82,7 @@ public class TicketService {
 
 
     request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
+    Volley.newRequestQueue(context).add(request).setTag("get_tickets");
   }
 
 

@@ -45,7 +45,21 @@
         android:padding="2dp"
         android:textColor="@color/main_text_color"
         android:textSize="@dimen/font_size_large"
-        tools:text="rating : 4"/>
+        tools:text="rating : 4"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/txt_region"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:gravity="left"
+        android:padding="2dp"
+        android:textColor="@color/main_text_color"
+        android:textSize="@dimen/font_size_large"
+        tools:text="Region : all"/>
+
 
     <TextView
         android:id="@+id/txt_release_date"

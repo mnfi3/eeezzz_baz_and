@@ -39,13 +39,14 @@ public class Game {
         game.setGame_info_id(jsonObject.getInt("game_info_id"));
         game.setPrice(jsonObject.getInt("price"));
         game.setIs_pending(jsonObject.getInt("is_pending"));
+        game.setRegion(jsonObject.getString("region"));
 
         //game_info
         game.setName(game_info_obj.getString("name"));
         game.setConsole_type_id(game_info_obj.getInt("console_type_id"));
         game.setAge_class(game_info_obj.getInt("age_class"));
         game.setProduction_date(game_info_obj.getString("production_date"));
-        game.setRegion(game_info_obj.getString("region"));
+//        game.setRegion(game_info_obj.getString("region"));
         game.setCan_play_online(game_info_obj.getInt("can_play_online"));
         game.setCompany_name(game_info_obj.getString("company_name"));
         game.setDescription(game_info_obj.getString("description"));

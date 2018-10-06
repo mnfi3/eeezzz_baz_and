@@ -12,6 +12,8 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperDate;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Comment;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
@@ -39,7 +41,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
 
 
     holder.txt_user_name.setText(comment.getUser().getFirst_name());
-    holder.txt_date.setText(comment.getCreated_at());
+    holder.txt_date.setText(HelperText.toPersianNumber(new HelperDate().timestampToPersian(comment.getCreated_at())));
     holder.expand_text_view.setText(comment.getText());
 
 
@@ -92,7 +94,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
 
     private void setTypeFace(){
       txt_user_name.setTypeface(MyViews.getIranSansBoldFont(context));
-      txt_date.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_date.setTypeface(MyViews.getIranSansUltraLightFont(context));
       expandable_text.setTypeface(MyViews.getIranSansLightFont(context));
     }
 

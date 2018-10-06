@@ -8,6 +8,7 @@ import android.net.wifi.WifiManager;
 import android.provider.Settings.Secure;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -16,21 +17,26 @@ import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.LoginCheckerService;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
+import mohtasham.paydar.sabalan.ezbazi.model.RentType;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 
 
 public class G extends Application {
 
   public static Context context;
-//  public static final String MAIN_URL="http://192.168.10.83/izi-bazi.ud/api";
+
+    public static final String TAG=" G ";
+  public static final String MAIN_URL="http://192.168.10.83/izi-bazi.ud/api";
 //  public static final String MAIN_URL="http://ittiktak.com/ezibazi/public/api";
-  public static final String MAIN_URL="http://192.168.1.3/izi-bazi.ud/api";
+//  public static final String MAIN_URL="http://192.168.1.5/izi-bazi.ud/api";
   public static final String SALT="7c3d596ed03ab9116c547b0eb678b247";
 
   public static final String SALT_COPY="7c3d596ed03ab9116c547b0eb678b247";
@@ -38,6 +44,7 @@ public class G extends Application {
   private static final String AES = "AES";
 
   public static  boolean isLoggedIn;
+  public static List<RentType> rentTypes;
 
 
   @Override
@@ -45,8 +52,26 @@ public class G extends Application {
     super.onCreate();
     context = getApplicationContext();
     initializeLogin();
+    setFakeCity();
+    getRentTypes();
+    Log.i(TAG, "onCreate: " + HelperText.toPersianNumber("12345"));
   }
 
+  private void setFakeCity(){
+    new UserSharedPrefManager(context).saveCityId(329);
+  }
+
+  private static void getRentTypes(){
+    RentService service = new RentService(context);
+    service.getRentTypes(new RentService.onRentTypesReceived() {
+      @Override
+      public void onReceived(int status, String message, List<RentType> rentTypes) {
+        if (status == 1){
+          G.rentTypes = rentTypes;
+        }
+      }
+    });
+  }
 
   public static String getUserToken(){
     User user = getUser();

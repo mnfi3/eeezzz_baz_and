@@ -11,7 +11,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,9 +23,14 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
+import mohtasham.paydar.sabalan.ezbazi.model.RentType;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedPost;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRelatedRents;
@@ -34,6 +38,8 @@ import mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail.FragmentRe
 
 public class ActivityShowRent extends AppCompatActivity {
   private static final String TAG = "ActivityShowRent";
+
+
 
   ImageView img_back;
   TextView txt_page_name;
@@ -44,7 +50,8 @@ public class ActivityShowRent extends AppCompatActivity {
   VideoView vdo_game;
   ImageView img_game;
   RoundedImageView img_game_cover;
-  TextView txt_name, txt_console, txt_genres, txt_release_date, txt_rate, txt_detail_age_class;
+  TextView txt_name, txt_console, txt_genres, txt_show_genres, txt_release_date, txt_rate, txt_detail_age_class;
+  TextView txt_region, txt_show_region;
   RoundedImageView img_detail_console_icon;
   TextView txt_detail_release_date;
   ImageView img_rate_star;
@@ -57,10 +64,18 @@ public class ActivityShowRent extends AppCompatActivity {
   NestedScrollView nested_scroll;
   TextView txt_rent_period;
   Button btn_rent;
-  Button btn_rent_day_count_10, btn_rent_day_count_20, btn_rent_day_count_30;
+  Button btn_rent_day_count_7, btn_rent_day_count_10, btn_rent_day_count_20, btn_rent_day_count_30;
   Button btn_comments;
 
   FragmentTransaction ft;
+
+
+  //for rent type initialize
+  List<RentType> rentTypes = G.rentTypes;
+  final int rent_day_7 = 7, rent_day_10 = 10, rent_day_20 = 20, rent_day_30 = 30;
+  int current_rent_day;
+  int rent_price_percent_7, rent_price_percent_10, rent_price_percent_20, rent_price_percent_30;
+  boolean is_ready_rent_types = false;
 
   @SuppressLint("ClickableViewAccessibility")
   @Override
@@ -68,31 +83,16 @@ public class ActivityShowRent extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_show_rent);
 
+
     setupViews();
     setTypeFace();
+
 
     Bundle extras = getIntent().getExtras();
     prepareGame(extras ,savedInstanceState);
 
 
-    nested_scroll.setOnTouchListener(new View.OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
-        int action = event.getAction();
-        switch (action) {
-          case MotionEvent.ACTION_DOWN:
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            break;
 
-          case MotionEvent.ACTION_UP:
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            break;
-        }
-        // Handle nestedScrollView touch events.
-        v.onTouchEvent(event);
-        return true;
-      }
-    });
 
 
     img_back.setOnClickListener(new View.OnClickListener() {
@@ -103,17 +103,53 @@ public class ActivityShowRent extends AppCompatActivity {
     });
 
 
-
-
     btn_comments.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(ActivityShowRent.this, ActivityComment.class);
         intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
+        intent.putExtra("GAME_NAME", game.getName());
         ActivityShowRent.this.startActivity(intent);
       }
     });
 
+
+
+    btn_rent_day_count_7.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if(is_ready_rent_types){
+          setRentDay(rent_day_7);
+        }
+      }
+    });
+
+    btn_rent_day_count_10.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if(is_ready_rent_types){
+          setRentDay(rent_day_10);
+        }
+      }
+    });
+
+    btn_rent_day_count_20.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if(is_ready_rent_types){
+          setRentDay(rent_day_20);
+        }
+      }
+    });
+
+    btn_rent_day_count_30.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if(is_ready_rent_types){
+          setRentDay(rent_day_30);
+        }
+      }
+    });
 
 
   }
@@ -132,9 +168,12 @@ public class ActivityShowRent extends AppCompatActivity {
     txt_name = (TextView) findViewById(R.id.txt_name);
     txt_console = (TextView) findViewById(R.id.txt_console);
     txt_genres = (TextView) findViewById(R.id.txt_genres);
+    txt_show_genres = (TextView) findViewById(R.id.txt_show_genres);
     txt_release_date = (TextView) findViewById(R.id.txt_release_date);
     txt_rate = (TextView) findViewById(R.id.txt_rate);
     img_rate_star = (ImageView) findViewById(R.id.img_rate_star);
+    txt_region = findViewById(R.id.txt_region);
+    txt_show_region = findViewById(R.id.txt_show_region);
 
     //bottom of detail
     txt_detail_age_class = (TextView) findViewById(R.id.txt_detail_age_class);
@@ -146,6 +185,7 @@ public class ActivityShowRent extends AppCompatActivity {
     nested_scroll = (NestedScrollView) findViewById(R.id.nested_scroll);
     txt_rent_period = (TextView) findViewById(R.id.txt_rent_period);
     btn_rent = findViewById(R.id.btn_rent);
+    btn_rent_day_count_7 = findViewById(R.id.btn_rent_day_count_7);
     btn_rent_day_count_10 = findViewById(R.id.btn_rent_day_count_10);
     btn_rent_day_count_20 = findViewById(R.id.btn_rent_day_count_20);
     btn_rent_day_count_30 = findViewById(R.id.btn_rent_day_count_30);
@@ -153,6 +193,26 @@ public class ActivityShowRent extends AppCompatActivity {
     btn_comments = findViewById(R.id.btn_comments);
 
   }
+
+  private void setTypeFace(){
+    txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    txt_name.setTypeface(MyViews.getIranSansMediumFont(ActivityShowRent.this));
+    txt_rate.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    txt_region.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    txt_show_region.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    txt_show_genres.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    txt_genres.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+
+    txt_rent_period.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    btn_rent.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+    btn_rent_day_count_7.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+    btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+    btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+    btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
+
+    btn_comments.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
+  }
+
 
   private void prepareGame(Bundle extras, Bundle savedInstanceState){
     int id ;
@@ -170,7 +230,8 @@ public class ActivityShowRent extends AppCompatActivity {
           MyViews.makeText(ActivityShowRent.this, message, Toast.LENGTH_SHORT);
         }else {
           ActivityShowRent.this.game = game;
-          fillViews();
+          getRentTypes();
+//          fillViews();
           setRelatedFragments();
         }
       }
@@ -178,41 +239,24 @@ public class ActivityShowRent extends AppCompatActivity {
 
   }
 
-
-  private void setRelatedFragments(){
-    ft = getSupportFragmentManager().beginTransaction();
-//    ft.setCustomAnimations(R.anim.anim_enter_from_left, R.anim.anim_exit_to_right);
-    FragmentRelatedRents relatedRents = new FragmentRelatedRents();
-    Bundle args = new Bundle();
-    args.putInt("game_id", game.getId());
-    relatedRents.setArguments(args);
-
-
-    FragmentRelatedPost relatedPost = new FragmentRelatedPost();
-    Bundle args2 = new Bundle();
-    args2.putInt("game_info_id", game.getGame_info_id());
-    relatedPost.setArguments(args2);
-
-
-    ft.replace(R.id.lyt_related_rents, relatedRents);
-    ft.replace(R.id.lyt_related_posts, relatedPost);
-    ft.commit();
+  private void getRentTypes(){
+    RentService service = new RentService(ActivityShowRent.this);
+    service.getRentTypes(new RentService.onRentTypesReceived() {
+      @Override
+      public void onReceived(int status, String message, List<RentType> rentTypes) {
+        if (status == 1){
+          ActivityShowRent.this.rentTypes = rentTypes;
+          initializeRentPricePercent();
+          fillViews();
+          setRentDay(rent_day_7);
+          is_ready_rent_types = true;
+        }else {
+          MyViews.makeText(ActivityShowRent.this, message, Toast.LENGTH_SHORT);
+        }
+      }
+    });
   }
 
-
-  private void setTypeFace(){
-    txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
-    txt_name.setTypeface(MyViews.getIranSansMediumFont(ActivityShowRent.this));
-    txt_rate.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
-
-    txt_rent_period.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
-    btn_rent.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
-    btn_rent_day_count_10.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
-    btn_rent_day_count_20.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
-    btn_rent_day_count_30.setTypeface(MyViews.getIranSansBoldFont(ActivityShowRent.this));
-
-    btn_comments.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
-  }
 
 
 
@@ -227,7 +271,8 @@ public class ActivityShowRent extends AppCompatActivity {
     }
     txt_genres.setText(genres);
     txt_release_date.setText("تاریخ عرضه: " + game.getProduction_date());
-    txt_rate.setText("rate : 4.6");
+//    txt_rate.setText("rate : 4.6");
+    txt_region.setText(game.getRegion());
 
     String cover_image = "";
     for (int i=0 ; i<game.getPhotos().size() ; i++){
@@ -255,6 +300,8 @@ public class ActivityShowRent extends AppCompatActivity {
 //        }
       }
     }
+
+
 
 
     //game detail
@@ -293,5 +340,84 @@ public class ActivityShowRent extends AppCompatActivity {
         vdo_game.start();
       }
     });
+  }
+
+  private void setRelatedFragments(){
+    ft = getSupportFragmentManager().beginTransaction();
+//    ft.setCustomAnimations(R.anim.anim_enter_from_left, R.anim.anim_exit_to_right);
+    FragmentRelatedRents relatedRents = new FragmentRelatedRents();
+    Bundle args = new Bundle();
+    args.putInt("game_id", game.getId());
+    relatedRents.setArguments(args);
+
+
+    FragmentRelatedPost relatedPost = new FragmentRelatedPost();
+    Bundle args2 = new Bundle();
+    args2.putInt("game_info_id", game.getGame_info_id());
+    relatedPost.setArguments(args2);
+
+
+    ft.replace(R.id.lyt_related_rents, relatedRents);
+    ft.replace(R.id.lyt_related_posts, relatedPost);
+    ft.commit();
+  }
+
+
+  private void setRentDay(int day){
+    current_rent_day = day;
+
+    resetChoose();
+    switch (day){
+      case rent_day_7 :
+        btn_rent_day_count_7.setBackgroundResource(R.drawable.back_rent_day_count_ch);
+        btn_rent.setText(" اجاره با قیمت " + HelperText.split_price(game.getPrice() * rent_price_percent_7 / 100) + " تومان ");
+        break;
+
+      case rent_day_10 :
+        btn_rent_day_count_10.setBackgroundResource(R.drawable.back_rent_day_count_ch);
+        btn_rent.setText(" اجاره با قیمت " + HelperText.split_price(game.getPrice() * rent_price_percent_10 / 100) + " تومان ");
+        break;
+
+      case rent_day_20 :
+        btn_rent_day_count_20.setBackgroundResource(R.drawable.back_rent_day_count_ch);
+        btn_rent.setText(" اجاره با قیمت " + HelperText.split_price(game.getPrice() * rent_price_percent_20 / 100) + " تومان ");
+        break;
+
+      case rent_day_30 :
+        btn_rent_day_count_30.setBackgroundResource(R.drawable.back_rent_day_count_ch);
+        btn_rent.setText(" اجاره با قیمت " + HelperText.split_price(game.getPrice() * rent_price_percent_30 / 100) + " تومان ");
+        break;
+
+    }
+  }
+
+  private void resetChoose(){
+    btn_rent_day_count_7.setBackgroundResource(R.drawable.back_rent_day_count);
+    btn_rent_day_count_10.setBackgroundResource(R.drawable.back_rent_day_count);
+    btn_rent_day_count_20.setBackgroundResource(R.drawable.back_rent_day_count);
+    btn_rent_day_count_30.setBackgroundResource(R.drawable.back_rent_day_count);
+  }
+
+
+  private void initializeRentPricePercent(){
+    for (int i=0;i<rentTypes.size();i++){
+      switch (rentTypes.get(i).getDay_count()){
+        case 7 :
+          rent_price_percent_7 = rentTypes.get(i).getPrice_percent();
+          break;
+
+        case 10:
+          rent_price_percent_10 = rentTypes.get(i).getPrice_percent();
+          break;
+
+        case 20:
+          rent_price_percent_20 = rentTypes.get(i).getPrice_percent();
+          break;
+
+        case 30:
+          rent_price_percent_30 = rentTypes.get(i).getPrice_percent();
+          break;
+      }
+    }
   }
 }

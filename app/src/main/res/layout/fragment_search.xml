@@ -94,7 +94,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.3"
             android:layout_height="wrap_content"
-            android:text="پست ها"
+            android:text="اخبار"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/font_size_very_small"
             android:layout_margin="10dp"

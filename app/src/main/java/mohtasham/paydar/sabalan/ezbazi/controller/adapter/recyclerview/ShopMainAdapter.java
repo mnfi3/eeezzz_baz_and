@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -41,6 +42,7 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
     final Game game = games.get(position);
+    final int id = game.getId();
     ArrayList<Photo> photos = game.getPhotos();
       Picasso.with(context).
         load(photos.get(0).getUrl())
@@ -62,7 +64,7 @@ public class ShopMainAdapter extends RecyclerView.Adapter<ShopMainAdapter.ListVi
       public void onClick(View v) {
         Intent intent = new Intent(context, ActivityShowShop.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("ID", game.getId());
+        intent.putExtra("ID", id);
         context.startActivity(intent);
       }
     });

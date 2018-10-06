@@ -17,9 +17,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.RentMainAdapter;
+import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.RelatedShopAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.adapters.AlphaInAnimationAdapter;
@@ -50,7 +49,7 @@ public class FragmentRelatedShops extends Fragment {
     setTypeFace();
     lyt_related_shops.setVisibility(View.GONE);
 
-    rcv_related_shops.setLayoutManager((new LinearLayoutManager(G.context,LinearLayoutManager.HORIZONTAL,true)));
+    rcv_related_shops.setLayoutManager((new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,true)));
 
     game_id = getArguments().getInt("game_id");
     getRelatedRents();
@@ -83,7 +82,7 @@ public class FragmentRelatedShops extends Fragment {
           MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
         } else {
           if(games.size() > 0) {
-            RentMainAdapter listAdapter = new RentMainAdapter(getActivity(), games);
+            RelatedShopAdapter listAdapter = new RelatedShopAdapter(getActivity(), games);
             AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
             rcv_related_shops.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
             setAnimation();
@@ -95,7 +94,7 @@ public class FragmentRelatedShops extends Fragment {
   }
 
   private void setAnimation(){
-    Animation anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_right);
+    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.anim_enter_from_right);
     lyt_related_shops.setAnimation(anim);
     anim.start();
   }
