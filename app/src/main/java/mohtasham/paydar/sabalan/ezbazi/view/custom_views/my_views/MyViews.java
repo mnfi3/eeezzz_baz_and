@@ -66,4 +66,12 @@ public class MyViews extends AppCompatActivity {
   public static Typeface getIranSansUltraLightFont(Context context){
     return Typeface.createFromAsset(context.getAssets(), "fonts/IRAN_Sans_UltraLight.ttf");
   }
+
+
+
+  public static Typeface getBlackthornsFont(Context context){
+    return Typeface.createFromAsset(context.getAssets(), "fonts/blackthorns_regular.ttf");
+  }
+
+  //blackthorns_regular
 }

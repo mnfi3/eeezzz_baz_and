@@ -239,8 +239,14 @@ public class ActivityShowShop extends AppCompatActivity {
       }
     }
 
+    if(game.getCount() > 0) {
+      btn_shop.setText(" خرید با قیمت " + HelperText.split_price(game.getPrice()) + " تومان ");
+    }else {
+      btn_shop.setBackgroundResource(R.drawable.back_list_game_price_finished);
+      btn_shop.setText("ناموجود");
+    }
 
-    btn_shop.setText(" خرید با قیمت " + HelperText.split_price(game.getPrice()) + " تومان ");
+
     expand_text_view.setText(game.getDescription());
   }
 

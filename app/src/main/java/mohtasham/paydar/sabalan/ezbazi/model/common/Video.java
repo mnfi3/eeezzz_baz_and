@@ -7,6 +7,7 @@ import org.json.JSONObject;
 public class Video {
   private int id;
   private String url;
+  private String type;
 
   public static class Parser{
     public static Video parse(JSONObject jsonObject){
@@ -14,6 +15,7 @@ public class Video {
       try {
         video.setId(jsonObject.getInt("id"));
         video.setUrl(jsonObject.getString("url"));
+        video.setType(jsonObject.getString("type"));
       } catch (JSONException e) {
         e.printStackTrace();
       }
@@ -21,6 +23,13 @@ public class Video {
     }
   }
 
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
 
   public int getId() {
     return id;

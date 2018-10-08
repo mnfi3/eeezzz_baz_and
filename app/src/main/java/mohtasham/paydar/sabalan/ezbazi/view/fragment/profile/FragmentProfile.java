@@ -17,6 +17,7 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.AccountService;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.UserDetailService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.Finance;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
@@ -33,7 +34,12 @@ public class FragmentProfile extends Fragment {
   LinearLayout lyt_logout;
   LinearLayout lyt_ticket;
   TextView txt_user_name;
-  TextView txt_user_balance;
+  TextView txt_user_balance, txt_show_user_balance;
+  Button btn_charge_account;
+  TextView txt_ticket;
+  TextView txt_logout;
+  TextView txt_show_admin_accounts;
+  TextView txt_rules;
 
   View view;
 
@@ -118,12 +124,24 @@ public class FragmentProfile extends Fragment {
     lyt_ticket = view.findViewById(R.id.lyt_ticket);
     txt_user_name = view.findViewById(R.id.txt_user_name);
     txt_user_balance = view.findViewById(R.id.txt_user_balance);
+    txt_show_user_balance = view.findViewById(R.id.txt_show_user_balance);
+    btn_charge_account = view.findViewById(R.id.btn_charge_account);
+    txt_ticket = view.findViewById(R.id.txt_ticket);
+    txt_logout = view.findViewById(R.id.txt_logout);
+    txt_show_admin_accounts = view.findViewById(R.id.txt_show_admin_accounts);
+    txt_rules = view.findViewById(R.id.txt_rules);
   }
 
   private void setTypeFace() {
     btn_login.setTypeface(MyViews.getIranSansLightFont(getContext()));
     txt_user_name.setTypeface(MyViews.getIranSansMediumFont(getContext()));
     txt_user_balance.setTypeface(MyViews.getIranSansLightFont(getContext()));
+    txt_show_user_balance.setTypeface(MyViews.getIranSansLightFont(getContext()));
+    btn_charge_account.setTypeface(MyViews.getIranSansLightFont(getContext()));
+    txt_ticket.setTypeface(MyViews.getIranSansLightFont(getContext()));
+    txt_logout.setTypeface(MyViews.getIranSansLightFont(getContext()));
+    txt_show_admin_accounts.setTypeface(MyViews.getIranSansLightFont(getContext()));
+    txt_rules.setTypeface(MyViews.getIranSansLightFont(getContext()));
   }
 
   private void logoutUser(){
@@ -147,10 +165,11 @@ public class FragmentProfile extends Fragment {
   private void getUserFinance(){
     UserDetailService service = new UserDetailService(getContext());
     service.getUserFinance(new UserDetailService.onFinanceReceivedComplete() {
+      @SuppressLint("SetTextI18n")
       @Override
       public void onComplete(int status, String message, Finance finance) {
         if(status == 1){
-          txt_user_balance.setText(Integer.toString(finance.getUser_balance()) + "  تومان  ");
+          txt_user_balance.setText(HelperText.split_price(finance.getUser_balance()) + "  تومان  ");
         }
       }
     });

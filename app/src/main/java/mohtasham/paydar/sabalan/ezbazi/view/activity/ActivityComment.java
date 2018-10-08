@@ -116,6 +116,8 @@ public class ActivityComment extends AppCompatActivity {
         }
       }
     });
+
+
   }
 
   private void setupViews(){

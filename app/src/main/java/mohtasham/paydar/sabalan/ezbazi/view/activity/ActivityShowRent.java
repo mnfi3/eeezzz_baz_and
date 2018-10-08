@@ -363,10 +363,17 @@ public class ActivityShowRent extends AppCompatActivity {
   }
 
 
+  @SuppressLint("SetTextI18n")
   private void setRentDay(int day){
-    current_rent_day = day;
-
     resetChoose();
+
+    if(game.getCount() == 0){
+      btn_rent.setBackgroundResource(R.drawable.back_list_game_price_finished);
+      btn_rent.setText("ناموجود");
+      return;
+    }
+
+    current_rent_day = day;
     switch (day){
       case rent_day_7 :
         btn_rent_day_count_7.setBackgroundResource(R.drawable.back_rent_day_count_ch);

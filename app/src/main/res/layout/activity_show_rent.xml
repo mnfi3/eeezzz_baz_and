@@ -109,7 +109,7 @@
                    android:layout_width="0dp"
                    android:layout_weight="0.25"
                    android:layout_height="match_parent"
-                   android:background="@drawable/back_rent_day_count_ch"
+                   android:background="@drawable/back_rent_day_count"
                    android:text="7"
                    android:layout_marginRight="5dp"
                    android:layout_marginLeft="5dp"

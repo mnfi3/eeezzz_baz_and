@@ -19,6 +19,7 @@ public class Game {
   private int age_class;
   private String production_date;
   private String region;
+  private int count;
   private int can_play_online;
   private String company_name;
   private String description;
@@ -40,6 +41,7 @@ public class Game {
         game.setPrice(jsonObject.getInt("price"));
         game.setIs_pending(jsonObject.getInt("is_pending"));
         game.setRegion(jsonObject.getString("region"));
+        game.setCount(jsonObject.getInt("count"));
 
         //game_info
         game.setName(game_info_obj.getString("name"));
@@ -228,6 +230,16 @@ public class Game {
   public void setGenres(ArrayList<String> genres) {
     this.genres = genres;
   }
+
+
+  public int getCount() {
+    return count;
+  }
+
+  public void setCount(int count) {
+    this.count = count;
+  }
+
 
 
 }

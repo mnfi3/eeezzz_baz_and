@@ -96,7 +96,7 @@
                             android:id="@+id/txt_user_balance"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="50000 تومان"
+                            tools:text="50000 تومان"
                             android:textColor="@color/main_text_color"
                             android:background="@drawable/back_profile_gray_field"
                             android:paddingRight="10dp"
@@ -109,6 +109,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/txt_show_user_balance"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
@@ -133,13 +134,14 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:orientation="horizontal"
                         android:padding="2dp"
                         android:gravity="center"
                         >
 
                         <Button
+                            android:id="@+id/btn_charge_account"
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:text="شارژ حساب کاربری"
@@ -175,6 +177,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_ticket"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="تماس با پشتیبانی"
@@ -207,6 +210,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_logout"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:padding="2dp"
@@ -246,6 +250,7 @@
 
 
                 <TextView
+                    android:id="@+id/txt_show_admin_accounts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ما را در شبکه های مجازی دنبال کنید"
@@ -295,6 +300,7 @@
                     android:paddingRight="10dp"
                     android:layout_marginTop="20dp">
                     <TextView
+                        android:id="@+id/txt_rules"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="right"

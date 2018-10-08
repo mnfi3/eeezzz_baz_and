@@ -131,7 +131,8 @@ public class ListRentRequestAdapter extends RecyclerView.Adapter<ListRentRequest
     }
 
     private void setTypeFace(){
-      txt_name.setTypeface(MyViews.getIranSansLightFont(context));
+//      txt_name.setTypeface(MyViews.getIranSansLightFont(context));
+      txt_name.setTypeface(MyViews.getBlackthornsFont(context));
       txt_rating.setTypeface(MyViews.getIranSansLightFont(context));
       txt_region.setTypeface(MyViews.getIranSansLightFont(context));
       txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));

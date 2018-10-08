@@ -7,6 +7,7 @@ public class Photo {
 
   private int id;
   private String url;
+  private String type;
   private int width;
   private int height;
 
@@ -16,6 +17,7 @@ public class Photo {
       try {
         photo.setId(jsonObject.getInt("id"));
         photo.setUrl(jsonObject.getString("url"));
+        photo.setType(jsonObject.getString("type"));
         photo.setWidth(jsonObject.getInt("width"));
         photo.setHeight(jsonObject.getInt("height"));
 
@@ -24,6 +26,14 @@ public class Photo {
       }
       return photo;
     }
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   public int getId() {

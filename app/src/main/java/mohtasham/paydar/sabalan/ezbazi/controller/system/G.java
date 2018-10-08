@@ -36,7 +36,7 @@ public class G extends Application {
     public static final String TAG=" G ";
   public static final String MAIN_URL="http://192.168.10.83/izi-bazi.ud/api";
 //  public static final String MAIN_URL="http://ittiktak.com/ezibazi/public/api";
-//  public static final String MAIN_URL="http://192.168.1.5/izi-bazi.ud/api";
+//  public static final String MAIN_URL="http://192.168.1.6/izi-bazi.ud/api";
   public static final String SALT="7c3d596ed03ab9116c547b0eb678b247";
 
   public static final String SALT_COPY="7c3d596ed03ab9116c547b0eb678b247";
@@ -54,7 +54,6 @@ public class G extends Application {
     initializeLogin();
     setFakeCity();
     getRentTypes();
-    Log.i(TAG, "onCreate: " + HelperText.toPersianNumber("12345"));
   }
 
   private void setFakeCity(){

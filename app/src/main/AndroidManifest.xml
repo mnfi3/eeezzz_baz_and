@@ -42,12 +42,10 @@
         </activity>
         <activity
             android:name=".view.activity.ActivityShowRent"
-            android:launchMode="singleTop"
             android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".view.activity.ActivityShowShop"
-            android:launchMode="singleTop"
             android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity android:name=".view.activity.ActivityListShop">

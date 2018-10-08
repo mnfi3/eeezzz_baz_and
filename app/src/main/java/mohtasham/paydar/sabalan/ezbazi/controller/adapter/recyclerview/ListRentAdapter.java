@@ -1,5 +1,6 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -44,6 +45,7 @@ public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListVi
     return new ListViewHolder(view);
   }
 
+  @SuppressLint("SetTextI18n")
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
     final Game game = games.get(position);
@@ -66,8 +68,19 @@ public class ListRentAdapter extends RecyclerView.Adapter<ListRentAdapter.ListVi
     int sevenDayPricePercent = 1;
     for (int i=0;i<rentTypes.size();i++){
       if(rentTypes.get(i).getDay_count() == 7){
-        sevenDayPricePercent = rentTypes.get(i).getPrice_percent(); } }int cost = ((game.getPrice() * (sevenDayPricePercent)) / 100);
-    holder.btn_price.setText(HelperText.split_price(cost) + " تومان ");
+        sevenDayPricePercent = rentTypes.get(i).getPrice_percent();
+      }
+    }
+    int cost = ((game.getPrice() * (sevenDayPricePercent)) / 100);
+
+
+    if(game.getCount() == 0) {
+      holder.btn_price.setBackgroundResource(R.drawable.back_list_game_price_finished);
+      holder.btn_price.setText("ناموجود");
+    }else{
+      holder.btn_price.setBackgroundResource(R.drawable.back_list_game_price);
+      holder.btn_price.setText(HelperText.split_price(cost) + " تومان ");
+    }
 
 
 

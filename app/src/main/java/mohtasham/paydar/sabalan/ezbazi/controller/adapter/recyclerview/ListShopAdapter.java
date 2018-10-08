@@ -1,5 +1,6 @@
 package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +41,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
     return new ListViewHolder(view);
   }
 
+  @SuppressLint("SetTextI18n")
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
     final Game game = games.get(position);
@@ -58,7 +60,14 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
 //      holder.txt_rating.setText("rate : 4.8");
       holder.txt_region.setText(" Region : " + game.getRegion());
 
+
+    if(game.getCount() == 0) {
+      holder.btn_price.setBackgroundResource(R.drawable.back_list_game_price_finished);
+      holder.btn_price.setText("ناموجود");
+    }else {
+      holder.btn_price.setBackgroundResource(R.drawable.back_list_game_price);
       holder.btn_price.setText(HelperText.split_price(game.getPrice()) + " تومان ");
+    }
 
 
 
