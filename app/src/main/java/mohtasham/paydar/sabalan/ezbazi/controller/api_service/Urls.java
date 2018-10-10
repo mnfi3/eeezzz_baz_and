@@ -49,6 +49,7 @@ public class Urls {
   //tickets
   public static final String TICKET_INDEX = G.MAIN_URL + "/ticket";
   public static final String TICKET_SEEN = G.MAIN_URL + "/ticket-user-seen";
+  public static final String NEW_TICKETS_COUNT = G.MAIN_URL + "/new-tickets-count";
 
   //user finance
   public static final String USER_FINANCE = G.MAIN_URL + "/user-finance";

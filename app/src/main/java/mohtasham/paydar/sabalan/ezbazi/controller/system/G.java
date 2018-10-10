@@ -258,10 +258,10 @@ public class G extends Application {
       @Override
       public void onCheck(User user, boolean isLoggedIn) {
         G.isLoggedIn = isLoggedIn;
-//        if(isLoggedIn){
-//          UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
-//          prefManager.saveUser(user);
-//        }
+        if(isLoggedIn){
+          UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
+          prefManager.saveUserFullName(user.getFull_name());
+        }
       }
     });
   }
@@ -272,8 +272,8 @@ public class G extends Application {
     LoginCheckerService service = new LoginCheckerService(context);
     service.check(user, new LoginCheckerService.onLoginCheckComplete() {
       @Override
-      public void onComplete(boolean isLoggedIn, String user_name) {
-        user.setUser_name(user_name);
+      public void onComplete(boolean isLoggedIn, String full_name) {
+        user.setFull_name(full_name);
         onLoginCheck.onCheck(user, isLoggedIn);
         G.isLoggedIn = isLoggedIn;
       }
@@ -284,8 +284,8 @@ public class G extends Application {
   public static User getUser(){
     UserSharedPrefManager prefManager = new UserSharedPrefManager(context);
     User user = prefManager.getUser();
-    if(user.getUser_name() == null || user.getToken() == null){
-      user.setUser_name("");
+    if(user.getFull_name() == null || user.getToken() == null){
+      user.setFull_name("");
       user.setToken("");
     }
     return user;

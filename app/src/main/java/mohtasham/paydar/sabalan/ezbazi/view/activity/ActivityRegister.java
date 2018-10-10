@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wang.avi.AVLoadingIndicatorView;
@@ -28,7 +28,8 @@ import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 public class ActivityRegister extends AppCompatActivity {
 
   ImageView img_back;
-  EditText edt_first_name, edt_last_name, edt_user_name, edt_mobile_number, edt_email, edt_password, edt_re_password;
+  EditText edt_full_name, edt_email, edt_password, edt_re_password;
+  TextView txt_show_pass;
   Button btn_register;
   AccountService service;
   CheckBox chk_show_pass;
@@ -70,19 +71,13 @@ public class ActivityRegister extends AppCompatActivity {
       public void onClick(View view) {
         if (!checkEntry()) return;
         avl_register.setVisibility(View.VISIBLE);
-        String first_name = edt_first_name.getText().toString();
-        String last_name = edt_last_name.getText().toString();
-        String mobile_number = edt_mobile_number.getText().toString();
-        String user_name = edt_user_name.getText().toString();
+        String full_name = edt_full_name.getText().toString();
         String email = edt_email.getText().toString();
         final String password = edt_password.getText().toString();
 
         JSONObject object = new JSONObject();
         try {
-          object.put("first_name", first_name);
-          object.put("last_name", last_name);
-          object.put("mobile_number", mobile_number);
-          object.put("user_name", user_name);
+          object.put("full_name", full_name);
           object.put("email", email);
           object.put("password", password);
         } catch (JSONException e) {
@@ -113,49 +108,39 @@ public class ActivityRegister extends AppCompatActivity {
   }
 
   private void setupViews(){
-    img_back = (ImageView) findViewById(R.id.img_back);
-    edt_first_name = (EditText) findViewById(R.id.edt_first_name);
-    edt_last_name = (EditText) findViewById(R.id.edt_last_name);
-    edt_user_name = (EditText) findViewById(R.id.edt_user_name);
-    edt_mobile_number = (EditText) findViewById(R.id.edt_mobile_number);
-    edt_email = (EditText) findViewById(R.id.edt_email);
-    edt_password = (EditText) findViewById(R.id.edt_password);
-    edt_re_password = (EditText) findViewById(R.id.edt_re_password);
-    btn_register = (Button) findViewById(R.id.btn_register);
-    chk_show_pass = (CheckBox) findViewById(R.id.chk_show_pass);
-    avl_register = (AVLoadingIndicatorView) findViewById(R.id.avl_register);
+    img_back = findViewById(R.id.img_back);
+    edt_full_name = findViewById(R.id.edt_full_name);
+    edt_email = findViewById(R.id.edt_email);
+    edt_password = findViewById(R.id.edt_password);
+    edt_re_password = findViewById(R.id.edt_re_password);
+    txt_show_pass = findViewById(R.id.txt_show_pass);
+    btn_register = findViewById(R.id.btn_register);
+    chk_show_pass = findViewById(R.id.chk_show_pass);
+    avl_register = findViewById(R.id.avl_register);
+  }
+
+  private void setTypeFace(){
+    edt_full_name.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
+    edt_email.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
+    edt_password.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
+    edt_re_password.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
+    txt_show_pass.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
+    btn_register.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
   }
 
 
   private boolean checkEntry(){
     if(
-      edt_first_name.getText().toString().length()<2 ||
-      edt_last_name.getText().toString().length()<2 ||
+      edt_full_name.getText().toString().length()<1 ||
       edt_email.getText().toString().length()<1 ||
-      edt_mobile_number.getText().toString().length()<1 ||
-      edt_user_name.getText().toString().length()<1 ||
       edt_password.getText().toString().length()<1 ||
       edt_re_password.getText().toString().length()<1
       ){
       MyViews.makeText(ActivityRegister.this,"لطفا اطلاعات خود را کامل وارد کنید", Toast.LENGTH_SHORT);
       return false;
     }
-
-
-
-//    else if( edt_mobile_number.getText().toString().length() != 10){
-//      MyViews.makeText(ActivityRegister.this,"شماره موبایل وارد شده اشتباه می باشد",Toast.LENGTH_SHORT);
-//      return false;
-//    }
-
-    else if(!validUserName(edt_user_name.getText().toString())){
-      MyViews.makeText(ActivityRegister.this,"نام کاربری باید متشکل از حروف انگلیسی و اعداد بوده و حداقل 5 کاراکتر داشته باشد",Toast.LENGTH_SHORT);
-      return false;
-    }
-
-
-    else if(!validMobile(edt_mobile_number.getText().toString())){
-      MyViews.makeText(ActivityRegister.this,"شماره موبایل وارد شده صحیح نمی باشد",Toast.LENGTH_SHORT);
+    else if( edt_full_name.getText().toString().length() < 6){
+      MyViews.makeText(ActivityRegister.this,"لطفا نام و نام خانوادگی خود را با دقت وارد کنید",Toast.LENGTH_SHORT);
       return false;
     }
     else if( edt_password.getText().toString().length() < 6){
@@ -193,24 +178,6 @@ public class ActivityRegister extends AppCompatActivity {
   }
 
 
-  private boolean validUserName(String user_name){
-    if (user_name.length() < 5) return false;
-
-//    for (int i=0 ; i<user_name.length() ; i++){
-//      if (
-//          user_name.charAt(i) < '0' &&
-//          user_name.charAt(i) > '9' &&
-//          user_name.charAt(i) < 'a' &&
-//          user_name.charAt(i) > 'z' &&
-//          user_name.charAt(i) < 'A' &&
-//          user_name.charAt(i) > 'Z'
-//        ){
-//        return false;
-//      }
-//    }
-
-    return true;
-  }
 
 
 

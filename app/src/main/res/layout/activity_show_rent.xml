@@ -229,14 +229,14 @@
                    <com.makeramen.roundedimageview.RoundedImageView
                        android:id="@+id/img_detail_console_icon"
                        android:layout_width="48dp"
-                       android:layout_height="match_parent"
+                       android:layout_height="48dp"
                        android:layout_marginRight="5dp"
                        android:layout_marginLeft="5dp"
                        android:background="@drawable/back_game_detail_circle"
                        android:gravity="center"
                        tools:src="@drawable/ic_xbox"
                        app:riv_corner_radius="48dp"
-                       android:padding="10dp"
+                       android:padding="12dp"
                        />
 
                    <TextView

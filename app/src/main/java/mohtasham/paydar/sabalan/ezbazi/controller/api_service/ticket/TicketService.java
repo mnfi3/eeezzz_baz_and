@@ -22,7 +22,6 @@ import java.util.Map;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
-import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 import mohtasham.paydar.sabalan.ezbazi.model.Ticket;
 
@@ -83,6 +82,47 @@ public class TicketService {
 
     request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     Volley.newRequestQueue(context).add(request).setTag("get_tickets");
+  }
+
+
+
+  public void getNewTicketsCount(final onNewTicketsCount onNewTicketsCount){
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.NEW_TICKETS_COUNT, null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        int count = 0;
+        List<Ticket> tickets = new ArrayList<Ticket>();
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          count = response.getInt("data");
+          onNewTicketsCount.onReceived(status, message, count);
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onNewTicketsCount.onReceived(0, "خطا در ارتباط با سرور", 0);
+      }
+    }){
+      @Override
+      public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("Accept", "application/json");
+        params.put("Authorization", "Bearer " + G.getUserToken());
+        return params;
+      }
+    };
+
+
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request).setTag("get_new_tickets_count");
   }
 
 
@@ -179,6 +219,10 @@ public class TicketService {
 
   public interface onSendTicket{
     void onReceived(int status, String message, Ticket ticket);
+  }
+
+  public interface onNewTicketsCount{
+    void onReceived(int status, String message, int count);
   }
 
 }

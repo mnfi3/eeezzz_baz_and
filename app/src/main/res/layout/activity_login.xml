@@ -31,20 +31,20 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp">
+                android:layout_marginTop="20dp">
 
                 <EditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16sp"
-                    android:layout_marginLeft="16sp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginBottom="30sp"
                     android:hint="ایمیل"
                     android:textColorHint="@color/main_text_color"
                     android:textColor="@color/main_text_color"
                     android:drawableRight="@drawable/ic_email"
-                    android:drawablePadding="16sp"
+                    android:drawablePadding="16dp"
                     android:textSize="@dimen/font_size_medium"
                     />
 
@@ -59,12 +59,12 @@
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16sp"
+                    android:layout_margin="16dp"
                     android:hint="کلمه عبور"
                     android:textColor="@color/main_text_color"
                     android:textColorHint="@color/main_text_color"
                     android:drawableRight="@drawable/ic_lock"
-                    android:drawablePadding="16sp"
+                    android:drawablePadding="16dp"
                     android:inputType="textPassword"
                     android:textSize="@dimen/font_size_medium"
                     />
@@ -82,6 +82,7 @@
                 android:layout_marginTop="8sp">
 
                 <TextView
+                    android:id="@+id/txt_show_pass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="نمایش کلمه عبور"
@@ -107,7 +108,7 @@
                 android:layout_height="40dp"
                 android:text="ورود"
                 android:layout_marginTop="20sp"
-                android:background="@drawable/back_button_game_comment"
+                android:background="@drawable/back_button_login"
                 android:textColor="@color/main_text_color"
                 />
 

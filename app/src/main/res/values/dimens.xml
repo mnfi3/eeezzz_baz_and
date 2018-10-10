@@ -26,6 +26,7 @@
     <dimen name="font_size_medium">15dp</dimen>
     <dimen name="font_size_large">16dp</dimen>
     <dimen name="font_size_very_large">20dp</dimen>
+    <dimen name="font_size_ticket_message_size">13.5dp</dimen>
 
     <!--item list games-->
     <dimen name="item_list_game_shop_height">140dp</dimen>

@@ -31,17 +31,17 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp">
+                android:layout_marginTop="40dp">
 
                 <EditText
-                    android:id="@+id/edt_first_name"
+                    android:id="@+id/edt_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30sp"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:drawablePadding="16sp"
-                    android:hint="نام"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:drawablePadding="16dp"
+                    android:hint="نام و نام خانوادگی"
                     android:inputType=""
                     android:textColor="@color/main_text_color"
                     android:textColorHint="@color/main_text_color"
@@ -50,87 +50,94 @@
 
             </android.support.design.widget.TextInputLayout>
 
+
+
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="300dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20sp">-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/edt_last_name"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="30sp"-->
+                    <!--android:layout_marginLeft="16sp"-->
+                    <!--android:layout_marginRight="16sp"-->
+                    <!--android:drawablePadding="16sp"-->
+                    <!--android:hint="نام خانوادگی"-->
+                    <!--android:inputType=""-->
+                    <!--android:textColor="@color/main_text_color"-->
+                    <!--android:textColorHint="@color/main_text_color"-->
+                    <!--android:textSize="@dimen/font_size_medium"-->
+                    <!--/>-->
+
+
+            <!--</android.support.design.widget.TextInputLayout>-->
+
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="300dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20sp">-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/edt_mobile_number"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="30sp"-->
+                    <!--android:layout_marginLeft="16sp"-->
+                    <!--android:layout_marginRight="16sp"-->
+                    <!--android:drawablePadding="16sp"-->
+                    <!--android:hint="شماره موبایل"-->
+                    <!--android:inputType="phone"-->
+                    <!--android:textColor="@color/main_text_color"-->
+                    <!--android:textColorHint="@color/main_text_color"-->
+                    <!--android:textSize="@dimen/font_size_medium"-->
+                    <!--/>-->
+
+
+            <!--</android.support.design.widget.TextInputLayout>-->
+
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="300dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20sp">-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/edt_user_name"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="30sp"-->
+                    <!--android:layout_marginLeft="16sp"-->
+                    <!--android:layout_marginRight="16sp"-->
+                    <!--android:drawablePadding="16sp"-->
+                    <!--android:hint="نام کاربری"-->
+                    <!--android:inputType=""-->
+                    <!--android:textColor="@color/main_text_color"-->
+                    <!--android:textColorHint="@color/main_text_color"-->
+                    <!--android:textSize="@dimen/font_size_medium"/>-->
+
+
+            <!--</android.support.design.widget.TextInputLayout>-->
+            <!---->
+
+
+
+
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp">
-
-                <EditText
-                    android:id="@+id/edt_last_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="30sp"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:drawablePadding="16sp"
-                    android:hint="نام خانوادگی"
-                    android:inputType=""
-                    android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"
-                    android:textSize="@dimen/font_size_medium"
-                    />
-
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp">
-
-                <EditText
-                    android:id="@+id/edt_mobile_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="30sp"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:drawablePadding="16sp"
-                    android:hint="شماره موبایل"
-                    android:inputType="phone"
-                    android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"
-                    android:textSize="@dimen/font_size_medium"
-                    />
-
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp">
-
-                <EditText
-                    android:id="@+id/edt_user_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="30sp"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:drawablePadding="16sp"
-                    android:hint="نام کاربری"
-                    android:inputType=""
-                    android:textColor="@color/main_text_color"
-                    android:textColorHint="@color/main_text_color"
-                    android:textSize="@dimen/font_size_medium"/>
-
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp">
+                >
 
                 <EditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30sp"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:drawablePadding="16sp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:drawablePadding="16dp"
                     android:hint="ایمیل"
                     android:inputType=""
                     android:textColor="@color/main_text_color"
@@ -142,14 +149,15 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <EditText
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16sp"
-                    android:drawablePadding="16sp"
+                    android:layout_margin="16dp"
+                    android:drawablePadding="16dp"
                     android:hint="کلمه عبور"
                     android:inputType="textPassword"
                     android:textColor="@color/main_text_color"
@@ -167,8 +175,8 @@
                     android:id="@+id/edt_re_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16sp"
-                    android:drawablePadding="16sp"
+                    android:layout_margin="16dp"
+                    android:drawablePadding="16dp"
                     android:hint="تکرار کلمه عبور"
                     android:inputType="textPassword"
                     android:textColor="@color/main_text_color"
@@ -188,6 +196,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/txt_show_pass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10sp"
@@ -210,7 +219,7 @@
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20sp"
-                android:background="@drawable/back_buttons"
+                android:background="@drawable/back_button_login"
                 android:text="ثبت نام"
                 android:textColor="@color/main_text_color"
                 />

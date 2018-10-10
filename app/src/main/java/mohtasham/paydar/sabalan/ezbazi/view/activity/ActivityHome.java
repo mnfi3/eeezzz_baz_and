@@ -38,12 +38,7 @@ public class ActivityHome extends AppCompatActivity {
 
       //Log.i(TAG, "onCreate: user_token = " + new UserSharedPrefManager(this).getUser().getToken());
 
-      G.loginCheck(new G.onLoginCheck() {
-        @Override
-        public void onCheck(User user, boolean isLoggedIn) {
-          Log.i(TAG, "onCheck: user_name = " + user.getUser_name() + "is_logged_in = " + isLoggedIn);
-        }
-      });
+
 
       setupViews();
 

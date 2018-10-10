@@ -34,6 +34,8 @@ public class ActivityLogin extends AppCompatActivity {
 
   TextView txt_register;
   TextView txt_page_name;
+  TextView txt_show_pass;
+  TextView txt_forget_password;
   ImageView img_back;
   EditText edt_email, edt_password;
   Button btn_login;
@@ -165,10 +167,18 @@ public class ActivityLogin extends AppCompatActivity {
     chk_show_pass = findViewById(R.id.chk_show_pass);
     avl_login =  findViewById(R.id.avl_login);
     txt_page_name = findViewById(R.id.txt_page_name);
+    txt_show_pass = findViewById(R.id.txt_show_pass);
+    txt_forget_password = findViewById(R.id.txt_forget_password);
   }
 
   private void setTypeFace(){
     txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityLogin.this));
+    edt_email.setTypeface(MyViews.getIranSansLightFont(ActivityLogin.this));
+    edt_password.setTypeface(MyViews.getIranSansLightFont(ActivityLogin.this));
+    btn_login.setTypeface(MyViews.getIranSansLightFont(ActivityLogin.this));
+    txt_show_pass.setTypeface(MyViews.getIranSansLightFont(ActivityLogin.this));
+    txt_forget_password.setTypeface(MyViews.getIranSansMediumFont(ActivityLogin.this));
+    txt_register.setTypeface(MyViews.getIranSansMediumFont(ActivityLogin.this));
   }
 
 

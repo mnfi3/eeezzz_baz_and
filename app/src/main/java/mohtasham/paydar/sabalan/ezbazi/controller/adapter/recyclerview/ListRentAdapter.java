@@ -3,7 +3,6 @@ package mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,7 @@ import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.RentType;
 import mohtasham.paydar.sabalan.ezbazi.model.common.Photo;

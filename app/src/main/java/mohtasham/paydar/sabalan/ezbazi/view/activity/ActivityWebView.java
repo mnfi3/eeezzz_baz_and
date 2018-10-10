@@ -1,6 +1,7 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 //import android.annotation.SuppressLint;
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -76,16 +77,16 @@ public class ActivityWebView extends AppCompatActivity {
   }
 
   private void setupViews(){
-    txt_page_name = (TextView) findViewById(R.id.txt_page_name);
-    img_back = (ImageView) findViewById(R.id.img_back);
-    img_finish = (ImageView) findViewById(R.id.img_finish);
-    web_view = (WebView) findViewById(R.id.web_view);
-    swipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
-    avl_webview = (AVLoadingIndicatorView) findViewById(R.id.avl_webview);
+    txt_page_name =  findViewById(R.id.txt_page_name);
+    img_back =  findViewById(R.id.img_back);
+    img_finish =  findViewById(R.id.img_finish);
+    web_view =  findViewById(R.id.web_view);
+    swipe =  findViewById(R.id.swipe);
+    avl_webview =  findViewById(R.id.avl_webview);
   }
 
 
-//  @SuppressLint("SetJavaScriptEnabled")
+  @SuppressLint("SetJavaScriptEnabled")
   public void WebAction(){
 
     web_view = (WebView) findViewById(R.id.web_view);
@@ -101,7 +102,7 @@ public class ActivityWebView extends AppCompatActivity {
 
     web_view.setWebViewClient(new WebViewClient(){
       public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-        web_view.loadUrl("file:///android_assets/error.html");
+//        web_view.loadUrl("file:///android_assets/error.html");
       }
       public void onPageFinished(WebView view, String url) {
         swipe.setRefreshing(false);

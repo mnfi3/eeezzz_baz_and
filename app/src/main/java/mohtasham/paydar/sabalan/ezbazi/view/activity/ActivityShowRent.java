@@ -28,7 +28,7 @@ import java.util.List;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.RentType;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;

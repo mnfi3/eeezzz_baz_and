@@ -99,7 +99,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/register_login_icon"
+                    android:src="@drawable/ic_register"
                     android:layout_marginRight="5sp"
                     android:layout_gravity="center_vertical"
                     android:padding="5sp"/>

@@ -42,7 +42,7 @@ public class FragmentNavigation extends Fragment {
       public void onCheck(User user, boolean isLoggedIn) {
         FragmentNavigation.this.isLoggedIn = isLoggedIn;
         if (isLoggedIn){
-          txt_users_name.setText(user.getUser_name());
+          txt_users_name.setText(user.getFull_name());
           txt_register_login.setText("داشبورد");
         }
       }
@@ -94,7 +94,7 @@ public class FragmentNavigation extends Fragment {
       public void onCheck(User user, boolean isLoggedIn) {
         FragmentNavigation.this.isLoggedIn = isLoggedIn;
         if (isLoggedIn){
-          txt_users_name.setText(user.getUser_name());
+          txt_users_name.setText(user.getFull_name());
           txt_register_login.setText("داشبورد");
         }
       }
@@ -109,7 +109,7 @@ public class FragmentNavigation extends Fragment {
       public void onCheck(User user, boolean isLoggedIn) {
         FragmentNavigation.this.isLoggedIn = isLoggedIn;
         if (isLoggedIn){
-          txt_users_name.setText(user.getUser_name());
+          txt_users_name.setText(user.getFull_name());
           txt_register_login.setText("داشبورد");
         }
       }
@@ -124,7 +124,7 @@ public class FragmentNavigation extends Fragment {
       public void onCheck(User user, boolean isLoggedIn) {
         FragmentNavigation.this.isLoggedIn = isLoggedIn;
         if (isLoggedIn){
-          txt_users_name.setText(user.getUser_name());
+          txt_users_name.setText(user.getFull_name());
           txt_register_login.setText("داشبورد");
         }
       }

@@ -14,8 +14,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperDate;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperDate;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Ticket;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
@@ -41,16 +41,21 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ListViewHo
   public void onBindViewHolder(ListViewHolder holder, int position) {
     final Ticket ticket = tickets.get(position);
 
-    holder.txt_message.setText(ticket.getText());
+
     holder.txt_created_at.setText(HelperText.toPersianNumber(new HelperDate().timestampToPersianFull(ticket.getCreated_at())));
 
     if (ticket.getIs_user_sent() == 0) {
+
+      holder.txt_message.setText("پشتیبانی : " + "\n" + ticket.getText());
       holder.txt_message.setBackgroundResource(R.drawable.back_ticket_item2);
       holder.lyt_ticket_item.setGravity(Gravity.LEFT);
     }else {
+      holder.txt_message.setText(ticket.getText());
       holder.txt_message.setBackgroundResource(R.drawable.back_ticket_item1);
       holder.lyt_ticket_item.setGravity(Gravity.RIGHT);
     }
+
+
 
     if (ticket.getIs_user_sent() == 1 && ticket.getIs_seen() == 1){
       holder.img_is_seen.setVisibility(View.VISIBLE);

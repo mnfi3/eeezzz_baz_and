@@ -20,7 +20,6 @@ import java.util.Map;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 
-import static android.content.ContentValues.TAG;
 
 public class LoginCheckerService {
   private Context context;
@@ -34,14 +33,13 @@ public class LoginCheckerService {
       @Override
       public void onResponse(JSONObject response) {
         int status = 0;
-        String user_name = "";
+        String full_name = "";
         boolean isLoggedIn = false;
         try {
           status = response.getInt("status");
           if (status == 1){
             isLoggedIn = true;
-            user_name = response.getJSONObject("data").getString("user_name");
-            Log.i(TAG, "onResponse: user_name = " + user_name);
+            full_name = response.getJSONObject("data").getString("full_name");
           }else {
             isLoggedIn = false;
           }
@@ -49,7 +47,7 @@ public class LoginCheckerService {
           e.printStackTrace();
         }
 
-        onLoginCheckComplete.onComplete(isLoggedIn, user_name);
+        onLoginCheckComplete.onComplete(isLoggedIn, full_name);
       }
     }, new Response.ErrorListener() {
       @Override
@@ -73,7 +71,7 @@ public class LoginCheckerService {
 
 
   public interface onLoginCheckComplete{
-    void onComplete(boolean isLoggedIn, String user_name);
+    void onComplete(boolean isLoggedIn, String full_name);
   }
 
 

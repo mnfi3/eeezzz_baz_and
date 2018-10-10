@@ -1,4 +1,5 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.TicketAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.ticket.TicketService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.config.AppConfig;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 import mohtasham.paydar.sabalan.ezbazi.model.Ticket;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
@@ -38,6 +40,7 @@ public class ActivityTicket extends AppCompatActivity {
   AVLoadingIndicatorView avl_send_message;
   int first_ticket_id = -1;
   boolean is_create_adapter = false;
+  boolean is_pause = false;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +55,11 @@ public class ActivityTicket extends AppCompatActivity {
     LinearLayoutManager layoutManager = new LinearLayoutManager(ActivityTicket.this, LinearLayoutManager.VERTICAL, false);
 //    layoutManager.setReverseLayout(true);
     rcv_tickets.setLayoutManager(layoutManager);
-    getTickets();
     avl_send_message.setVisibility(View.VISIBLE);
     setSeenTickets();
+
+    //get tickets with async
+    receiveTickets();
 
     img_back.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -75,25 +80,7 @@ public class ActivityTicket extends AppCompatActivity {
 
 
 
-      Thread thread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-          while (true) {
-            try {
-              Thread.sleep(4000);
-            } catch (InterruptedException e) {
-              e.printStackTrace();
-            }
-            if (G.isLoggedIn) {
-              getTickets();
-            }
-          }
-        }
-      });
 
-    if(G.isLoggedIn) {
-      thread.start();
-    }
 
 
   }
@@ -207,4 +194,26 @@ public class ActivityTicket extends AppCompatActivity {
   }
 
 
+  private void receiveTickets(){
+    final Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+      public void run() {
+        getTickets();
+        if (!is_pause && G.isLoggedIn) {
+          handler.postDelayed(this, AppConfig.NEW_TICKETS_TIME_MS);
+        }else {
+          return;
+        }
+      }
+    };
+    handler.post(runnable);
+
+  }
+
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    is_pause = true;
+  }
 }

@@ -12,8 +12,8 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperDate;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.HelperText;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperDate;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Comment;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
@@ -40,7 +40,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
     final Comment comment = comments.get(position);
 
 
-    holder.txt_user_name.setText(comment.getUser().getFirst_name());
+    holder.txt_full_name.setText(comment.getUser().getFull_name());
     holder.txt_date.setText(HelperText.toPersianNumber(new HelperDate().timestampToPersian(comment.getCreated_at())));
     holder.expand_text_view.setText(comment.getText());
 
@@ -75,14 +75,14 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
 
   public class ListViewHolder extends RecyclerView.ViewHolder{
 
-    private TextView txt_user_name;
+    private TextView txt_full_name;
     private TextView txt_date;
     private ExpandableTextView expand_text_view;
     private TextView expandable_text;
 
     public ListViewHolder(View itemView) {
       super(itemView);
-      txt_user_name = itemView.findViewById(R.id.txt_user_name);
+      txt_full_name = itemView.findViewById(R.id.txt_full_name);
       txt_date = itemView.findViewById(R.id.txt_date);
       expand_text_view = itemView.findViewById(R.id.expand_text_view);
       expandable_text = itemView.findViewById(R.id.expandable_text);
@@ -93,7 +93,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
     }
 
     private void setTypeFace(){
-      txt_user_name.setTypeface(MyViews.getIranSansBoldFont(context));
+      txt_full_name.setTypeface(MyViews.getIranSansBoldFont(context));
       txt_date.setTypeface(MyViews.getIranSansUltraLightFont(context));
       expandable_text.setTypeface(MyViews.getIranSansLightFont(context));
     }

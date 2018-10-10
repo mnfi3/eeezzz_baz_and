@@ -8,6 +8,7 @@
     tools:context=".view.activity.ActivityWebView">
 
     <include layout="@layout/toolbar_web_view"/>
+    <!--<include layout="@layout/toolbar_public"/>-->
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe"

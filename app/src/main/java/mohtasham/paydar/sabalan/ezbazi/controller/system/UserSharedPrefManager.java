@@ -13,7 +13,7 @@ public class UserSharedPrefManager {
 
 
   private static final String USER_SHARED_PREF_NAME = "user_shared_pref";
-  private static final String USER_NAME = "user_name";
+  private static final String FULL_NAME = "name";
   private static final String TOKEN = "token";
   private static final String CITY_ID = "city_id";
 //  private static final String CLIENT_KEY = "client_key";
@@ -28,18 +28,29 @@ public class UserSharedPrefManager {
     if (user != null) {
       String newToken = G.encrypt(user.getToken());
       user.setToken(newToken);
-      Log.i(TAG, "saveUser: new_token = " + newToken);
       SharedPreferences.Editor editor = sharedPreferences.edit();
-      editor.putString(USER_NAME, user.getUser_name());
+      editor.putString(FULL_NAME, user.getFull_name());
       editor.putString(TOKEN, user.getToken());
 //      editor.putString(CLIENT_KEY, user.getClient_key());
       editor.apply();
     }
   }
 
+  public void saveUserFullName(String f_name){
+    String full_name = "";
+    if (f_name != null){
+      full_name = f_name;
+      SharedPreferences.Editor editor = sharedPreferences.edit();
+      editor.putString(FULL_NAME, full_name);
+      editor.apply();
+    }
+
+
+  }
+
   public User getUser() {
     User user = new User();
-    user.setUser_name(sharedPreferences.getString(USER_NAME, ""));
+    user.setFull_name(sharedPreferences.getString(FULL_NAME, ""));
     String main_token = G.decrypt(sharedPreferences.getString(TOKEN ,""));
     user.setToken(main_token);
 //    user.setClient_key(sharedPreferences.getString(CLIENT_KEY , ""));
