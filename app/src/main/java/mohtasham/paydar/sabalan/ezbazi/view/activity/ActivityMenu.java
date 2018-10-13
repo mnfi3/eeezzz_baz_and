@@ -1,16 +1,21 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
+import android.content.IntentFilter;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.hardware.ConnectivityListener;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.hardware.Hardware;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.pref_manager.UserPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.view.fragment.activity.FragmentActivity;
@@ -22,6 +27,11 @@ public class ActivityMenu extends AppCompatActivity {
 
 
   private static ActivityMenu activity;
+
+  CoordinatorLayout lyt_root;
+  ConnectivityListener connectivityListener;
+  LinearLayout lyt_bottom_buttons;
+  FrameLayout lyt_action;
 
   ImageView img_profile, img_search, img_activity, img_home;
   BottomNavigationView bottom_nav;
@@ -114,6 +124,9 @@ public class ActivityMenu extends AppCompatActivity {
 
 
   private void setupViews(){
+    lyt_root = findViewById(R.id.lyt_root);
+    lyt_action = findViewById(R.id.lyt_action);
+    lyt_bottom_buttons = findViewById(R.id.lyt_bottom_buttons);
     bottom_nav = findViewById(R.id.bottom_nav);
     img_profile = findViewById(R.id.img_profile);
     img_search = findViewById(R.id.img_search);
@@ -246,5 +259,22 @@ public class ActivityMenu extends AppCompatActivity {
   }
 
 
+
+
+
+  protected void onStart() {
+    super.onStart();
+
+//    connectivityListener = new ConnectivityListener(lyt_action);
+    registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    unregisterReceiver(G.connectivityListener);
+  }
 
 }

@@ -1,6 +1,7 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +25,16 @@ import java.util.regex.Pattern;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.AccountService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.hardware.ConnectivityListener;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.pref_manager.UserPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
 public class ActivityLogin extends AppCompatActivity {
 
+
+  ConnectivityListener connectivityListener;
+  LinearLayout lyt_root;
 
   TextView txt_register;
   TextView txt_page_name;
@@ -157,6 +163,7 @@ public class ActivityLogin extends AppCompatActivity {
 //  }
 
   private void setupViews(){
+    lyt_root = findViewById(R.id.lyt_root);
     txt_register = findViewById(R.id.txt_register);
     img_back = findViewById(R.id.img_back);
     edt_email = findViewById(R.id.edt_email);
@@ -204,5 +211,22 @@ public class ActivityLogin extends AppCompatActivity {
   private boolean validEmail(String email) {
     Pattern pattern = Patterns.EMAIL_ADDRESS;
     return pattern.matcher(email).matches();
+  }
+
+
+
+  protected void onStart() {
+    super.onStart();
+
+//    connectivityListener = new ConnectivityListener(lyt_root);
+    registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    unregisterReceiver(G.connectivityListener);
   }
 }

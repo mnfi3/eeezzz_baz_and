@@ -1,6 +1,7 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -22,6 +23,7 @@ import java.util.regex.Pattern;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.AccountService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
@@ -183,6 +185,24 @@ public class ActivityRegister extends AppCompatActivity {
   }
 
 
+
+
+
+
+  protected void onStart() {
+    super.onStart();
+
+//    connectivityListener = new ConnectivityListener(lyt_action);
+    registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    unregisterReceiver(G.connectivityListener);
+  }
 
 
 

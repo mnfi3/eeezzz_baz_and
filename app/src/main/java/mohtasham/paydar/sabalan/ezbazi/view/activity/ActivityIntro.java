@@ -51,7 +51,7 @@ public class ActivityIntro extends AppCompatActivity {
     btn_per.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Animation rotation = AnimationUtils.loadAnimation(ActivityIntro.this, R.anim.rotate);
+        Animation rotation = AnimationUtils.loadAnimation(ActivityIntro.this, R.anim.rotate_intro_button);
         btn_per.startAnimation(rotation);
        if(current_fragment == 2){
          ft = getSupportFragmentManager().beginTransaction();
@@ -75,7 +75,7 @@ public class ActivityIntro extends AppCompatActivity {
     btn_next.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Animation rotation = AnimationUtils.loadAnimation(ActivityIntro.this, R.anim.rotate);
+        Animation rotation = AnimationUtils.loadAnimation(ActivityIntro.this, R.anim.rotate_intro_button);
         btn_next.startAnimation(rotation);
         if(current_fragment == 1){
           ft = getSupportFragmentManager().beginTransaction();

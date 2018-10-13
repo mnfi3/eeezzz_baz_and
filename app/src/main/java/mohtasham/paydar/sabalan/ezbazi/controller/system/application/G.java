@@ -6,7 +6,7 @@ import android.content.Context;
 import java.util.List;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.RentService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.auth.Auth;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.config.AppConfig;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.hardware.ConnectivityListener;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.hardware.Storage;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.pref_manager.CityPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.pref_manager.UserPrefManager;
@@ -19,6 +19,9 @@ public class G extends Application {
   @SuppressLint("StaticFieldLeak")
   public static Context context;
   public static final String TAG=" G ";
+
+  public static ConnectivityListener connectivityListener ;
+  public static boolean mustReconnect = false;
 
 
   public static  boolean isLoggedIn = true;
@@ -33,6 +36,7 @@ public class G extends Application {
     setFakeCity();
     getRentTypes();
     Storage.deleteCache(context);
+    connectivityListener = new ConnectivityListener();
   }
 
   private void setFakeCity(){

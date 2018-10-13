@@ -2,6 +2,7 @@ package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -236,6 +237,24 @@ public class ActivityComment extends AppCompatActivity {
     return true;
   }
 
+
+
+
+
+  protected void onStart() {
+    super.onStart();
+
+//    connectivityListener = new ConnectivityListener(lyt_action);
+    registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    unregisterReceiver(G.connectivityListener);
+  }
 
 
 }

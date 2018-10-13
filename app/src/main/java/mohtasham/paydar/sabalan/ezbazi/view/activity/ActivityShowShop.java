@@ -2,6 +2,7 @@ package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.squareup.picasso.Picasso;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.ShopService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
@@ -291,5 +293,24 @@ public class ActivityShowShop extends AppCompatActivity {
         vdo_game.start();
       }
     });
+  }
+
+
+
+
+
+  protected void onStart() {
+    super.onStart();
+
+//    connectivityListener = new ConnectivityListener(lyt_action);
+    registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    unregisterReceiver(G.connectivityListener);
   }
 }

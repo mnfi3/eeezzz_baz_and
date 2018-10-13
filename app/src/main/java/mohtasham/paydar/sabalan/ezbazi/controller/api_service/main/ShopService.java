@@ -29,7 +29,7 @@ public class ShopService {
 
 
   public void getMainShops(final int page_num, final onShopsReceived onShopsReceived){
-    String url = Urls.SHOP_INDEX0 + "/"+ Integer.toString(new CityPrefManager(context).getCityId()) +  page_num;
+    String url = Urls.SHOP_INDEX0 + "/"+ Integer.toString(new CityPrefManager(context).getCityId()) + "?page=" + page_num;
     final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {

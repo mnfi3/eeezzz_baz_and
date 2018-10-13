@@ -1,4 +1,5 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -215,5 +216,28 @@ public class ActivityTicket extends AppCompatActivity {
   protected void onPause() {
     super.onPause();
     is_pause = true;
+  }
+
+
+
+
+
+
+
+
+
+  protected void onStart() {
+    super.onStart();
+
+//    connectivityListener = new ConnectivityListener(lyt_action);
+    registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    unregisterReceiver(G.connectivityListener);
   }
 }

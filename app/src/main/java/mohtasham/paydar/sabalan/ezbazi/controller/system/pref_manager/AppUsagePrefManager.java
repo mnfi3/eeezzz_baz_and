@@ -6,7 +6,7 @@ public class AppUsagePrefManager {
 
 
   private static final String APP_USAGE_SHARED_PREF_NAME = "app_usage_pref";
-  private static final String IS_FIRST_USE = "is_first_use";
+  private static final String IS_FIRST_USE = "is_first_use_v1";
 //  private static final String CLIENT_KEY = "client_key";
 
   private SharedPreferences sharedPreferences;

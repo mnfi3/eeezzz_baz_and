@@ -2,6 +2,7 @@ package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 //import android.annotation.SuppressLint;
 import android.annotation.SuppressLint;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
 
 public class ActivityWebView extends AppCompatActivity {
 
@@ -127,6 +129,24 @@ public class ActivityWebView extends AppCompatActivity {
     }else {
       finish();
     }
+  }
+
+
+
+
+  protected void onStart() {
+    super.onStart();
+
+//    connectivityListener = new ConnectivityListener(lyt_action);
+    registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    unregisterReceiver(G.connectivityListener);
   }
 
 }

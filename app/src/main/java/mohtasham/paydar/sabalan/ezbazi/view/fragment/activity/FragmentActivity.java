@@ -93,12 +93,12 @@ public class FragmentActivity extends Fragment {
       @Override
       public void onReceived(int status, String message, List<ShopRequest> requests) {
         avl_buys.setVisibility(View.INVISIBLE);
-        if(status != 0){
+        if(status == 1){
           ListShopRequestAdapter adapter = new ListShopRequestAdapter(getContext(),requests);
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(adapter);
           rcv_buys.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
         }else {
-          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+//          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
         }
       }
     });

@@ -136,7 +136,7 @@
                     android:adjustViewBounds="true"
                     android:padding="4dp"
                     android:src="@drawable/ic_star"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     />
 
                 <TextView

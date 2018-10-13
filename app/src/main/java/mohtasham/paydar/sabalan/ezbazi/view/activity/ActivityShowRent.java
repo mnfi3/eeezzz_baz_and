@@ -2,6 +2,7 @@ package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
@@ -426,5 +427,24 @@ public class ActivityShowRent extends AppCompatActivity {
           break;
       }
     }
+  }
+
+
+
+
+
+  protected void onStart() {
+    super.onStart();
+
+//    connectivityListener = new ConnectivityListener(lyt_action);
+    registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    unregisterReceiver(G.connectivityListener);
   }
 }
