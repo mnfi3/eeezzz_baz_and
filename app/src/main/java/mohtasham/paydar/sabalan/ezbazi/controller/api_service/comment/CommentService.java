@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.auth.Auth;
 import mohtasham.paydar.sabalan.ezbazi.model.Comment;
 import mohtasham.paydar.sabalan.ezbazi.model.MainSlider;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
@@ -98,7 +99,7 @@ public class CommentService {
       public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> params = new HashMap<String, String>();
         params.put("Accept", "application/json");
-        params.put("Authorization", "Bearer " + G.getUserToken());
+        params.put("Authorization", "Bearer " + Auth.getUserToken());
         return params;
       }
     };

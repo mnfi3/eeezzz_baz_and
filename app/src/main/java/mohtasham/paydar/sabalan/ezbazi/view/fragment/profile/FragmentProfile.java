@@ -18,10 +18,11 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.AccountService;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.UserDetailService;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.ticket.TicketService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.auth.Auth;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.config.AppConfig;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperText;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.pref_manager.UserPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.Finance;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityLogin;
@@ -47,7 +48,7 @@ public class FragmentProfile extends Fragment {
 
   View view;
 
-  UserSharedPrefManager prefManager;
+  UserPrefManager prefManager;
 
   boolean is_pause = false;
 
@@ -64,7 +65,7 @@ public class FragmentProfile extends Fragment {
 
 
 
-    G.loginCheck(new G.onLoginCheck() {
+    Auth.loginCheck(new G.onLoginCheck() {
       @Override
       public void onCheck(User user, boolean isLoggedIn) {
         if(!isLoggedIn){
@@ -74,7 +75,7 @@ public class FragmentProfile extends Fragment {
           lyt_user_detail.setVisibility(View.VISIBLE);
           btn_login.setVisibility(View.GONE);
 //          getUserDetail();
-          txt_full_name.setText(new UserSharedPrefManager(getContext()).getUser().getFull_name());
+          txt_full_name.setText(new UserPrefManager(getContext()).getUser().getFull_name());
           getUserFinance();
         }
       }
@@ -125,7 +126,7 @@ public class FragmentProfile extends Fragment {
 
 
 
-    prefManager = new UserSharedPrefManager(getContext());
+    prefManager = new UserPrefManager(getContext());
 //    prefManager.saveCityId(329);
 
 
@@ -163,7 +164,7 @@ public class FragmentProfile extends Fragment {
   }
 
   private void logoutUser(){
-    prefManager = new UserSharedPrefManager(getContext());
+    prefManager = new UserPrefManager(getContext());
     User user = new User();
     user.setToken("");
     user.setFull_name("");

@@ -22,7 +22,7 @@ import java.util.List;
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.TicketAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.ticket.TicketService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.config.AppConfig;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 import mohtasham.paydar.sabalan.ezbazi.model.Ticket;
@@ -108,7 +108,7 @@ public class ActivityTicket extends AppCompatActivity {
         avl_send_message.setVisibility(View.INVISIBLE);
 
         if (status == 0){
-          MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
+//          MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
         }else {
 
 

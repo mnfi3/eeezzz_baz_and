@@ -18,7 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.auth.Auth;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 
 public class AccountService {
@@ -129,7 +130,7 @@ public class AccountService {
       public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> params = new HashMap<String, String>();
         params.put("Accept", "application/json");
-        params.put("Authorization", "Bearer " + G.getUserToken());
+        params.put("Authorization", "Bearer " + Auth.getUserToken());
         return params;
       }
     };

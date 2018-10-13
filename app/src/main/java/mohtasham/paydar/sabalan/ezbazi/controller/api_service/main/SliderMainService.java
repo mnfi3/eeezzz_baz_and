@@ -1,4 +1,4 @@
-package mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu;
+package mohtasham.paydar.sabalan.ezbazi.controller.api_service.main;
 
 import android.content.Context;
 

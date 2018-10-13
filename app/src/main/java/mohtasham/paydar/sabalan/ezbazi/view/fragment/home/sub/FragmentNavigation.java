@@ -11,7 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.auth.Auth;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityLogin;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityTicket;
@@ -37,7 +38,7 @@ public class FragmentNavigation extends Fragment {
     setupViews();
 
 
-    G.loginCheck(new G.onLoginCheck() {
+    Auth.loginCheck(new G.onLoginCheck() {
       @Override
       public void onCheck(User user, boolean isLoggedIn) {
         FragmentNavigation.this.isLoggedIn = isLoggedIn;
@@ -89,7 +90,7 @@ public class FragmentNavigation extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    G.loginCheck(new G.onLoginCheck() {
+    Auth.loginCheck(new G.onLoginCheck() {
       @Override
       public void onCheck(User user, boolean isLoggedIn) {
         FragmentNavigation.this.isLoggedIn = isLoggedIn;
@@ -104,7 +105,7 @@ public class FragmentNavigation extends Fragment {
   @Override
   public void onStart() {
     super.onStart();
-    G.loginCheck(new G.onLoginCheck() {
+    Auth.loginCheck(new G.onLoginCheck() {
       @Override
       public void onCheck(User user, boolean isLoggedIn) {
         FragmentNavigation.this.isLoggedIn = isLoggedIn;
@@ -119,7 +120,7 @@ public class FragmentNavigation extends Fragment {
   @Override
   public void onStop() {
     super.onStop();
-    G.loginCheck(new G.onLoginCheck() {
+    Auth.loginCheck(new G.onLoginCheck() {
       @Override
       public void onCheck(User user, boolean isLoggedIn) {
         FragmentNavigation.this.isLoggedIn = isLoggedIn;

@@ -65,12 +65,14 @@ public class ListRentRequestAdapter extends RecyclerView.Adapter<ListRentRequest
 
     if(request.getIs_finish() == 1) {
       holder.txt_status.setText("تمام شده");
-    }else if(request.getIs_finish() == 0 && request.getIs_success() == 1){
+    }
+    else if(request.getIs_finish() == 0 && request.getIs_success() == 1){
       holder.txt_status.setText("دریافت شده");
     }
     else if(request.getIs_finish() == 0 && request.getIs_success() == 0 && request.getIs_sent() == 1){
       holder.txt_status.setText("ارسال شده");
-    }else if(request.getIs_finish() == 0 && request.getIs_success() == 0 && request.getIs_sent() == 0){
+    }
+    else if(request.getIs_finish() == 0 && request.getIs_success() == 0 && request.getIs_sent() == 0){
       holder.txt_status.setText("در حال ارسال");
     }
 

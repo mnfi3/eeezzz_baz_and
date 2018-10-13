@@ -81,7 +81,7 @@ public class FragmentActivity extends Fragment {
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(adapter);
           rcv_rents.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
         }else {
-          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+//          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
         }
       }
     });

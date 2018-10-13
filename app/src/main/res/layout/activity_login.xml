@@ -87,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:text="نمایش کلمه عبور"
                     android:layout_marginRight="10sp"
+                    android:textSize="@dimen/font_size_small"
                     android:textColor="@color/main_text_color"/>
 
                 <android.support.v7.widget.AppCompatCheckBox
@@ -122,6 +123,7 @@
                 android:layout_marginTop="30dp"
                 android:text="کلمه عبور را فراموش کرده ام"
                 android:textStyle="bold"
+                android:textSize="@dimen/font_size_small"
                 android:textColor="@color/main_link_color"
                 android:padding="4dp"
                 />
@@ -133,8 +135,8 @@
                 android:layout_marginTop="15sp"
                 android:textStyle="bold"
                 android:text="ایجاد حساب کاربری"
+                android:textSize="@dimen/font_size_small"
                 android:textColor="@color/main_link_color"
-                android:textSize="15sp"
                 android:padding="4dp"/>
 
             <!--<ProgressBar-->

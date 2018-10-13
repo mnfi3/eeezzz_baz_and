@@ -28,6 +28,7 @@ import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 public class ActivityRegister extends AppCompatActivity {
 
   ImageView img_back;
+  TextView txt_page_name;
   EditText edt_full_name, edt_email, edt_password, edt_re_password;
   TextView txt_show_pass;
   Button btn_register;
@@ -42,6 +43,8 @@ public class ActivityRegister extends AppCompatActivity {
     setContentView(R.layout.activity_register);
 
     setupViews();
+    setTypeFace();
+    txt_page_name.setText("یجاد حساب کاربری");
 
     img_back.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -109,6 +112,7 @@ public class ActivityRegister extends AppCompatActivity {
 
   private void setupViews(){
     img_back = findViewById(R.id.img_back);
+    txt_page_name = findViewById(R.id.txt_page_name);
     edt_full_name = findViewById(R.id.edt_full_name);
     edt_email = findViewById(R.id.edt_email);
     edt_password = findViewById(R.id.edt_password);
@@ -120,6 +124,7 @@ public class ActivityRegister extends AppCompatActivity {
   }
 
   private void setTypeFace(){
+    txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
     edt_full_name.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
     edt_email.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));
     edt_password.setTypeface(MyViews.getIranSansLightFont(ActivityRegister.this));

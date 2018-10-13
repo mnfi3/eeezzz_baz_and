@@ -1,4 +1,4 @@
-package mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu;
+package mohtasham.paydar.sabalan.ezbazi.controller.api_service.main;
 
 import android.content.Context;
 
@@ -17,18 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.Urls;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.pref_manager.CityPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
+import mohtasham.paydar.sabalan.ezbazi.model.RentType;
 
-public class ShopService {
+public class RentService {
   private Context context;
-  public ShopService(Context context){
+  public RentService(Context context){
     this.context = context;
   }
 
 
-  public void getMainShops(final int page_num, final onShopsReceived onShopsReceived){
-    String url = Urls.SHOP_INDEX0 + "?page=" + page_num;
+  public void getRents(final int page_num, final onRentsReceived onRentsReceived){
+    String url = Urls.RENT_INDEX0 + "/"+ Integer.toString(new CityPrefManager(context).getCityId()) + "?page=" + page_num;
     final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
@@ -46,8 +48,7 @@ public class ShopService {
             games.add( Game.Parser.parse(gameObj));
           }
 
-
-          onShopsReceived.onReceived(status, message, games, paginate);
+          onRentsReceived.onReceived(status, message, games, paginate);
 
         } catch (JSONException e) {
           e.printStackTrace();
@@ -57,7 +58,8 @@ public class ShopService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onShopsReceived.onReceived(0, "", new ArrayList<Game>(), new Paginate());
+        onRentsReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<Game>(), new Paginate());
+
       }
     });
 
@@ -66,8 +68,9 @@ public class ShopService {
   }
 
 
-  public void getSearchedShops(JSONObject obj, final onSearchedShopsReceived onSearchedShopsReceived){
-    String url = Urls.SHOP_SEARCH;
+
+  public void getSearchedRents(JSONObject obj, final onSearchedRentsReceived onSearchedRentsReceived){
+    String url = Urls.RENT_SEARCH;
     final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
@@ -84,7 +87,8 @@ public class ShopService {
             }
           }
 
-          onSearchedShopsReceived.onReceived(status, message, games);
+
+          onSearchedRentsReceived.onReceived(status, message, games);
 
         } catch (JSONException e) {
           e.printStackTrace();
@@ -94,7 +98,8 @@ public class ShopService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onSearchedShopsReceived.onReceived(0, "خطا در ارتباط با سرور", new ArrayList<Game>());
+        onSearchedRentsReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<Game>());
+
       }
     });
 
@@ -103,8 +108,9 @@ public class ShopService {
   }
 
 
-  public void getRelatedShops(final int game_id, final onRelatedShopsReceived onRelatedShopsReceived){
-    String url = Urls.GAME_RELATED_GAME_FOR_SHOP + "/"+Integer.toString(game_id) ;
+
+  public void getRelatedRents(final int game_id, final onRelatedRentsReceived onRelatedRentsReceived){
+    String url = Urls.GAME_RELATED_GAME_FOR_RENT + "/"+Integer.toString(game_id) ;
     final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
@@ -120,7 +126,7 @@ public class ShopService {
           }
 
 
-          onRelatedShopsReceived.onReceived(status, message, games);
+          onRelatedRentsReceived.onReceived(status, message, games);
 
         } catch (JSONException e) {
           e.printStackTrace();
@@ -130,7 +136,7 @@ public class ShopService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onRelatedShopsReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<Game>());
+        onRelatedRentsReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<Game>());
 
       }
     });
@@ -140,8 +146,8 @@ public class ShopService {
   }
 
 
-  public void getSpecialShop(int id, final onSpecialShopReceived onSpecialshopReceived){
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.SHOP_INDEX + "/" + id, null, new Response.Listener<JSONObject>() {
+  public void getSpecialRent(int id, final onSpecialRentReceived onSpecialRentReceived){
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.RENT_INDEX + "/" + id, null, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
         int status = 0;
@@ -154,7 +160,7 @@ public class ShopService {
 
           game = Game.Parser.parse(gameObj);
 
-          onSpecialshopReceived.onReceived(status, message, game);
+          onSpecialRentReceived.onReceived(status, message, game);
 
         } catch (JSONException e) {
           e.printStackTrace();
@@ -163,7 +169,7 @@ public class ShopService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onSpecialshopReceived.onReceived(0, "خطا در ارتباط با سرور", new Game());
+        onSpecialRentReceived.onReceived(0, "خطا در ارتباط با سرور", new Game());
       }
     });
 
@@ -172,21 +178,65 @@ public class ShopService {
   }
 
 
-  public interface onShopsReceived{
+
+
+  public void getRentTypes(final onRentTypesReceived onRentTypesReceived){
+    String url = Urls.RENT_TYPE_INDEX ;
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        List<RentType> rentTypes = new ArrayList<>();
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          JSONArray data = response.getJSONArray("data");
+          for (int i=0 ; i<data.length() ; i++){
+            JSONObject rentTypeObj = data.getJSONObject(i);
+            rentTypes.add( RentType.Parser.parse(rentTypeObj));
+          }
+
+          onRentTypesReceived.onReceived(status, message, rentTypes);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onRentTypesReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<RentType>());
+
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+
+
+
+  public interface onRentsReceived{
     void onReceived(int status, String message, List<Game> games, Paginate paginate);
   }
 
-  public interface onSearchedShopsReceived{
+  public interface onSearchedRentsReceived{
     void onReceived(int status, String message, List<Game> games);
   }
 
-  public interface onRelatedShopsReceived{
+  public interface onRelatedRentsReceived{
     void onReceived(int status, String message, List<Game> games);
   }
 
-  public interface onSpecialShopReceived{
+  public interface onSpecialRentReceived{
     void onReceived(int status, String message, Game game);
   }
 
+  public interface onRentTypesReceived{
+    void onReceived(int status, String message, List<RentType> rentTypes);
+  }
 
 }

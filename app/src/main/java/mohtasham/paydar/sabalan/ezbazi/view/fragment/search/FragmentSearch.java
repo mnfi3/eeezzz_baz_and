@@ -30,11 +30,11 @@ import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListPostAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListRentAdapter;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListShopAdapter;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.PostService;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.PostService;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.RentService;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.ShopService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.hardware.Hardware;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.pref_manager.CityPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Post;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
@@ -66,7 +66,7 @@ public class FragmentSearch extends Fragment {
   RentService rentService;
   ShopService shopService;
   PostService postService;
-  UserSharedPrefManager prefManager;
+  CityPrefManager prefManager;
 
 
 
@@ -150,8 +150,8 @@ public class FragmentSearch extends Fragment {
 
   private void search() {
     if(checkEntry()) {
-      G.hideKeyboard(getActivity());
-      prefManager = new UserSharedPrefManager(getContext());
+      Hardware.hideKeyboard(getActivity());
+      prefManager = new CityPrefManager(getContext());
       int city_id = prefManager.getCityId();
       String text = edt_search.getText().toString();
       JSONObject object = new JSONObject();

@@ -1,8 +1,6 @@
 package mohtasham.paydar.sabalan.ezbazi.view.activity;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -24,8 +22,8 @@ import java.util.regex.Pattern;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.api_service.account.AccountService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.UserSharedPrefManager;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.pref_manager.UserPrefManager;
 import mohtasham.paydar.sabalan.ezbazi.model.User;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 
@@ -127,7 +125,7 @@ public class ActivityLogin extends AppCompatActivity {
             avl_login.setVisibility(View.INVISIBLE);
             MyViews.makeText(ActivityLogin.this, message, Toast.LENGTH_SHORT);
             if(status == 1){
-              UserSharedPrefManager prefManager = new UserSharedPrefManager(ActivityLogin.this);
+              UserPrefManager prefManager = new UserPrefManager(ActivityLogin.this);
               prefManager.saveUser(user);
               G.isLoggedIn = true;
               G.initializeLogin();

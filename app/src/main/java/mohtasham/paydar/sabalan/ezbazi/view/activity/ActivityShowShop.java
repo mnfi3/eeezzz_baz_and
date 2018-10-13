@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -23,7 +22,7 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopService;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.ShopService;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
@@ -163,7 +162,7 @@ public class ActivityShowShop extends AppCompatActivity {
       @Override
       public void onReceived(int status, String message, Game game) {
         if(status != 1){
-          MyViews.makeText(ActivityShowShop.this, message, Toast.LENGTH_SHORT);
+//          MyViews.makeText(ActivityShowShop.this, message, Toast.LENGTH_SHORT);
         }else {
           ActivityShowShop.this.game = game;
           fillViews();

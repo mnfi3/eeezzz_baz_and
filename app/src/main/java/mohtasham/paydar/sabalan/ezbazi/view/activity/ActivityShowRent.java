@@ -26,8 +26,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.RentService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
 import mohtasham.paydar.sabalan.ezbazi.controller.system.helper.HelperText;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.RentType;
@@ -227,7 +227,7 @@ public class ActivityShowRent extends AppCompatActivity {
       @Override
       public void onReceived(int status, String message, Game game) {
         if(status != 1){
-          MyViews.makeText(ActivityShowRent.this, message, Toast.LENGTH_SHORT);
+//          MyViews.makeText(ActivityShowRent.this, message, Toast.LENGTH_SHORT);
         }else {
           ActivityShowRent.this.game = game;
           getRentTypes();

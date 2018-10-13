@@ -12,14 +12,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ShopMainAdapter;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.ShopService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityListShop;
@@ -71,7 +70,7 @@ public class FragmentShops extends Fragment {
       @Override
       public void onReceived(int status, String message, List<Game> games, Paginate paginate) {
         if(status == 0){
-          Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
+//          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
         }else {
           ShopMainAdapter listAdapter=new ShopMainAdapter(G.context, games);
           AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);

@@ -2,7 +2,6 @@ package mohtasham.paydar.sabalan.ezbazi.view.fragment.home.game_detail;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,16 +11,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.RelatedRentAdapter;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.RentService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.RentService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
-import mohtasham.paydar.sabalan.ezbazi.view.activity.ActivityShowRent;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.recyclerview_animation.adapters.AlphaInAnimationAdapter;
 
@@ -80,7 +77,7 @@ public class FragmentRelatedRents extends Fragment {
       @Override
       public void onReceived(int status, String message, List<Game> games) {
         if (status == 0) {
-          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+//          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
         } else {
           if(games.size() > 0) {
             RelatedRentAdapter listAdapter = new RelatedRentAdapter(getActivity(), games);

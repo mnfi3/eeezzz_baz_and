@@ -14,8 +14,8 @@ import java.util.List;
 
 import mohtasham.paydar.sabalan.ezbazi.R;
 import mohtasham.paydar.sabalan.ezbazi.controller.adapter.recyclerview.ListShopAdapter;
-import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main_menu.ShopService;
-import mohtasham.paydar.sabalan.ezbazi.controller.system.G;
+import mohtasham.paydar.sabalan.ezbazi.controller.api_service.main.ShopService;
+import mohtasham.paydar.sabalan.ezbazi.controller.system.application.G;
 import mohtasham.paydar.sabalan.ezbazi.model.Game;
 import mohtasham.paydar.sabalan.ezbazi.model.Paginate;
 import mohtasham.paydar.sabalan.ezbazi.view.custom_views.my_views.MyViews;

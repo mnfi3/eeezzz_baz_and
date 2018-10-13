@@ -9,59 +9,87 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
-        android:name=".controller.system.G"
+        android:name=".controller.system.application.G"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
 
-        <activity
-            android:name=".view.activity.ActivityMenu"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme">
+
+
+
+        <activity android:name=".view.activity.ActivityIntro"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
         </activity>
+
+
+
+        <activity
+            android:name=".view.activity.ActivityMenu"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+
+
 
         <activity
             android:name=".view.activity.ActivityHome"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.ActivityLogin">
+        <activity android:name=".view.activity.ActivityLogin"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.ActivityPhoneValidation">
-        </activity>
-        <activity android:name=".view.activity.ActivityRegister">
-        </activity>
-        <activity android:name=".view.activity.ActivityPhoneAccept">
+        <activity android:name=".view.activity.ActivityRegister"
+                  android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".view.activity.ActivityShowRent"
-            android:theme="@style/AppThemeFullScreen">
+            android:theme="@style/AppThemeFullScreen"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".view.activity.ActivityShowShop"
-            android:theme="@style/AppThemeFullScreen">
+            android:theme="@style/AppThemeFullScreen"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.ActivityListShop">
+        <activity android:name=".view.activity.ActivityListShop"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.ActivityListRent">
+        <activity android:name=".view.activity.ActivityListRent"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.ActivityListPost"/>
-        <activity android:name=".view.activity.ActivityTicket">
+        <activity android:name=".view.activity.ActivityListPost"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.ActivityWebView">
+        <activity android:name=".view.activity.ActivityTicket"
+                  android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".view.activity.ActivityWebView"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ActivityComment">
+
+        <activity android:name=".view.activity.ActivityComment"
+                  android:screenOrientation="portrait">
         </activity>
+
+
     </application>
 
 </manifest>
