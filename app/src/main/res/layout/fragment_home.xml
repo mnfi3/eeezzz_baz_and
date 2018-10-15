@@ -31,7 +31,7 @@
                 android:id="@+id/frg_slider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.home.sub.FragmentSlider"
+                android:name="sabalan.paydar.mohtasham.ezibazi.view.fragment.home.sub.FragmentSlider"
                 tools:layout="@layout/fragment_main_slider"
                 />
 
