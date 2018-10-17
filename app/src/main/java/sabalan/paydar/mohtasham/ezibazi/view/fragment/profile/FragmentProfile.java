@@ -217,8 +217,8 @@ public class FragmentProfile extends Fragment {
     Runnable runnable = new Runnable() {
       public void run() {
         getNewTicketsCount();
-        if (!is_pause && G.isLoggedIn) {
-          handler.postDelayed(this, AppConfig.NEW_TICKETS_TIME_MS);
+        if (G.isLoggedIn) {
+          handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
         }else {
           return;
         }

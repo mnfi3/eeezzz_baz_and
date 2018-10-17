@@ -67,7 +67,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:padding="2dp"
-                            android:text="محسن فرجامی"
+                            tools:text="نام کاربر"
                             android:layout_marginLeft="30dp"
                             android:textColor="@color/main_text_color"
                             android:gravity="center_vertical|right"

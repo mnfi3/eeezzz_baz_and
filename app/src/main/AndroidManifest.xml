@@ -21,22 +21,16 @@
         android:screenOrientation="portrait"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-
-
         <service android:name=".controller.firebase.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
-
-
-        <service
-            android:name=".controller.firebase.MyFirebaseMessagingService">
+        <service android:name=".controller.firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -48,9 +42,12 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent"/>
-
-
-
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d0217f736c9c03f87f574a6a067bf3462cd1429e"/>
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="false"/>
 
         <activity
             android:name=".view.activity.ActivityIntro"
@@ -74,16 +71,23 @@
         </activity>
         <activity
             android:name=".view.activity.ActivityLogin"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".view.activity.ActivityRegister"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".view.activity.ActivityShowRent"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
+            <intent-filter>
+                <action android:name="ActivityShowRent"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.ActivityShowShop"
@@ -122,8 +126,8 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
-
-
+        <activity android:name=".view.activity.ActivityPurchase">
+        </activity>
     </application>
 
 </manifest>

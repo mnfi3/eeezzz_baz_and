@@ -3,7 +3,16 @@ package sabalan.paydar.mohtasham.ezibazi.controller.system.application;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.core.CrashlyticsCore;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+import sabalan.paydar.mohtasham.ezibazi.BuildConfig;
+
+import io.fabric.sdk.android.Fabric;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.RentService;
@@ -28,19 +37,41 @@ public class G extends Application {
   public static boolean mustReconnect = false;
 
 
-  public static  boolean isLoggedIn = true;
+  public static  boolean isLoggedIn = false;
   public static List<RentType> rentTypes;
+
+  //analytics
+  private FirebaseAnalytics mFirebaseAnalytics;
 
 
   @Override
   public void onCreate() {
     super.onCreate();
+    Crashlytics crashlyticsKit = new Crashlytics.Builder()
+      .core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+      .build();
+
+// Initialize Fabric with the debug-disabled crashlytics.
+    Fabric.with(this, crashlyticsKit);
+
+
     context = getApplicationContext();
     initializeLogin();
     setFakeCity();
     getRentTypes();
     Storage.deleteCache(context);
     connectivityListener = new ConnectivityListener();
+    mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+    appOpenAnalytics();
+    Log.i(TAG, "client_key : " + Cryptography.generateClientKey());
+    Log.i(TAG, "fcm_client_key : " + Cryptography.generateFcmClientKey());
+  }
+
+  @SuppressLint("InvalidAnalyticsName")
+  private void appOpenAnalytics(){
+    Bundle bundle = new Bundle();
+    bundle.putString("APP_OPEN", "1");
+    mFirebaseAnalytics.logEvent("App", bundle);
   }
 
   private void setFakeCity(){

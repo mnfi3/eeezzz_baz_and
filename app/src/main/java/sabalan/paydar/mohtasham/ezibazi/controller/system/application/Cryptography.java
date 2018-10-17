@@ -1,6 +1,8 @@
 package sabalan.paydar.mohtasham.ezibazi.controller.system.application;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Base64;
 
 import java.math.BigInteger;
@@ -25,12 +27,26 @@ public class Cryptography {
   public static String encrypt(String strClearText){
     try {
       SecretKey secretKey = generateDefaultKey();
-//      for (int i = 0; i< Character.getNumericValue(getHashedString(SALT).charAt(10))-1; i++) {
       @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance(AES);
       cipher.init(Cipher.ENCRYPT_MODE, secretKey);
       byte[] encrypted = cipher.doFinal(strClearText.getBytes("UTF-8"));
       strClearText= Base64.encodeToString(encrypted, Base64.DEFAULT);
-//      }
+      return strClearText;
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "not encrypted";
+    }
+  }
+
+  public static String encrypt(String strClearText, String key){
+    try {
+
+      SecretKey secretKey = new SecretKeySpec(key.getBytes(), AES);
+      @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance(AES);
+      cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+      byte[] encrypted = cipher.doFinal(strClearText.getBytes("UTF-8"));
+      strClearText= Base64.encodeToString(encrypted, Base64.DEFAULT);
       return strClearText;
 
     } catch (Exception e) {
@@ -42,12 +58,24 @@ public class Cryptography {
   public static String decrypt(String strEncrypted){
     try {
       SecretKey secretKey = generateDefaultKey();
-//      for (int i = 0; i< Character.getNumericValue(getHashedString(SALT).charAt(10))-1; i++) {
       @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance(AES);
       cipher.init(Cipher.DECRYPT_MODE, secretKey);
       byte[] decrypted = cipher.doFinal(Base64.decode(strEncrypted, Base64.DEFAULT));
       strEncrypted= new String(decrypted, "UTF-8");
-//      }
+      return strEncrypted;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "not decrypted";
+    }
+  }
+
+  public static String decrypt(String strEncrypted, String key){
+    try {
+      SecretKey secretKey = new SecretKeySpec(key.getBytes(), AES);
+      @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance(AES);
+      cipher.init(Cipher.DECRYPT_MODE, secretKey);
+      byte[] decrypted = cipher.doFinal(Base64.decode(strEncrypted, Base64.DEFAULT));
+      strEncrypted= new String(decrypted, "UTF-8");
       return strEncrypted;
     } catch (Exception e) {
       e.printStackTrace();
@@ -56,15 +84,28 @@ public class Cryptography {
   }
 
 
-  private static String generateClientKey(){
+  public static String generateClientKey(){
     return getHashedString(
-      Cryptography.SALT +
-        Hardware.getWifiMac() +
-//        username +
-        Hardware.getDeviceModel()
-      // G.getSubscriberId(G.context)
-      // G.getAndroidId(G.context)
+      Hardware.getWifiMac()
+      + Hardware.getDeviceModel()
+      + Hardware.getDevice()
+      + Hardware.getDeviceBrand()
+      + Hardware.getDeviceId()
+      + Hardware.getSubscriberId()
     );
+  }
+
+  public static String generateFcmClientKey(){
+    return encrypt(
+     Hardware.getWifiMac()
+      + Hardware.getDeviceModel()
+      + Hardware.getDevice()
+      + Hardware.getDeviceBrand()
+      + Hardware.getDeviceId()
+      + Hardware.getSubscriberId()
+      + Hardware.getAndroidId()
+
+      , SALT);
   }
 
 

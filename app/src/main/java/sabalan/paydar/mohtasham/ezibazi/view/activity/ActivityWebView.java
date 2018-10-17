@@ -91,7 +91,7 @@ public class ActivityWebView extends AppCompatActivity {
   @SuppressLint("SetJavaScriptEnabled")
   public void WebAction(){
 
-    web_view = findViewById(R.id.web_view);
+//    web_view = findViewById(R.id.web_view);
     assert web_view != null;
 //    web_view.getSettings().setJavaScriptEnabled(true);
     web_view.getSettings().setAppCacheEnabled(true);

@@ -201,7 +201,7 @@ public class ActivityTicket extends AppCompatActivity {
       public void run() {
         getTickets();
         if (!is_pause && G.isLoggedIn) {
-          handler.postDelayed(this, AppConfig.NEW_TICKETS_TIME_MS);
+          handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
         }else {
           return;
         }

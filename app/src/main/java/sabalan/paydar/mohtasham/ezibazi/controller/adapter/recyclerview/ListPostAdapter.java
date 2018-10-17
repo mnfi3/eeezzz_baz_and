@@ -1,6 +1,7 @@
 package sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.List;
 import sabalan.paydar.mohtasham.ezibazi.R;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperDate;
 import sabalan.paydar.mohtasham.ezibazi.model.Post;
+import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityWebView;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 
 public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListViewHolder>{
@@ -56,18 +58,9 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-//        Intent intent=new Intent(context, ActivityShowPost.class);
-//        intent.putExtra("ID", post.getId());
-//        intent.putExtra("IMAGE", post.getImageUrl());
-//        intent.putExtra("MAIN_IMAGE", post.getMainImageUrl());
-//        intent.putExtra("DESCRIPTION", post.getDescription());
-//        intent.putExtra("TAGS", post.getTags());
-//        intent.putExtra("SAVE_COUNT", post.getSaveCount());
-//        intent.putExtra("SHARE_COUNT", post.getShareCount());
-//        intent.putExtra("USERNAME", post.getUsername());
-//        intent.putExtra("DESCRIPTION", post.getDescription());
-//        context.startActivity(intent);
-
+        Intent intent = new Intent(context, ActivityWebView.class);
+        intent.putExtra("URL", "https://www.google.com");
+        context.startActivity(intent);
       }
     });
 

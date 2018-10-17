@@ -58,4 +58,8 @@ public class Urls {
   //comment
   public static final String COMMENT_INDEX = AppConfig.MAIN_URL + "/comment";
 
+
+  //fcm refresh token
+  public static final String REFRESH_FCM_TOKEN = AppConfig.MAIN_URL + "/refresh-fcm-token";
+
 }

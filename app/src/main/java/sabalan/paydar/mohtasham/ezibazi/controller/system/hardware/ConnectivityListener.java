@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.widget.Toast;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityNetworkError;
@@ -40,7 +39,7 @@ public class ConnectivityListener extends BroadcastReceiver {
     ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     assert connectivityManager != null;
     NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
-    boolean isConnected = networkInfo!=null && networkInfo.isConnected();
+    boolean isConnected = networkInfo!=null && networkInfo.isAvailable() && networkInfo.isConnected() && networkInfo.isConnectedOrConnecting();
 
 
     if(isConnected){
