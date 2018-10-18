@@ -1,22 +1,33 @@
 package sabalan.paydar.mohtasham.ezibazi.view.fragment.profile;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import sabalan.paydar.mohtasham.ezibazi.R;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.account.AccountService;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.account.UserDetailService;
+import sabalan.paydar.mohtasham.ezibazi.controller.api_service.payment.FinanceService;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ticket.TicketService;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
@@ -46,9 +57,16 @@ public class FragmentProfile extends Fragment {
   TextView txt_rules;
   TextView txt_new_ticket_count;
 
+
   View view;
 
   UserPrefManager prefManager;
+
+  Dialog dialog;
+  Button btn_go_to_bank;
+  TextView txt_dialog_head;
+  EditText edt_amount;
+  AVLoadingIndicatorView avl_pay;
 
   boolean is_pause = false;
 
@@ -116,7 +134,21 @@ public class FragmentProfile extends Fragment {
 
 
 
-      btn_login.setOnClickListener(new View.OnClickListener() {
+    btn_charge_account.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if(!G.isLoggedIn){
+          Intent intent = new Intent(getActivity(), ActivityLogin.class);
+          startActivity(intent);
+        }else {
+          dialog.show();
+        }
+      }
+    });
+
+
+
+    btn_login.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           Intent intent = new Intent(getContext(), ActivityLogin.class);
@@ -126,8 +158,48 @@ public class FragmentProfile extends Fragment {
 
 
 
-    prefManager = new UserPrefManager(getContext());
-//    prefManager.saveCityId(329);
+    edt_amount.addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+      }
+
+      @Override
+      public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+      }
+
+      @Override
+      public void afterTextChanged(Editable editable) {
+//        String text = edt_amount.getText().toString();
+//
+//        text = HelperText.toPersianNumber(text);
+//        edt_amount.setText(HelperText.split_price(text));
+//        text = HelperText.splitedPersianToLatin(edt_amount.getText().toString());
+//        int price = Integer.valueOf(text);
+//
+//        Toast.makeText(getContext(), "amount = " + price, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "amount = " + price, Toast.LENGTH_SHORT).show();
+
+
+      }
+    });
+
+
+    btn_go_to_bank.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if(!checkEntry()){
+          return;
+        }
+       increaseCredit();
+      }
+    });
+
+
+      prefManager = new UserPrefManager(getContext());
+
+
 
 
     return view;
@@ -148,6 +220,15 @@ public class FragmentProfile extends Fragment {
     txt_show_admin_accounts = view.findViewById(R.id.txt_show_admin_accounts);
     txt_rules = view.findViewById(R.id.txt_rules);
     txt_new_ticket_count = view.findViewById(R.id.txt_new_ticket_count);
+
+    dialog = new Dialog(getContext());
+    dialog.setContentView(R.layout.custom_dialog_increase_credit);
+    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+    btn_go_to_bank = dialog.findViewById(R.id.btn_go_to_bank);
+    txt_dialog_head = dialog.findViewById(R.id.txt_dialog_head);
+    edt_amount = dialog.findViewById(R.id.edt_amount);
+    avl_pay = dialog.findViewById(R.id.avl_pay);
   }
 
   private void setTypeFace() {
@@ -161,6 +242,11 @@ public class FragmentProfile extends Fragment {
     txt_show_admin_accounts.setTypeface(MyViews.getIranSansLightFont(getContext()));
     txt_rules.setTypeface(MyViews.getIranSansLightFont(getContext()));
     txt_new_ticket_count.setTypeface(MyViews.getIranSansUltraLightFont(getContext()));
+
+    btn_go_to_bank.setTypeface(MyViews.getIranSansUltraLightFont(getContext()));
+    txt_dialog_head.setTypeface(MyViews.getIranSansUltraLightFont(getContext()));
+    edt_amount.setTypeface(MyViews.getIranSansUltraLightFont(getContext()));
+
   }
 
   private void logoutUser(){
@@ -212,6 +298,18 @@ public class FragmentProfile extends Fragment {
   }
 
 
+  private boolean checkEntry(){
+    String text = edt_amount.getText().toString();
+    if(text.length() < 1){
+      MyViews.makeText((AppCompatActivity) getActivity(), "هیچ مبلغی وارد نشده است", Toast.LENGTH_SHORT);
+      return false;
+    } else if(Integer.valueOf(text) < 100){
+      MyViews.makeText((AppCompatActivity) getActivity(), "مبلغ وارد شده حداقل باید 100 تومان باشد", Toast.LENGTH_SHORT);
+      return false;
+    }
+    return true;
+  }
+
   private void receiveNewTicketsCount(){
     final Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -227,6 +325,54 @@ public class FragmentProfile extends Fragment {
 
     handler.post(runnable);
 
+  }
+
+
+  private void receiveUserFinance(){
+    final Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+      public void run() {
+        getUserFinance();
+        if (G.isLoggedIn) {
+          handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
+        }else {
+          return;
+        }
+      }
+    };
+
+    handler.post(runnable);
+
+  }
+
+
+
+  private void increaseCredit(){
+    avl_pay.setVisibility(View.VISIBLE);
+    FinanceService service = new FinanceService(getContext());
+    JSONObject object = new JSONObject();
+    try {
+      object.put("amount", Integer.valueOf(edt_amount.getText().toString()));
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+    service.getPayUrl(object, new FinanceService.onCreditComplete() {
+      @Override
+      public void onComplete(int status, String message, String url) {
+        avl_pay.setVisibility(View.INVISIBLE);
+        if (status == 1){
+          edt_amount.setText("");
+          dialog.dismiss();
+
+          receiveUserFinance();
+
+          Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+          startActivity(browserIntent);
+        }else {
+          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+        }
+      }
+    });
 
   }
 

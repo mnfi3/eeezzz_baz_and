@@ -92,7 +92,7 @@ public class ActivityComment extends AppCompatActivity {
 
 
 
-      btn_add_comment.setOnClickListener(new View.OnClickListener() {
+    btn_add_comment.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           insertComment();

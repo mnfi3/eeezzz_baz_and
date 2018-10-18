@@ -62,4 +62,8 @@ public class Urls {
   //fcm refresh token
   public static final String REFRESH_FCM_TOKEN = AppConfig.MAIN_URL + "/refresh-fcm-token";
 
+
+  //finance
+  public static final String INCREASE_CREDIT = AppConfig.MAIN_URL + "/increase-credit";
+
 }

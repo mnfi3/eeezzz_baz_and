@@ -58,4 +58,62 @@ public class HelperText {
       return toPersianNumber(String.valueOf(price));
     }
   }
+
+
+  public static String splitedPersianToLatin(String price){
+    if (price.length() == 0) {
+      return "";
+    }
+
+    price = price.replace(persianNumbers[0].charAt(0), '0');
+    price = price.replace(persianNumbers[1].charAt(0), '1');
+    price = price.replace(persianNumbers[2].charAt(0), '2');
+    price = price.replace(persianNumbers[3].charAt(0), '3');
+    price = price.replace(persianNumbers[4].charAt(0), '4');
+    price = price.replace(persianNumbers[5].charAt(0), '5');
+    price = price.replace(persianNumbers[6].charAt(0), '6');
+    price = price.replace(persianNumbers[7].charAt(0), '7');
+    price = price.replace(persianNumbers[8].charAt(0), '8');
+    price = price.replace(persianNumbers[9].charAt(0), '9');
+    price = price.replace(',', "".charAt(0));
+    price = price.replace('،', "".charAt(0));
+
+    return price;
+
+//    StringBuilder out = new StringBuilder();
+//    int length = price.length();
+//    for (int i = 0; i < length; i++) {
+//      String c = Character.toString(price.charAt(i));
+//      if (c.equals(persianNumbers[0])) {
+//        out.append("0");
+//      } else if (c.equals(persianNumbers[1])) {
+//        out.append("1");
+//      } else if (c.equals(persianNumbers[2])) {
+//        out.append("2");
+//      } else if (c.equals(persianNumbers[3])) {
+//        out.append("3");
+//      } else if (c.equals(persianNumbers[4])) {
+//        out.append("4");
+//      } else if (c.equals(persianNumbers[5])) {
+//        out.append("5");
+//      } else if (c.equals(persianNumbers[6])) {
+//        out.append("6");
+//      } else if (c.equals(persianNumbers[7])) {
+//        out.append("7");
+//      } else if (c.equals(persianNumbers[8])) {
+//        out.append("8");
+//      } else if (c.equals(persianNumbers[9])) {
+//        out.append("9");
+//      } else if (c.equals(Character.toString(','))) {
+//        out.append("");
+//      } else if (c.equals(Character.toString('،'))) {
+//        out.append("");
+//      }
+//    }
+//    return out.toString();
+  }
+
+
+
+
 }

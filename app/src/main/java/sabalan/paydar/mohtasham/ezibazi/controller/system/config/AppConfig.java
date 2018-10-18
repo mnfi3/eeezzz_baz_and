@@ -9,4 +9,5 @@ public class AppConfig {
 
   public static final int DEFAULT_CITY_ID = 14;//TABRIZ
   public static final int NEW_TICKETS_CHECK_TIME_MS = 10000;
+  public static final int GET_USER_FINANCE_REFRESH = 10000;
 }
