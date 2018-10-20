@@ -53,6 +53,7 @@ public class G extends Application {
 
 // Initialize Fabric with the debug-disabled crashlytics.
     Fabric.with(this, crashlyticsKit);
+    Fabric.with(this, new Crashlytics());
 
 
     context = getApplicationContext();

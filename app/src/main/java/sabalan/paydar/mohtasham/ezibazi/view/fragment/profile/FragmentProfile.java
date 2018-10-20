@@ -334,7 +334,7 @@ public class FragmentProfile extends Fragment {
       public void run() {
         getUserFinance();
         if (G.isLoggedIn) {
-          handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
+          handler.postDelayed(this, AppConfig.GET_USER_FINANCE_REFRESH);
         }else {
           return;
         }

@@ -167,7 +167,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //      new NotificationCompat.Builder(this)
         .setSmallIcon(R.drawable.ic_ezibazi)
 //        .setContentTitle(getString(R.string.fcm_message))
-        .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.ic_ezibazi))
+        .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.gamepad))
         .setContentTitle(getString(R.string.app_name))
         .setContentText(messageBody)
         .setAutoCancel(true)

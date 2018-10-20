@@ -32,12 +32,12 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     fcm.setToken(refreshedToken);
     fcm.setClient_key(Cryptography.generateFcmClientKey());
     new FcmPrefManager(MyFirebaseInstanceIDService.this).saveFcm(fcm);
-    sendFcmInfoToServer();
+    sendFcmInfoToServer(fcm);
   }
 
 
-  private void sendFcmInfoToServer(){
-    Fcm fcm = new FcmPrefManager(MyFirebaseInstanceIDService.this).getFcm();
+  private void sendFcmInfoToServer(Fcm fcm){
+//    Fcm fcm = new FcmPrefManager(MyFirebaseInstanceIDService.this).getFcm();
     JSONObject object = new JSONObject();
     try {
       object.put("device_type", "ANDROID");
@@ -46,7 +46,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     } catch (JSONException e) {
     }
 
-    FireBaseApiService service = new FireBaseApiService(getApplicationContext());
+    FireBaseApiService service = new FireBaseApiService(MyFirebaseInstanceIDService.this);
     service.refreshFcmToken(object, new FireBaseApiService.onRefreshTokenReceived() {
       @Override
       public void onReceived(int status, String message, Device device) {

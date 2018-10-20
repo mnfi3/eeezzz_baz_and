@@ -204,7 +204,7 @@ public class ActivityLogin extends AppCompatActivity {
     } catch (JSONException e) {
     }
 
-    FireBaseApiService service = new FireBaseApiService(getApplicationContext());
+    FireBaseApiService service = new FireBaseApiService(ActivityLogin.this);
     service.refreshFcmToken(object, new FireBaseApiService.onRefreshTokenReceived() {
       @Override
       public void onReceived(int status, String message, Device device) {
