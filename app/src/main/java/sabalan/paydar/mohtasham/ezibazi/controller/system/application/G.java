@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.core.CrashlyticsCore;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -47,13 +48,14 @@ public class G extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    Crashlytics crashlyticsKit = new Crashlytics.Builder()
-      .core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
-      .build();
+//    Crashlytics crashlyticsKit = new Crashlytics.Builder()
+//      .core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+//      .build();
 
 // Initialize Fabric with the debug-disabled crashlytics.
-    Fabric.with(this, crashlyticsKit);
+//    Fabric.with(this, crashlyticsKit);
     Fabric.with(this, new Crashlytics());
+    Fabric.with(this, new Answers());
 
 
     context = getApplicationContext();
@@ -64,8 +66,6 @@ public class G extends Application {
     connectivityListener = new ConnectivityListener();
     mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     appOpenAnalytics();
-    Log.i(TAG, "client_key : " + Cryptography.generateClientKey());
-    Log.i(TAG, "fcm_client_key : " + Cryptography.generateFcmClientKey());
   }
 
   @SuppressLint("InvalidAnalyticsName")

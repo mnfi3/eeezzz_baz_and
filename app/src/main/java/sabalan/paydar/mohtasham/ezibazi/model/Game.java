@@ -27,6 +27,8 @@ public class Game {
   private ArrayList<Video> videos;
   private ArrayList<String> genres;
   private String console_name;
+  private ArrayList<String> app_main_photos_url;
+  private String app_cover_photo_url;
 
   public static class Parser{
 
@@ -54,11 +56,21 @@ public class Game {
         game.setDescription(game_info_obj.getString("description"));
         JSONArray photoArray = game_info_obj.getJSONArray("photos");
         ArrayList<Photo> photos = new ArrayList<>();
+
+        ArrayList<String> main_photo_urls = new ArrayList<>();
        for (int i=0 ; i<photoArray.length() ; i++){
          Photo photo;
          photo = Photo.Parser.parse(photoArray.getJSONObject(i));
          photos.add(photo);
+
+         if(photo.getType().contains("app_main")){
+           main_photo_urls.add(photo.getUrl());
+         }else if(photo.getType().contains("app_cover")){
+           game.setApp_cover_photo_url(photo.getUrl());
+         }
+
        }
+       game.setApp_main_photos_url(main_photo_urls);
        game.setPhotos(photos);
 
         JSONArray videoArray = game_info_obj.getJSONArray("videos");
@@ -89,8 +101,21 @@ public class Game {
   }
 
 
+  public ArrayList<String> getApp_main_photos_url() {
+    return app_main_photos_url;
+  }
 
+  public void setApp_main_photos_url(ArrayList<String> app_main_photos_url) {
+    this.app_main_photos_url = app_main_photos_url;
+  }
 
+  public String getApp_cover_photo_url() {
+    return app_cover_photo_url;
+  }
+
+  public void setApp_cover_photo_url(String app_cover_photo_url) {
+    this.app_cover_photo_url = app_cover_photo_url;
+  }
 
   public String getConsole_name() {
     return console_name;

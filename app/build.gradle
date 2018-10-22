@@ -13,11 +13,11 @@ buildscript {
 //noinspection GradleCompatible
 apply plugin: 'com.android.application'
 
+apply plugin: 'io.fabric'
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-//apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -101,9 +101,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.3.3'
 //    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
     //crash reporting
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
     implementation 'com.google.firebase:firebase-crash:11.8.0'
+    //fabric answer
+    implementation 'com.crashlytics.sdk.android:answers:1.4.3'
 }
 
 //firebase

@@ -43,10 +43,8 @@ public class RelatedRentAdapter extends RecyclerView.Adapter<RelatedRentAdapter.
   public void onBindViewHolder(ListViewHolder holder, int position) {
     Game game = games.get(position);
     final int id = game.getId();
-    final int gameInfoId = game.getGame_info_id();
-    ArrayList<Photo> photos = game.getPhotos();
       Picasso.with(context).
-        load(photos.get(0).getUrl())
+        load(game.getApp_cover_photo_url())
 //      .noFade()
 //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
 //      .skipMemoryCache()

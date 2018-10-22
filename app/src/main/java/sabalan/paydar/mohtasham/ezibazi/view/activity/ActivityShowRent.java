@@ -20,6 +20,10 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
@@ -30,6 +34,7 @@ import sabalan.paydar.mohtasham.ezibazi.R;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.RentService;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.SettingPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
 import sabalan.paydar.mohtasham.ezibazi.model.RentType;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
@@ -49,7 +54,7 @@ public class ActivityShowRent extends AppCompatActivity {
   Toolbar toolbar;
 
   VideoView vdo_game;
-  ImageView img_game;
+  SliderLayout slider_game;
   RoundedImageView img_game_cover;
   TextView txt_name, txt_console, txt_genres, txt_show_genres, txt_release_date, txt_rate, txt_detail_age_class;
   TextView txt_region, txt_show_region;
@@ -115,15 +120,25 @@ public class ActivityShowRent extends AppCompatActivity {
     });
 
 
-
-    btn_rent_day_count_7.setOnClickListener(new View.OnClickListener() {
+    btn_rent.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(is_ready_rent_types){
-          setRentDay(rent_day_7);
-        }
+        goToPurchase();
       }
     });
+
+
+
+
+
+    btn_rent_day_count_7.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          if (is_ready_rent_types) {
+            setRentDay(rent_day_7);
+          }
+        }
+      });
 
     btn_rent_day_count_10.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -163,8 +178,8 @@ public class ActivityShowRent extends AppCompatActivity {
     collapsing_toolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
     toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-    vdo_game = (VideoView) findViewById(R.id.vdo_game);
-    img_game = (ImageView) findViewById(R.id.img_game);
+    vdo_game =  findViewById(R.id.vdo_game);
+    slider_game = findViewById(R.id.slider_game);
     img_game_cover = (RoundedImageView) findViewById(R.id.img_game_cover);
     txt_name = (TextView) findViewById(R.id.txt_name);
     txt_console = (TextView) findViewById(R.id.txt_console);
@@ -214,7 +229,6 @@ public class ActivityShowRent extends AppCompatActivity {
     btn_comments.setTypeface(MyViews.getIranSansLightFont(ActivityShowRent.this));
   }
 
-
   private void prepareGame(Bundle extras, Bundle savedInstanceState){
     int id ;
     if(extras != null) {
@@ -247,6 +261,7 @@ public class ActivityShowRent extends AppCompatActivity {
       public void onReceived(int status, String message, List<RentType> rentTypes) {
         if (status == 1){
           ActivityShowRent.this.rentTypes = rentTypes;
+          G.rentTypes = rentTypes;
           initializeRentPricePercent();
           fillViews();
           setRentDay(rent_day_7);
@@ -257,9 +272,6 @@ public class ActivityShowRent extends AppCompatActivity {
       }
     });
   }
-
-
-
 
   private void fillViews(){
     txt_page_name.setText(game.getName());
@@ -275,32 +287,21 @@ public class ActivityShowRent extends AppCompatActivity {
 //    txt_rate.setText("rate : 4.6");
     txt_region.setText(game.getRegion());
 
-    String cover_image = "";
-    for (int i=0 ; i<game.getPhotos().size() ; i++){
-//      if (game.getPhotos().get(i).getHeight() == R.dimen.photo_cover_height){
-      cover_image = game.getPhotos().get(0).getUrl();
-      break;
-//      }
-    }
+    String cover_image = game.getApp_cover_photo_url();
     Picasso.with(ActivityShowRent.this).
       load(cover_image)
 //      .placeholder()
       .into(img_game_cover);
 
-    if(game.getVideos().size() > 0){
-      img_game.setVisibility(View.GONE);
+    int is_play_video = new SettingPrefManager(ActivityShowRent.this).getPlayVideos();
+    if(game.getVideos().size() > 0 && is_play_video != 0 ){
+      slider_game.setVisibility(View.INVISIBLE);
       playVideo();
     }else {
-      img_game.setVisibility(View.VISIBLE);
-      vdo_game.setVisibility(View.GONE);
-      String main_image = "";
-      for (int i=0 ; i<game.getPhotos().size() ; i++){
-//        if (game.getPhotos().get(i).getHeight() == R.dimen.photo_main_height){
-        cover_image = game.getPhotos().get(0).getUrl();
-        break;
-//        }
-      }
+      vdo_game.setVisibility(View.INVISIBLE);
+      setSlider();
     }
+
 
 
 
@@ -319,6 +320,58 @@ public class ActivityShowRent extends AppCompatActivity {
   }
 
 
+
+  private void goToPurchase(){
+    if (game == null || rentTypes == null || game.getCount() < 1){
+      return;
+    }
+
+    if(!G.isLoggedIn){
+      Intent intent = new Intent(ActivityShowRent.this, ActivityLogin.class);
+      startActivity(intent);
+    }
+
+    int rent_type_id = 0;
+    for (int i=0 ; i<rentTypes.size() ; i++){
+      if (current_rent_day == rentTypes.get(i).getDay_count()){
+        rent_type_id = rentTypes.get(i).getId();
+        break;
+      }
+    }
+
+    Intent intent = new Intent(ActivityShowRent.this, ActivityPurchase.class);
+    intent.putExtra("TYPE", "RENT");
+    intent.putExtra("ID", game.getId());
+    intent.putExtra("RENT_TYPE_ID", rent_type_id);
+    startActivity(intent);
+
+
+
+  }
+
+
+
+
+  private void setSlider(){
+    for (int i=0;i<game.getApp_main_photos_url().size();i++){
+      TextSliderView textSliderView = new TextSliderView(ActivityShowRent.this);
+      textSliderView
+        .image(game.getApp_main_photos_url().get(i))
+        .setScaleType(BaseSliderView.ScaleType.Fit);
+
+      slider_game.addSlider(textSliderView);
+    }
+
+    slider_game.startAutoCycle();
+    slider_game.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+    slider_game.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+    slider_game.setCustomAnimation(new DescriptionAnimation());
+    slider_game.setDuration(5000);
+  }
+
+
+
+
   private void playVideo(){
 //    getWindow().setFormat(PixelFormat.TRANSLUCENT);
 //    MediaController mediaController = new MediaController(ActivityShowRent.this);
@@ -331,6 +384,8 @@ public class ActivityShowRent extends AppCompatActivity {
       @Override
       public void onPrepared(MediaPlayer mediaPlayer) {
         mediaPlayer.setVolume(0,0);
+//        vdo_game.setVisibility(View.VISIBLE);
+        slider_game.setVisibility(View.INVISIBLE);
         vdo_game.start();
       }
     });

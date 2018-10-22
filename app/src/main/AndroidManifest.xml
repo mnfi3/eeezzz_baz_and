@@ -47,7 +47,7 @@
             android:value="d0217f736c9c03f87f574a6a067bf3462cd1429e"/>
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
-            android:value="false"/>
+            android:value="true"/>
 
         <activity
             android:name=".view.activity.ActivityIntro"
@@ -60,22 +60,35 @@
         </activity>
 
 
-
         <activity
             android:name=".view.activity.ActivityMenu"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
 
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
                 <data
-                    android:host="http://izi-bazi.ud"
-                    android:pathPattern="/api/success"
-                    android:scheme="http" />
+                    android:scheme="http"
+                    android:host="192.168.10.83/izi-bazi.ud"
+                    android:pathPrefix="/api/slider"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:scheme="http"
+                    android:host="192.168.10.83"
+                    />
+            </intent-filter>
+
 
         </activity>
 
@@ -100,7 +113,6 @@
             android:theme="@style/AppThemeFullScreen">
             <intent-filter>
                 <action android:name="ActivityShowRent"/>
-
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

@@ -46,9 +46,9 @@ public class ListShopRequestAdapter extends RecyclerView.Adapter<ListShopRequest
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
     final ShopRequest request = requests.get(position);
-    ArrayList<Photo> photos = request.getGame().getPhotos();
+    String image_url = request.getGame().getApp_cover_photo_url();
     Picasso.with(context).
-      load(photos.get(0).getUrl())
+      load(image_url)
 //      .noFade()
 //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
 //      .skipMemoryCache()

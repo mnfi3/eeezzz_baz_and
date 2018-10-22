@@ -46,9 +46,9 @@ public class ListRentRequestAdapter extends RecyclerView.Adapter<ListRentRequest
   @Override
   public void onBindViewHolder(ListViewHolder holder, int position) {
     final RentRequest request = requests.get(position);
-    ArrayList<Photo> photos = request.getGame().getPhotos();
+    String image_url = request.getGame().getApp_cover_photo_url();
     Picasso.with(context).
-      load(photos.get(0).getUrl())
+      load(image_url)
 //    .noFade()
 //    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
 //    .skipMemoryCache()
@@ -134,7 +134,8 @@ public class ListRentRequestAdapter extends RecyclerView.Adapter<ListRentRequest
 
     private void setTypeFace(){
 //      txt_name.setTypeface(MyViews.getIranSansLightFont(context));
-      txt_name.setTypeface(MyViews.getBlackthornsFont(context));
+//      txt_name.setTypeface(MyViews.getBlackthornsFont(context));
+      txt_name.setTypeface(MyViews.getPlayFairDisplaySCFont(context));
       txt_rating.setTypeface(MyViews.getIranSansLightFont(context));
       txt_region.setTypeface(MyViews.getIranSansLightFont(context));
       txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));

@@ -267,6 +267,76 @@
 
 
                 <TextView
+                    android:id="@+id/txt_show_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="تنظیمات : "
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/font_size_small"
+                    android:layout_marginTop="20dp"
+                    android:padding="3dp"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:layout_marginTop="20dp">
+
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/swch_show_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:textOff=""
+                        android:textOn=""
+                        android:button="@null"
+                        android:padding="20dp"/>
+
+
+
+                    <TextView
+                        android:id="@+id/txt_show_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:text="نمایش ویدیوها "
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/font_size_small"/>
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|right"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/back_profile_user_detail"
+                android:orientation="vertical">
+
+
+
+
+
+                <TextView
                     android:id="@+id/txt_show_admin_accounts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

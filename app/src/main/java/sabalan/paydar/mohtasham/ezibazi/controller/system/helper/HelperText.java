@@ -65,19 +65,19 @@ public class HelperText {
       return "";
     }
 
-    price = price.replace(persianNumbers[0].charAt(0), '0');
-    price = price.replace(persianNumbers[1].charAt(0), '1');
-    price = price.replace(persianNumbers[2].charAt(0), '2');
-    price = price.replace(persianNumbers[3].charAt(0), '3');
-    price = price.replace(persianNumbers[4].charAt(0), '4');
-    price = price.replace(persianNumbers[5].charAt(0), '5');
-    price = price.replace(persianNumbers[6].charAt(0), '6');
-    price = price.replace(persianNumbers[7].charAt(0), '7');
-    price = price.replace(persianNumbers[8].charAt(0), '8');
-    price = price.replace(persianNumbers[9].charAt(0), '9');
-    price = price.replace(',', "".charAt(0));
-    price = price.replace('،', "".charAt(0));
-
+    price = price.replace(persianNumbers[0], "0");
+    price = price.replace(persianNumbers[1], "1");
+    price = price.replace(persianNumbers[2], "2");
+    price = price.replace(persianNumbers[3], "3");
+    price = price.replace(persianNumbers[4], "4");
+    price = price.replace(persianNumbers[5], "5");
+    price = price.replace(persianNumbers[6], "6");
+    price = price.replace(persianNumbers[7], "7");
+    price = price.replace(persianNumbers[8], "8");
+    price = price.replace(persianNumbers[9], "9");
+    price = price.replace(",", "");
+    price = price.replace("،", "");
+//
     return price;
 
 //    StringBuilder out = new StringBuilder();

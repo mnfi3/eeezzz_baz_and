@@ -43,9 +43,8 @@ public class RentMainAdapter extends RecyclerView.Adapter<RentMainAdapter.ListVi
   public void onBindViewHolder(ListViewHolder holder, int position) {
     Game game = games.get(position);
     final int id = game.getId();
-    ArrayList<Photo> photos = game.getPhotos();
       Picasso.with(context).
-        load(photos.get(0).getUrl())
+        load(game.getApp_cover_photo_url())
 //      .noFade()
 //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
 //      .skipMemoryCache()

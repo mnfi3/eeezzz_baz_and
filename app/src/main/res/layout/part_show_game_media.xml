@@ -35,16 +35,20 @@
             app:layout_collapseParallaxMultiplier="0.7">
 
 
-            <!--<com.daimajia.slider.library.SliderLayout-->
-            <!--android:id="@+id/slider_game"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="300sp"-->
-            <!--android:fitsSystemWindows="true"-->
-            <!--android:scaleType="centerCrop"-->
-            <!--android:src="@drawable/test"-->
-            <!--app:auto_cycle="true"-->
-            <!--android:visibility="invisible"-->
-            <!--/>-->
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider_game"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="60dp"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitXY"
+                android:visibility="visible"
+            />
 
             <VideoView
                 android:id="@+id/vdo_game"
@@ -79,16 +83,7 @@
                 />
 
 
-            <!--<ImageView-->
-            <!--android:id="@+id/img_game_cover"-->
-            <!--android:layout_width="@dimen/item_list_games_image_width"-->
-            <!--android:layout_height="@dimen/item_list_games_image_height"-->
-            <!--android:layout_alignBottom="@+id/vdo_game"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_marginBottom="-30dp"-->
-            <!--android:layout_marginEnd="20dp"-->
-            <!--android:contentDescription="TODO"-->
-            <!--tools:src="@drawable/test"/>-->
+
 
 
             <com.makeramen.roundedimageview.RoundedImageView

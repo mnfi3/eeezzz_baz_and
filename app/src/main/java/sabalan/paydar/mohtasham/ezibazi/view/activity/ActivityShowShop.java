@@ -18,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
@@ -26,6 +30,7 @@ import sabalan.paydar.mohtasham.ezibazi.R;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.ShopService;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.SettingPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail.FragmentRelatedPost;
@@ -43,6 +48,7 @@ public class ActivityShowShop extends AppCompatActivity {
 
   VideoView vdo_game;
   ImageView img_game;
+  SliderLayout slider_game;
   RoundedImageView img_game_cover;
   TextView txt_name, txt_console, txt_genres, txt_show_genres, txt_release_date, txt_rate;
   TextView txt_region, txt_show_region;
@@ -75,27 +81,6 @@ public class ActivityShowShop extends AppCompatActivity {
     Bundle extras = getIntent().getExtras();
     prepareGame(extras ,savedInstanceState);
 
-
-//    nested_scroll.setOnTouchListener(new View.OnTouchListener() {
-//      @Override
-//      public boolean onTouch(View v, MotionEvent event) {
-//        int action = event.getAction();
-//        switch (action) {
-//          case MotionEvent.ACTION_DOWN:
-//            v.getParent().requestDisallowInterceptTouchEvent(true);
-//            break;
-//
-//          case MotionEvent.ACTION_UP:
-//            v.getParent().requestDisallowInterceptTouchEvent(true);
-//            break;
-//        }
-//        // Handle nestedScrollView touch events.
-//        v.onTouchEvent(event);
-//        return true;
-//      }
-//    });
-
-
     img_back.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -103,16 +88,27 @@ public class ActivityShowShop extends AppCompatActivity {
       }
     });
 
-
-    btn_comments.setOnClickListener(new View.OnClickListener() {
+    btn_shop.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent intent = new Intent(ActivityShowShop.this, ActivityComment.class);
-        intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
-        intent.putExtra("GAME_NAME", game.getName());
-        ActivityShowShop.this.startActivity(intent);
+        goToPurchase();
       }
     });
+
+
+
+
+      btn_comments.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          Intent intent = new Intent(ActivityShowShop.this, ActivityComment.class);
+          intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
+          intent.putExtra("GAME_NAME", game.getName());
+          ActivityShowShop.this.startActivity(intent);
+        }
+      });
+
+
 
 
 
@@ -130,6 +126,7 @@ public class ActivityShowShop extends AppCompatActivity {
 
     vdo_game = (VideoView) findViewById(R.id.vdo_game);
     img_game = (ImageView) findViewById(R.id.img_game);
+    slider_game = findViewById(R.id.slider_game);
     img_game_cover = (RoundedImageView) findViewById(R.id.img_game_cover);
     txt_name = (TextView) findViewById(R.id.txt_name);
     txt_console = (TextView) findViewById(R.id.txt_console);
@@ -198,6 +195,7 @@ public class ActivityShowShop extends AppCompatActivity {
 
 
 
+  @SuppressLint("SetTextI18n")
   private void fillViews(){
     txt_page_name.setText(game.getName());
 
@@ -224,20 +222,17 @@ public class ActivityShowShop extends AppCompatActivity {
 //      .placeholder()
       .into(img_game_cover);
 
-    if(game.getVideos().size() > 0){
-      img_game.setVisibility(View.GONE);
+
+    int is_play_video = new SettingPrefManager(ActivityShowShop.this).getPlayVideos();
+    if(game.getVideos().size() > 0 && is_play_video != 0 ){
+      slider_game.setVisibility(View.INVISIBLE);
       playVideo();
     }else {
-      img_game.setVisibility(View.VISIBLE);
-      vdo_game.setVisibility(View.GONE);
-      String main_image = "";
-      for (int i=0 ; i<game.getPhotos().size() ; i++){
-//        if (game.getPhotos().get(i).getHeight() == R.dimen.photo_main_height){
-          cover_image = game.getPhotos().get(0).getUrl();
-          break;
-//        }
-      }
+      vdo_game.setVisibility(View.INVISIBLE);
+      setSlider();
     }
+
+
 
     if(game.getCount() > 0) {
       btn_shop.setText(" خرید با قیمت " + HelperText.split_price(game.getPrice()) + " تومان ");
@@ -268,6 +263,48 @@ public class ActivityShowShop extends AppCompatActivity {
     ft.replace(R.id.lyt_related_shops, relatedShops);
     ft.replace(R.id.lyt_related_posts, relatedPost);
     ft.commit();
+  }
+
+
+
+  private void goToPurchase(){
+    if (game == null || game.getCount() < 1){
+      return;
+    }
+
+    if(!G.isLoggedIn){
+      Intent intent = new Intent(ActivityShowShop.this, ActivityLogin.class);
+      startActivity(intent);
+    }
+
+
+
+    Intent intent = new Intent(ActivityShowShop.this, ActivityPurchase.class);
+    intent.putExtra("TYPE", "SHOP");
+    intent.putExtra("ID", game.getId());
+    startActivity(intent);
+
+
+
+  }
+
+
+
+  private void setSlider(){
+    for (int i=0;i<game.getApp_main_photos_url().size();i++){
+      TextSliderView textSliderView = new TextSliderView(ActivityShowShop.this);
+      textSliderView
+        .image(game.getApp_main_photos_url().get(i))
+        .setScaleType(BaseSliderView.ScaleType.Fit);
+
+      slider_game.addSlider(textSliderView);
+    }
+
+    slider_game.startAutoCycle();
+    slider_game.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+    slider_game.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+    slider_game.setCustomAnimation(new DescriptionAnimation());
+    slider_game.setDuration(5000);
   }
 
 

@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.config.AppConfig;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.SettingPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.UserPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
@@ -56,17 +59,23 @@ public class FragmentProfile extends Fragment {
   TextView txt_show_admin_accounts;
   TextView txt_rules;
   TextView txt_new_ticket_count;
+  TextView txt_show_setting;
+  TextView txt_show_video;
+  SwitchCompat swch_show_video;
 
 
   View view;
 
   UserPrefManager prefManager;
+  SettingPrefManager settingPrefManager;
 
   Dialog dialog;
   Button btn_go_to_bank;
   TextView txt_dialog_head;
   EditText edt_amount;
   AVLoadingIndicatorView avl_pay;
+  int amount = 0;
+  boolean is_to_change = true;
 
   boolean is_pause = false;
 
@@ -77,9 +86,12 @@ public class FragmentProfile extends Fragment {
     setupViews();
     setTypeFace();
 
+    prefManager = new UserPrefManager(getContext());
+    settingPrefManager = new SettingPrefManager(getContext());
 
     //get new tickets count (async)
     receiveNewTicketsCount();
+    initializeSetting();
 
 
 
@@ -172,16 +184,14 @@ public class FragmentProfile extends Fragment {
       @Override
       public void afterTextChanged(Editable editable) {
 //        String text = edt_amount.getText().toString();
-//
-//        text = HelperText.toPersianNumber(text);
-//        edt_amount.setText(HelperText.split_price(text));
+//        text = HelperText.splitedPersianToLatin(text);
+//        amount = Integer.valueOf(text);
+//        String splitedText = HelperText.split_price(text);
+//        edt_amount.setText(splitedText);
 //        text = HelperText.splitedPersianToLatin(edt_amount.getText().toString());
 //        int price = Integer.valueOf(text);
-//
+//        Toast.makeText(getContext(), "amount = " + amount, Toast.LENGTH_SHORT).show();
 //        Toast.makeText(getContext(), "amount = " + price, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(getContext(), "amount = " + price, Toast.LENGTH_SHORT).show();
-
-
       }
     });
 
@@ -196,8 +206,18 @@ public class FragmentProfile extends Fragment {
       }
     });
 
+    swch_show_video.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (b){
+          settingPrefManager.savePlayVideo(1);
+        }else {
+          settingPrefManager.savePlayVideo(0);
+        }
+      }
+    });
 
-      prefManager = new UserPrefManager(getContext());
+
 
 
 
@@ -220,6 +240,9 @@ public class FragmentProfile extends Fragment {
     txt_show_admin_accounts = view.findViewById(R.id.txt_show_admin_accounts);
     txt_rules = view.findViewById(R.id.txt_rules);
     txt_new_ticket_count = view.findViewById(R.id.txt_new_ticket_count);
+    txt_show_setting = view.findViewById(R.id.txt_show_setting);
+    txt_show_video = view.findViewById(R.id.txt_show_video);
+    swch_show_video = view.findViewById(R.id.swch_show_video);
 
     dialog = new Dialog(getContext());
     dialog.setContentView(R.layout.custom_dialog_increase_credit);
@@ -242,12 +265,29 @@ public class FragmentProfile extends Fragment {
     txt_show_admin_accounts.setTypeface(MyViews.getIranSansLightFont(getContext()));
     txt_rules.setTypeface(MyViews.getIranSansLightFont(getContext()));
     txt_new_ticket_count.setTypeface(MyViews.getIranSansUltraLightFont(getContext()));
+    txt_show_setting.setTypeface(MyViews.getIranSansLightFont(getContext()));
+    txt_show_video.setTypeface(MyViews.getIranSansLightFont(getContext()));
 
     btn_go_to_bank.setTypeface(MyViews.getIranSansUltraLightFont(getContext()));
     txt_dialog_head.setTypeface(MyViews.getIranSansUltraLightFont(getContext()));
     edt_amount.setTypeface(MyViews.getIranSansUltraLightFont(getContext()));
 
   }
+
+
+
+  private void initializeSetting(){
+    int is_play_video = settingPrefManager.getPlayVideos();
+    if (is_play_video == 2){
+      settingPrefManager.savePlayVideo(1);
+      swch_show_video.setChecked(true);
+    }else if(is_play_video == 0){
+      swch_show_video.setChecked(false);
+    }else if (is_play_video == 1){
+      swch_show_video.setChecked(true);
+    }
+  }
+
 
   private void logoutUser(){
     prefManager = new UserPrefManager(getContext());
@@ -263,9 +303,6 @@ public class FragmentProfile extends Fragment {
   }
 
 
-  private void getUserDetail(){
-
-  }
 
   private void getUserFinance(){
     UserDetailService service = new UserDetailService(getContext());
@@ -303,7 +340,7 @@ public class FragmentProfile extends Fragment {
     if(text.length() < 1){
       MyViews.makeText((AppCompatActivity) getActivity(), "هیچ مبلغی وارد نشده است", Toast.LENGTH_SHORT);
       return false;
-    } else if(Integer.valueOf(text) < 100){
+    } else if(Integer.parseInt(text) < 100){
       MyViews.makeText((AppCompatActivity) getActivity(), "مبلغ وارد شده حداقل باید 100 تومان باشد", Toast.LENGTH_SHORT);
       return false;
     }
@@ -334,7 +371,7 @@ public class FragmentProfile extends Fragment {
       public void run() {
         getUserFinance();
         if (G.isLoggedIn) {
-          handler.postDelayed(this, AppConfig.GET_USER_FINANCE_REFRESH);
+          handler.postDelayed(this, AppConfig.TIME_GET_USER_FINANCE_REFRESH_MS);
         }else {
           return;
         }
@@ -351,8 +388,9 @@ public class FragmentProfile extends Fragment {
     avl_pay.setVisibility(View.VISIBLE);
     FinanceService service = new FinanceService(getContext());
     JSONObject object = new JSONObject();
+    amount = Integer.parseInt(edt_amount.getText().toString());
     try {
-      object.put("amount", Integer.valueOf(edt_amount.getText().toString()));
+      object.put("amount", amount);
     } catch (JSONException e) {
       e.printStackTrace();
     }

@@ -1,9 +1,12 @@
 package sabalan.paydar.mohtasham.ezibazi.model;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+
+import sabalan.paydar.mohtasham.ezibazi.model.common.Photo;
 
 public class Post  implements Serializable {
 
@@ -21,7 +24,16 @@ public class Post  implements Serializable {
         post.setTitle(postObj.getString("title"));
         post.setContent(postObj.getString("content"));
         post.setCreated_at(postObj.getString("created_at"));
-        post.setImage_url(postObj.getJSONArray("photos").getJSONObject(0).getString("url"));
+        JSONArray photoArray = postObj.getJSONArray("photos");
+        for (int i=0 ; i<photoArray.length() ; i++){
+          Photo photo;
+          photo = Photo.Parser.parse(photoArray.getJSONObject(i));
+          if(photo.getType().equals("app_cover")){
+            post.setImage_url(photo.getUrl());
+            break;
+          }
+        }
+
       } catch (JSONException e) {
         e.printStackTrace();
       }
