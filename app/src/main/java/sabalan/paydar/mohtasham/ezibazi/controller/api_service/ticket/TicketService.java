@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.model.Paginate;
 import sabalan.paydar.mohtasham.ezibazi.model.Ticket;

@@ -79,6 +79,11 @@ public class FragmentProfile extends Fragment {
 
   boolean is_pause = false;
 
+  private Runnable new_tickets_runnable;
+  private Handler new_tickets_handler;
+  private Runnable finance_runnable;
+  private Handler finance_handler;
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -348,37 +353,37 @@ public class FragmentProfile extends Fragment {
   }
 
   private void receiveNewTicketsCount(){
-    final Handler handler = new Handler();
-    Runnable runnable = new Runnable() {
+    new_tickets_handler = new Handler();
+    new_tickets_runnable = new Runnable() {
       public void run() {
         getNewTicketsCount();
         if (G.isLoggedIn) {
-          handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
+          new_tickets_handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
         }else {
           return;
         }
       }
     };
 
-    handler.post(runnable);
+    new_tickets_handler.post(new_tickets_runnable);
 
   }
 
 
   private void receiveUserFinance(){
-    final Handler handler = new Handler();
-    Runnable runnable = new Runnable() {
+    finance_handler = new Handler();
+    finance_runnable = new Runnable() {
       public void run() {
         getUserFinance();
         if (G.isLoggedIn) {
-          handler.postDelayed(this, AppConfig.TIME_GET_USER_FINANCE_REFRESH_MS);
+          finance_handler.postDelayed(this, AppConfig.TIME_GET_USER_FINANCE_REFRESH_MS);
         }else {
           return;
         }
       }
     };
 
-    handler.post(runnable);
+    finance_handler.post(finance_runnable);
 
   }
 
@@ -419,5 +424,21 @@ public class FragmentProfile extends Fragment {
   public void onPause() {
     super.onPause();
     is_pause = true;
+    new_tickets_handler.removeCallbacks(new_tickets_runnable);
+    finance_handler.removeCallbacks(finance_runnable);
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    receiveUserFinance();
+    receiveNewTicketsCount();
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    new_tickets_handler.removeCallbacks(new_tickets_runnable);
+    finance_handler.removeCallbacks(finance_runnable);
   }
 }

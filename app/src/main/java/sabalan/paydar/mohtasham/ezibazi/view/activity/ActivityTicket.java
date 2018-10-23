@@ -42,6 +42,8 @@ public class ActivityTicket extends AppCompatActivity {
   int first_ticket_id = -1;
   boolean is_create_adapter = false;
   boolean is_pause = false;
+  Handler handler;
+  Runnable runnable;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -196,13 +198,14 @@ public class ActivityTicket extends AppCompatActivity {
 
 
   private void receiveTickets(){
-    final Handler handler = new Handler();
-    Runnable runnable = new Runnable() {
+    handler = new Handler();
+    runnable = new Runnable() {
       public void run() {
         getTickets();
-        if (!is_pause && G.isLoggedIn) {
+        if (G.isLoggedIn) {
           handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
         }else {
+          handler.removeCallbacks(runnable);
           return;
         }
       }
@@ -216,15 +219,20 @@ public class ActivityTicket extends AppCompatActivity {
   protected void onPause() {
     super.onPause();
     is_pause = true;
+    handler.removeCallbacks(runnable);
   }
 
+  @Override
+  protected void onResume() {
+    super.onResume();
+    receiveTickets();
+  }
 
-
-
-
-
-
-
+  @Override
+  protected void onRestart() {
+    super.onRestart();
+    receiveTickets();
+  }
 
   protected void onStart() {
     super.onStart();
@@ -237,7 +245,7 @@ public class ActivityTicket extends AppCompatActivity {
   @Override
   protected void onStop() {
     super.onStop();
-
+    handler.removeCallbacks(runnable);
     unregisterReceiver(G.connectivityListener);
   }
 }
