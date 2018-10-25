@@ -62,7 +62,7 @@ public class G extends Application {
     initializeLogin();
     setFakeCity();
     getRentTypes();
-    Storage.deleteCache(context);
+//    Storage.deleteCache(context);
     connectivityListener = new ConnectivityListener();
     mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     appOpenAnalytics();

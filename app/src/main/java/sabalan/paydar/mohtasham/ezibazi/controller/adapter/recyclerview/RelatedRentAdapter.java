@@ -102,7 +102,7 @@ public class RelatedRentAdapter extends RecyclerView.Adapter<RelatedRentAdapter.
     }
 
     private void setTypeFace(){
-      txt_game_name.setTypeface(MyViews.getIranSansMediumFont(context));
+      txt_game_name.setTypeface(MyViews.getRobotoLightFont(context));
       txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));
     }
 

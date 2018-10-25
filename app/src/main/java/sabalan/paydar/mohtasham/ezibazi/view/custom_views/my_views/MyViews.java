@@ -81,5 +81,13 @@ public class MyViews extends AppCompatActivity {
     return Typeface.createFromAsset(context.getAssets(), "fonts/PlayfairDisplaySC_Regular.otf");
   }
 
+
+  public static Typeface getRobotoLightFont(Context context){
+    return Typeface.createFromAsset(context.getAssets(), "fonts/Roboto_Light.ttf");
+  }
+
+  public static Typeface getRobotoRegularFont(Context context){
+    return Typeface.createFromAsset(context.getAssets(), "fonts/Roboto_Regular.ttf");
+  }
   //blackthorns_regular
 }

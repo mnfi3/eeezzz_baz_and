@@ -112,9 +112,9 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ListVi
 
 
     private void setTypeFace(){
-      txt_name.setTypeface(MyViews.getIranSansLightFont(context));
-      txt_rating.setTypeface(MyViews.getIranSansLightFont(context));
-      txt_region.setTypeface(MyViews.getIranSansLightFont(context));
+      txt_name.setTypeface(MyViews.getRobotoLightFont(context));
+      txt_rating.setTypeface(MyViews.getRobotoLightFont(context));
+      txt_region.setTypeface(MyViews.getRobotoLightFont(context));
       txt_release_date.setTypeface(MyViews.getIranSansMediumFont(context));
       btn_price.setTypeface(MyViews.getIranSansMediumFont(context));
     }

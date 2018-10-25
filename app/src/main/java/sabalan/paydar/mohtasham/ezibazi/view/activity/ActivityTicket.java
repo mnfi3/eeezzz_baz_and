@@ -61,8 +61,10 @@ public class ActivityTicket extends AppCompatActivity {
     avl_send_message.setVisibility(View.VISIBLE);
     setSeenTickets();
 
+    getTickets();
+
     //get tickets with async
-    receiveTickets();
+//    receiveTickets();
 
     img_back.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -197,45 +199,48 @@ public class ActivityTicket extends AppCompatActivity {
   }
 
 
-  private void receiveTickets(){
-    handler = new Handler();
-    runnable = new Runnable() {
-      public void run() {
-        getTickets();
-        if (G.isLoggedIn) {
-          handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
-        }else {
-          handler.removeCallbacks(runnable);
-          return;
-        }
-      }
-    };
-    handler.post(runnable);
-
-  }
+//  private void receiveTickets(){
+//    handler = new Handler();
+//    runnable = new Runnable() {
+//      public void run() {
+//        getTickets();
+//        if (G.isLoggedIn) {
+//          handler.postDelayed(this, AppConfig.NEW_TICKETS_CHECK_TIME_MS);
+//        }else {
+//          handler.removeCallbacks(runnable);
+//          return;
+//        }
+//      }
+//    };
+//    handler.post(runnable);
+//
+//  }
 
 
   @Override
   protected void onPause() {
     super.onPause();
-    is_pause = true;
-    handler.removeCallbacks(runnable);
+//    is_pause = true;
+//    handler.removeCallbacks(runnable);
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    receiveTickets();
+//    getTickets();
+//    receiveTickets();
   }
 
   @Override
   protected void onRestart() {
     super.onRestart();
-    receiveTickets();
+//    getTickets();
+//    receiveTickets();
   }
 
   protected void onStart() {
     super.onStart();
+
 
 //    connectivityListener = new ConnectivityListener(lyt_action);
     registerReceiver(G.connectivityListener,new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
@@ -245,7 +250,7 @@ public class ActivityTicket extends AppCompatActivity {
   @Override
   protected void onStop() {
     super.onStop();
-    handler.removeCallbacks(runnable);
+//    handler.removeCallbacks(runnable);
     unregisterReceiver(G.connectivityListener);
   }
 }

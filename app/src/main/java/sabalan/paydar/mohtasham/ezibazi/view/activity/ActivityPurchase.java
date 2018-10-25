@@ -136,8 +136,8 @@ public class ActivityPurchase extends AppCompatActivity {
 
   private void setTypeFace(){
     txt_show_product.setTypeface(MyViews.getIranSansMediumFont(ActivityPurchase.this));//medium
-    txt_region.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
-    txt_name.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
+    txt_region.setTypeface(MyViews.getRobotoLightFont(ActivityPurchase.this));
+    txt_name.setTypeface(MyViews.getRobotoLightFont(ActivityPurchase.this));
     txt_game_status.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
     txt_show_address.setTypeface(MyViews.getIranSansMediumFont(ActivityPurchase.this));//medium
     txt_show_state.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));

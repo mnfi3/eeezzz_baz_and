@@ -93,7 +93,7 @@ public class ActivityWebView extends AppCompatActivity {
 
 //    web_view = findViewById(R.id.web_view);
     assert web_view != null;
-//    web_view.getSettings().setJavaScriptEnabled(true);
+    web_view.getSettings().setJavaScriptEnabled(true);
     web_view.getSettings().setAppCacheEnabled(true);
 
     web_view.loadUrl(url);

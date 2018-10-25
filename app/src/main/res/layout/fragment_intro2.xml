@@ -7,14 +7,20 @@
               android:background="#2077af"
     >
 
-    <ImageView
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:padding="20dp"-->
+        <!--android:src="@drawable/ic_intro2"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:layout_marginBottom="40dp"-->
+        <!--/>-->
+
+
+    <WebView
+        android:id="@+id/web_view_intro2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:padding="20dp"
-        android:src="@drawable/ic_intro2"
-        android:scaleType="fitXY"
-        android:layout_marginBottom="40dp"
-        />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

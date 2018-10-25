@@ -101,6 +101,9 @@ public class ActivityShowShop extends AppCompatActivity {
       btn_comments.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+          if(game == null){
+            return;
+          }
           Intent intent = new Intent(ActivityShowShop.this, ActivityComment.class);
           intent.putExtra("GAME_INFO_ID", game.getGame_info_id());
           intent.putExtra("GAME_NAME", game.getName());
@@ -174,11 +177,11 @@ public class ActivityShowShop extends AppCompatActivity {
 
 
   private void setTypeFace(){
-    txt_page_name.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
-    txt_name.setTypeface(MyViews.getIranSansMediumFont(ActivityShowShop.this));
-    txt_rate.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
-    txt_show_region.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
-    txt_region.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
+    txt_page_name.setTypeface(MyViews.getRobotoLightFont(ActivityShowShop.this));
+    txt_name.setTypeface(MyViews.getRobotoLightFont(ActivityShowShop.this));
+    txt_rate.setTypeface(MyViews.getRobotoLightFont(ActivityShowShop.this));
+    txt_show_region.setTypeface(MyViews.getRobotoLightFont(ActivityShowShop.this));
+    txt_region.setTypeface(MyViews.getRobotoLightFont(ActivityShowShop.this));
     txt_show_genres.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
     txt_genres.setTypeface(MyViews.getIranSansLightFont(ActivityShowShop.this));
 

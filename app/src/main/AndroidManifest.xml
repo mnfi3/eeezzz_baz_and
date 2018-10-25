@@ -74,8 +74,8 @@
 
                 <data
                     android:scheme="http"
-                    android:host="192.168.10.83/izi-bazi.ud"
-                    android:pathPrefix="/api/slider"/>
+                    android:host="ezibazi.com"
+                    android:pathPrefix="/"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -87,6 +87,11 @@
                     android:scheme="http"
                     android:host="192.168.10.83"
                     />
+            </intent-filter>
+
+            <intent-filter>
+                <data android:scheme="my.special.scheme" />
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
 
 

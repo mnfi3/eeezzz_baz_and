@@ -91,11 +91,14 @@ public class FragmentProfile extends Fragment {
     setupViews();
     setTypeFace();
 
+    getNewTicketsCount();
+    getUserFinance();
+
     prefManager = new UserPrefManager(getContext());
     settingPrefManager = new SettingPrefManager(getContext());
 
     //get new tickets count (async)
-    receiveNewTicketsCount();
+//    receiveNewTicketsCount();
     initializeSetting();
 
 
@@ -221,11 +224,6 @@ public class FragmentProfile extends Fragment {
         }
       }
     });
-
-
-
-
-
 
     return view;
   }
@@ -407,7 +405,6 @@ public class FragmentProfile extends Fragment {
           edt_amount.setText("");
           dialog.dismiss();
 
-          receiveUserFinance();
 
           Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
           startActivity(browserIntent);
@@ -424,21 +421,33 @@ public class FragmentProfile extends Fragment {
   public void onPause() {
     super.onPause();
     is_pause = true;
-    new_tickets_handler.removeCallbacks(new_tickets_runnable);
-    finance_handler.removeCallbacks(finance_runnable);
+    getUserFinance();
+    getNewTicketsCount();
+//    new_tickets_handler.removeCallbacks(new_tickets_runnable);
+//    finance_handler.removeCallbacks(finance_runnable);
   }
 
   @Override
   public void onResume() {
     super.onResume();
-    receiveUserFinance();
-    receiveNewTicketsCount();
+    getUserFinance();
+    getNewTicketsCount();
+//    receiveUserFinance();
+//    receiveNewTicketsCount();
   }
 
   @Override
   public void onStop() {
     super.onStop();
-    new_tickets_handler.removeCallbacks(new_tickets_runnable);
-    finance_handler.removeCallbacks(finance_runnable);
+//    new_tickets_handler.removeCallbacks(new_tickets_runnable);
+//    finance_handler.removeCallbacks(finance_runnable);
   }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    getNewTicketsCount();
+    getUserFinance();
+  }
+
 }
