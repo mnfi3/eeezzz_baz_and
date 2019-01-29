@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.model.common;
+package sabalan.paydar.mohtasham.ezibazi.model;
 
 import org.json.JSONException;
 import org.json.JSONObject;

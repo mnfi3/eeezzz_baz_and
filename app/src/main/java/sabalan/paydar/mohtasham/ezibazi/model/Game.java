@@ -6,9 +6,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import sabalan.paydar.mohtasham.ezibazi.model.common.Photo;
-import sabalan.paydar.mohtasham.ezibazi.model.common.Video;
-
 public class Game {
   private int id;
   private int game_info_id;

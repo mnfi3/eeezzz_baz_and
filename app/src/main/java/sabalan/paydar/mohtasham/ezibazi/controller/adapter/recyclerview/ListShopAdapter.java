@@ -13,13 +13,11 @@ import android.widget.TextView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
-import sabalan.paydar.mohtasham.ezibazi.model.common.Photo;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityShowShop;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 

@@ -6,8 +6,6 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-import sabalan.paydar.mohtasham.ezibazi.model.common.Photo;
-
 public class Post  implements Serializable {
 
   private int id;

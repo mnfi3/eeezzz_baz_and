@@ -100,6 +100,7 @@ public class ActivityPurchase extends AppCompatActivity {
         break;
       default:
         Log.i(TAG, "onCreate: " + "data error");
+        ActivityPurchase.this.finish();
         break;
     }
 
