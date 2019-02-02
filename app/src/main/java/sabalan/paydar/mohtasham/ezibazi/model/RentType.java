@@ -3,6 +3,8 @@ package sabalan.paydar.mohtasham.ezibazi.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+
 public class RentType {
   private int id;
   private int day_count;
@@ -22,6 +24,22 @@ public class RentType {
     }
 
   }
+
+
+
+  public static RentType findById(int id){
+    RentType rentType = new RentType();
+    for (int i = 0 ; i < G.rentTypes.size() ; i++){
+      if(id == G.rentTypes.get(i).getId()){
+        rentType = G.rentTypes.get(i);
+        break;
+      }
+    }
+    return  rentType;
+  }
+
+
+
 
   public int getId() {
     return id;

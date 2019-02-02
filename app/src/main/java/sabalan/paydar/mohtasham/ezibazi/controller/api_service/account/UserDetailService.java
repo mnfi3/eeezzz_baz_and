@@ -19,7 +19,10 @@ import java.util.Map;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
+import sabalan.paydar.mohtasham.ezibazi.model.Address;
+import sabalan.paydar.mohtasham.ezibazi.model.City;
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
+import sabalan.paydar.mohtasham.ezibazi.model.State;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
 
 public class UserDetailService {
@@ -108,6 +111,54 @@ public class UserDetailService {
 
 
 
+  public void getUserLastAddress(final onLastAddressReceived onLastAddressReceived){
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.USER_LAST_ADDRESS, null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        String token = "";
+        Address address;
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          if(status == 1){
+            JSONObject data = response.getJSONObject("data");
+            address = Address.Parser.parse(data);
+          }else {
+            address = null;
+          }
+
+          onLastAddressReceived.onComplete(status, message, address);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+
+        onLastAddressReceived.onComplete(0, "مشکل در ارتباط با سرور", new Address());
+      }
+    }){
+      @Override
+      public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("Accept", "application/json");
+        params.put("Authorization", "Bearer " + Auth.getUserToken());
+        return params;
+      }
+    };
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+
+
+
 
 
 
@@ -121,6 +172,10 @@ public class UserDetailService {
 
   public interface onFinanceReceivedComplete{
     void onComplete(int status, String message, Finance finance);
+  }
+
+  public interface onLastAddressReceived{
+    void onComplete(int status, String message, Address address);
   }
 
 

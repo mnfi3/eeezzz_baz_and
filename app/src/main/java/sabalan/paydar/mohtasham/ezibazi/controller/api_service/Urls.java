@@ -55,6 +55,9 @@ public class Urls {
   //user finance
   public static final String USER_FINANCE = AppConfig.MAIN_URL + "/user-finance";
 
+  //user last address
+  public static final String USER_LAST_ADDRESS = AppConfig.MAIN_URL + "/user-last-address";
+
   //comment
   public static final String COMMENT_INDEX = AppConfig.MAIN_URL + "/comment";
 
@@ -66,4 +69,8 @@ public class Urls {
   //finance
   public static final String INCREASE_CREDIT = AppConfig.MAIN_URL + "/increase-credit";
 
+
+  //address
+  public static final String ADDRESS_STATES = AppConfig.MAIN_URL + "/states";
+  public static final String ADDRESS_STATE_CITIES = AppConfig.MAIN_URL + "/state/{id}/cities";
 }

@@ -22,6 +22,8 @@ public class Address {
     public static Address parse(JSONObject object){
       Address address = new Address();
       try {
+        address.setState(State.Parser.parse(object.getJSONObject("state")));
+        address.setCity(City.Parser.parse(object.getJSONObject("city")));
         address.setId(object.getInt("id"));
         address.setUser_id(object.getInt("user_id"));
         address.setState_id(object.getInt("state_id"));
@@ -32,14 +34,26 @@ public class Address {
         address.setLatitude(object.getDouble("latitude"));
         address.setLatitude(object.getDouble("longitude"));
         address.setCreated_at(object.getString("created_at"));
-        address.setState(State.Parser.parse(object.getJSONObject("state")));
-        address.setCity(City.Parser.parse(object.getJSONObject("city")));
       } catch (JSONException e) {
         e.printStackTrace();
       }
       return address;
     }
   }
+
+
+
+
+  public String getAddressText(){
+    String text = "";
+    text += " استان : " + state.getName() + "\n";
+    text += " شهر : " + city.getName() + "\n";
+    text += " آدرس : " + content + "\n";
+    text += " کدپستی : " + postcode + "\n";
+    text += " شماره تلفن : " + home_phone_number + "\n";
+    return text;
+  }
+
 
 
   public State getState() {
