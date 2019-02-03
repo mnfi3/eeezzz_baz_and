@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +7,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     tools:context=".view.activity.ActivityPurchase"
+    android:orientation="vertical">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_main"/>
@@ -308,6 +315,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:layout_margin="5dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:backgroundTintMode="multiply"
                         >
 
                     </android.support.v7.widget.AppCompatSpinner>
@@ -337,7 +346,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
-                        android:layout_margin="5dp">
+                        android:layout_margin="5dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:backgroundTintMode="multiply">
 
                     </android.support.v7.widget.AppCompatSpinner>
 
@@ -491,6 +502,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/lyt_rent_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -616,3 +628,21 @@
 
 
 </LinearLayout>
+
+
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avl_wait"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        />
+
+
+
+</RelativeLayout>

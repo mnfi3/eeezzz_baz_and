@@ -1,9 +1,6 @@
 package sabalan.paydar.mohtasham.ezibazi.controller.api_service.address;
 
 import android.content.Context;
-import android.content.Intent;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,11 +13,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
+import sabalan.paydar.mohtasham.ezibazi.controller.api_service.account.AccountService;
 import sabalan.paydar.mohtasham.ezibazi.model.Address;
 import sabalan.paydar.mohtasham.ezibazi.model.City;
 import sabalan.paydar.mohtasham.ezibazi.model.State;
@@ -116,6 +111,36 @@ public class AddressService {
 
 
 
+  public void saveAddress(JSONObject jsonObject, final onAddressSaved onAddressSaved){
+    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Urls.ADDRESS_INDEX, jsonObject, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        int status = 0;
+        String message = "";
+        Address address = new Address();
+        try {
+          status = response.getInt("status");
+          message = response.getString("message");
+          address = Address.Parser.parse(response.getJSONObject("data"));
+          onAddressSaved.onComplete(status, message, address);
+
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        onAddressSaved.onComplete(0, "خطا در ارتباط با سرور", new Address());
+      }
+    });
+
+    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    Volley.newRequestQueue(context).add(request);
+  }
+
+
 
 
 
@@ -131,6 +156,11 @@ public class AddressService {
 
   public interface onStateCitiesReceived{
     void onComplete(int status, String message, ArrayList<City> cities);
+  }
+
+
+  public interface onAddressSaved{
+    void onComplete(int status, String message, Address address);
   }
 
 

@@ -71,6 +71,14 @@ public class Urls {
 
 
   //address
+  public static final String ADDRESS_INDEX = AppConfig.MAIN_URL + "/address";
   public static final String ADDRESS_STATES = AppConfig.MAIN_URL + "/states";
   public static final String ADDRESS_STATE_CITIES = AppConfig.MAIN_URL + "/state/{id}/cities";
+
+  //game payments
+  public static final String RENT_WITH_WALLET = AppConfig.MAIN_URL + "/rent-game-with-wallet";
+  public static final String RENT_WITH_BANK = AppConfig.MAIN_URL + "/rent-game";
+
+  public static final String SHOP_WITH_WALLET = AppConfig.MAIN_URL + "/shop-game-with-wallet";
+  public static final String SHOP_WITH_BANK = AppConfig.MAIN_URL + "/shop-game";
 }

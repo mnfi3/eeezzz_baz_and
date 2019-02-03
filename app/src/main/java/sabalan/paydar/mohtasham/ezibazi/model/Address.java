@@ -22,8 +22,12 @@ public class Address {
     public static Address parse(JSONObject object){
       Address address = new Address();
       try {
-        address.setState(State.Parser.parse(object.getJSONObject("state")));
-        address.setCity(City.Parser.parse(object.getJSONObject("city")));
+        if (object.getJSONObject("state") != null) {
+          address.setState(State.Parser.parse(object.getJSONObject("state")));
+        }
+        if (object.getJSONObject("city") != null){
+          address.setCity(City.Parser.parse(object.getJSONObject("city")));
+        }
         address.setId(object.getInt("id"));
         address.setUser_id(object.getInt("user_id"));
         address.setState_id(object.getInt("state_id"));

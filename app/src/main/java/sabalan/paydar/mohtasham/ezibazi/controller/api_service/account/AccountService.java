@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
 
