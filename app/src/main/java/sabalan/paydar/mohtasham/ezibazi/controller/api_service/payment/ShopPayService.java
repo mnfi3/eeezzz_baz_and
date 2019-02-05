@@ -73,10 +73,12 @@ public class ShopPayService {
       public void onResponse(JSONObject response) {
         int status = 0;
         String message = "";
+        String pay_url = "";
         try {
           status = response.getInt("status");
           message = response.getString("message");
-          onShopWithBankComplete.onComplete(status, message);
+          pay_url = response.getString("data");
+          onShopWithBankComplete.onComplete(status, message, pay_url);
 
         } catch (JSONException e) {
           e.printStackTrace();
@@ -86,7 +88,7 @@ public class ShopPayService {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        onShopWithBankComplete.onComplete(0, "خطا در ارتباط با سرور");
+        onShopWithBankComplete.onComplete(0, "خطا در ارتباط با سرور", "");
       }
     })
     {
@@ -115,7 +117,7 @@ public class ShopPayService {
   }
 
   public interface onShopWithBankComplete{
-    void onComplete(int status, String message);
+    void onComplete(int status, String message, String pay_url);
   }
 
 

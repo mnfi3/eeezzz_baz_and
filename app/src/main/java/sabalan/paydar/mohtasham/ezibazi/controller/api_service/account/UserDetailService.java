@@ -16,13 +16,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.model.Address;
-import sabalan.paydar.mohtasham.ezibazi.model.City;
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
-import sabalan.paydar.mohtasham.ezibazi.model.State;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
 
 public class UserDetailService {
@@ -68,43 +66,23 @@ public class UserDetailService {
 
 
   public void getUserFinance(final onFinanceReceivedComplete onFinanceReceivedComplete){
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.USER_FINANCE, null, new Response.Listener<JSONObject>() {
+    ApiRequest.getInstance(context).request(ApiRequest.GET, Urls.USER_FINANCE, null, true, new ApiRequest.onDataReceived() {
       @Override
-      public void onResponse(JSONObject response) {
-        int status = 0;
-        String message = "";
-        String token = "";
+      public void onReceived(JSONObject response, int status, String message, boolean error) {
+        if (error){
+          onFinanceReceivedComplete.onComplete(status, message, null);
+          return;
+        }
+
         Finance finance = new Finance();
         try {
-          status = response.getInt("status");
-          message = response.getString("message");
           finance = Finance.Parser.parse(response.getJSONObject("data"));
-
-          onFinanceReceivedComplete.onComplete(status, message, finance);
-
         } catch (JSONException e) {
           e.printStackTrace();
         }
-
+        onFinanceReceivedComplete.onComplete(status, message, finance);
       }
-    }, new Response.ErrorListener() {
-      @Override
-      public void onErrorResponse(VolleyError error) {
-
-        onFinanceReceivedComplete.onComplete(0, "مشکل در ارتباط با سرور", new Finance());
-      }
-    }){
-      @Override
-      public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("Accept", "application/json");
-        params.put("Authorization", "Bearer " + Auth.getUserToken());
-        return params;
-      }
-    };
-
-    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
+    });
   }
 
 

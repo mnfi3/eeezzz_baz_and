@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
@@ -29,113 +30,70 @@ public class AccountService {
 
 
   public void login(JSONObject jsonObject, final onLoginComplete onLoginComplete){
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Urls.LOGIN, jsonObject, new Response.Listener<JSONObject>() {
+    ApiRequest.getInstance(context).request(ApiRequest.POST, Urls.LOGIN, jsonObject, false, new ApiRequest.onDataReceived() {
       @Override
-      public void onResponse(JSONObject response) {
-        int status = 0;
-        String message = "";
+      public void onReceived(JSONObject response, int status, String message, boolean error) {
+        if(error){
+          onLoginComplete.onComplete(status, message, "", null);
+          return;
+        }
         String token = "";
         User user = new User();
-        try {
-          status = response.getInt("status");
-          message = response.getString("message");
           if(status == 1) {
-            token = response.getJSONObject("data").getString("token");
-            JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
-            user = User.Parser.parse(userObj);
-            user.setToken(token);
+            try {
+              token = response.getJSONObject("data").getString("token");
+              JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
+              user = User.Parser.parse(userObj);
+              user.setToken(token);
+            } catch (JSONException e) {
+              e.printStackTrace();
+            }
           }
-          onLoginComplete.onComplete(status, message, token, user);
-
-        } catch (JSONException e) {
-          e.printStackTrace();
-        }
-
-      }
-    }, new Response.ErrorListener() {
-      @Override
-      public void onErrorResponse(VolleyError error) {
-        onLoginComplete.onComplete(0, "خطا در ارتباط با سرور", "", new User());
+        onLoginComplete.onComplete(status, message, token, user);
       }
     });
 
-    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
   }
 
 
 
   public void register(JSONObject jsonObject, final onRegisterComplete onRegisterComplete){
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Urls.REGISTER, jsonObject, new Response.Listener<JSONObject>() {
+    ApiRequest.getInstance(context).request(ApiRequest.POST, Urls.REGISTER, jsonObject, false, new ApiRequest.onDataReceived() {
       @Override
-      public void onResponse(JSONObject response) {
-        int status = 0;
-        String message = "";
+      public void onReceived(JSONObject response, int status, String message, boolean error) {
+        if(error){
+          onRegisterComplete.onComplete(status, message, "", null);
+          return;
+        }
+
         String token = "";
         User user = new User();
         try {
-          status = response.getInt("status");
-          message = response.getString("message");
           token = response.getJSONObject("data").getString("token");
           JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
-
           user = User.Parser.parse(userObj);
-
-          onRegisterComplete.onComplete(status, message, token, user);
-
         } catch (JSONException e) {
           e.printStackTrace();
         }
-
-      }
-    }, new Response.ErrorListener() {
-      @Override
-      public void onErrorResponse(VolleyError error) {
-
-        onRegisterComplete.onComplete(0, "خطا در ارتباط با سرور", "", new User());
+        onRegisterComplete.onComplete(status, message, token, user);
       }
     });
 
-    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
   }
 
 
 
   public void logout(final onLogoutComplete onLogoutComplete){
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.LOGOUT, null, new Response.Listener<JSONObject>() {
+    ApiRequest.getInstance(context).request(ApiRequest.GET, Urls.LOGOUT, null, true, new ApiRequest.onDataReceived() {
       @Override
-      public void onResponse(JSONObject response) {
-        int status = 0;
-        String message = "";
-        try {
-          status = response.getInt("status");
-          message = response.getString("message");
+      public void onReceived(JSONObject response, int status, String message, boolean error) {
+        if (error){
           onLogoutComplete.onComplete(status, message);
-
-        } catch (JSONException e) {
-          e.printStackTrace();
+          return;
         }
-
+        onLogoutComplete.onComplete(status, message);
       }
-    }, new Response.ErrorListener() {
-      @Override
-      public void onErrorResponse(VolleyError error) {
-        onLogoutComplete.onComplete(0, "خطا در ارتباط با سرور");
-      }
-    })
-    {
-      @Override
-      public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("Accept", "application/json");
-        params.put("Authorization", "Bearer " + Auth.getUserToken());
-        return params;
-      }
-    };
-
-    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
+    });
   }
 
 

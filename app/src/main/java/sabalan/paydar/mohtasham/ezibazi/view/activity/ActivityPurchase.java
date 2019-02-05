@@ -2,6 +2,7 @@ package sabalan.paydar.mohtasham.ezibazi.view.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -207,6 +208,7 @@ public class ActivityPurchase extends AppCompatActivity {
     btn_bank_pay.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        avl_wait.setVisibility(View.VISIBLE);
         if(type.equals(TYPE_RENT)){
           rentGameWithBank();
         }else {
@@ -220,6 +222,7 @@ public class ActivityPurchase extends AppCompatActivity {
     btn_wallet_pay.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        avl_wait.setVisibility(View.VISIBLE);
         if(type.equals(TYPE_RENT)){
           rentGameWithWallet();
         }else {
@@ -413,7 +416,7 @@ public class ActivityPurchase extends AppCompatActivity {
 
 
 
-  //rents
+  //wallet
   private void rentGameWithWallet(){
     if(sum_price > user_balance){
       MyViews.makeText(ActivityPurchase.this, "موجودی کیف پول شما کمتر میباشد. لطفا اقدام به شارژ کیف پول خود نمایید", Toast.LENGTH_LONG);
@@ -434,6 +437,7 @@ public class ActivityPurchase extends AppCompatActivity {
       service.rentWithWallet(object, new RentPayService.onRentWithWalletComplete() {
         @Override
         public void onComplete(int status, String message) {
+          avl_wait.setVisibility(View.INVISIBLE);
           if(status == 0){
             MyViews.makeText(ActivityPurchase.this, message, Toast.LENGTH_SHORT);
           }else {
@@ -467,6 +471,7 @@ public class ActivityPurchase extends AppCompatActivity {
             service.rentWithWallet(object, new RentPayService.onRentWithWalletComplete() {
               @Override
               public void onComplete(int status, String message) {
+                avl_wait.setVisibility(View.INVISIBLE);
                 if(status == 0){
                   MyViews.makeText(ActivityPurchase.this, message, Toast.LENGTH_SHORT);
                 }else {
@@ -557,12 +562,116 @@ public class ActivityPurchase extends AppCompatActivity {
   //bank
 
   public void rentGameWithBank(){
+    final RentPayService service = new RentPayService(ActivityPurchase.this);
+    if (is_use_last_address){
+      JSONObject object = new JSONObject();
+      try {
+        object.put("game_id", game.getId());
+        object.put("address_id", last_address.getId());
+        object.put("rent_type_id", rent_type_id);
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+      service.rentWithBank(object, new RentPayService.onRentWithBankComplete() {
+        @Override
+        public void onComplete(int status, String message, String pay_url) {
+          if(status == 0){
+            MyViews.makeText(ActivityPurchase.this, message, Toast.LENGTH_SHORT);
+          }else {
+            openBrowser(pay_url);
+          }
+        }
+      });
 
+    }
+    else {
+      if(getNewAddressObject() == null) return;
+      AddressService addressService = new AddressService(ActivityPurchase.this);
+      addressService.saveAddress(getNewAddressObject(), new AddressService.onAddressSaved() {
+        @Override
+        public void onComplete(int status, String message, Address address) {
+          JSONObject object = new JSONObject();
+          try {
+            object.put("game_id", game.getId());
+            object.put("address_id", last_address.getId());
+            object.put("rent_type_id", rent_type_id);
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+          service.rentWithBank(object, new RentPayService.onRentWithBankComplete() {
+            @Override
+            public void onComplete(int status, String message, String pay_url) {
+              if(status == 0){
+                MyViews.makeText(ActivityPurchase.this, message, Toast.LENGTH_SHORT);
+              }else {
+                openBrowser(pay_url);
+              }
+            }
+          });
+        }
+      });
+    }
   }
 
 
-  public void shopGameWithBank(){
 
+  public void shopGameWithBank(){
+    final ShopPayService service = new ShopPayService(ActivityPurchase.this);
+    if(is_use_last_address){
+      JSONObject object = new JSONObject();
+      try {
+        object.put("game_id", game.getId());
+        object.put("address_id", last_address.getId());
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+      service.shopWithBank(object, new ShopPayService.onShopWithBankComplete() {
+        @Override
+        public void onComplete(int status, String message, String pay_url) {
+          avl_wait.setVisibility(View.INVISIBLE);
+          if(status == 0){
+            MyViews.makeText(ActivityPurchase.this, message, Toast.LENGTH_SHORT);
+          }else {
+            openBrowser(pay_url);
+          }
+        }
+      });
+
+    }else {
+      if(getNewAddressObject() == null) return;
+      AddressService addressService = new AddressService(ActivityPurchase.this);
+      addressService.saveAddress(getNewAddressObject(), new AddressService.onAddressSaved() {
+        @Override
+        public void onComplete(int status, String message, Address address) {
+          if (status == 0) {
+            MyViews.makeText(ActivityPurchase.this, message, Toast.LENGTH_SHORT);
+          }else {
+            new_address_id = address.getId();
+            JSONObject object = new JSONObject();
+            try {
+              object.put("game_id", game.getId());
+              object.put("address_id", new_address_id);
+            } catch (JSONException e) {
+              e.printStackTrace();
+            }
+
+            service.shopWithBank(object, new ShopPayService.onShopWithBankComplete() {
+              @Override
+              public void onComplete(int status, String message, String pay_url) {
+                avl_wait.setVisibility(View.INVISIBLE);
+                if(status == 0){
+                  MyViews.makeText(ActivityPurchase.this, message, Toast.LENGTH_SHORT);
+                }else {
+                  openBrowser(pay_url);
+                }
+              }
+            });
+
+          }
+
+        }
+      });
+    }
   }
 
 
@@ -684,9 +793,16 @@ private JSONObject getNewAddressObject(){
 
 
   private void restartApp(){
-    ActivityMenu.getInstance().finish();
-    Intent intent = new Intent(ActivityPurchase.this, ActivityMenu.class);
-    startActivity(intent);
-    ActivityPurchase.this.finish();
+    if(ActivityMenu.getInstance() != null) {
+      ActivityMenu.getInstance().finish();
+      Intent intent = new Intent(ActivityPurchase.this, ActivityMenu.class);
+      startActivity(intent);
+      ActivityPurchase.this.finish();
+    }
+  }
+
+  private void openBrowser(String url){
+    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    startActivity(browserIntent);
   }
 }
