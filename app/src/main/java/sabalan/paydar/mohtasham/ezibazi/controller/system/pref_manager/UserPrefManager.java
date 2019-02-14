@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.Cryptography;
+import sabalan.paydar.mohtasham.ezibazi.controller.system.application.Crypt;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
 
 public class UserPrefManager {
@@ -26,7 +26,7 @@ public class UserPrefManager {
 
   public void saveUser(User user) {
     if (user != null) {
-      String newToken = Cryptography.encrypt(user.getToken());
+      String newToken = Crypt.encrypt(user.getToken());
       user.setToken(newToken);
       SharedPreferences.Editor editor = sharedPreferences.edit();
       editor.putString(FULL_NAME, user.getFull_name());
@@ -51,7 +51,7 @@ public class UserPrefManager {
   public User getUser() {
     User user = new User();
     user.setFull_name(sharedPreferences.getString(FULL_NAME, ""));
-    String main_token = Cryptography.decrypt(sharedPreferences.getString(TOKEN ,""));
+    String main_token = Crypt.decrypt(sharedPreferences.getString(TOKEN ,""));
     user.setToken(main_token);
 //    user.setClient_key(sharedPreferences.getString(CLIENT_KEY , ""));
     return user;

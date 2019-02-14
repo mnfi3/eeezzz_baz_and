@@ -1,25 +1,11 @@
 package sabalan.paydar.mohtasham.ezibazi.controller.api_service.account;
 
 import android.content.Context;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import java.util.HashMap;
-import java.util.Map;
-
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
 
 public class AccountService {
@@ -30,7 +16,8 @@ public class AccountService {
 
 
   public void login(JSONObject jsonObject, final onLoginComplete onLoginComplete){
-    ApiRequest.getInstance(context).request(ApiRequest.POST, Urls.LOGIN, jsonObject, false, new ApiRequest.onDataReceived() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.POST, Urls.LOGIN, jsonObject, false, new ApiRequest.onDataReceived() {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if(error){
@@ -45,11 +32,13 @@ public class AccountService {
               JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
               user = User.Parser.parse(userObj);
               user.setToken(token);
+
+              onLoginComplete.onComplete(status, message, token, user);
             } catch (JSONException e) {
               e.printStackTrace();
             }
           }
-        onLoginComplete.onComplete(status, message, token, user);
+
       }
     });
 
@@ -58,7 +47,8 @@ public class AccountService {
 
 
   public void register(JSONObject jsonObject, final onRegisterComplete onRegisterComplete){
-    ApiRequest.getInstance(context).request(ApiRequest.POST, Urls.REGISTER, jsonObject, false, new ApiRequest.onDataReceived() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.POST, Urls.REGISTER, jsonObject, false, new ApiRequest.onDataReceived() {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if(error){
@@ -72,10 +62,12 @@ public class AccountService {
           token = response.getJSONObject("data").getString("token");
           JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
           user = User.Parser.parse(userObj);
+
+          onRegisterComplete.onComplete(status, message, token, user);
         } catch (JSONException e) {
           e.printStackTrace();
         }
-        onRegisterComplete.onComplete(status, message, token, user);
+
       }
     });
 
@@ -84,7 +76,8 @@ public class AccountService {
 
 
   public void logout(final onLogoutComplete onLogoutComplete){
-    ApiRequest.getInstance(context).request(ApiRequest.GET, Urls.LOGOUT, null, true, new ApiRequest.onDataReceived() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.GET, Urls.LOGOUT, null, true, new ApiRequest.onDataReceived() {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){

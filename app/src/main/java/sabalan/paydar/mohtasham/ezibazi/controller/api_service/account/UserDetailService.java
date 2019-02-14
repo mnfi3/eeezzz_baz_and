@@ -2,23 +2,12 @@ package sabalan.paydar.mohtasham.ezibazi.controller.api_service.account;
 
 import android.content.Context;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.model.Address;
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
@@ -66,7 +55,8 @@ public class UserDetailService {
 
 
   public void getUserFinance(final onFinanceReceivedComplete onFinanceReceivedComplete){
-    ApiRequest.getInstance(context).request(ApiRequest.GET, Urls.USER_FINANCE, null, true, new ApiRequest.onDataReceived() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.GET, Urls.USER_FINANCE, null, true, new ApiRequest.onDataReceived() {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
@@ -77,10 +67,10 @@ public class UserDetailService {
         Finance finance = new Finance();
         try {
           finance = Finance.Parser.parse(response.getJSONObject("data"));
+          onFinanceReceivedComplete.onComplete(status, message, finance);
         } catch (JSONException e) {
           e.printStackTrace();
         }
-        onFinanceReceivedComplete.onComplete(status, message, finance);
       }
     });
   }
@@ -90,48 +80,29 @@ public class UserDetailService {
 
 
   public void getUserLastAddress(final onLastAddressReceived onLastAddressReceived){
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Urls.USER_LAST_ADDRESS, null, new Response.Listener<JSONObject>() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.GET, Urls.USER_LAST_ADDRESS, null, true, new ApiRequest.onDataReceived() {
       @Override
-      public void onResponse(JSONObject response) {
-        int status = 0;
-        String message = "";
-        String token = "";
-        Address address;
-        try {
-          status = response.getInt("status");
-          message = response.getString("message");
-          if(status == 1){
-            JSONObject data = response.getJSONObject("data");
-            address = Address.Parser.parse(data);
-          }else {
-            address = null;
+      public void onReceived(JSONObject response, int status, String message, boolean error) {
+        if(error){
+          onLastAddressReceived.onComplete(status, message,null);
+          return;
+        }
+
+        Address address = null;
+        if (status == 1){
+          try {
+            address = Address.Parser.parse(response.getJSONObject("data"));
+            onLastAddressReceived.onComplete(status, message, address);
+          } catch (JSONException e) {
+            e.printStackTrace();
           }
-
-          onLastAddressReceived.onComplete(status, message, address);
-
-        } catch (JSONException e) {
-          e.printStackTrace();
         }
 
       }
-    }, new Response.ErrorListener() {
-      @Override
-      public void onErrorResponse(VolleyError error) {
+    });
 
-        onLastAddressReceived.onComplete(0, "مشکل در ارتباط با سرور", new Address());
-      }
-    }){
-      @Override
-      public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("Accept", "application/json");
-        params.put("Authorization", "Bearer " + Auth.getUserToken());
-        return params;
-      }
-    };
 
-    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
   }
 
 

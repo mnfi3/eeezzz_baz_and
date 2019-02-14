@@ -1,21 +1,9 @@
 package sabalan.paydar.mohtasham.ezibazi.controller.api_service.account;
 
 import android.content.Context;
-import android.util.Log;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
@@ -30,7 +18,8 @@ public class LoginCheckerService {
 
 
   public void check(final User user, final onLoginCheckComplete onLoginCheckComplete){
-    ApiRequest.getInstance(context).request(ApiRequest.GET, Urls.LOGIN_CHECK, null, true, new ApiRequest.onDataReceived() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.GET, Urls.LOGIN_CHECK, null, true, new ApiRequest.onDataReceived() {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
@@ -46,10 +35,11 @@ public class LoginCheckerService {
           }else {
             isLoggedIn = false;
           }
+
+          onLoginCheckComplete.onComplete(isLoggedIn, full_name);
         } catch (JSONException e) {
           e.printStackTrace();
         }
-        onLoginCheckComplete.onComplete(isLoggedIn, full_name);
       }
     });
 

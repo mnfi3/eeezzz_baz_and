@@ -9,7 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.firebase.FireBaseApiService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.Cryptography;
+import sabalan.paydar.mohtasham.ezibazi.controller.system.application.Crypt;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.FcmPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.model.Device;
 import sabalan.paydar.mohtasham.ezibazi.model.Fcm;
@@ -30,7 +30,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 //    Log.d(TAG, "Refreshed token: " + refreshedToken);
     Fcm fcm = new Fcm();
     fcm.setToken(refreshedToken);
-    fcm.setClient_key(Cryptography.generateFcmClientKey());
+    fcm.setClient_key(Crypt.generateFcmClientKey());
     new FcmPrefManager(MyFirebaseInstanceIDService.this).saveFcm(fcm);
     sendFcmInfoToServer(fcm);
   }

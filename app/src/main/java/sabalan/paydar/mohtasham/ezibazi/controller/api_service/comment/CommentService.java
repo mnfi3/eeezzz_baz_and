@@ -2,28 +2,16 @@ package sabalan.paydar.mohtasham.ezibazi.controller.api_service.comment;
 
 import android.content.Context;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.model.Comment;
-import sabalan.paydar.mohtasham.ezibazi.model.MainSlider;
 import sabalan.paydar.mohtasham.ezibazi.model.Paginate;
 
 public class CommentService {
@@ -35,77 +23,59 @@ public class CommentService {
 
   public void getComments(final int game_info_id, final int page_num, final onCommentsReceived onCommentsReceived){
     String url = Urls.GAME_INFO_COMMENTS +"/"+Integer.toString(game_info_id) + "?page=" + page_num;
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.GET, url, null, false, new ApiRequest.onDataReceived() {
       @Override
-      public void onResponse(JSONObject response) {
-        List<MainSlider> sliders = new ArrayList<>();
-        int status = 0;
-        String message = "";
+      public void onReceived(JSONObject response, int status, String message, boolean error) {
+        if (error){
+          onCommentsReceived.onReceived(status, message, null, null);
+          return;
+        }
+
+        List<Comment> comments = new ArrayList<>();
+        Paginate paginate = null;
         try {
-          status = response.getInt("status");
-          message = response.getString("message");
-          List<Comment> comments =  new ArrayList<Comment>();
           JSONObject jsonData = response.getJSONObject("data");
-          Paginate paginate = Paginate.Parser.parse(jsonData);
+          paginate = Paginate.Parser.parse(jsonData);
           JSONArray data = jsonData.getJSONArray("data");
           for (int i=0 ; i<data.length() ; i++){
             JSONObject commentObj = data.getJSONObject(i);
             comments.add( Comment.Parser.parse(commentObj));
           }
 
-
           onCommentsReceived.onReceived(status, message, comments, paginate);
 
         } catch (JSONException e) {
           e.printStackTrace();
         }
-
-      }
-    }, new Response.ErrorListener() {
-      @Override
-      public void onErrorResponse(VolleyError error) {
-        onCommentsReceived.onReceived(0, "خطا در اتصال به سرور", new ArrayList<Comment>(), new Paginate());
       }
     });
 
-    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
   }
 
   public void addComment(JSONObject object, final onAddCommentReceived onAddCommentReceived){
-    String url = Urls.COMMENT_INDEX ;
-    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.POST, Urls.COMMENT_INDEX, object, true, new ApiRequest.onDataReceived() {
       @Override
-      public void onResponse(JSONObject response) {
-        int status = 0;
-        String message = "";
+      public void onReceived(JSONObject response, int status, String message, boolean error) {
+        if (error){
+          onAddCommentReceived.onReceived(status, message, null);
+          return;
+        }
+
         Comment comment;
         try {
-          status = response.getInt("status");
-          message = response.getString("message");
           comment = Comment.Parser.parse(response.getJSONObject("data"));
           onAddCommentReceived.onReceived(status, message, comment);
         } catch (JSONException e) {
           e.printStackTrace();
         }
       }
-    }, new Response.ErrorListener() {
-      @Override
-      public void onErrorResponse(VolleyError error) {
-        onAddCommentReceived.onReceived(0, "خطا در اتصال به سرور", new Comment());
-      }
-    }){
-      @Override
-      public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("Accept", "application/json");
-        params.put("Authorization", "Bearer " + Auth.getUserToken());
-        return params;
-      }
-    };
+    });
 
-    request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
+
+
   }
 
 

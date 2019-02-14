@@ -15,7 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.Hardware;
 
-public class Cryptography {
+public class Crypt {
   private static final String SALT="7c3d596ed03ab9116c547b0eb678b247";
   private static final String SALT_COPY="7c3d596ed03ab9116c547b0eb678b247";
 

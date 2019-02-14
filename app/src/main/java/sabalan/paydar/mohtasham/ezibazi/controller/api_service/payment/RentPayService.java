@@ -16,8 +16,8 @@ public class RentPayService {
 
 
   public void rentWithWallet(JSONObject jsonObject, final onRentWithWalletComplete onRentWithWalletComplete){
-
-    ApiRequest.getInstance(context).request(ApiRequest.POST, Urls.RENT_WITH_WALLET, jsonObject, true, new ApiRequest.onDataReceived() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.POST, Urls.RENT_WITH_WALLET, jsonObject, true, new ApiRequest.onDataReceived() {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
@@ -33,7 +33,8 @@ public class RentPayService {
 
 
   public void rentWithBank(JSONObject jsonObject, final onRentWithBankComplete onRentWithBankComplete){
-    ApiRequest.getInstance(context).request(ApiRequest.POST, Urls.RENT_WITH_BANK, jsonObject, true, new ApiRequest.onDataReceived() {
+    ApiRequest apiRequest = new ApiRequest(context);
+    apiRequest.request(ApiRequest.POST, Urls.RENT_WITH_BANK, jsonObject, true, new ApiRequest.onDataReceived() {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if(error){
