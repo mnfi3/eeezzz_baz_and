@@ -133,12 +133,14 @@
                 android:id="@+id/txt_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15sp"
+                android:layout_marginTop="20sp"
                 android:textStyle="bold"
                 android:text="ایجاد حساب کاربری"
                 android:textSize="@dimen/font_size_small"
-                android:textColor="@color/main_link_color"
-                android:padding="4dp"/>
+                android:textColor="@color/colorAccent"
+                android:padding="4dp"
+                android:elevation="2dp"
+                />
 
             <!--<ProgressBar-->
                 <!--style="@style/AppTheme"-->

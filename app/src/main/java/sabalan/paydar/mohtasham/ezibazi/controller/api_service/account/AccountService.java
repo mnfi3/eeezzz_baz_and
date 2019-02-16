@@ -26,18 +26,20 @@ public class AccountService {
         }
         String token = "";
         User user = new User();
-          if(status == 1) {
-            try {
-              token = response.getJSONObject("data").getString("token");
-              JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
-              user = User.Parser.parse(userObj);
-              user.setToken(token);
 
-              onLoginComplete.onComplete(status, message, token, user);
-            } catch (JSONException e) {
-              e.printStackTrace();
-            }
+        try {
+          if(status == 1) {
+            token = response.getJSONObject("data").getString("token");
+            JSONObject userObj = response.getJSONObject("data").getJSONObject("user");
+            user = User.Parser.parse(userObj);
+            user.setToken(token);
           }
+
+          onLoginComplete.onComplete(status, message, token, user);
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
 
       }
     });

@@ -1,6 +1,5 @@
 package sabalan.paydar.mohtasham.ezibazi.controller.api_service;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.config.AppConfig;
 
 public class Urls {
@@ -43,6 +42,10 @@ public class Urls {
   public static final String USER = AppConfig.MAIN_URL + "/user";
   public static final String LOGOUT = AppConfig.MAIN_URL + "/logout";
   public static final String LOGIN_CHECK = AppConfig.MAIN_URL + "/login-check";
+
+  //password reset
+  public static final String PASSWORD_RESET = "/password/reset";
+
 
   //===passport service===//
 

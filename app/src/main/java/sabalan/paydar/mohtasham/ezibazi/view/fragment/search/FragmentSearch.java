@@ -2,9 +2,10 @@ package sabalan.paydar.mohtasham.ezibazi.view.fragment.search;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.wang.avi.AVLoadingIndicatorView;
@@ -117,6 +117,19 @@ public class FragmentSearch extends Fragment {
           search();
         }
         return false;
+      }
+    });
+
+    edt_search.addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+      }
+      @Override
+      public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+      }
+      @Override
+      public void afterTextChanged(Editable editable) {
+        search();
       }
     });
 
@@ -239,7 +252,7 @@ public class FragmentSearch extends Fragment {
   private boolean checkEntry(){
     String text = edt_search.getText().toString();
     if(text.length() < 3){
-      MyViews.makeText((AppCompatActivity) getActivity(), "متن شما برای جستجو بسیار کوتاه است", Toast.LENGTH_SHORT);
+//      MyViews.makeText((AppCompatActivity) getActivity(), "متن شما برای جستجو بسیار کوتاه است", Toast.LENGTH_SHORT);
       return false;
     }
     return true;

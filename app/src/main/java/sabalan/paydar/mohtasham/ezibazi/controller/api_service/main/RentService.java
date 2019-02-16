@@ -31,7 +31,7 @@ public class RentService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onRentsReceived.onReceived(status, message, null, null);
+          onRentsReceived.onReceived(status, message, new ArrayList<Game>(), new Paginate());
           return;
         }
 
@@ -65,7 +65,7 @@ public class RentService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onSearchedRentsReceived.onReceived(status, message, null);
+          onSearchedRentsReceived.onReceived(status, message, new ArrayList<Game>());
           return;
         }
 

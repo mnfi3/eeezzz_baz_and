@@ -2,6 +2,7 @@ package sabalan.paydar.mohtasham.ezibazi.view.activity;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -23,9 +24,11 @@ import org.json.JSONObject;
 import java.util.regex.Pattern;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
+import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.account.AccountService;
 import sabalan.paydar.mohtasham.ezibazi.controller.api_service.firebase.FireBaseApiService;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.controller.system.config.AppConfig;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.ConnectivityListener;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.FcmPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.UserPrefManager;
@@ -102,7 +105,20 @@ public class ActivityLogin extends AppCompatActivity {
     });
 
 
-    txt_register.setOnClickListener(new View.OnClickListener() {
+    txt_forget_password.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        String url = AppConfig.MAIN_URL;
+        url = url.substring(0, url.length() - 4);
+        url += Urls.PASSWORD_RESET;
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
+      }
+    });
+
+
+
+      txt_register.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           Intent intent = new Intent(ActivityLogin.this, ActivityRegister.class);
