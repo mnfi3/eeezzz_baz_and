@@ -40,6 +40,7 @@ import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.UserPrefM
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityLogin;
+import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityMenu;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityTicket;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 
@@ -303,6 +304,12 @@ public class FragmentProfile extends Fragment {
 
     lyt_user_detail.setVisibility(View.GONE);
     btn_login.setVisibility(View.VISIBLE);
+
+    if(ActivityMenu.getInstance() != null) {
+      ActivityMenu.getInstance().finish();
+      Intent intent = new Intent(getContext(), ActivityMenu.class);
+      startActivity(intent);
+    }
   }
 
 

@@ -28,7 +28,7 @@ public class UserRequestsService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onRentRequestsReceived.onReceived(status, message, null);
+          onRentRequestsReceived.onReceived(status, message, new ArrayList<RentRequest>());
           return;
         }
 
@@ -59,7 +59,7 @@ public class UserRequestsService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onShopRequestsReceived.onReceived(status, message, null);
+          onShopRequestsReceived.onReceived(status, message, new ArrayList<ShopRequest>());
           return;
         }
 

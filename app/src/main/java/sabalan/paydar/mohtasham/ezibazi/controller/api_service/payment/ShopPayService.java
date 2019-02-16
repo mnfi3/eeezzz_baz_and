@@ -42,7 +42,7 @@ public class ShopPayService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onShopWithBankComplete.onComplete(status, message, null);
+          onShopWithBankComplete.onComplete(status, message, "");
           return;
         }
 

@@ -332,6 +332,7 @@ public class ActivityShowRent extends AppCompatActivity {
     if(!G.isLoggedIn){
       Intent intent = new Intent(ActivityShowRent.this, ActivityLogin.class);
       startActivity(intent);
+      return;
     }
 
     int rent_type_id = 0;

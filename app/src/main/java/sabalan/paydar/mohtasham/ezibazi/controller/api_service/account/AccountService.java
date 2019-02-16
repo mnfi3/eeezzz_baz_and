@@ -21,7 +21,7 @@ public class AccountService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if(error){
-          onLoginComplete.onComplete(status, message, "", null);
+          onLoginComplete.onComplete(status, message, "", new User());
           return;
         }
         String token = "";
@@ -54,7 +54,7 @@ public class AccountService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if(error){
-          onRegisterComplete.onComplete(status, message, "", null);
+          onRegisterComplete.onComplete(status, message, "", new User());
           return;
         }
 

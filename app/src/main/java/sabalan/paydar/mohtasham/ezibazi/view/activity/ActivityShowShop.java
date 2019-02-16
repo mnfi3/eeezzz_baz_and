@@ -278,6 +278,7 @@ public class ActivityShowShop extends AppCompatActivity {
     if(!G.isLoggedIn){
       Intent intent = new Intent(ActivityShowShop.this, ActivityLogin.class);
       startActivity(intent);
+      return;
     }
 
 

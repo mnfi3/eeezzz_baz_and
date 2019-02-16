@@ -29,7 +29,7 @@ public class CommentService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onCommentsReceived.onReceived(status, message, null, null);
+          onCommentsReceived.onReceived(status, message, new ArrayList<Comment>(), new Paginate());
           return;
         }
 
@@ -60,7 +60,7 @@ public class CommentService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onAddCommentReceived.onReceived(status, message, null);
+          onAddCommentReceived.onReceived(status, message, new Comment());
           return;
         }
 

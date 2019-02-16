@@ -27,7 +27,7 @@ public class SliderMainService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onSliderReceived.onReceived(message, null);
+          onSliderReceived.onReceived(message, new ArrayList<MainSlider>());
           return;
         }
 

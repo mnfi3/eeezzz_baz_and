@@ -60,7 +60,7 @@ public class UserDetailService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onFinanceReceivedComplete.onComplete(status, message, null);
+          onFinanceReceivedComplete.onComplete(status, message, new Finance());
           return;
         }
 
@@ -85,7 +85,7 @@ public class UserDetailService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if(error){
-          onLastAddressReceived.onComplete(status, message,null);
+          onLastAddressReceived.onComplete(status, message,new Address());
           return;
         }
 

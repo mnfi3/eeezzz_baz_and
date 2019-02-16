@@ -30,7 +30,7 @@ public class ShopService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onShopsReceived.onReceived(status, message, null, null);
+          onShopsReceived.onReceived(status, message, new ArrayList<Game>(), new Paginate());
           return;
         }
 
@@ -62,7 +62,7 @@ public class ShopService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onSearchedShopsReceived.onReceived(status, message, null);
+          onSearchedShopsReceived.onReceived(status, message, new ArrayList<Game>());
           return;
         }
 
@@ -94,7 +94,7 @@ public class ShopService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onRelatedShopsReceived.onReceived(status, message, null);
+          onRelatedShopsReceived.onReceived(status, message, new ArrayList<Game>());
           return;
         }
 
@@ -122,7 +122,7 @@ public class ShopService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onSpecialshopReceived.onReceived(status, message, null);
+          onSpecialshopReceived.onReceived(status, message, new Game());
           return;
         }
 

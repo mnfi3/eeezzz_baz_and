@@ -29,7 +29,7 @@ public class PostService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onPostsReceived.onReceived(status, message, null, null);
+          onPostsReceived.onReceived(status, message, new ArrayList<Post>(), new Paginate());
           return;
         }
 
@@ -59,7 +59,7 @@ public class PostService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onSearchedPostsReceived.onReceived(status, message, null);
+          onSearchedPostsReceived.onReceived(status, message, new ArrayList<Post>());
           return;
         }
 
@@ -88,7 +88,7 @@ public class PostService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onRelatedPostsReceived.onReceived(status, message, null);
+          onRelatedPostsReceived.onReceived(status, message, new ArrayList<Post>());
           return;
         }
 

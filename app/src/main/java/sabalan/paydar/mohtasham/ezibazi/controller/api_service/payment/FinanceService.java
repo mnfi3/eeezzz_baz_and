@@ -23,7 +23,7 @@ public class FinanceService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onCreditComplete.onComplete(status, message, null);
+          onCreditComplete.onComplete(status, message, "");
           return;
         }
 

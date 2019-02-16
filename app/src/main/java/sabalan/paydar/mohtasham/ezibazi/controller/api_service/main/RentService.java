@@ -96,7 +96,7 @@ public class RentService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onRelatedRentsReceived.onReceived(status, message, null);
+          onRelatedRentsReceived.onReceived(status, message, new ArrayList<Game>());
           return;
         }
 
@@ -126,7 +126,7 @@ public class RentService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onSpecialRentReceived.onReceived(status, message, null);
+          onSpecialRentReceived.onReceived(status, message, new Game());
           return;
         }
 
@@ -156,7 +156,7 @@ public class RentService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onRentTypesReceived.onReceived(status, message, null);
+          onRentTypesReceived.onReceived(status, message, new ArrayList<RentType>());
           return;
         }
 

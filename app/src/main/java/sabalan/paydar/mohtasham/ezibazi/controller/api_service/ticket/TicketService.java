@@ -29,7 +29,7 @@ public class TicketService {
         @Override
         public void onReceived(JSONObject response, int status, String message, boolean error) {
           if (error){
-            onTicketsReceived.onReceived(status, message, null, null);
+            onTicketsReceived.onReceived(status, message, new Paginate(), new ArrayList<Ticket>());
             return;
           }
 
@@ -113,7 +113,7 @@ public class TicketService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onSendTicket.onReceived(status, message, null);
+          onSendTicket.onReceived(status, message, new Ticket());
           return;
         }
 

@@ -129,7 +129,7 @@ public class FragmentSearch extends Fragment {
       }
       @Override
       public void afterTextChanged(Editable editable) {
-        search();
+//        search();
       }
     });
 

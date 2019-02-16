@@ -26,7 +26,7 @@ public class FireBaseApiService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onRefreshTokenReceived.onReceived(status, message, null);
+          onRefreshTokenReceived.onReceived(status, message, new Device());
           return;
         }
 

@@ -29,7 +29,7 @@ public class AddressService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onStatesReceived.onComplete(status, message, null);
+          onStatesReceived.onComplete(status, message, new ArrayList<State>());
           return;
         }
 
@@ -65,7 +65,7 @@ public class AddressService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onStateCitiesReceived.onComplete(status, message, null);
+          onStateCitiesReceived.onComplete(status, message, new ArrayList<City>());
           return;
         }
 
@@ -95,7 +95,7 @@ public class AddressService {
       @Override
       public void onReceived(JSONObject response, int status, String message, boolean error) {
         if (error){
-          onAddressSaved.onComplete(status, message, null);
+          onAddressSaved.onComplete(status, message, new Address());
           return;
         }
 
