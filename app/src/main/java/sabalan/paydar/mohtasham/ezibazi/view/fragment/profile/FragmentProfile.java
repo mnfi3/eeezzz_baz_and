@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import sabalan.paydar.mohtasham.ezibazi.api_service.payment.FinanceService;
 import sabalan.paydar.mohtasham.ezibazi.api_service.ticket.TicketService;
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
+import sabalan.paydar.mohtasham.ezibazi.system.application.Crypt;
 import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig;
@@ -48,6 +50,7 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 public class FragmentProfile extends Fragment {
 
 
+  private static final String TAG = "FragmentProfile";
   Button btn_login;
   LinearLayout lyt_user_detail;
   LinearLayout lyt_logout;
@@ -88,6 +91,8 @@ public class FragmentProfile extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+
 
     setupViews();
     setTypeFace();

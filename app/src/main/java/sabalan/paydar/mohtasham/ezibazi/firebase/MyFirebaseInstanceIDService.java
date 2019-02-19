@@ -9,10 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import sabalan.paydar.mohtasham.ezibazi.api_service.firebase.FireBaseApiService;
-import sabalan.paydar.mohtasham.ezibazi.system.application.Crypt;
 import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.FcmPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.model.Device;
 import sabalan.paydar.mohtasham.ezibazi.model.Fcm;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.SettingPrefManager;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
@@ -30,8 +30,9 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 //    Log.d(TAG, "Refreshed token: " + refreshedToken);
     Fcm fcm = new Fcm();
     fcm.setToken(refreshedToken);
-    fcm.setClient_key(Crypt.generateFcmClientKey());
-    new FcmPrefManager(MyFirebaseInstanceIDService.this).saveFcm(fcm);
+    fcm.setClient_key(new SettingPrefManager(MyFirebaseInstanceIDService.this).getFcmClientKey());
+    FcmPrefManager fcmPrefManager = new FcmPrefManager(MyFirebaseInstanceIDService.this);
+    fcmPrefManager.saveFcm(fcm);
     sendFcmInfoToServer(fcm);
   }
 

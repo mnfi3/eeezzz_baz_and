@@ -12,10 +12,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
 import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.AppUsagePrefManager;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.SettingPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.layout_behavior.OnSwipeTouchListener;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.intro.FragmentIntro1;
@@ -56,6 +56,9 @@ public class ActivityIntro extends AppCompatActivity {
       startActivity(intent);
       finish();
     }
+
+    SettingPrefManager prefManager = new SettingPrefManager(ActivityIntro.this);
+    prefManager.saveFcmClientKey();
 
     setupViews();
     setTypeFace();

@@ -23,8 +23,8 @@ public class FcmPrefManager {
   }
 
   public void saveFcm(Fcm fcm) {
-    String newToken = Crypt.encrypt(fcm.getToken());
-    String newClientKey = Crypt.encrypt(fcm.getClient_key());
+    String newToken = fcm.getToken();
+    String newClientKey = fcm.getClient_key();
     SharedPreferences.Editor editor = sharedPreferences.edit();
     editor.putString(FCM_TOKEN, newToken);
     editor.putString(FCM_CLIENT_KEY, newClientKey);
@@ -35,8 +35,8 @@ public class FcmPrefManager {
 
   public Fcm getFcm() {
     Fcm fcm = new Fcm();
-    String token = Crypt.decrypt(sharedPreferences.getString(FCM_TOKEN,""));
-    String client_key = Crypt.decrypt(sharedPreferences.getString(FCM_CLIENT_KEY,""));
+    String token = sharedPreferences.getString(FCM_TOKEN,"");
+    String client_key = sharedPreferences.getString(FCM_CLIENT_KEY,"");
     fcm.setToken(token);
     fcm.setClient_key(client_key);
     return fcm;

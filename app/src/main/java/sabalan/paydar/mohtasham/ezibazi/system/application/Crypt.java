@@ -1,8 +1,6 @@
 package sabalan.paydar.mohtasham.ezibazi.system.application;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Base64;
 
 import java.math.BigInteger;
@@ -105,7 +103,7 @@ public class Crypt {
       + Hardware.getSubscriberId()
       + Hardware.getAndroidId()
 
-      , SALT);
+      , generateDefaultKey().toString());
   }
 
 
