@@ -195,6 +195,7 @@ public class ActivityPurchase extends AppCompatActivity {
       @Override
       public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         city_id = cities.get(i).getId();
+        Toast.makeText(ActivityPurchase.this, ""+cities.get(i).getName(), Toast.LENGTH_LONG).show();
       }
 
       @Override

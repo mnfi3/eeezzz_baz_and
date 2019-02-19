@@ -36,7 +36,7 @@ public class Address {
         address.setHome_phone_number(object.getString("home_phone_number"));
         address.setContent(object.getString("content"));
         address.setLatitude(object.getDouble("latitude"));
-        address.setLatitude(object.getDouble("longitude"));
+        address.setLongitude(object.getDouble("longitude"));
         address.setCreated_at(object.getString("created_at"));
       } catch (JSONException e) {
         e.printStackTrace();
@@ -50,8 +50,10 @@ public class Address {
 
   public String getAddressText(){
     String text = "";
-    text += " استان : " + state.getName() + "\n";
-    text += " شهر : " + city.getName() + "\n";
+    if(state != null)
+      text += " استان : " + state.getName() + "\n";
+    if(city != null)
+      text += " شهر : " + city.getName() + "\n";
     text += " آدرس : " + content + "\n";
     text += " کدپستی : " + postcode + "\n";
     text += " شماره تلفن : " + home_phone_number + "\n";
