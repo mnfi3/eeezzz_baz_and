@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.hardware;
+package sabalan.paydar.mohtasham.ezibazi.system.hardware;
 
 import android.content.Context;
 

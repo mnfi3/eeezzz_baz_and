@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.application;
+package sabalan.paydar.mohtasham.ezibazi.system.application;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -13,7 +13,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.Hardware;
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.Hardware;
 
 public class Crypt {
   private static final String SALT="7c3d596ed03ab9116c547b0eb678b247";

@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.firebase;
+package sabalan.paydar.mohtasham.ezibazi.firebase;
 
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;

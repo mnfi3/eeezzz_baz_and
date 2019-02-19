@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager;
+package sabalan.paydar.mohtasham.ezibazi.system.pref_manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;

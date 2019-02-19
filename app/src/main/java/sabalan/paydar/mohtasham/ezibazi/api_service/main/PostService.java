@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.api_service.main;
+package sabalan.paydar.mohtasham.ezibazi.api_service.main;
 
 import android.content.Context;
 
@@ -10,8 +10,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
+import sabalan.paydar.mohtasham.ezibazi.api_service.ApiRequest;
+import sabalan.paydar.mohtasham.ezibazi.api_service.Urls;
 import sabalan.paydar.mohtasham.ezibazi.model.Paginate;
 import sabalan.paydar.mohtasham.ezibazi.model.Post;
 

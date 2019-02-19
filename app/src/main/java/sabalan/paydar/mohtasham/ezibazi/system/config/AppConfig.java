@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.config;
+package sabalan.paydar.mohtasham.ezibazi.system.config;
 
 public class AppConfig {
 

@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview;
+package sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,8 +16,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
 import sabalan.paydar.mohtasham.ezibazi.model.RentType;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityShowRent;

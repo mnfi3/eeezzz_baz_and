@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview.user_activity;
+package sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter.user_activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,8 +16,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperDate;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperDate;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText;
 import sabalan.paydar.mohtasham.ezibazi.model.ShopRequest;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityShowShop;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;

@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.hardware;
+package sabalan.paydar.mohtasham.ezibazi.system.hardware;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityNetworkError;
 
 public class ConnectivityListener extends BroadcastReceiver {

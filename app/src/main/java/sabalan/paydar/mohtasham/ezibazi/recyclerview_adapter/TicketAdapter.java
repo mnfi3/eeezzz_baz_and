@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview;
+package sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +14,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperDate;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperDate;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText;
 import sabalan.paydar.mohtasham.ezibazi.model.Ticket;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 

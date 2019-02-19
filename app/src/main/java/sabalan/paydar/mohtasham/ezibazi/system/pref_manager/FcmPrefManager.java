@@ -1,9 +1,9 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager;
+package sabalan.paydar.mohtasham.ezibazi.system.pref_manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.Crypt;
+import sabalan.paydar.mohtasham.ezibazi.system.application.Crypt;
 import sabalan.paydar.mohtasham.ezibazi.model.Fcm;
 
 public class FcmPrefManager {

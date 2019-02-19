@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.application;
+package sabalan.paydar.mohtasham.ezibazi.system.application;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -16,12 +16,12 @@ import sabalan.paydar.mohtasham.ezibazi.BuildConfig;
 import io.fabric.sdk.android.Fabric;
 import java.util.List;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.RentService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.ConnectivityListener;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.Storage;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.CityPrefManager;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.UserPrefManager;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.RentService;
+import sabalan.paydar.mohtasham.ezibazi.system.auth.Auth;
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.ConnectivityListener;
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.Storage;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.CityPrefManager;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.UserPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.model.RentType;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
 

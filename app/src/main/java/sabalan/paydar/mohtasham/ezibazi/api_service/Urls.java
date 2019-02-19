@@ -1,86 +1,87 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.api_service
+package sabalan.paydar.mohtasham.ezibazi.api_service;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.config.AppConfig
+import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig;
 
-object Urls {
-    //-------Main Menu-----//
-    //slider
-    val MAIN_SLIDER = AppConfig.MAIN_URL + "/slider"
-    //posts
-    val POST_INDEX = AppConfig.MAIN_URL + "/post"
-    val POST_SEARCH = AppConfig.MAIN_URL + "/post-search"
+public class Urls {
+  //-------Main Menu-----//
+  //slider
+  public static final String MAIN_SLIDER = AppConfig.MAIN_URL + "/slider";
+  //posts
+  public static final String POST_INDEX = AppConfig.MAIN_URL + "/post";
+  public static final String POST_SEARCH = AppConfig.MAIN_URL + "/post-search";
 
-    //games
-    val SHOP_INDEX = AppConfig.MAIN_URL + "/game-for-shop"
-    val SHOP_INDEX0 = AppConfig.MAIN_URL + "/game-for-shop-index"
-    val SHOP_SEARCH = AppConfig.MAIN_URL + "/game-for-shop-search"
+  //games
+  public static final String SHOP_INDEX = AppConfig.MAIN_URL + "/game-for-shop";
+  public static final String SHOP_INDEX0 = AppConfig.MAIN_URL + "/game-for-shop-index";
+  public static final String SHOP_SEARCH = AppConfig.MAIN_URL + "/game-for-shop-search";
 
-    val RENT_INDEX = AppConfig.MAIN_URL + "/game-for-rent"
-    val RENT_INDEX0 = AppConfig.MAIN_URL + "/game-for-rent-index"
-    val RENT_SEARCH = AppConfig.MAIN_URL + "/game-for-rent-search"
-    val RENT_TYPE_INDEX = AppConfig.MAIN_URL + "/rent-type"
+  public static final String RENT_INDEX = AppConfig.MAIN_URL + "/game-for-rent";
+  public static final String RENT_INDEX0 = AppConfig.MAIN_URL + "/game-for-rent-index";
+  public static final String RENT_SEARCH = AppConfig.MAIN_URL + "/game-for-rent-search";
+  public static final String RENT_TYPE_INDEX = AppConfig.MAIN_URL + "/rent-type";
 
-    val GAME_INFO_COMMENTS = AppConfig.MAIN_URL + "/game-info-comments"
+  public static final String GAME_INFO_COMMENTS = AppConfig.MAIN_URL + "/game-info-comments";
 
-    val GAME_RELATED_GAME_FOR_RENT = AppConfig.MAIN_URL + "/game-for-rent-related"
-    val GAME_RELATED_GAME_FOR_SHOP = AppConfig.MAIN_URL + "/game-for-shop-related"
-    val GAME_RELATED_POSTS = AppConfig.MAIN_URL + "/game-info-related-posts"
-
-
-    //user requests
-    val USER_RENT_REQUESTS = AppConfig.MAIN_URL + "/user-game-for-rent-requests"
-    val USER_BUY_REQUESTS = AppConfig.MAIN_URL + "/user-game-for-shop-requests"
-
-    //======Main Menu=====//
+  public static final String GAME_RELATED_GAME_FOR_RENT = AppConfig.MAIN_URL + "/game-for-rent-related";
+  public static final String GAME_RELATED_GAME_FOR_SHOP = AppConfig.MAIN_URL + "/game-for-shop-related";
+  public static final String GAME_RELATED_POSTS = AppConfig.MAIN_URL + "/game-info-related-posts";
 
 
-    //---passport service---//
 
-    val LOGIN = AppConfig.MAIN_URL + "/login"
-    val REGISTER = AppConfig.MAIN_URL + "/register"
-    val USER = AppConfig.MAIN_URL + "/user"
-    val LOGOUT = AppConfig.MAIN_URL + "/logout"
-    val LOGIN_CHECK = AppConfig.MAIN_URL + "/login-check"
+  //user requests
+  public static final String USER_RENT_REQUESTS = AppConfig.MAIN_URL + "/user-game-for-rent-requests";
+  public static final String USER_BUY_REQUESTS = AppConfig.MAIN_URL + "/user-game-for-shop-requests";
 
-    //password reset
-    val PASSWORD_RESET = "/password/reset"
+  //======Main Menu=====//
 
 
-    //===passport service===//
+  //---passport service---//
+
+  public static final String LOGIN = AppConfig.MAIN_URL + "/login";
+  public static final String REGISTER = AppConfig.MAIN_URL + "/register";
+  public static final String USER = AppConfig.MAIN_URL + "/user";
+  public static final String LOGOUT = AppConfig.MAIN_URL + "/logout";
+  public static final String LOGIN_CHECK = AppConfig.MAIN_URL + "/login-check";
+
+  //password reset
+  public static final String PASSWORD_RESET = "/password/reset";
 
 
-    //tickets
-    val TICKET_INDEX = AppConfig.MAIN_URL + "/ticket"
-    val TICKET_SEEN = AppConfig.MAIN_URL + "/ticket-user-seen"
-    val NEW_TICKETS_COUNT = AppConfig.MAIN_URL + "/new-tickets-count"
-
-    //user finance
-    val USER_FINANCE = AppConfig.MAIN_URL + "/user-finance"
-
-    //user last address
-    val USER_LAST_ADDRESS = AppConfig.MAIN_URL + "/user-last-address"
-
-    //comment
-    val COMMENT_INDEX = AppConfig.MAIN_URL + "/comment"
+  //===passport service===//
 
 
-    //fcm refresh token
-    val REFRESH_FCM_TOKEN = AppConfig.MAIN_URL + "/refresh-fcm-token"
+  //tickets
+  public static final String TICKET_INDEX = AppConfig.MAIN_URL + "/ticket";
+  public static final String TICKET_SEEN = AppConfig.MAIN_URL + "/ticket-user-seen";
+  public static final String NEW_TICKETS_COUNT = AppConfig.MAIN_URL + "/new-tickets-count";
+
+  //user finance
+  public static final String USER_FINANCE = AppConfig.MAIN_URL + "/user-finance";
+
+  //user last address
+  public static final String USER_LAST_ADDRESS = AppConfig.MAIN_URL + "/user-last-address";
+
+  //comment
+  public static final String COMMENT_INDEX = AppConfig.MAIN_URL + "/comment";
 
 
-    //finance
-    val INCREASE_CREDIT = AppConfig.MAIN_URL + "/increase-credit"
+  //fcm refresh token
+  public static final String REFRESH_FCM_TOKEN = AppConfig.MAIN_URL + "/refresh-fcm-token";
 
 
-    //address
-    val ADDRESS_INDEX = AppConfig.MAIN_URL + "/address"
-    val ADDRESS_STATES = AppConfig.MAIN_URL + "/states"
-    val ADDRESS_STATE_CITIES = AppConfig.MAIN_URL + "/state/{id}/cities"
+  //finance
+  public static final String INCREASE_CREDIT = AppConfig.MAIN_URL + "/increase-credit";
 
-    //game payments
-    val RENT_WITH_WALLET = AppConfig.MAIN_URL + "/rent-game-with-wallet"
-    val RENT_WITH_BANK = AppConfig.MAIN_URL + "/rent-game"
 
-    val SHOP_WITH_WALLET = AppConfig.MAIN_URL + "/shop-game-with-wallet"
-    val SHOP_WITH_BANK = AppConfig.MAIN_URL + "/shop-game"
+  //address
+  public static final String ADDRESS_INDEX = AppConfig.MAIN_URL + "/address";
+  public static final String ADDRESS_STATES = AppConfig.MAIN_URL + "/states";
+  public static final String ADDRESS_STATE_CITIES = AppConfig.MAIN_URL + "/state/{id}/cities";
+
+  //game payments
+  public static final String RENT_WITH_WALLET = AppConfig.MAIN_URL + "/rent-game-with-wallet";
+  public static final String RENT_WITH_BANK = AppConfig.MAIN_URL + "/rent-game";
+
+  public static final String SHOP_WITH_WALLET = AppConfig.MAIN_URL + "/shop-game-with-wallet";
+  public static final String SHOP_WITH_BANK = AppConfig.MAIN_URL + "/shop-game";
 }

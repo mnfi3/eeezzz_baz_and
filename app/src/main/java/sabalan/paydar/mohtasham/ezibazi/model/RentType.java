@@ -3,7 +3,7 @@ package sabalan.paydar.mohtasham.ezibazi.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 
 public class RentType {
   private int id;

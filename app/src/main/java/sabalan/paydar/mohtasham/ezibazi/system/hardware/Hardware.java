@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.hardware;
+package sabalan.paydar.mohtasham.ezibazi.system.hardware;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -17,7 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.util.UUID;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 
 public class Hardware {
 

@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview;
+package sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperDate;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperDate;
 import sabalan.paydar.mohtasham.ezibazi.model.Post;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityWebView;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;

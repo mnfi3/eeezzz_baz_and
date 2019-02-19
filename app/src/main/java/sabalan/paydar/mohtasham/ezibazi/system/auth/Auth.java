@@ -1,8 +1,8 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.auth;
+package sabalan.paydar.mohtasham.ezibazi.system.auth;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.account.LoginCheckerService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.UserPrefManager;
+import sabalan.paydar.mohtasham.ezibazi.api_service.account.LoginCheckerService;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.UserPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
 
 public class Auth {

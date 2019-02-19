@@ -1,12 +1,12 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.api_service.payment;
+package sabalan.paydar.mohtasham.ezibazi.api_service.payment;
 
 import android.content.Context;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
+import sabalan.paydar.mohtasham.ezibazi.api_service.ApiRequest;
+import sabalan.paydar.mohtasham.ezibazi.api_service.Urls;
 
 public class RentPayService {
   private Context context;

@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.api_service.firebase;
+package sabalan.paydar.mohtasham.ezibazi.api_service.firebase;
 
 import android.content.Context;
 
@@ -7,8 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
+import sabalan.paydar.mohtasham.ezibazi.api_service.ApiRequest;
+import sabalan.paydar.mohtasham.ezibazi.api_service.Urls;
 import sabalan.paydar.mohtasham.ezibazi.model.Device;
 
 public class FireBaseApiService {

@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview;
+package sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter;
 
 import android.content.Context;
 import android.content.Intent;

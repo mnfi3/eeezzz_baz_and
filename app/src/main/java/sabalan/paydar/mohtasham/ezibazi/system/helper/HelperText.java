@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.helper;
+package sabalan.paydar.mohtasham.ezibazi.system.helper;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

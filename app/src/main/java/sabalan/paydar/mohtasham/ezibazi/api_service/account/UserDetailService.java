@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.api_service.account;
+package sabalan.paydar.mohtasham.ezibazi.api_service.account;
 
 import android.content.Context;
 
@@ -6,8 +6,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
+import sabalan.paydar.mohtasham.ezibazi.api_service.ApiRequest;
+import sabalan.paydar.mohtasham.ezibazi.api_service.Urls;
 import sabalan.paydar.mohtasham.ezibazi.model.Address;
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
 import sabalan.paydar.mohtasham.ezibazi.model.User;

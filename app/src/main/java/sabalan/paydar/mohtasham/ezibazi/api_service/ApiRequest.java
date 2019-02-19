@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.api_service;
+package sabalan.paydar.mohtasham.ezibazi.api_service;
 
 import android.content.Context;
 
@@ -15,8 +15,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.config.AppConfig;
+import sabalan.paydar.mohtasham.ezibazi.system.auth.Auth;
+import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig;
 
 public class ApiRequest {
 

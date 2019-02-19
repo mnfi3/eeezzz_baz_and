@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.api_service.address;
+package sabalan.paydar.mohtasham.ezibazi.api_service.address;
 
 import android.content.Context;
 
@@ -8,8 +8,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ApiRequest;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
+import sabalan.paydar.mohtasham.ezibazi.api_service.ApiRequest;
+import sabalan.paydar.mohtasham.ezibazi.api_service.Urls;
 import sabalan.paydar.mohtasham.ezibazi.model.Address;
 import sabalan.paydar.mohtasham.ezibazi.model.City;
 import sabalan.paydar.mohtasham.ezibazi.model.State;

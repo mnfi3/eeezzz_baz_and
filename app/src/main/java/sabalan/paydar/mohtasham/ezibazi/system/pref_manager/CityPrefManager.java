@@ -1,9 +1,9 @@
-package sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager;
+package sabalan.paydar.mohtasham.ezibazi.system.pref_manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import sabalan.paydar.mohtasham.ezibazi.controller.system.config.AppConfig;
+import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig;
 
 public class CityPrefManager {
 
