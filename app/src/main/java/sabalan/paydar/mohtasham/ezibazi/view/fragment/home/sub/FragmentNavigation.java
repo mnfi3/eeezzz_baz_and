@@ -11,9 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityLogin;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityTicket;
 

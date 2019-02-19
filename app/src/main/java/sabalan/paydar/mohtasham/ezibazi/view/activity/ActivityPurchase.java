@@ -29,20 +29,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.account.UserDetailService;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.address.AddressService;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.RentService;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.ShopService;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.payment.RentPayService;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.payment.ShopPayService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.api_service.account.UserDetailService;
+import sabalan.paydar.mohtasham.ezibazi.api_service.address.AddressService;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.RentService;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.ShopService;
+import sabalan.paydar.mohtasham.ezibazi.api_service.payment.RentPayService;
+import sabalan.paydar.mohtasham.ezibazi.api_service.payment.ShopPayService;
 import sabalan.paydar.mohtasham.ezibazi.model.Address;
 import sabalan.paydar.mohtasham.ezibazi.model.City;
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
 import sabalan.paydar.mohtasham.ezibazi.model.RentType;
 import sabalan.paydar.mohtasham.ezibazi.model.State;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 
 public class ActivityPurchase extends AppCompatActivity {

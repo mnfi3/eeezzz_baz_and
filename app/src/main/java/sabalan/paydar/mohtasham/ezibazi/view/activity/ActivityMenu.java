@@ -14,10 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.ConnectivityListener;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.Hardware;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.UserPrefManager;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.ConnectivityListener;
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.Hardware;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.UserPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.activity.FragmentActivity;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.FragmentHome;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.profile.FragmentProfile;

@@ -27,11 +27,11 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.ShopService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.SettingPrefManager;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.ShopService;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.SettingPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail.FragmentRelatedPost;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail.FragmentRelatedShops;

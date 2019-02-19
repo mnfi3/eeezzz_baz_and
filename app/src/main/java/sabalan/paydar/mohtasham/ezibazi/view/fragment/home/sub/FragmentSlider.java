@@ -18,9 +18,9 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.SliderMainService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.SliderMainService;
 import sabalan.paydar.mohtasham.ezibazi.model.MainSlider;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityWebView;
 
 

@@ -24,17 +24,17 @@ import org.json.JSONObject;
 import java.util.regex.Pattern;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.Urls;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.account.AccountService;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.firebase.FireBaseApiService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.config.AppConfig;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.ConnectivityListener;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.FcmPrefManager;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.UserPrefManager;
+import sabalan.paydar.mohtasham.ezibazi.api_service.Urls;
+import sabalan.paydar.mohtasham.ezibazi.api_service.account.AccountService;
+import sabalan.paydar.mohtasham.ezibazi.api_service.firebase.FireBaseApiService;
 import sabalan.paydar.mohtasham.ezibazi.model.Device;
 import sabalan.paydar.mohtasham.ezibazi.model.Fcm;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig;
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.ConnectivityListener;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.FcmPrefManager;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.UserPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 
 public class ActivityLogin extends AppCompatActivity {

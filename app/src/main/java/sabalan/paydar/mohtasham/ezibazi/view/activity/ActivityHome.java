@@ -11,7 +11,7 @@ import sabalan.paydar.mohtasham.ezibazi.R;
 
 public class ActivityHome extends AppCompatActivity {
 
-  private static final String TAG = "ActivityMain";
+  private static final String TAG = "ActivityHome";
 
   ImageView img_open_navigation;
   DrawerLayout drawerLayout;

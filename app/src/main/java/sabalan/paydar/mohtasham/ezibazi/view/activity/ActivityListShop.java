@@ -14,11 +14,11 @@ import com.wang.avi.AVLoadingIndicatorView;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview.ListShopAdapter;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.ShopService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.ShopService;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
 import sabalan.paydar.mohtasham.ezibazi.model.Paginate;
+import sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter.ListShopAdapter;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation.adapters.ScaleInAnimationAdapter;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation.adapters.SlideInBottomAnimationAdapter;

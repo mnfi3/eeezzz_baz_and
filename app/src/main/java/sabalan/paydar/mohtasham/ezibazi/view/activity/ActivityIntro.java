@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.AppUsagePrefManager;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.AppUsagePrefManager;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.layout_behavior.OnSwipeTouchListener;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.intro.FragmentIntro1;

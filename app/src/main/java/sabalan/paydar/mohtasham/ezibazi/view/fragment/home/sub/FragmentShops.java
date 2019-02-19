@@ -16,11 +16,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview.ShopMainAdapter;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.ShopService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.ShopService;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
 import sabalan.paydar.mohtasham.ezibazi.model.Paginate;
+import sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter.ShopMainAdapter;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityListShop;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation.adapters.AlphaInAnimationAdapter;

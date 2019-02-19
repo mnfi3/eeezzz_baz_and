@@ -31,12 +31,12 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.RentService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.helper.HelperText;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.pref_manager.SettingPrefManager;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.RentService;
 import sabalan.paydar.mohtasham.ezibazi.model.Game;
 import sabalan.paydar.mohtasham.ezibazi.model.RentType;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText;
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.SettingPrefManager;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail.FragmentRelatedPost;
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail.FragmentRelatedRents;

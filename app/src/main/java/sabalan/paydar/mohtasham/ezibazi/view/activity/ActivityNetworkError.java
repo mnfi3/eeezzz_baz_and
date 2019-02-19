@@ -9,8 +9,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.hardware.ConnectivityListener;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.ConnectivityListener;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 
 public class ActivityNetworkError extends AppCompatActivity {

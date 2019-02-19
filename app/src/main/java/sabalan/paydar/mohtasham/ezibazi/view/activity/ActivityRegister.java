@@ -22,9 +22,9 @@ import org.json.JSONObject;
 import java.util.regex.Pattern;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.account.AccountService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.api_service.account.AccountService;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 
 public class ActivityRegister extends AppCompatActivity {

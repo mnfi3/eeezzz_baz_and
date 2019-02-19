@@ -21,12 +21,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview.TicketAdapter;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.ticket.TicketService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.config.AppConfig;
+import sabalan.paydar.mohtasham.ezibazi.api_service.ticket.TicketService;
 import sabalan.paydar.mohtasham.ezibazi.model.Paginate;
 import sabalan.paydar.mohtasham.ezibazi.model.Ticket;
+import sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter.TicketAdapter;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 
 public class ActivityTicket extends AppCompatActivity {

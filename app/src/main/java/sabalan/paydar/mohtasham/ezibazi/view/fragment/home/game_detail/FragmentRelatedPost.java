@@ -15,10 +15,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import sabalan.paydar.mohtasham.ezibazi.R;
-import sabalan.paydar.mohtasham.ezibazi.controller.adapter.recyclerview.PostMainAdapter;
-import sabalan.paydar.mohtasham.ezibazi.controller.api_service.main.PostService;
-import sabalan.paydar.mohtasham.ezibazi.controller.system.application.G;
+import sabalan.paydar.mohtasham.ezibazi.api_service.main.PostService;
 import sabalan.paydar.mohtasham.ezibazi.model.Post;
+import sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter.PostMainAdapter;
+import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews;
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation.adapters.AlphaInAnimationAdapter;
 
