@@ -1,7 +1,6 @@
 package sabalan.paydar.mohtasham.ezibazi.api_service;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
