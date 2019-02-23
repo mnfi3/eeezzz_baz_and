@@ -12,10 +12,12 @@ buildscript {
 }
 //noinspection GradleCompatible
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 apply plugin: 'io.fabric'
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    mavenCentral()
 }
 
 
@@ -44,46 +46,29 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    //noinspection GradleCompatible
-//    implementation 'com.android.support:appcompat-v7:23.4.0'
-    //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "com.android.support:appcompat-v7:$sdk_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     //slider
     implementation 'com.daimajia.slider:library:1.1.5@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
 
-    //recyclerview
-    //noinspection GradleCompatible
-//    implementation 'com.android.support:recyclerview-v7:23.4.0'
-    //noinspection GradleCompatible
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation "com.android.support:recyclerview-v7:$sdk_version"
 
     //volley
     implementation 'com.android.volley:volley:1.0.0'
 
-    //support design
-    //noinspection GradleCompatible
-//    implementation 'com.android.support:design:23.4.0'
-    //noinspection GradleCompatible
-    implementation 'com.android.support:design:28.0.0'
+    implementation "com.android.support:design:$sdk_version"
     implementation 'com.android.support:support-v4:+'
     //noinspection GradleCompatible
-    implementation('com.android.support:support-v4:28.0.0') {
+    implementation("com.android.support:support-v4:$sdk_version") {
         force = true;
     }
-
-    //glide
-//    implementation 'com.github.bumptech.glide:glide:4.8.0'
-//    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
 //    implementation 'com.squareup.picasso:picasso:2.71828'
 
-    //batter video player
-//    implementation 'com.github.halilozercan:BetterVideoPlayer:1.2.alpha1'
 
     //avloading
     implementation 'com.wang.avi:library:2.1.3'
@@ -106,6 +91,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crash:11.8.0'
     //fabric answer
     implementation 'com.crashlytics.sdk.android:answers:1.4.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 //firebase

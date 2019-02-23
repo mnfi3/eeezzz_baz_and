@@ -1,6 +1,7 @@
 package sabalan.paydar.mohtasham.ezibazi.api_service;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -20,6 +21,9 @@ import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig;
 
 public class ApiRequest {
 
+  private static String TAG = "ApiRequest";
+
+
   public static final int GET = 0;
   public static final int POST = 1;
   public static final int PUT = 2;
@@ -31,15 +35,17 @@ public class ApiRequest {
 
   private Context context;
 
+  private static long last_request_time = 0;
+
 
   public ApiRequest(Context context){
     this.context = context;
   }
 
 
-
   //json object request
   public void request(int method, String url, JSONObject object, final boolean auth, final onDataReceived listener){
+
     final JsonObjectRequest request = new JsonObjectRequest(method, url, object, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
@@ -80,6 +86,7 @@ public class ApiRequest {
 
 
   public void request(int method, String url, JSONObject object, final boolean auth, final onDataReceived listener, String tag){
+
     final JsonObjectRequest request = new JsonObjectRequest(method, url, object, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
@@ -113,6 +120,8 @@ public class ApiRequest {
     request.setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     Volley.newRequestQueue(context).add(request).setTag(tag);
   }
+
+
 
 
 

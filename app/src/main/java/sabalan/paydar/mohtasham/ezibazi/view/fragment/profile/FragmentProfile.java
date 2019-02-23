@@ -34,7 +34,6 @@ import sabalan.paydar.mohtasham.ezibazi.api_service.payment.FinanceService;
 import sabalan.paydar.mohtasham.ezibazi.api_service.ticket.TicketService;
 import sabalan.paydar.mohtasham.ezibazi.model.Finance;
 import sabalan.paydar.mohtasham.ezibazi.model.User;
-import sabalan.paydar.mohtasham.ezibazi.system.application.Crypt;
 import sabalan.paydar.mohtasham.ezibazi.system.application.G;
 import sabalan.paydar.mohtasham.ezibazi.system.auth.Auth;
 import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig;
@@ -91,8 +90,6 @@ public class FragmentProfile extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_profile, container, false);
-
-
 
     setupViews();
     setTypeFace();
@@ -433,8 +430,8 @@ public class FragmentProfile extends Fragment {
   public void onPause() {
     super.onPause();
     is_pause = true;
-    getUserFinance();
-    getNewTicketsCount();
+//    getUserFinance();
+//    getNewTicketsCount();
 //    new_tickets_handler.removeCallbacks(new_tickets_runnable);
 //    finance_handler.removeCallbacks(finance_runnable);
   }
