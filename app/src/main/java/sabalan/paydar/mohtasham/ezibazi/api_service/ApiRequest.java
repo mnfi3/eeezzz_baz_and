@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -34,7 +35,6 @@ public class ApiRequest {
 
   private Context context;
 
-  private static long last_request_time = 0;
 
 
   public ApiRequest(Context context){
@@ -75,8 +75,12 @@ public class ApiRequest {
     };
 
 
-    request.setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request);
+    request
+      .setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
+      .setShouldCache(false);
+    RequestQueue queue = Volley.newRequestQueue(context);
+    queue.getCache().clear();
+    queue.add(request);
   }
 
 
@@ -116,17 +120,13 @@ public class ApiRequest {
     };
 
 
-    request.setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    Volley.newRequestQueue(context).add(request).setTag(tag);
+    request
+      .setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
+      .setShouldCache(false);
+    RequestQueue queue = Volley.newRequestQueue(context);
+    queue.getCache().clear();
+    queue.add(request);
   }
-
-
-
-
-
-
-
-
 
 
   public interface onDataReceived{
