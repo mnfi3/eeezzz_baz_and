@@ -13,6 +13,7 @@ buildscript {
 //noinspection GradleCompatible
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 apply plugin: 'io.fabric'
 repositories {
@@ -91,7 +92,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-crash:11.8.0'
     //fabric answer
     implementation 'com.crashlytics.sdk.android:answers:1.4.3'
+    //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    kapt "org.androidannotations:androidannotations:4.3.1"
 
     //osm
     implementation 'org.osmdroid:osmdroid-android:6.0.3'
