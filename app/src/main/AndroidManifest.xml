@@ -3,6 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="sabalan.paydar.mohtasham.ezibazi">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -159,6 +161,8 @@
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".view.activity.ActivityPurchase">
+        </activity>
+        <activity android:name=".view.activity.ActivityMap">
         </activity>
     </application>
 

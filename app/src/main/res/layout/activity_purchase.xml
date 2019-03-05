@@ -425,7 +425,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp"
-                        android:hint="کد پستی(اختیاری)"
+                        android:hint="کد پستی"
                         android:textColorHint="@color/main_text_color"
                         android:textColor="@color/main_text_color"
                         android:drawablePadding="16dp"
@@ -435,6 +435,21 @@
 
 
                 </android.support.design.widget.TextInputLayout>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/btn_open_map"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="6dp"
+                        android:layout_marginTop="10dp"
+                        android:text="انتخاب در نقشه"
+                        android:textSize="@dimen/font_size_small"
+                        android:textColor="@color/main_text_color"
+                        android:background="@drawable/back_button_open_map"
+                        >
+
+                    </android.support.v7.widget.AppCompatButton>
 
                 </LinearLayout>
 

@@ -3,6 +3,7 @@ package sabalan.paydar.mohtasham.ezibazi.view.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -79,6 +81,7 @@ public class ActivityPurchase extends AppCompatActivity {
   EditText edt_address_content;
   EditText edt_phone_number;
   EditText edt_postcode;
+  Button btn_open_map;
 
   //third block
   TextView txt_show_payment;
@@ -176,19 +179,28 @@ public class ActivityPurchase extends AppCompatActivity {
       }
     });
 
-    spinner_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    btn_open_map.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        state_id = states.get(i).getId();
-        avl_wait.setVisibility(View.VISIBLE);
-        getStateCities(state_id);
-      }
-
-      @Override
-      public void onNothingSelected(AdapterView<?> adapterView) {
-
+      public void onClick(View view) {
+        Intent intent = new Intent(ActivityPurchase.this, ActivityMap.class);
+        startActivity(intent);
       }
     });
+
+
+      spinner_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+          state_id = states.get(i).getId();
+          avl_wait.setVisibility(View.VISIBLE);
+          getStateCities(state_id);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+      });
 
 
     spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -750,6 +762,7 @@ private JSONObject getNewAddressObject(){
     edt_address_content = findViewById(R.id.edt_address_content);
     edt_phone_number = findViewById(R.id.edt_phone_number);
     edt_postcode = findViewById(R.id.edt_postcode);
+    btn_open_map = findViewById(R.id.btn_open_map);
     lyt_rent_price = findViewById(R.id.lyt_rent_price);
     txt_show_payment = findViewById(R.id.txt_show_payment);
     txt_game_price = findViewById(R.id.txt_game_price);
@@ -779,6 +792,7 @@ private JSONObject getNewAddressObject(){
     edt_address_content.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
     edt_phone_number.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
     edt_postcode.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
+    btn_open_map.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
     txt_show_payment.setTypeface(MyViews.getIranSansMediumFont(ActivityPurchase.this));//medium
     txt_game_price.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
     txt_show_game_price.setTypeface(MyViews.getIranSansLightFont(ActivityPurchase.this));
@@ -804,5 +818,12 @@ private JSONObject getNewAddressObject(){
   private void openBrowser(String url){
     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
     startActivity(browserIntent);
+  }
+
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
   }
 }

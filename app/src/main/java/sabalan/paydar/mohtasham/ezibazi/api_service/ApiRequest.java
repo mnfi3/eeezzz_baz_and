@@ -2,7 +2,6 @@ package sabalan.paydar.mohtasham.ezibazi.api_service;
 
 import android.content.Context;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -65,7 +64,7 @@ public class ApiRequest {
       }
     }){
       @Override
-      public Map<String, String> getHeaders() throws AuthFailureError {
+      public Map<String, String> getHeaders() {
         Map<String, String> params = new HashMap<String, String>();
         params.put("Accept", "application/json");
         params.put("Content-Type", "application/json");
@@ -77,9 +76,9 @@ public class ApiRequest {
 
     request
       .setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
-      .setShouldCache(false);
+      .setShouldCache(true);
     RequestQueue queue = Volley.newRequestQueue(context);
-    queue.getCache().clear();
+//    queue.getCache().clear();
     queue.add(request);
   }
 
@@ -110,7 +109,7 @@ public class ApiRequest {
       }
     }){
       @Override
-      public Map<String, String> getHeaders() throws AuthFailureError {
+      public Map<String, String> getHeaders() {
         Map<String, String> params = new HashMap<String, String>();
         params.put("Accept", "application/json");
         params.put("Content-Type", "application/json");
@@ -122,9 +121,9 @@ public class ApiRequest {
 
     request
       .setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
-      .setShouldCache(false);
+      .setShouldCache(true);
     RequestQueue queue = Volley.newRequestQueue(context);
-    queue.getCache().clear();
+//    queue.getCache().clear();
     queue.add(request);
   }
 

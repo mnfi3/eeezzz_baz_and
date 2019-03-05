@@ -107,15 +107,15 @@ public class FragmentActivity extends Fragment {
   public void onStart() {
     super.onStart();
 
-    getUserRentRequests();
-    getUserShopRequests();
+//    getUserRentRequests();
+//    getUserShopRequests();
   }
 
   @Override
   public void onResume() {
     super.onResume();
 
-    getUserRentRequests();
-    getUserShopRequests();
+//    getUserRentRequests();
+//    getUserShopRequests();
   }
 }

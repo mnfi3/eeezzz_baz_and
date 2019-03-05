@@ -92,6 +92,11 @@ dependencies {
     //fabric answer
     implementation 'com.crashlytics.sdk.android:answers:1.4.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //osm
+    implementation 'org.osmdroid:osmdroid-android:6.0.3'
+    //maps ic_location services
+//    implementation "com.google.android.gms:play-services-ic_location:11.0.1"
 }
 
 //firebase

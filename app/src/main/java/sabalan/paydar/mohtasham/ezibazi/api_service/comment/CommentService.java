@@ -22,7 +22,7 @@ public class CommentService {
 
 
   public void getComments(final int game_info_id, final int page_num, final onCommentsReceived onCommentsReceived){
-    String url = Urls.GAME_INFO_COMMENTS +"/"+Integer.toString(game_info_id) + "?page=" + page_num;
+    String url = Urls.GAME_INFO_COMMENTS +"/"+Integer.toString(game_info_id) + "?page=" + Integer.toString(page_num);
 
     ApiRequest apiRequest = new ApiRequest(context);
     apiRequest.request(ApiRequest.GET, url, null, false, new ApiRequest.onDataReceived() {
