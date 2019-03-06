@@ -14,7 +14,7 @@ import sabalan.paydar.mohtasham.ezibazi.R
 
 class FragmentIntro2 : Fragment() {
 
-    internal var view: View
+    internal lateinit var view: View
     internal var web_view_intro2: WebView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

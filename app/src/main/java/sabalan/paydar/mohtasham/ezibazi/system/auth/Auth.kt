@@ -29,15 +29,15 @@ object Auth {
             return user
         }
 
-    fun loginCheck(onLoginCheck: G.onLoginCheck) {
-        val user = Auth.user
-        val service = LoginCheckerService(G.context)
-        service.check(user, object : LoginCheckerService.onLoginCheckComplete {
-            override fun onComplete(isLoggedIn: Boolean, full_name: String) {
-                user.full_name = full_name
-                onLoginCheck.onCheck(user, isLoggedIn)
-                G.isLoggedIn = isLoggedIn
-            }
-        })
-    }
+//    fun loginCheck(onLoginCheck: G.onLoginCheck) {
+//        val user = Auth.user
+//        val service = LoginCheckerService(G.context)
+//        service.check(user, object : LoginCheckerService.onLoginCheckComplete {
+//            override fun onComplete(isLoggedIn: Boolean, full_name: String) {
+//                user.full_name = full_name
+//                onLoginCheck.onCheck(user, isLoggedIn)
+//                G.isLoggedIn = isLoggedIn
+//            }
+//        })
+//    }
 }

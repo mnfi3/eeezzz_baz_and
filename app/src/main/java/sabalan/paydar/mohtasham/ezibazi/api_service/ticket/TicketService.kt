@@ -20,7 +20,7 @@ class TicketService(private val context: Context) {
     fun getTickets(onTicketsReceived: onTicketsReceived) {
         Volley.newRequestQueue(context).cancelAll("get_tickets")
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.TICKET_INDEX, null!!, true, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.TICKET_INDEX, JSONObject(), true, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onTicketsReceived.onReceived(status, message, Paginate(), ArrayList<Ticket>())
@@ -57,7 +57,7 @@ class TicketService(private val context: Context) {
     fun getNewTicketsCount(onNewTicketsCount: onNewTicketsCount) {
         Volley.newRequestQueue(context).cancelAll("get_new_tickets_count")
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.NEW_TICKETS_COUNT, null!!, true, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.NEW_TICKETS_COUNT, JSONObject(), true, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onNewTicketsCount.onReceived(status, message, 0)
@@ -81,7 +81,7 @@ class TicketService(private val context: Context) {
 
     fun seenTickets(onSeenTicket: onSeenTicket) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.TICKET_SEEN, null!!, true, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.TICKET_SEEN, JSONObject(), true, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onSeenTicket.onReceived(status, message)

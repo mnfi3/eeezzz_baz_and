@@ -19,7 +19,7 @@ class UserRequestsService(private val context: Context) {
 
     fun getRentRequests(onRentRequestsReceived: onRentRequestsReceived) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.USER_RENT_REQUESTS, null!!, true, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.USER_RENT_REQUESTS, JSONObject(), true, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onRentRequestsReceived.onReceived(status, message, ArrayList<RentRequest>())
@@ -48,7 +48,7 @@ class UserRequestsService(private val context: Context) {
 
     fun getShopRequests(onShopRequestsReceived: onShopRequestsReceived) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.USER_BUY_REQUESTS, null!!, true, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.USER_BUY_REQUESTS, JSONObject(), true, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onShopRequestsReceived.onReceived(status, message, ArrayList<ShopRequest>())

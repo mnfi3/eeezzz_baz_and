@@ -48,47 +48,47 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 class ActivityPurchase : AppCompatActivity() {
 
     //center
-    internal var avl_wait: AVLoadingIndicatorView
+    internal lateinit var avl_wait: AVLoadingIndicatorView
 
     //first block
-    internal var txt_show_product: TextView
-    internal var img_game: RoundedImageView
-    internal var txt_region: TextView
-    internal var txt_name: TextView
-    internal var txt_rent_day: TextView
-    internal var txt_game_status: TextView
+    internal lateinit var txt_show_product: TextView
+    internal lateinit var img_game: RoundedImageView
+    internal lateinit var txt_region: TextView
+    internal lateinit var txt_name: TextView
+    internal lateinit var txt_rent_day: TextView
+    internal lateinit var txt_game_status: TextView
 
     //second block
-    internal var lyt_last_address: LinearLayout
-    internal var txt_show_address: TextView
-    internal var txt_last_address_show: TextView
-    internal var txt_address_text: TextView
-    internal var txt_use_last_address: TextView
-    internal var swch_use_last_address: SwitchCompat
+    internal lateinit var lyt_last_address: LinearLayout
+    internal lateinit var txt_show_address: TextView
+    internal lateinit var txt_last_address_show: TextView
+    internal lateinit var txt_address_text: TextView
+    internal lateinit var txt_use_last_address: TextView
+    internal lateinit var swch_use_last_address: SwitchCompat
 
-    internal var lyt_new_address: LinearLayout
-    internal var spinner_state: AppCompatSpinner
-    internal var spinner_city: AppCompatSpinner
-    internal var txt_show_state: TextView
-    internal var txt_show_city: TextView
-    internal var edt_address_content: EditText
-    internal var edt_phone_number: EditText
-    internal var edt_postcode: EditText
-    internal var btn_open_map: Button
+    internal lateinit var lyt_new_address: LinearLayout
+    internal lateinit var spinner_state: AppCompatSpinner
+    internal lateinit var spinner_city: AppCompatSpinner
+    internal lateinit var txt_show_state: TextView
+    internal lateinit var txt_show_city: TextView
+    internal lateinit var edt_address_content: EditText
+    internal lateinit var edt_phone_number: EditText
+    internal lateinit var edt_postcode: EditText
+    internal lateinit var btn_open_map: Button
 
     //third block
-    internal var txt_show_payment: TextView
-    internal var txt_game_price: TextView
-    internal var txt_show_game_price: TextView
-    internal var lyt_rent_price: LinearLayout
-    internal var txt_rent_price: TextView
-    internal var txt_show_rent_price: TextView
-    internal var txt_sum_price: TextView
-    internal var txt_show_sum_price: TextView
+    internal lateinit var txt_show_payment: TextView
+    internal lateinit var txt_game_price: TextView
+    internal lateinit var txt_show_game_price: TextView
+    internal lateinit var lyt_rent_price: LinearLayout
+    internal lateinit var txt_rent_price: TextView
+    internal lateinit var txt_show_rent_price: TextView
+    internal lateinit var txt_sum_price: TextView
+    internal lateinit var txt_show_sum_price: TextView
 
     //buttons
-    internal var btn_wallet_pay: AppCompatButton
-    internal var btn_bank_pay: AppCompatButton
+    internal lateinit var btn_wallet_pay: AppCompatButton
+    internal lateinit var btn_bank_pay: AppCompatButton
 
 
     internal var type: String? = null
@@ -96,7 +96,7 @@ class ActivityPurchase : AppCompatActivity() {
     internal var rent_type_id = 0
     internal var rent_price = 0
 
-    internal var game: Game
+    internal lateinit var game: Game
     private var user_balance = 0
 
     private var last_address: Address? = null
@@ -114,9 +114,9 @@ class ActivityPurchase : AppCompatActivity() {
 
     private val rentPrice: Int
         get() {
-            for (i in G.rentTypes.indices) {
-                if (G.rentTypes[i].id == rent_type_id) {
-                    return game.price * G.rentTypes[i].price_percent / 100
+            for (i in G.rentTypes!!.indices) {
+                if (G.rentTypes!![i].id == rent_type_id) {
+                    return game.price * G.rentTypes!![i].price_percent / 100
                 }
             }
             return 0
@@ -254,27 +254,35 @@ class ActivityPurchase : AppCompatActivity() {
 
     private fun setRent() {
         val service = RentService(this@ActivityPurchase)
-        service.getSpecialRent(id) { status, message, game ->
-            if (status == 1) {
-                this@ActivityPurchase.game = game
-                rent_price = rentPrice
-                //fill rent views
-                fillViews()
+        val onSpecialRentReceived = object : RentService.onSpecialRentReceived{
+            override fun onReceived(status: Int, message: String, game: Game) {
+                if (status == 1) {
+                    this@ActivityPurchase.game = game
+                    rent_price = rentPrice
+                    //fill rent views
+                    fillViews()
+                }
             }
         }
+
+        service.getSpecialRent(id, onSpecialRentReceived)
+
 
     }
 
 
     private fun setShop() {
         val shopService = ShopService(this@ActivityPurchase)
-        shopService.getSpecialShop(id) { status, message, game ->
-            if (status == 1) {
-                this@ActivityPurchase.game = game
-                //fill shop views
-                fillViews()
+        val onSpecialShopReceived = object : ShopService.onSpecialShopReceived{
+            override fun onReceived(status: Int, message: String, game: Game) {
+                if (status == 1) {
+                    this@ActivityPurchase.game = game
+                    //fill shop views
+                    fillViews()
+                }
             }
         }
+        shopService.getSpecialShop(id, onSpecialShopReceived)
 
     }
 
@@ -303,15 +311,19 @@ class ActivityPurchase : AppCompatActivity() {
 
     private fun getUserLastAddress() {
         val service = UserDetailService(this@ActivityPurchase)
-        service.getUserLastAddress { status, message, address ->
-            avl_wait.visibility = View.INVISIBLE
-            this@ActivityPurchase.last_address = address
-            if (address != null) {
-                fillWithAddress()
-            } else {
-                fillWithoutAddress()
+        val onLastAddressReceived = object : UserDetailService.onLastAddressReceived{
+            override fun onComplete(status: Int, message: String, address: Address?) {
+                avl_wait.visibility = View.INVISIBLE
+                this@ActivityPurchase.last_address = address
+                if (address != null) {
+                    fillWithAddress()
+                } else {
+                    fillWithoutAddress()
+                }
             }
         }
+        service.getUserLastAddress(onLastAddressReceived)
+
     }
 
     private fun fillWithAddress() {
@@ -336,44 +348,56 @@ class ActivityPurchase : AppCompatActivity() {
 
     private fun getStates() {
         val service = AddressService(this@ActivityPurchase)
-        service.getStates { status, message, states ->
-            this@ActivityPurchase.states = states
-            val states_array = ArrayList<String>()
-            for (i in states.indices) {
-                states_array.add(states[i].name)
+        val onStatesReceived = object : AddressService.onStatesReceived{
+            override fun onComplete(status: Int, message: String, states: ArrayList<State>) {
+                this@ActivityPurchase.states = states
+                val states_array = ArrayList<String>()
+                for (i in states.indices) {
+                    states_array.add(states[i].name!!)
+                }
+                val adapter = ArrayAdapter(this@ActivityPurchase, R.layout.item_style_spinner, states_array)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner_state.adapter = adapter
             }
-            val adapter = ArrayAdapter(this@ActivityPurchase, R.layout.item_style_spinner, states_array)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner_state.adapter = adapter
         }
+        service.getStates(onStatesReceived)
+
     }
 
 
     private fun getStateCities(state_id: Int) {
         val service = AddressService(this@ActivityPurchase)
-        service.getStateCities(state_id) { status, message, cities ->
-            avl_wait.visibility = View.INVISIBLE
-            this@ActivityPurchase.cities = cities
-            val city_array = ArrayList<String>()
-            for (i in cities.indices) {
-                city_array.add(cities[i].name)
-            }
+        val onStateCitiesReceived = object : AddressService.onStateCitiesReceived{
+            override fun onComplete(status: Int, message: String, cities: ArrayList<City>) {
+                avl_wait.visibility = View.INVISIBLE
+                this@ActivityPurchase.cities = cities
+                val city_array = ArrayList<String>()
+                for (i in cities.indices) {
+                    city_array.add(cities[i].name!!)
+                }
 
-            val adapter = ArrayAdapter(this@ActivityPurchase, R.layout.item_style_spinner, city_array)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner_city.adapter = adapter
+                val adapter = ArrayAdapter(this@ActivityPurchase, R.layout.item_style_spinner, city_array)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner_city.adapter = adapter
+            }
         }
+        service.getStateCities(state_id, onStateCitiesReceived)
+
     }
 
 
     private fun getUserBalance() {
         val service = UserDetailService(this@ActivityPurchase)
-        service.getUserFinance { status, message, finance ->
-            if (status == 1) {
-                user_balance = finance.user_balance
-                //calculate pay with wallet
+        val onFinanceReceivedComplete = object : UserDetailService.onFinanceReceivedComplete{
+            override fun onComplete(status: Int, message: String, finance: Finance) {
+                if (status == 1) {
+                    user_balance = finance.user_balance
+                    //calculate pay with wallet
+                }
             }
         }
+        service.getUserFinance(onFinanceReceivedComplete)
+
     }
 
 
@@ -411,45 +435,58 @@ class ActivityPurchase : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            service.rentWithWallet(`object`) { status, message ->
-                avl_wait.visibility = View.INVISIBLE
-                if (status == 0) {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                } else {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                    restartApp()
+            val onRentWithWalletComplete = object : RentPayService.onRentWithWalletComplete{
+                override fun onComplete(status: Int, message: String) {
+                    avl_wait.visibility = View.INVISIBLE
+                    if (status == 0) {
+                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                    } else {
+                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        restartApp()
+                    }
                 }
             }
+            service.rentWithWallet(`object`, onRentWithWalletComplete)
+
 
         } else {
             if (newAddressObject == null) return
             val addressService = AddressService(this@ActivityPurchase)
-            addressService.saveAddress(newAddressObject) { status, message, address ->
-                if (status == 0) {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                } else {
-                    new_address_id = address.id
-                    val `object` = JSONObject()
-                    try {
-                        `object`.put("game_id", game.id)
-                        `object`.put("address_id", new_address_id)
-                        `object`.put("rent_type_id", rent_type_id)
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-
-                    service.rentWithWallet(`object`) { status, message ->
-                        avl_wait.visibility = View.INVISIBLE
-                        if (status == 0) {
-                            MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                        } else {
-                            MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                            restartApp()
+            val onAddressSaved = object : AddressService.onAddressSaved{
+                override fun onComplete(status: Int, message: String, address: Address) {
+                    if (status == 0) {
+                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                    } else {
+                        new_address_id = address.id
+                        val `object` = JSONObject()
+                        try {
+                            `object`.put("game_id", game.id)
+                            `object`.put("address_id", new_address_id)
+                            `object`.put("rent_type_id", rent_type_id)
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
                         }
-                    }
 
+                        val onRentWithWalletComplete = object : RentPayService.onRentWithWalletComplete{
+                            override fun onComplete(status: Int, message: String) {
+                                avl_wait.visibility = View.INVISIBLE
+                                if (status == 0) {
+                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                } else {
+                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                    restartApp()
+                                }
+                            }
+                        }
+                        service.rentWithWallet(`object`, onRentWithWalletComplete)
+
+
+                    }
                 }
             }
+
+            addressService.saveAddress(newAddressObject!!, onAddressSaved)
+
         }
     }
 
@@ -470,43 +507,56 @@ class ActivityPurchase : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            service.shopWithWallet(`object`) { status, message ->
-                if (status == 0) {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                } else {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                    restartApp()
+            val onShopWithWalletComplete = object : ShopPayService.onShopWithWalletComplete{
+                override fun onComplete(status: Int, message: String) {
+                    if (status == 0) {
+                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                    } else {
+                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        restartApp()
+                    }
                 }
             }
+
+            service.shopWithWallet(`object`, onShopWithWalletComplete)
+
 
         } else {
             if (newAddressObject == null) return
             val addressService = AddressService(this@ActivityPurchase)
-            addressService.saveAddress(newAddressObject) { status, message, address ->
-                if (status == 0) {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                } else {
-                    new_address_id = address.id
-                    val `object` = JSONObject()
-                    try {
-                        `object`.put("game_id", game.id)
-                        `object`.put("address_id", new_address_id)
-                        `object`.put("rent_type_id", rent_type_id)
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-
-                    service.shopWithWallet(`object`) { status, message ->
-                        if (status == 0) {
-                            MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                        } else {
-                            MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                            restartApp()
+            val onAddressSaved = object : AddressService.onAddressSaved{
+                override fun onComplete(status: Int, message: String, address: Address) {
+                    if (status == 0) {
+                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                    } else {
+                        new_address_id = address.id
+                        val `object` = JSONObject()
+                        try {
+                            `object`.put("game_id", game.id)
+                            `object`.put("address_id", new_address_id)
+                            `object`.put("rent_type_id", rent_type_id)
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
                         }
-                    }
 
+                        val onShopWithWalletComplete = object : ShopPayService.onShopWithWalletComplete{
+                            override fun onComplete(status: Int, message: String) {
+                                if (status == 0) {
+                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                } else {
+                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                    restartApp()
+                                }
+                            }
+                        }
+                        service.shopWithWallet(`object`, onShopWithWalletComplete)
+
+                    }
                 }
             }
+
+            addressService.saveAddress(newAddressObject!!, onAddressSaved)
+
         }
     }
 
@@ -525,28 +575,8 @@ class ActivityPurchase : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            service.rentWithBank(`object`) { status, message, pay_url ->
-                if (status == 0) {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                } else {
-                    openBrowser(pay_url)
-                }
-            }
-
-        } else {
-            if (newAddressObject == null) return
-            val addressService = AddressService(this@ActivityPurchase)
-            addressService.saveAddress(newAddressObject) { status, message, address ->
-                val `object` = JSONObject()
-                try {
-                    `object`.put("game_id", game.id)
-                    `object`.put("address_id", last_address!!.id)
-                    `object`.put("rent_type_id", rent_type_id)
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-
-                service.rentWithBank(`object`) { status, message, pay_url ->
+            val onRentWithBankComplete = object : RentPayService.onRentWithBankComplete{
+                override fun onComplete(status: Int, message: String, pay_url: String) {
                     if (status == 0) {
                         MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                     } else {
@@ -554,6 +584,38 @@ class ActivityPurchase : AppCompatActivity() {
                     }
                 }
             }
+            service.rentWithBank(`object`, onRentWithBankComplete)
+
+        } else {
+            if (newAddressObject == null) return
+            val addressService = AddressService(this@ActivityPurchase)
+            val onAddressSaved = object : AddressService.onAddressSaved{
+                override fun onComplete(status: Int, message: String, address: Address) {
+                    val `object` = JSONObject()
+                    try {
+                        `object`.put("game_id", game.id)
+                        `object`.put("address_id", last_address!!.id)
+                        `object`.put("rent_type_id", rent_type_id)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+
+                    val onRentWithBankComplete = object : RentPayService.onRentWithBankComplete{
+                        override fun onComplete(status: Int, message: String, pay_url: String) {
+                            if (status == 0) {
+                                MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                            } else {
+                                openBrowser(pay_url)
+                            }
+                        }
+                    }
+
+                    service.rentWithBank(`object`, onRentWithBankComplete)
+                }
+            }
+
+            addressService.saveAddress(newAddressObject!!, onAddressSaved)
+
         }
     }
 
@@ -569,42 +631,55 @@ class ActivityPurchase : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            service.shopWithBank(`object`) { status, message, pay_url ->
-                avl_wait.visibility = View.INVISIBLE
-                if (status == 0) {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                } else {
-                    openBrowser(pay_url)
+            val onShopWithBankComplete = object : ShopPayService.onShopWithBankComplete{
+                override fun onComplete(status: Int, message: String, pay_url: String) {
+                    avl_wait.visibility = View.INVISIBLE
+                    if (status == 0) {
+                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                    } else {
+                        openBrowser(pay_url)
+                    }
                 }
             }
+
+            service.shopWithBank(`object`, onShopWithBankComplete)
+
 
         } else {
             if (newAddressObject == null) return
             val addressService = AddressService(this@ActivityPurchase)
-            addressService.saveAddress(newAddressObject) { status, message, address ->
-                if (status == 0) {
-                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                } else {
-                    new_address_id = address.id
-                    val `object` = JSONObject()
-                    try {
-                        `object`.put("game_id", game.id)
-                        `object`.put("address_id", new_address_id)
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-
-                    service.shopWithBank(`object`) { status, message, pay_url ->
-                        avl_wait.visibility = View.INVISIBLE
-                        if (status == 0) {
-                            MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
-                        } else {
-                            openBrowser(pay_url)
+            val onAddressSaved = object : AddressService.onAddressSaved{
+                override fun onComplete(status: Int, message: String, address: Address) {
+                    if (status == 0) {
+                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                    } else {
+                        new_address_id = address.id
+                        val `object` = JSONObject()
+                        try {
+                            `object`.put("game_id", game.id)
+                            `object`.put("address_id", new_address_id)
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
                         }
-                    }
 
+                        val onShopWithBankComplete = object : ShopPayService.onShopWithBankComplete{
+                            override fun onComplete(status: Int, message: String, pay_url: String) {
+                                avl_wait.visibility = View.INVISIBLE
+                                if (status == 0) {
+                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                } else {
+                                    openBrowser(pay_url)
+                                }
+                            }
+                        }
+                        service.shopWithBank(`object`, onShopWithBankComplete)
+
+
+                    }
                 }
             }
+            addressService.saveAddress(newAddressObject!!, onAddressSaved)
+
         }
     }
 

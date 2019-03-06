@@ -21,7 +21,7 @@ class ShopService(private val context: Context) {
     fun getMainShops(page_num: Int, onShopsReceived: onShopsReceived) {
         val url = Urls.SHOP_INDEX0 + "/" + Integer.toString(CityPrefManager(context).cityId) + "?page=" + page_num
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onShopsReceived.onReceived(status, message, ArrayList<Game>(), Paginate())
@@ -83,7 +83,7 @@ class ShopService(private val context: Context) {
     fun getRelatedShops(game_id: Int, onRelatedShopsReceived: onRelatedShopsReceived) {
         val url = Urls.GAME_RELATED_GAME_FOR_SHOP + "/" + Integer.toString(game_id)
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onRelatedShopsReceived.onReceived(status, message, ArrayList<Game>())
@@ -111,7 +111,7 @@ class ShopService(private val context: Context) {
     fun getSpecialShop(id: Int, onSpecialshopReceived: onSpecialShopReceived) {
         val url = Urls.SHOP_INDEX + "/" + Integer.toString(id)
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onSpecialshopReceived.onReceived(status, message, Game())

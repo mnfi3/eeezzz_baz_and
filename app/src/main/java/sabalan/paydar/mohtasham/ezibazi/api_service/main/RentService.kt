@@ -22,7 +22,7 @@ class RentService(private val context: Context) {
     fun getRents(page_num: Int, onRentsReceived: onRentsReceived) {
         val url = Urls.RENT_INDEX0 + "/" + Integer.toString(CityPrefManager(context).cityId) + "?page=" + page_num
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onRentsReceived.onReceived(status, message, ArrayList<Game>(), Paginate())
@@ -84,7 +84,7 @@ class RentService(private val context: Context) {
     fun getRelatedRents(game_id: Int, onRelatedRentsReceived: onRelatedRentsReceived) {
         val url = Urls.GAME_RELATED_GAME_FOR_RENT + "/" + Integer.toString(game_id)
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onRelatedRentsReceived.onReceived(status, message, ArrayList<Game>())
@@ -113,7 +113,7 @@ class RentService(private val context: Context) {
     fun getSpecialRent(id: Int, onSpecialRentReceived: onSpecialRentReceived) {
         val url = Urls.RENT_INDEX + "/" + Integer.toString(id)
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 var status = status
                 var message = message
@@ -143,7 +143,7 @@ class RentService(private val context: Context) {
 
     fun getRentTypes(onRentTypesReceived: onRentTypesReceived) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.RENT_TYPE_INDEX, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.RENT_TYPE_INDEX, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 var status = status
                 var message = message

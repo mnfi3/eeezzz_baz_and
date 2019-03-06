@@ -4,6 +4,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 
@@ -12,7 +13,7 @@ import sabalan.paydar.mohtasham.ezibazi.R
 class ActivityHome : AppCompatActivity() {
 
     internal var img_open_navigation: ImageView? = null
-    internal var drawerLayout: DrawerLayout
+    internal lateinit var drawerLayout: DrawerLayout
     internal var navigation: NavigationView? = null
     internal var lyt_navigation: FrameLayout? = null
 
@@ -53,7 +54,7 @@ class ActivityHome : AppCompatActivity() {
     //       drawerLayout.closeDrawers();
     private fun setupViews() {
         //    img_open_navigation = (ImageView) findViewById(R.id.img_open_navigation);
-        drawerLayout = findViewById<View>(R.id.drawerLayout)
+        drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         //    navigation = (NavigationView) findViewById(R.id.navigation);
         //    lyt_navigation = (FrameLayout) findViewById(R.id.lyt_navigation);
     }

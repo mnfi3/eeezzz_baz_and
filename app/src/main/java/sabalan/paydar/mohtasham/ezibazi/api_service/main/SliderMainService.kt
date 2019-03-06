@@ -18,7 +18,7 @@ class SliderMainService(private val context: Context) {
 
     fun getMainSlider(onSliderReceived: onSliderReceived) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.MAIN_SLIDER, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.MAIN_SLIDER, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onSliderReceived.onReceived(message, ArrayList<MainSlider>())

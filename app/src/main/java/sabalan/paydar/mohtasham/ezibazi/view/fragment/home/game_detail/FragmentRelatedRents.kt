@@ -1,5 +1,7 @@
 package sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -23,26 +25,33 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation
 
 class FragmentRelatedRents : Fragment() {
 
+    internal lateinit var context: Context
+    internal lateinit var activity: Activity
+
     private var game_id: Int = 0
 
-    internal var lyt_related_rents: LinearLayout
-    internal var rcv_related_rents: RecyclerView
-    internal var apiService: RentService
+    internal lateinit var lyt_related_rents: LinearLayout
+    internal lateinit var rcv_related_rents: RecyclerView
+    internal lateinit var apiService: RentService
     internal var page_num = 1
-    internal var txt_related_rents: TextView
+    internal lateinit var txt_related_rents: TextView
 
-    internal var view: View
+    internal lateinit var view: View
     fun setId(game_id: Int) {
         this.game_id = game_id
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view = inflater.inflate(R.layout.fragment_related_rents, container, false)
+
+        context = getContext()!!
+        activity = getActivity()!!
+
         setupViews()
         setTypeFace()
         lyt_related_rents.visibility = View.GONE
 
-        rcv_related_rents.layoutManager = LinearLayoutManager(G.context, LinearLayoutManager.HORIZONTAL, true)
+        rcv_related_rents.layoutManager = LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true)
 
         game_id = arguments!!.getInt("game_id")
         getRelatedRents()
@@ -66,23 +75,27 @@ class FragmentRelatedRents : Fragment() {
 
     private fun getRelatedRents() {
         apiService = RentService(context)
-        apiService.getRelatedRents(game_id) { status, message, games ->
-            if (status == 0) {
-                //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
-            } else {
-                if (games.size > 0) {
-                    val listAdapter = RelatedRentAdapter(activity, games)
-                    val alphaAdapter = AlphaInAnimationAdapter(listAdapter)
-                    rcv_related_rents.adapter = AlphaInAnimationAdapter(alphaAdapter)
-                    setAnimation()
-                    lyt_related_rents.visibility = View.VISIBLE
+        val onRelatedRentsReceived = object : RentService.onRelatedRentsReceived{
+            override fun onReceived(status: Int, message: String, games: List<Game>) {
+                if (status == 0) {
+                    //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+                } else {
+                    if (games.size > 0) {
+                        val listAdapter = RelatedRentAdapter(activity, games as MutableList<Game>)
+                        val alphaAdapter = AlphaInAnimationAdapter(listAdapter)
+                        rcv_related_rents.adapter = AlphaInAnimationAdapter(alphaAdapter)
+                        setAnimation()
+                        lyt_related_rents.visibility = View.VISIBLE
+                    }
                 }
             }
         }
+
+        apiService.getRelatedRents(game_id, onRelatedRentsReceived)
     }
 
     private fun setAnimation() {
-        val anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_right)
+        val anim = AnimationUtils.loadAnimation(context, R.anim.anim_enter_from_right)
         lyt_related_rents.animation = anim
         anim.start()
     }

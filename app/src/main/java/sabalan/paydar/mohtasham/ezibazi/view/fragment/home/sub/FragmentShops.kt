@@ -26,12 +26,12 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation
 
 class FragmentShops : Fragment() {
 
-    internal var lyt_shops: LinearLayout
-    internal var rcv_shops: RecyclerView
-    internal var apiService: ShopService
+    internal lateinit var lyt_shops: LinearLayout
+    internal lateinit var rcv_shops: RecyclerView
+    internal lateinit var apiService: ShopService
     internal var page_num = 1
-    internal var txt_show_shops_list: TextView
-    internal var view: View
+    internal lateinit var txt_show_shops_list: TextView
+    internal lateinit var view: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view = inflater.inflate(R.layout.fragment_main_shops, container, false)
@@ -40,11 +40,11 @@ class FragmentShops : Fragment() {
         setTypeFace()
         lyt_shops.visibility = View.INVISIBLE
 
-        rcv_shops.layoutManager = LinearLayoutManager(G.context, LinearLayoutManager.HORIZONTAL, true)
+        rcv_shops.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
         getShops()
 
         txt_show_shops_list.setOnClickListener {
-            val intent = Intent(G.context, ActivityListShop::class.java)
+            val intent = Intent(context, ActivityListShop::class.java)
             startActivity(intent)
         }
 
@@ -59,22 +59,25 @@ class FragmentShops : Fragment() {
     }
 
     private fun getShops() {
-        apiService = ShopService(G.context)
-        apiService.getMainShops(1) { status, message, games, paginate ->
-            if (status == 0) {
-                //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
-            } else {
-                val listAdapter = ShopMainAdapter(G.context, games)
-                val alphaAdapter = AlphaInAnimationAdapter(listAdapter)
-                rcv_shops.adapter = AlphaInAnimationAdapter(alphaAdapter)
-                setAnimation()
-                lyt_shops.visibility = View.VISIBLE
+        apiService = ShopService(context!!)
+        val onShopsReceived = object : ShopService.onShopsReceived{
+            override fun onReceived(status: Int, message: String, games: List<Game>, paginate: Paginate) {
+                if (status == 0) {
+                    //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+                } else {
+                    val listAdapter = ShopMainAdapter(context!!, games as MutableList<Game>)
+                    val alphaAdapter = AlphaInAnimationAdapter(listAdapter)
+                    rcv_shops.adapter = AlphaInAnimationAdapter(alphaAdapter)
+                    setAnimation()
+                    lyt_shops.visibility = View.VISIBLE
+                }
             }
         }
+        apiService.getMainShops(1, onShopsReceived)
     }
 
     private fun setAnimation() {
-        val anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_left)
+        val anim = AnimationUtils.loadAnimation(context, R.anim.anim_enter_from_left)
         lyt_shops.animation = anim
         anim.start()
     }

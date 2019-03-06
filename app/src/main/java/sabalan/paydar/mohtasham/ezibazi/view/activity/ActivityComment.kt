@@ -32,26 +32,26 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation
 
 class ActivityComment : AppCompatActivity() {
 
-    internal var img_back: ImageView
-    internal var txt_page_name: TextView
-    internal var rcv_comments: RecyclerView
+    internal lateinit var img_back: ImageView
+    internal lateinit var txt_page_name: TextView
+    internal lateinit var rcv_comments: RecyclerView
 
-    internal var service: CommentService
-    internal var fab_add_comment: FloatingActionButton
+    internal lateinit var service: CommentService
+    internal lateinit var fab_add_comment: FloatingActionButton
 
-    internal var dialog: Dialog
-    internal var btn_add_comment: Button
-    internal var txt_dialog_head: TextView
-    internal var edt_comment: EditText
+    internal lateinit var dialog: Dialog
+    internal lateinit var btn_add_comment: Button
+    internal lateinit var txt_dialog_head: TextView
+    internal lateinit var edt_comment: EditText
 
     internal var game_info_id: Int = 0
 
 
-    internal var avl_center: AVLoadingIndicatorView
-    internal var avl_bottom: AVLoadingIndicatorView
+    internal lateinit var avl_center: AVLoadingIndicatorView
+    internal lateinit var avl_bottom: AVLoadingIndicatorView
     internal var page_num = 1
     internal var paginate: Paginate? = null
-    internal var adapter: ListCommentAdapter
+    internal lateinit var adapter: ListCommentAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -160,22 +160,41 @@ class ActivityComment : AppCompatActivity() {
 
     private fun getComments() {
         service = CommentService(this@ActivityComment)
-        service.getComments(game_info_id, page_num, CommentService.onCommentsReceived { status, message, comments, paginate ->
-            avl_center.visibility = View.INVISIBLE
-            avl_bottom.visibility = View.INVISIBLE
-            if (status != 1) {
-                //          MyViews.makeText(ActivityComment.this, message, Toast.LENGTH_SHORT);
-                return@onCommentsReceived
+        val onCommentsReceived = object : CommentService.onCommentsReceived{
+            override fun onReceived(status: Int, message: String, comments: List<Comment>, paginate: Paginate?) {
+                avl_center.visibility = View.INVISIBLE
+                avl_bottom.visibility = View.INVISIBLE
+                if (status != 1) {
+                    //          MyViews.makeText(ActivityComment.this, message, Toast.LENGTH_SHORT);
+                    return
+                }
+                this@ActivityComment.paginate = paginate
+                if (page_num == 1) {
+                    adapter = ListCommentAdapter(this@ActivityComment, comments as MutableList<Comment>)
+                    val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
+                    rcv_comments.adapter = ScaleInAnimationAdapter(alphaAdapter)
+                } else {
+                    adapter.notifyData(comments)
+                }
             }
-            this@ActivityComment.paginate = paginate
-            if (page_num == 1) {
-                adapter = ListCommentAdapter(this@ActivityComment, comments)
-                val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
-                rcv_comments.adapter = ScaleInAnimationAdapter(alphaAdapter)
-            } else {
-                adapter.notifyData(comments)
-            }
-        })
+        }
+        service.getComments(game_info_id, page_num, onCommentsReceived)
+//        service.getComments(game_info_id, page_num, CommentService.onCommentsReceived { status, message, comments, paginate ->
+//            avl_center.visibility = View.INVISIBLE
+//            avl_bottom.visibility = View.INVISIBLE
+//            if (status != 1) {
+//                //          MyViews.makeText(ActivityComment.this, message, Toast.LENGTH_SHORT);
+//                return@onCommentsReceived
+//            }
+//            this@ActivityComment.paginate = paginate
+//            if (page_num == 1) {
+//                adapter = ListCommentAdapter(this@ActivityComment, comments)
+//                val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
+//                rcv_comments.adapter = ScaleInAnimationAdapter(alphaAdapter)
+//            } else {
+//                adapter.notifyData(comments)
+//            }
+//        })
     }
 
 
@@ -194,14 +213,27 @@ class ActivityComment : AppCompatActivity() {
         }
 
         service = CommentService(this@ActivityComment)
-        service.addComment(`object`) { status, message, comment ->
-            edt_comment.setText("")
-            if (status == 1) {
-                MyViews.makeText(this@ActivityComment, "نظر شما با موفقیت ثبت شد", Toast.LENGTH_SHORT)
-            } else {
-                MyViews.makeText(this@ActivityComment, message, Toast.LENGTH_SHORT)
+        val onAddCommentReceived = object : CommentService.onAddCommentReceived{
+            override fun onReceived(status: Int, message: String, comment: Comment) {
+                edt_comment.setText("")
+                if (status == 1) {
+                    MyViews.makeText(this@ActivityComment, "نظر شما با موفقیت ثبت شد", Toast.LENGTH_SHORT)
+                } else {
+                    MyViews.makeText(this@ActivityComment, message, Toast.LENGTH_SHORT)
+                }
             }
         }
+
+        service.addComment(`object`, onAddCommentReceived)
+
+//        service.addComment(`object`) { status, message, comment ->
+//            edt_comment.setText("")
+//            if (status == 1) {
+//                MyViews.makeText(this@ActivityComment, "نظر شما با موفقیت ثبت شد", Toast.LENGTH_SHORT)
+//            } else {
+//                MyViews.makeText(this@ActivityComment, message, Toast.LENGTH_SHORT)
+//            }
+//        }
 
 
     }

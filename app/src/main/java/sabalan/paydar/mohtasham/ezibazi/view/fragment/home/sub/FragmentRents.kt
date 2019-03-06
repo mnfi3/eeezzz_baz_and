@@ -29,12 +29,12 @@ class FragmentRents : Fragment() {
     internal var activity: AppCompatActivity? = null
 
 
-    internal var lyt_rents: LinearLayout
-    internal var rcv_rents: RecyclerView
-    internal var apiService: RentService
+    internal lateinit var lyt_rents: LinearLayout
+    internal lateinit var rcv_rents: RecyclerView
+    internal lateinit var apiService: RentService
     internal var page_num = 1
-    internal var txt_show_rent_list: TextView
-    internal var view: View
+    internal lateinit var txt_show_rent_list: TextView
+    internal lateinit var view: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view = inflater.inflate(R.layout.fragment_main_rents, container, false)
@@ -42,11 +42,11 @@ class FragmentRents : Fragment() {
         setTypeFace()
         lyt_rents.visibility = View.INVISIBLE
 
-        rcv_rents.layoutManager = LinearLayoutManager(G.context, LinearLayoutManager.HORIZONTAL, true)
+        rcv_rents.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
         getRents()
 
         txt_show_rent_list.setOnClickListener {
-            val intent = Intent(G.context, ActivityListRent::class.java)
+            val intent = Intent(context, ActivityListRent::class.java)
             startActivity(intent)
         }
 
@@ -65,22 +65,25 @@ class FragmentRents : Fragment() {
 
 
     private fun getRents() {
-        apiService = RentService(G.context)
-        apiService.getRents(1) { status, message, games, paginate ->
-            if (status == 0) {
-                //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
-            } else {
-                val listAdapter = RentMainAdapter(getActivity(), games)
-                val alphaAdapter = AlphaInAnimationAdapter(listAdapter)
-                rcv_rents.adapter = AlphaInAnimationAdapter(alphaAdapter)
-                setAnimation()
-                lyt_rents.visibility = View.VISIBLE
+        apiService = RentService(context!!)
+        val onRentsReceived = object : RentService.onRentsReceived{
+            override fun onReceived(status: Int, message: String, games: List<Game>, paginate: Paginate) {
+                if (status == 0) {
+                    //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+                } else {
+                    val listAdapter = RentMainAdapter(getActivity()!!, games as MutableList<Game>)
+                    val alphaAdapter = AlphaInAnimationAdapter(listAdapter)
+                    rcv_rents.adapter = AlphaInAnimationAdapter(alphaAdapter)
+                    setAnimation()
+                    lyt_rents.visibility = View.VISIBLE
+                }
             }
         }
+        apiService.getRents(1, onRentsReceived)
     }
 
     private fun setAnimation() {
-        val anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_right)
+        val anim = AnimationUtils.loadAnimation(context, R.anim.anim_enter_from_right)
         lyt_rents.animation = anim
         anim.start()
     }

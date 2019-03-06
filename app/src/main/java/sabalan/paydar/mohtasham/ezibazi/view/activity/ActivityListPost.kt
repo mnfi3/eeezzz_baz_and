@@ -22,18 +22,18 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation
 class ActivityListPost : AppCompatActivity() {
 
 
-    internal var img_back: ImageView
-    internal var txt_page_name: TextView
+    internal lateinit var img_back: ImageView
+    internal lateinit var txt_page_name: TextView
 
-    internal var rcv_list_post: RecyclerView
-    internal var apiService: PostService
+    internal lateinit var rcv_list_post: RecyclerView
+    internal lateinit var apiService: PostService
 
 
-    internal var avl_center: AVLoadingIndicatorView
-    internal var avl_bottom: AVLoadingIndicatorView
+    internal lateinit var avl_center: AVLoadingIndicatorView
+    internal lateinit var avl_bottom: AVLoadingIndicatorView
     internal var page_num = 1
     internal var paginate: Paginate? = null
-    internal var listAdapter: ListPostAdapter
+    internal lateinit var listAdapter: ListPostAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,22 +85,41 @@ class ActivityListPost : AppCompatActivity() {
 
     private fun getPosts() {
         apiService = PostService(this@ActivityListPost)
-        apiService.getMainPosts(page_num) { status, message, posts, paginate ->
-            avl_center.visibility = View.INVISIBLE
-            avl_bottom.visibility = View.INVISIBLE
-            if (status == 0) {
-                //          MyViews.makeText( ActivityMain, message, Toast.LENGTH_SHORT);
-            } else {
-                this@ActivityListPost.paginate = paginate
-                if (page_num == 1) {
-                    listAdapter = ListPostAdapter(this@ActivityListPost, posts)
-                    val alphaAdapter = SlideInBottomAnimationAdapter(listAdapter)
-                    rcv_list_post.adapter = ScaleInAnimationAdapter(alphaAdapter)
+        val onPostsReceived = object : PostService.onPostsReceived{
+            override fun onReceived(status: Int, message: String, posts: List<Post>, paginate: Paginate) {
+                avl_center.visibility = View.INVISIBLE
+                avl_bottom.visibility = View.INVISIBLE
+                if (status == 0) {
+                    //          MyViews.makeText( ActivityMain, message, Toast.LENGTH_SHORT);
                 } else {
-                    listAdapter.notifyData(posts)
+                    this@ActivityListPost.paginate = paginate
+                    if (page_num == 1) {
+                        listAdapter = ListPostAdapter(this@ActivityListPost, posts as MutableList<Post>)
+                        val alphaAdapter = SlideInBottomAnimationAdapter(listAdapter)
+                        rcv_list_post.adapter = ScaleInAnimationAdapter(alphaAdapter)
+                    } else {
+                        listAdapter.notifyData(posts)
+                    }
                 }
             }
         }
+        apiService.getMainPosts(page_num, onPostsReceived)
+//        apiService.getMainPosts(page_num) { status, message, posts, paginate ->
+//            avl_center.visibility = View.INVISIBLE
+//            avl_bottom.visibility = View.INVISIBLE
+//            if (status == 0) {
+//                //          MyViews.makeText( ActivityMain, message, Toast.LENGTH_SHORT);
+//            } else {
+//                this@ActivityListPost.paginate = paginate
+//                if (page_num == 1) {
+//                    listAdapter = ListPostAdapter(this@ActivityListPost, posts)
+//                    val alphaAdapter = SlideInBottomAnimationAdapter(listAdapter)
+//                    rcv_list_post.adapter = ScaleInAnimationAdapter(alphaAdapter)
+//                } else {
+//                    listAdapter.notifyData(posts)
+//                }
+//            }
+//        }
     }
 
 

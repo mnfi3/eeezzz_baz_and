@@ -26,6 +26,7 @@ class ConnectivityListener : BroadcastReceiver() {
     private val snackbar: Snackbar? = null
     private val view: View? = null
     private var isShowNetworkError = false
+    private lateinit var context: Context
 
 
     override fun onReceive(context: Context, intent: Intent) {

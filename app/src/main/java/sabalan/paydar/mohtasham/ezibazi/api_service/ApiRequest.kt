@@ -19,6 +19,18 @@ import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig
 
 class ApiRequest(private val context: Context) {
 
+    companion object {
+        private val TAG = "ApiRequest"
+        val GET = 0
+        val POST = 1
+        val PUT = 2
+        val DELETE = 3
+        val HEAD = 4
+        val OPTION = 5
+        val TRACE = 6
+        val PATCH = 7
+    }
+
 
     //json object request
     fun request(method: Int, url: String, `object`: JSONObject, auth: Boolean, listener: onDataReceived) {
@@ -39,7 +51,7 @@ class ApiRequest(private val context: Context) {
                 val params = HashMap<String, String>()
                 params["Accept"] = "application/json"
                 params["Content-Type"] = "application/json"
-                if (auth) params["Authorization"] = "Bearer " + Auth.getUserToken()
+                if (auth) params["Authorization"] = "Bearer " + Auth.userToken
                 return params
             }
         }
@@ -47,7 +59,7 @@ class ApiRequest(private val context: Context) {
 
         request
                 .setRetryPolicy(DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
-                .setShouldCache(true)
+//                .setShouldCache(true)
         val queue = Volley.newRequestQueue(context)
         //    queue.getCache().clear();
         queue.add(request)
@@ -72,7 +84,7 @@ class ApiRequest(private val context: Context) {
                 val params = HashMap<String, String>()
                 params["Accept"] = "application/json"
                 params["Content-Type"] = "application/json"
-                if (auth) params["Authorization"] = "Bearer " + Auth.getUserToken()
+                if (auth) params["Authorization"] = "Bearer " + Auth.userToken
                 return params
             }
         }
@@ -80,7 +92,7 @@ class ApiRequest(private val context: Context) {
 
         request
                 .setRetryPolicy(DefaultRetryPolicy(AppConfig.DEFAULT_VOLLEY_TIME_OUT_MILLIS, AppConfig.DEFAULT_VOLLEY_RETRY_COUNT, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
-                .setShouldCache(true)
+//                .setShouldCache(true)
         val queue = Volley.newRequestQueue(context)
         //    queue.getCache().clear();
         queue.add(request)
@@ -91,18 +103,5 @@ class ApiRequest(private val context: Context) {
         fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean)
     }
 
-    companion object {
 
-        private val TAG = "ApiRequest"
-
-
-        val GET = 0
-        val POST = 1
-        val PUT = 2
-        val DELETE = 3
-        val HEAD = 4
-        val OPTION = 5
-        val TRACE = 6
-        val PATCH = 7
-    }
 }

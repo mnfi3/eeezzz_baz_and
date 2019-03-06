@@ -69,12 +69,12 @@ class ListShopAdapter(private val context: Context, private val games: MutableLi
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val img_game: RoundedImageView
-        private val txt_name: TextView
-        private val txt_rating: TextView
-        private val txt_region: TextView
-        private val txt_release_date: TextView
-        private val btn_price: Button
+        internal val img_game: RoundedImageView
+        internal val txt_name: TextView
+        internal val txt_rating: TextView
+        internal val txt_region: TextView
+        internal val txt_release_date: TextView
+        internal val btn_price: Button
 
         init {
             img_game = itemView.findViewById(R.id.img_game)

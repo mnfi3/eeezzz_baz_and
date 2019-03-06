@@ -61,7 +61,7 @@ class Game {
                     photos.add(photo)
 
                     if (photo.type!!.contains("app_main")) {
-                        main_photo_urls.add(photo.url)
+                        main_photo_urls.add(photo.url!!)
                     } else if (photo.type!!.contains("app_cover")) {
                         game.app_cover_photo_url = photo.url
                     }

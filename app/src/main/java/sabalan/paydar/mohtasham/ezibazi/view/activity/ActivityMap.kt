@@ -2,7 +2,6 @@ package sabalan.paydar.mohtasham.ezibazi.view.activity
 
 import android.Manifest
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
@@ -35,6 +34,11 @@ import sabalan.paydar.mohtasham.ezibazi.R
 
 
 class ActivityMap : AppCompatActivity(), LocationListener {
+
+    companion object {
+        private val MIN_UPDATE_TIME: Long = 500
+        private val MIN_UPDATE_DISTANCE = 5.0f
+    }
 
     private var context: Context? = null
 
@@ -128,7 +132,7 @@ class ActivityMap : AppCompatActivity(), LocationListener {
             showSettingsAlert()
         } else {
 
-            if (android.support.v4.app.ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && android.support.v4.app.ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return
             }
 
@@ -252,10 +256,5 @@ class ActivityMap : AppCompatActivity(), LocationListener {
         initLocation()
     }
 
-    companion object {
 
-
-        private val MIN_UPDATE_TIME: Long = 1500
-        private val MIN_UPDATE_DISTANCE = 20.0f
-    }
 }

@@ -46,19 +46,19 @@ class ListRentRequestAdapter(private val context: Context, private val requests:
         holder.txt_rent_day.text = " اجاره " + HelperText.toPersianNumber(Integer.toString(request.rent_day_count)) + " روزه"
         holder.btn_price.text = HelperText.split_price(request.rent_price) + " تومان "
 
-        if (request.getIs_finish() === 1) {
+        if (request.is_finish === 1) {
             holder.txt_status.text = "تمام شده"
-        } else if (request.getIs_finish() === 0 && request.getIs_success() === 1) {
+        } else if (request.is_finish === 0 && request.is_success === 1) {
             holder.txt_status.text = "دریافت شده"
-        } else if (request.getIs_finish() === 0 && request.getIs_success() === 0 && request.getIs_sent() === 1) {
+        } else if (request.is_finish === 0 && request.is_success === 0 && request.is_sent === 1) {
             holder.txt_status.text = "ارسال شده"
-        } else if (request.getIs_finish() === 0 && request.getIs_success() === 0 && request.getIs_sent() === 0) {
+        } else if (request.is_finish === 0 && request.is_success === 0 && request.is_sent === 0) {
             holder.txt_status.text = "در حال ارسال"
         }
 
-        holder.txt_finished_at.text = HelperDate().timestampToPersian(request.finished_at)
+        holder.txt_finished_at.text = HelperDate().timestampToPersian(request.finished_at!!)
 
-        if (request.getIs_finish() === 1) {
+        if (request.is_finish === 1) {
             holder.txt_finished_at.visibility = View.INVISIBLE
             holder.txt_show_finished_at.visibility = View.INVISIBLE
         }
@@ -81,17 +81,17 @@ class ListRentRequestAdapter(private val context: Context, private val requests:
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val img_game: RoundedImageView
-        private val txt_name: TextView
-        private val txt_rating: TextView
-        private val txt_region: TextView
-        private val txt_release_date: TextView
-        private val txt_rent_day: TextView
-        private val btn_price: Button
-        private val txt_show_status: TextView
-        private val txt_status: TextView
-        private val txt_show_finished_at: TextView
-        private val txt_finished_at: TextView
+        internal val img_game: RoundedImageView
+        internal val txt_name: TextView
+        internal val txt_rating: TextView
+        internal val txt_region: TextView
+        internal val txt_release_date: TextView
+        internal val txt_rent_day: TextView
+        internal val btn_price: Button
+        internal val txt_show_status: TextView
+        internal val txt_status: TextView
+        internal val txt_show_finished_at: TextView
+        internal val txt_finished_at: TextView
 
         init {
             img_game = itemView.findViewById(R.id.img_game)

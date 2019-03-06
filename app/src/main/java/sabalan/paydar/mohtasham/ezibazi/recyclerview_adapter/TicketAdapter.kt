@@ -24,12 +24,12 @@ class TicketAdapter(private val context: Context, private val tickets: MutableLi
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val ticket = tickets[position]
+        val ticket = tickets[position] as Ticket
 
 
-        holder.txt_created_at.text = HelperText.toPersianNumber(HelperDate().timestampToPersianFull(ticket.created_at))
+        holder.txt_created_at.text = HelperText.toPersianNumber(HelperDate().timestampToPersianFull(ticket.created_at!!))
 
-        if (ticket.getIs_user_sent() === 0) {
+        if (ticket.is_user_sent === 0) {
 
             holder.txt_message.text = "پشتیبانی : " + "\n" + ticket.text
             holder.txt_message.setBackgroundResource(R.drawable.back_ticket_item2)
@@ -42,7 +42,7 @@ class TicketAdapter(private val context: Context, private val tickets: MutableLi
 
 
 
-        if (ticket.getIs_user_sent() === 1 && ticket.getIs_seen() === 1) {
+        if (ticket.is_user_sent === 1 && ticket.is_seen === 1) {
             holder.img_is_seen.visibility = View.VISIBLE
         } else {
             holder.img_is_seen.visibility = View.INVISIBLE
@@ -65,10 +65,10 @@ class TicketAdapter(private val context: Context, private val tickets: MutableLi
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val txt_message: TextView
-        private val img_is_seen: ImageView
-        private val txt_created_at: TextView
-        private val lyt_ticket_item: RelativeLayout
+        internal val txt_message: TextView
+        internal val img_is_seen: ImageView
+        internal val txt_created_at: TextView
+        internal val lyt_ticket_item: RelativeLayout
 
         init {
             txt_message = itemView.findViewById(R.id.txt_message)

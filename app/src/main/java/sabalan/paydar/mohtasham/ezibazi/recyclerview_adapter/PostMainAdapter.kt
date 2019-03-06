@@ -55,9 +55,9 @@ class PostMainAdapter(private val context: Context, private val posts: MutableLi
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val img_post: RoundedImageView
-        private val txt_post_title: TextView
-        private val txt_post_date: TextView
+        internal val img_post: RoundedImageView
+        internal val txt_post_title: TextView
+        internal val txt_post_date: TextView
 
         init {
             img_post = itemView.findViewById(R.id.img_post)

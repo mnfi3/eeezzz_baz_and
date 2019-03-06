@@ -20,7 +20,7 @@ class PostService(private val context: Context) {
     fun getMainPosts(page_num: Int, onPostsReceived: onPostsReceived) {
         val url = Urls.POST_INDEX + "?page=" + page_num
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onPostsReceived.onReceived(status, message, ArrayList<Post>(), Paginate())
@@ -79,7 +79,7 @@ class PostService(private val context: Context) {
     fun getRelatedPosts(game_id: Int, onRelatedPostsReceived: onRelatedPostsReceived) {
         val url = Urls.GAME_RELATED_POSTS + "/" + Integer.toString(game_id)
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onRelatedPostsReceived.onReceived(status, message, ArrayList<Post>())

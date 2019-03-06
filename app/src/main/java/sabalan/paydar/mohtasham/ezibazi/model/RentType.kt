@@ -31,9 +31,9 @@ class RentType {
 
         fun findById(id: Int): RentType {
             var rentType = RentType()
-            for (i in G.rentTypes.indices) {
-                if (id == G.rentTypes[i].id) {
-                    rentType = G.rentTypes[i]
+            for (i in G.rentTypes!!.indices) {
+                if (id == G.rentTypes!![i].id) {
+                    rentType = G.rentTypes!![i]
                     break
                 }
             }

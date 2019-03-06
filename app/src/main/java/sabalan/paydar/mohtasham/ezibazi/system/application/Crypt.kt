@@ -12,12 +12,14 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
 import sabalan.paydar.mohtasham.ezibazi.system.hardware.Hardware
+import java.nio.charset.Charset
 
 object Crypt {
     private val SALT = "7c3d596ed03ab9116c547b0eb678b247"
     private val SALT_COPY = "7c3d596ed03ab9116c547b0eb678b247"
 
     private val AES = "AES"
+
 
 
     fun encrypt(strClearText: String): String {
@@ -62,7 +64,7 @@ object Crypt {
             @SuppressLint("GetInstance") val cipher = Cipher.getInstance(AES)
             cipher.init(Cipher.DECRYPT_MODE, secretKey)
             val decrypted = cipher.doFinal(Base64.decode(strEncrypted, Base64.DEFAULT))
-            strEncrypted = String(decrypted, "UTF-8")
+            strEncrypted = String(decrypted, "UTF-8" as Charset)
             return strEncrypted
         } catch (e: Exception) {
             e.printStackTrace()
@@ -71,6 +73,8 @@ object Crypt {
 
     }
 
+
+
     fun decrypt(strEncrypted: String, key: String): String {
         var strEncrypted = strEncrypted
         try {
@@ -78,7 +82,7 @@ object Crypt {
             @SuppressLint("GetInstance") val cipher = Cipher.getInstance(AES)
             cipher.init(Cipher.DECRYPT_MODE, secretKey)
             val decrypted = cipher.doFinal(Base64.decode(strEncrypted, Base64.DEFAULT))
-            strEncrypted = String(decrypted, "UTF-8")
+            strEncrypted = String(decrypted, "UTF-8" as Charset)
             return strEncrypted
         } catch (e: Exception) {
             e.printStackTrace()

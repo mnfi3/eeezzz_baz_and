@@ -24,8 +24,8 @@ import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityWebView
 
 class FragmentSlider : Fragment() {
 
-    internal var sliderLayout: SliderLayout
-    internal var lyt_slider: CoordinatorLayout
+    internal lateinit var sliderLayout: SliderLayout
+    internal lateinit var lyt_slider: CoordinatorLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main_slider, container, false)
@@ -39,7 +39,7 @@ class FragmentSlider : Fragment() {
 
     private fun setSlider(sliders: List<MainSlider>) {
         for (i in sliders.indices) {
-            val textSliderView = TextSliderView(G.context)
+            val textSliderView = TextSliderView(context)
             textSliderView
                     .description(sliders[i].title)
                     .image(sliders[i].image_url)
@@ -68,16 +68,18 @@ class FragmentSlider : Fragment() {
     }
 
     private fun getSlider() {
-        val apiService = SliderMainService(G.context)
-        apiService.getMainSlider { message, sliders ->
-            setSlider(sliders)
-            //        setAnimation();
+        val apiService = SliderMainService(context!!)
+        val onSliderReceived = object : SliderMainService.onSliderReceived{
+            override fun onReceived(message: String, sliders: List<MainSlider>) {
+                setSlider(sliders)
+            }
         }
+        apiService.getMainSlider(onSliderReceived)
     }
 
 
     private fun setAnimation() {
-        val anim = AnimationUtils.loadAnimation(G.context, R.anim.anim_enter_from_right)
+        val anim = AnimationUtils.loadAnimation(context, R.anim.anim_enter_from_right)
         lyt_slider.animation = anim
         anim.start()
     }

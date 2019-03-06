@@ -41,19 +41,18 @@ class ActivityLogin : AppCompatActivity() {
 
 
     internal var connectivityListener: ConnectivityListener? = null
-    internal var lyt_root: LinearLayout
-
-    internal var txt_register: TextView
-    internal var txt_page_name: TextView
-    internal var txt_show_pass: TextView
-    internal var txt_forget_password: TextView
-    internal var img_back: ImageView
-    internal var edt_email: EditText
-    internal var edt_password: EditText
-    internal var btn_login: Button
-    internal var service: AccountService
-    internal var chk_show_pass: CheckBox
-    internal var avl_login: AVLoadingIndicatorView
+    internal lateinit var lyt_root: LinearLayout
+    internal lateinit var txt_register: TextView
+    internal lateinit var txt_page_name: TextView
+    internal lateinit var txt_show_pass: TextView
+    internal lateinit var txt_forget_password: TextView
+    internal lateinit var img_back: ImageView
+    internal lateinit var edt_email: EditText
+    internal lateinit var edt_password: EditText
+    internal lateinit var btn_login: Button
+    internal lateinit var service: AccountService
+    internal lateinit var chk_show_pass: CheckBox
+    internal lateinit var avl_login: AVLoadingIndicatorView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,24 +128,46 @@ class ActivityLogin : AppCompatActivity() {
             }
 
             service = AccountService(this@ActivityLogin)
-            service.login(`object`) { status, message, token, user ->
-                avl_login.visibility = View.INVISIBLE
-                MyViews.makeText(this@ActivityLogin, message, Toast.LENGTH_SHORT)
-                if (status == 1) {
-                    val prefManager = UserPrefManager(this@ActivityLogin)
-                    prefManager.saveUser(user)
-                    G.isLoggedIn = true
-                    G.initializeLogin()
-                    //update user fcm token in server
-                    sendFcmInfoToServer()
+            val onLoginComplete = object : AccountService.onLoginComplete{
+                override fun onComplete(status: Int, message: String, token: String, user: User) {
+                    avl_login.visibility = View.INVISIBLE
+//                    MyViews.makeText(this@ActivityLogin, message, Toast.LENGTH_SHORT)
+                    if (status == 1) {
+                        val prefManager = UserPrefManager(this@ActivityLogin)
+                        prefManager.saveUser(user)
+                        G.isLoggedIn = true
+                        G.initializeLogin()
+                        //update user fcm token in server
+                        sendFcmInfoToServer()
 
-                    //restart ActivityMenu
-                    ActivityMenu.instance!!.finish()
-                    val intent = Intent(this@ActivityLogin, ActivityMenu::class.java)
-                    startActivity(intent)
-                    this@ActivityLogin.finish()
+                        //restart ActivityMenu
+                        ActivityMenu.instance!!.finish()
+                        val intent = Intent(this@ActivityLogin, ActivityMenu::class.java)
+                        startActivity(intent)
+                        this@ActivityLogin.finish()
+                    }
                 }
             }
+
+            service.login(`object`, onLoginComplete)
+//            service.login(`object`) { status, message, token, user ->
+//                avl_login.visibility = View.INVISIBLE
+//                MyViews.makeText(this@ActivityLogin, message, Toast.LENGTH_SHORT)
+//                if (status == 1) {
+//                    val prefManager = UserPrefManager(this@ActivityLogin)
+//                    prefManager.saveUser(user)
+//                    G.isLoggedIn = true
+//                    G.initializeLogin()
+//                    //update user fcm token in server
+//                    sendFcmInfoToServer()
+//
+//                    //restart ActivityMenu
+//                    ActivityMenu.instance!!.finish()
+//                    val intent = Intent(this@ActivityLogin, ActivityMenu::class.java)
+//                    startActivity(intent)
+//                    this@ActivityLogin.finish()
+//                }
+//            }
         })
 
     }
@@ -200,7 +221,12 @@ class ActivityLogin : AppCompatActivity() {
         }
 
         val service = FireBaseApiService(this@ActivityLogin)
-        service.refreshFcmToken(`object`) { status, message, device -> }
+        val onRefreshTokenReceived = object : FireBaseApiService.onRefreshTokenReceived{
+            override fun onReceived(status: Int, message: String, device: Device) {
+
+            }
+        }
+        service.refreshFcmToken(`object`, onRefreshTokenReceived)
     }
 
 

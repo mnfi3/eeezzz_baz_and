@@ -1,5 +1,6 @@
 package sabalan.paydar.mohtasham.ezibazi.view.fragment.search
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -43,20 +44,21 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation
 
 class FragmentSearch : Fragment() {
 
+    internal lateinit var context: Context
 
-    internal var edt_search: EditText
+    internal lateinit var edt_search: EditText
 
-    internal var txt_search_in: TextView
-    internal var rdg_search: RadioGroup
-    internal var rdo_rent: RadioButton
-    internal var rdo_shop: RadioButton
-    internal var rdo_post: RadioButton
-    internal var avl_search: AVLoadingIndicatorView
-    internal var txt_no_result: TextView
-    internal var rcv_search: RecyclerView
-    internal var img_search: ImageView
+    internal lateinit var txt_search_in: TextView
+    internal lateinit var rdg_search: RadioGroup
+    internal lateinit var rdo_rent: RadioButton
+    internal lateinit var rdo_shop: RadioButton
+    internal lateinit var rdo_post: RadioButton
+    internal lateinit var avl_search: AVLoadingIndicatorView
+    internal lateinit var txt_no_result: TextView
+    internal lateinit var rcv_search: RecyclerView
+    internal lateinit var img_search: ImageView
 
-    internal var view: View
+    internal lateinit var view: View
 
     internal var rdo_rent_num = 1
     internal var rdo_shop_num = 2
@@ -64,16 +66,18 @@ class FragmentSearch : Fragment() {
 
     internal var current_rdo = rdo_rent_num
 
-    internal var rentService: RentService
-    internal var shopService: ShopService
-    internal var postService: PostService
-    internal var prefManager: CityPrefManager
+    internal lateinit var rentService: RentService
+    internal lateinit var shopService: ShopService
+    internal lateinit var postService: PostService
+    internal lateinit var prefManager: CityPrefManager
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view = inflater.inflate(R.layout.fragment_search, container, false)
 
         //    View view1 = getActivity().findViewById();
+        context = getContext()!!
+
         setupViews()
         setTypeFace()
 
@@ -174,45 +178,56 @@ class FragmentSearch : Fragment() {
 
     private fun searchRents(`object`: JSONObject) {
         rentService = RentService(context)
-        rentService.getSearchedRents(`object`) { status, message, games ->
-            avl_search.visibility = View.GONE
-            if (games.size > 0) {
-                val adapter = ListRentAdapter(context, games)
-                val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
-                rcv_search.adapter = ScaleInAnimationAdapter(alphaAdapter)
-            } else {
-                txt_no_result.visibility = View.VISIBLE
+        val onSearchedRentsReceived = object : RentService.onSearchedRentsReceived{
+            override fun onReceived(status: Int, message: String, games: List<Game>) {
+                avl_search.visibility = View.GONE
+                if (games.size > 0) {
+                    val adapter = ListRentAdapter(context, games as MutableList<Game>)
+                    val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
+                    rcv_search.adapter = ScaleInAnimationAdapter(alphaAdapter)
+                } else {
+                    txt_no_result.visibility = View.VISIBLE
+                }
             }
         }
+
+        rentService.getSearchedRents(`object`, onSearchedRentsReceived)
 
     }
 
     private fun searchShops(`object`: JSONObject) {
         shopService = ShopService(context)
-        shopService.getSearchedShops(`object`) { status, message, games ->
-            avl_search.visibility = View.GONE
-            if (games.size > 0) {
-                val adapter = ListShopAdapter(context, games)
-                val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
-                rcv_search.adapter = ScaleInAnimationAdapter(alphaAdapter)
-            } else {
-                txt_no_result.visibility = View.VISIBLE
+        val onSearchedShopsReceived = object : ShopService.onSearchedShopsReceived{
+            override fun onReceived(status: Int, message: String, games: List<Game>) {
+                avl_search.visibility = View.GONE
+                if (games.size > 0) {
+                    val adapter = ListShopAdapter(context, games as MutableList<Game>)
+                    val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
+                    rcv_search.adapter = ScaleInAnimationAdapter(alphaAdapter)
+                } else {
+                    txt_no_result.visibility = View.VISIBLE
+                }
             }
         }
+
+        shopService.getSearchedShops(`object`, onSearchedShopsReceived)
     }
 
     private fun searchPosts(`object`: JSONObject) {
         postService = PostService(context)
-        postService.getSearchedPosts(`object`) { status, message, posts ->
-            avl_search.visibility = View.GONE
-            if (posts.size > 0) {
-                val adapter = ListPostAdapter(context, posts)
-                val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
-                rcv_search.adapter = ScaleInAnimationAdapter(alphaAdapter)
-            } else {
-                txt_no_result.visibility = View.VISIBLE
+        val onSearchedPostsReceived = object : PostService.onSearchedPostsReceived{
+            override fun onReceived(status: Int, message: String, posts: List<Post>) {
+                avl_search.visibility = View.GONE
+                if (posts.size > 0) {
+                    val adapter = ListPostAdapter(context, posts as MutableList<Post>)
+                    val alphaAdapter = SlideInBottomAnimationAdapter(adapter)
+                    rcv_search.adapter = ScaleInAnimationAdapter(alphaAdapter)
+                } else {
+                    txt_no_result.visibility = View.VISIBLE
+                }
             }
         }
+        postService.getSearchedPosts(`object`, onSearchedPostsReceived)
     }
 
 

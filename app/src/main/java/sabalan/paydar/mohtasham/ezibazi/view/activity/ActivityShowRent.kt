@@ -43,43 +43,43 @@ import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail.FragmentR
 class ActivityShowRent : AppCompatActivity() {
 
 
-    internal var img_back: ImageView
-    internal var txt_page_name: TextView
-    internal var app_bar: AppBarLayout
-    internal var collapsing_toolbar: CollapsingToolbarLayout
-    internal var toolbar: Toolbar
+    internal lateinit var img_back: ImageView
+    internal lateinit var txt_page_name: TextView
+    internal lateinit var app_bar: AppBarLayout
+    internal lateinit var collapsing_toolbar: CollapsingToolbarLayout
+    internal lateinit var toolbar: Toolbar
 
-    internal var vdo_game: VideoView
-    internal var slider_game: SliderLayout
-    internal var img_game_cover: RoundedImageView
-    internal var txt_name: TextView
-    internal var txt_console: TextView
-    internal var txt_genres: TextView
-    internal var txt_show_genres: TextView
-    internal var txt_release_date: TextView
-    internal var txt_rate: TextView
-    internal var txt_detail_age_class: TextView
-    internal var txt_region: TextView
-    internal var txt_show_region: TextView
-    internal var img_detail_console_icon: RoundedImageView
-    internal var txt_detail_release_date: TextView
-    internal var img_rate_star: ImageView
-    internal var expand_text_view: ExpandableTextView
+    internal lateinit var vdo_game: VideoView
+    internal lateinit var slider_game: SliderLayout
+    internal lateinit var img_game_cover: RoundedImageView
+    internal lateinit var txt_name: TextView
+    internal lateinit var txt_console: TextView
+    internal lateinit var txt_genres: TextView
+    internal lateinit var txt_show_genres: TextView
+    internal lateinit var txt_release_date: TextView
+    internal lateinit var txt_rate: TextView
+    internal lateinit var txt_detail_age_class: TextView
+    internal lateinit var txt_region: TextView
+    internal lateinit var txt_show_region: TextView
+    internal lateinit var img_detail_console_icon: RoundedImageView
+    internal lateinit var txt_detail_release_date: TextView
+    internal lateinit var img_rate_star: ImageView
+    internal lateinit var expand_text_view: ExpandableTextView
 
     internal var game: Game? = null
 
-    internal var service: RentService
+    internal lateinit var service: RentService
 
-    internal var nested_scroll: NestedScrollView
-    internal var txt_rent_period: TextView
-    internal var btn_rent: Button
-    internal var btn_rent_day_count_7: Button
-    internal var btn_rent_day_count_10: Button
-    internal var btn_rent_day_count_20: Button
-    internal var btn_rent_day_count_30: Button
-    internal var btn_comments: Button
+    internal lateinit var nested_scroll: NestedScrollView
+    internal lateinit var txt_rent_period: TextView
+    internal lateinit var btn_rent: Button
+    internal lateinit var btn_rent_day_count_7: Button
+    internal lateinit var btn_rent_day_count_10: Button
+    internal lateinit var btn_rent_day_count_20: Button
+    internal lateinit var btn_rent_day_count_30: Button
+    internal lateinit var btn_comments: Button
 
-    internal var ft: FragmentTransaction
+    internal lateinit var ft: FragmentTransaction
 
 
     //for rent type initialize
@@ -227,33 +227,32 @@ class ActivityShowRent : AppCompatActivity() {
         }
 
         service = RentService(this@ActivityShowRent)
-        service.getSpecialRent(id) { status, message, game ->
-            if (status != 1) {
-                //          MyViews.makeText(ActivityShowRent.this, message, Toast.LENGTH_SHORT);
-            } else {
-                this@ActivityShowRent.game = game
-                getRentTypes()
-                //          fillViews();
-                setRelatedFragments()
+        val onSpecialRentReceived = object : RentService.onSpecialRentReceived{
+            override fun onReceived(status: Int, message: String, game: Game) {
+                if (status != 1) {
+                    //          MyViews.makeText(ActivityShowRent.this, message, Toast.LENGTH_SHORT);
+                } else {
+                    this@ActivityShowRent.game = game
+                    getRentTypes()
+                    fillViews();
+                    setRelatedFragments()
+                }
             }
         }
+
+        service.getSpecialRent(id, onSpecialRentReceived)
 
     }
 
     private fun getRentTypes() {
         val service = RentService(this@ActivityShowRent)
-        service.getRentTypes { status, message, rentTypes ->
-            if (status == 1) {
+        val onRentTypesReceived = object : RentService.onRentTypesReceived{
+            override fun onReceived(status: Int, message: String, rentTypes: List<RentType>) {
                 this@ActivityShowRent.rentTypes = rentTypes
-                G.rentTypes = rentTypes
-                initializeRentPricePercent()
-                fillViews()
-                setRentDay(rent_day_7)
-                is_ready_rent_types = true
-            } else {
-                MyViews.makeText(this@ActivityShowRent, message, Toast.LENGTH_SHORT)
             }
         }
+        service.getRentTypes(onRentTypesReceived)
+
     }
 
     private fun fillViews() {

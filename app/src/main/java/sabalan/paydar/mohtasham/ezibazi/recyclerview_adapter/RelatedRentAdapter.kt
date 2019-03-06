@@ -64,9 +64,9 @@ class RelatedRentAdapter(private val context: Context, private val games: Mutabl
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val img_game: RoundedImageView
-        private val txt_game_name: TextView
-        private val txt_release_date: TextView
+        internal val img_game: RoundedImageView
+        internal val txt_game_name: TextView
+        internal val txt_release_date: TextView
 
         init {
             img_game = itemView.findViewById(R.id.img_game)

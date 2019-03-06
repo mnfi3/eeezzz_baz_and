@@ -71,7 +71,7 @@ class AccountService(private val context: Context) {
 
     fun logout(onLogoutComplete: onLogoutComplete) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.LOGOUT, null!!, true, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.LOGOUT, JSONObject(), true, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onLogoutComplete.onComplete(status, message)

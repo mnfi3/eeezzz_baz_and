@@ -46,17 +46,17 @@ class ListShopRequestAdapter(private val context: Context, private val requests:
 
         holder.btn_price.text = HelperText.split_price(request.game_price) + " تومان "
 
-        if (request.getIs_finish() === 1) {
+        if (request.is_finish === 1) {
             holder.txt_status.text = "تمام شده"
-        } else if (request.getIs_finish() === 0 && request.getIs_success() === 1) {
+        } else if (request.is_finish === 0 && request.is_success === 1) {
             holder.txt_status.text = "دریافت شده"
-        } else if (request.getIs_finish() === 0 && request.getIs_success() === 0 && request.getIs_sent() === 1) {
+        } else if (request.is_finish === 0 && request.is_success === 0 && request.is_sent === 1) {
             holder.txt_status.text = "ارسال شده"
-        } else if (request.getIs_finish() === 0 && request.getIs_success() === 0 && request.getIs_sent() === 0) {
+        } else if (request.is_finish === 0 && request.is_success === 0 && request.is_sent === 0) {
             holder.txt_status.text = "در حال ارسال"
         }
 
-        holder.txt_date.text = HelperDate().timestampToPersian(request.created_at)
+        holder.txt_date.text = HelperDate().timestampToPersian(request.created_at!!)
 
 
 
@@ -78,16 +78,16 @@ class ListShopRequestAdapter(private val context: Context, private val requests:
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val img_game: RoundedImageView
-        private val txt_name: TextView
-        private val txt_rating: TextView
-        private val txt_region: TextView
-        private val txt_release_date: TextView
-        private val btn_price: Button
-        private val txt_show_status: TextView
-        private val txt_status: TextView
-        private val txt_date: TextView
-        private val txt_show_date: TextView
+        internal val img_game: RoundedImageView
+        internal val txt_name: TextView
+        internal val txt_rating: TextView
+        internal val txt_region: TextView
+        internal val txt_release_date: TextView
+        internal val btn_price: Button
+        internal val txt_show_status: TextView
+        internal val txt_status: TextView
+        internal val txt_date: TextView
+        internal val txt_show_date: TextView
 
         init {
             img_game = itemView.findViewById(R.id.img_game)

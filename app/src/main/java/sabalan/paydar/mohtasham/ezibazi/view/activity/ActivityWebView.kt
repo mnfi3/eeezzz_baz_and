@@ -22,12 +22,12 @@ class ActivityWebView : AppCompatActivity() {
 
 
     internal var web_view: WebView? = null
-    internal var swipe: SwipeRefreshLayout
-    internal var txt_page_name: TextView
-    internal var img_back: ImageView
-    internal var img_finish: ImageView
+    internal lateinit var swipe: SwipeRefreshLayout
+    internal lateinit var txt_page_name: TextView
+    internal lateinit var img_back: ImageView
+    internal lateinit var img_finish: ImageView
     internal var url: String? = null
-    internal var avl_webview: AVLoadingIndicatorView
+    internal lateinit var avl_webview: AVLoadingIndicatorView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -29,17 +29,17 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 
 class ActivityRegister : AppCompatActivity() {
 
-    internal var img_back: ImageView
-    internal var txt_page_name: TextView
-    internal var edt_full_name: EditText
-    internal var edt_email: EditText
-    internal var edt_password: EditText
-    internal var edt_re_password: EditText
-    internal var txt_show_pass: TextView
-    internal var btn_register: Button
-    internal var service: AccountService
-    internal var chk_show_pass: CheckBox
-    internal var avl_register: AVLoadingIndicatorView
+    internal lateinit var img_back: ImageView
+    internal lateinit var txt_page_name: TextView
+    internal lateinit var edt_full_name: EditText
+    internal lateinit var edt_email: EditText
+    internal lateinit var edt_password: EditText
+    internal lateinit var edt_re_password: EditText
+    internal lateinit var txt_show_pass: TextView
+    internal lateinit var btn_register: Button
+    internal lateinit var service: AccountService
+    internal lateinit var chk_show_pass: CheckBox
+    internal lateinit var avl_register: AVLoadingIndicatorView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,18 +82,22 @@ class ActivityRegister : AppCompatActivity() {
             }
 
             service = AccountService(this@ActivityRegister)
-            service.register(`object`) { status, message, token, user ->
-                avl_register.visibility = View.INVISIBLE
-                MyViews.makeText(this@ActivityRegister, message, Toast.LENGTH_SHORT)
-                if (status == 1) {
-                    MyViews.makeText(this@ActivityRegister, "لطفا وارد حساب کاربری خود شوید", Toast.LENGTH_SHORT)
-                    val intent = Intent(this@ActivityRegister, ActivityLogin::class.java)
-                    intent.putExtra("EMAIL", edt_email.text.toString())
-                    intent.putExtra("PASSWORD", edt_password.text.toString())
-                    startActivity(intent)
-                    this@ActivityRegister.finish()
+            val onRegisterComplete = object : AccountService.onRegisterComplete{
+                override fun onComplete(status: Int, message: String, token: String, user: User) {
+                    avl_register.visibility = View.INVISIBLE
+                    MyViews.makeText(this@ActivityRegister, message, Toast.LENGTH_SHORT)
+                    if (status == 1) {
+                        MyViews.makeText(this@ActivityRegister, "لطفا وارد حساب کاربری خود شوید", Toast.LENGTH_SHORT)
+                        val intent = Intent(this@ActivityRegister, ActivityLogin::class.java)
+                        intent.putExtra("EMAIL", edt_email.text.toString())
+                        intent.putExtra("PASSWORD", edt_password.text.toString())
+                        startActivity(intent)
+                        this@ActivityRegister.finish()
+                    }
                 }
             }
+
+            service.register(`object`, onRegisterComplete)
         })
 
 

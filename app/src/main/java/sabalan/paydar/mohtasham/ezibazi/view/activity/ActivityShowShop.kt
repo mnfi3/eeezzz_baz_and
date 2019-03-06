@@ -39,38 +39,37 @@ import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail.FragmentR
 
 class ActivityShowShop : AppCompatActivity() {
 
-    internal var img_back: ImageView
-    internal var txt_page_name: TextView
-    internal var app_bar: AppBarLayout
-    internal var collapsing_toolbar: CollapsingToolbarLayout
-    internal var toolbar: Toolbar
-
-    internal var vdo_game: VideoView
-    internal var img_game: ImageView
-    internal var slider_game: SliderLayout
-    internal var img_game_cover: RoundedImageView
-    internal var txt_name: TextView
-    internal var txt_console: TextView
-    internal var txt_genres: TextView
-    internal var txt_show_genres: TextView
-    internal var txt_release_date: TextView
-    internal var txt_rate: TextView
-    internal var txt_region: TextView
-    internal var txt_show_region: TextView
-    internal var img_rate_star: ImageView
-    internal var expand_text_view: ExpandableTextView
+    internal lateinit var img_back: ImageView
+    internal lateinit var txt_page_name: TextView
+    internal lateinit var app_bar: AppBarLayout
+    internal lateinit var collapsing_toolbar: CollapsingToolbarLayout
+    internal lateinit var toolbar: Toolbar
+    internal lateinit var vdo_game: VideoView
+    internal lateinit var img_game: ImageView
+    internal lateinit var slider_game: SliderLayout
+    internal lateinit var img_game_cover: RoundedImageView
+    internal lateinit var txt_name: TextView
+    internal lateinit var txt_console: TextView
+    internal lateinit var txt_genres: TextView
+    internal lateinit var txt_show_genres: TextView
+    internal lateinit var txt_release_date: TextView
+    internal lateinit var txt_rate: TextView
+    internal lateinit var txt_region: TextView
+    internal lateinit var txt_show_region: TextView
+    internal lateinit var img_rate_star: ImageView
+    internal lateinit var expand_text_view: ExpandableTextView
 
     internal var game: Game? = null
 
-    internal var service: ShopService
+    internal lateinit var service: ShopService
 
-    internal var nested_scroll: NestedScrollView
+    internal lateinit var nested_scroll: NestedScrollView
     //  TextView txt_rent_period;
-    internal var btn_shop: Button
+    internal lateinit var btn_shop: Button
     //  Button btn_rent_day_count_10, btn_rent_day_count_20, btn_rent_day_count_30;
-    internal var btn_comments: Button
+    internal lateinit var btn_comments: Button
 
-    internal var ft: FragmentTransaction
+    internal lateinit var ft: FragmentTransaction
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -145,15 +144,18 @@ class ActivityShowShop : AppCompatActivity() {
         }
 
         service = ShopService(this@ActivityShowShop)
-        service.getSpecialShop(id) { status, message, game ->
-            if (status != 1) {
-                //          MyViews.makeText(ActivityShowShop.this, message, Toast.LENGTH_SHORT);
-            } else {
-                this@ActivityShowShop.game = game
-                fillViews()
-                setRelatedFragments()
+        val onSpecialShopReceived = object : ShopService.onSpecialShopReceived{
+            override fun onReceived(status: Int, message: String, game: Game) {
+                if (status != 1) {
+                    //          MyViews.makeText(ActivityShowShop.this, message, Toast.LENGTH_SHORT);
+                } else {
+                    this@ActivityShowShop.game = game
+                    fillViews()
+                    setRelatedFragments()
+                }
             }
         }
+        service.getSpecialShop(id, onSpecialShopReceived)
 
     }
 

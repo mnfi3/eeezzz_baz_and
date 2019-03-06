@@ -1,5 +1,7 @@
 package sabalan.paydar.mohtasham.ezibazi.view.fragment.home.game_detail
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -22,22 +24,31 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation
 
 class FragmentRelatedShops : Fragment() {
 
+
+    internal lateinit var context: Context
+    internal lateinit var activity: Activity
+
+
     internal var game_id: Int = 0
 
-    internal var lyt_related_shops: LinearLayout
-    internal var rcv_related_shops: RecyclerView
-    internal var apiService: ShopService
+    internal lateinit var lyt_related_shops: LinearLayout
+    internal lateinit var rcv_related_shops: RecyclerView
+    internal lateinit var apiService: ShopService
     internal var page_num = 1
-    internal var txt_related_shops: TextView
+    internal lateinit var txt_related_shops: TextView
 
 
-    internal var view: View
+    internal lateinit var view: View
     fun setId(game_id: Int) {
         this.game_id = game_id
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view = inflater.inflate(R.layout.fragment_related_shops, container, false)
+
+        context = getContext()!!
+        activity = getActivity()!!
+
         setupViews()
         setTypeFace()
         lyt_related_shops.visibility = View.GONE
@@ -67,19 +78,23 @@ class FragmentRelatedShops : Fragment() {
 
     private fun getRelatedRents() {
         apiService = ShopService(context)
-        apiService.getRelatedShops(game_id) { status, message, games ->
-            if (status == 0) {
-                //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
-            } else {
-                if (games.size > 0) {
-                    val listAdapter = RelatedShopAdapter(activity, games)
-                    val alphaAdapter = AlphaInAnimationAdapter(listAdapter)
-                    rcv_related_shops.adapter = AlphaInAnimationAdapter(alphaAdapter)
-                    setAnimation()
-                    lyt_related_shops.visibility = View.VISIBLE
+        val onRelatedShopsReceived = object : ShopService.onRelatedShopsReceived{
+            override fun onReceived(status: Int, message: String, games: List<Game>) {
+                if (status == 0) {
+                    //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+                } else {
+                    if (games.size > 0) {
+                        val listAdapter = RelatedShopAdapter(activity, games as MutableList<Game>)
+                        val alphaAdapter = AlphaInAnimationAdapter(listAdapter)
+                        rcv_related_shops.adapter = AlphaInAnimationAdapter(alphaAdapter)
+                        setAnimation()
+                        lyt_related_shops.visibility = View.VISIBLE
+                    }
                 }
             }
         }
+
+        apiService.getRelatedShops(game_id, onRelatedShopsReceived)
     }
 
     private fun setAnimation() {

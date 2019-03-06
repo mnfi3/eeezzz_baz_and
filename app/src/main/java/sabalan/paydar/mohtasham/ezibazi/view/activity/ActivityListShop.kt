@@ -23,17 +23,17 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation
 
 class ActivityListShop : AppCompatActivity() {
 
-    internal var rcv_list_shops: RecyclerView
-    internal var apiService: ShopService
+    internal lateinit var rcv_list_shops: RecyclerView
+    internal lateinit var apiService: ShopService
 
-    internal var img_back: ImageView
-    internal var txt_page_name: TextView
+    internal lateinit var img_back: ImageView
+    internal lateinit var txt_page_name: TextView
 
-    internal var avl_center: AVLoadingIndicatorView
-    internal var avl_bottom: AVLoadingIndicatorView
+    internal lateinit var avl_center: AVLoadingIndicatorView
+    internal lateinit var avl_bottom: AVLoadingIndicatorView
     internal var page_num = 1
     internal var paginate: Paginate? = null
-    internal var listAdapter: ListShopAdapter
+    internal lateinit var listAdapter: ListShopAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class ActivityListShop : AppCompatActivity() {
         setupViews()
         setTypeFace()
 
-        rcv_list_shops.layoutManager = GridLayoutManager(G.context, 1, GridLayoutManager.VERTICAL, false)
+        rcv_list_shops.layoutManager = GridLayoutManager(this@ActivityListShop, 1, GridLayoutManager.VERTICAL, false)
         getShops()
 
         txt_page_name.text = "لیست بازی های فروشی"
@@ -83,26 +83,50 @@ class ActivityListShop : AppCompatActivity() {
 
 
     private fun getShops() {
-        apiService = ShopService(G.context)
-        apiService.getMainShops(page_num) { status, message, games, paginate ->
-            avl_center.visibility = View.INVISIBLE
-            avl_bottom.visibility = View.INVISIBLE
-            if (status == 0) {
-                //          Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
-            } else {
-                this@ActivityListShop.paginate = paginate
-                if (page_num == 1) {
-                    listAdapter = ListShopAdapter(this@ActivityListShop, games)
-                    //          AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
-                    val alphaAdapter = SlideInBottomAnimationAdapter(listAdapter)
-                    //          rcv_list_shops.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
-                    rcv_list_shops.adapter = ScaleInAnimationAdapter(alphaAdapter)
+        apiService = ShopService(this@ActivityListShop)
+        val onShopsReceived = object : ShopService.onShopsReceived{
+            override fun onReceived(status: Int, message: String, games: List<Game>, paginate: Paginate) {
+                avl_center.visibility = View.INVISIBLE
+                avl_bottom.visibility = View.INVISIBLE
+                if (status == 0) {
+                    //          Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
                 } else {
-                    listAdapter.notifyData(games)
-                }
+                    this@ActivityListShop.paginate = paginate
+                    if (page_num == 1) {
+                        listAdapter = ListShopAdapter(this@ActivityListShop, games as MutableList<Game>)
+                        //          AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
+                        val alphaAdapter = SlideInBottomAnimationAdapter(listAdapter)
+                        //          rcv_list_shops.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
+                        rcv_list_shops.adapter = ScaleInAnimationAdapter(alphaAdapter)
+                    } else {
+                        listAdapter.notifyData(games)
+                    }
 
+                }
             }
+
         }
+
+        apiService.getMainShops(page_num, onShopsReceived)
+//        apiService.getMainShops(page_num) { status, message, games, paginate ->
+//            avl_center.visibility = View.INVISIBLE
+//            avl_bottom.visibility = View.INVISIBLE
+//            if (status == 0) {
+//                //          Toast.makeText(G.context, message, Toast.LENGTH_SHORT).show();
+//            } else {
+//                this@ActivityListShop.paginate = paginate
+//                if (page_num == 1) {
+//                    listAdapter = ListShopAdapter(this@ActivityListShop, games)
+//                    //          AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(listAdapter);
+//                    val alphaAdapter = SlideInBottomAnimationAdapter(listAdapter)
+//                    //          rcv_list_shops.setAdapter(new AlphaInAnimationAdapter(alphaAdapter));
+//                    rcv_list_shops.adapter = ScaleInAnimationAdapter(alphaAdapter)
+//                } else {
+//                    listAdapter.notifyData(games)
+//                }
+//
+//            }
+//        }
     }
 
 

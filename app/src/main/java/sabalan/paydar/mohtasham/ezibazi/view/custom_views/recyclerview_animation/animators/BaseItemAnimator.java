@@ -211,17 +211,17 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     }
   }
 
-  protected void preAnimateRemoveImpl(final RecyclerView.ViewHolder holder) {
+  protected void preAnimateRemoveImpl(final ViewHolder holder) {
   }
 
-  protected void preAnimateAddImpl(final RecyclerView.ViewHolder holder) {
+  protected void preAnimateAddImpl(final ViewHolder holder) {
   }
 
-  protected abstract void animateRemoveImpl(final RecyclerView.ViewHolder holder);
+  protected abstract void animateRemoveImpl(final ViewHolder holder);
 
-  protected abstract void animateAddImpl(final RecyclerView.ViewHolder holder);
+  protected abstract void animateAddImpl(final ViewHolder holder);
 
-  private void preAnimateRemove(final RecyclerView.ViewHolder holder) {
+  private void preAnimateRemove(final ViewHolder holder) {
     ViewHelper.clear(holder.itemView);
 
     if (holder instanceof AnimateViewHolder) {
@@ -231,7 +231,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     }
   }
 
-  private void preAnimateAdd(final RecyclerView.ViewHolder holder) {
+  private void preAnimateAdd(final ViewHolder holder) {
     ViewHelper.clear(holder.itemView);
 
     if (holder instanceof AnimateViewHolder) {
@@ -241,7 +241,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     }
   }
 
-  private void doAnimateRemove(final RecyclerView.ViewHolder holder) {
+  private void doAnimateRemove(final ViewHolder holder) {
     if (holder instanceof AnimateViewHolder) {
       ((AnimateViewHolder) holder).animateRemoveImpl(holder, new DefaultRemoveVpaListener(holder));
     } else {
@@ -251,7 +251,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     mRemoveAnimations.add(holder);
   }
 
-  private void doAnimateAdd(final RecyclerView.ViewHolder holder) {
+  private void doAnimateAdd(final ViewHolder holder) {
     if (holder instanceof AnimateViewHolder) {
       ((AnimateViewHolder) holder).animateAddImpl(holder, new DefaultAddVpaListener(holder));
     } else {
@@ -269,7 +269,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     return true;
   }
 
-  protected long getRemoveDelay(final RecyclerView.ViewHolder holder) {
+  protected long getRemoveDelay(final ViewHolder holder) {
     return Math.abs(holder.getOldPosition() * getRemoveDuration() / 4);
   }
 
@@ -281,7 +281,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     return true;
   }
 
-  protected long getAddDelay(final RecyclerView.ViewHolder holder) {
+  protected long getAddDelay(final ViewHolder holder) {
     return Math.abs(holder.getAdapterPosition() * getAddDuration() / 4);
   }
 
@@ -681,9 +681,9 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
 
   protected class DefaultAddVpaListener extends VpaListenerAdapter {
 
-    RecyclerView.ViewHolder mViewHolder;
+    ViewHolder mViewHolder;
 
-    public DefaultAddVpaListener(final RecyclerView.ViewHolder holder) {
+    public DefaultAddVpaListener(final ViewHolder holder) {
       mViewHolder = holder;
     }
 
@@ -708,9 +708,9 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
 
   protected class DefaultRemoveVpaListener extends VpaListenerAdapter {
 
-    RecyclerView.ViewHolder mViewHolder;
+    ViewHolder mViewHolder;
 
-    public DefaultRemoveVpaListener(final RecyclerView.ViewHolder holder) {
+    public DefaultRemoveVpaListener(final ViewHolder holder) {
       mViewHolder = holder;
     }
 

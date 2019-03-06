@@ -25,16 +25,15 @@ import sabalan.paydar.mohtasham.ezibazi.view.fragment.search.FragmentSearch
 
 class ActivityMenu : AppCompatActivity() {
 
-    internal var lyt_root: CoordinatorLayout
+    internal lateinit var lyt_root: CoordinatorLayout
     internal var connectivityListener: ConnectivityListener? = null
-    internal var lyt_bottom_buttons: LinearLayout
-    internal var lyt_action: FrameLayout
-
-    internal var img_profile: ImageView
-    internal var img_search: ImageView
-    internal var img_activity: ImageView
-    internal var img_home: ImageView
-    internal var bottom_nav: BottomNavigationView
+    internal lateinit var lyt_bottom_buttons: LinearLayout
+    internal lateinit var lyt_action: FrameLayout
+    internal lateinit var img_profile: ImageView
+    internal lateinit var img_search: ImageView
+    internal lateinit var img_activity: ImageView
+    internal lateinit var img_home: ImageView
+    internal lateinit var bottom_nav: BottomNavigationView
     internal var ft: FragmentTransaction? = null
 
     private val frg_profile_num = 1
@@ -50,7 +49,7 @@ class ActivityMenu : AppCompatActivity() {
     internal val fragmentSearch = FragmentSearch()
     internal val fragmentProfile = FragmentProfile()
 
-    internal var active: Fragment
+    internal lateinit var active: Fragment
 
     internal val fm = supportFragmentManager
 

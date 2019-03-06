@@ -29,7 +29,7 @@ class UserPrefManager(context: Context) {
 
     fun saveUser(user: User?) {
         if (user != null) {
-            val newToken = Crypt.encrypt(user.token)
+            val newToken = Crypt.encrypt(user.token!!)
             user.token = newToken
             val editor = sharedPreferences.edit()
             editor.putString(FULL_NAME, user.full_name)

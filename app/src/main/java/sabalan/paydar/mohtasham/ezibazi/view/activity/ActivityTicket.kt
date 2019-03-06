@@ -30,14 +30,14 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 
 class ActivityTicket : AppCompatActivity() {
 
-    internal var txt_page_name: TextView
-    internal var img_back: ImageView
-    internal var rcv_tickets: RecyclerView
-    internal var edt_message: EditText
-    internal var imb_send_message: ImageButton
-    internal var apiService: TicketService
-    internal var adapter: TicketAdapter
-    internal var avl_send_message: AVLoadingIndicatorView
+    internal lateinit var txt_page_name: TextView
+    internal lateinit var img_back: ImageView
+    internal lateinit var rcv_tickets: RecyclerView
+    internal lateinit var edt_message: EditText
+    internal lateinit var imb_send_message: ImageButton
+    internal lateinit var apiService: TicketService
+    internal lateinit var adapter: TicketAdapter
+    internal lateinit var avl_send_message: AVLoadingIndicatorView
     internal var first_ticket_id = -1
     internal var is_create_adapter = false
     internal var is_pause = false
@@ -92,39 +92,47 @@ class ActivityTicket : AppCompatActivity() {
 
     private fun getTickets() {
         apiService = TicketService(this@ActivityTicket)
-        apiService.getTickets { status, message, paginate, tickets ->
-            avl_send_message.visibility = View.INVISIBLE
+        val onTicketsReceived = object : TicketService.onTicketsReceived{
+            override fun onReceived(status: Int, message: String, paginate: Paginate, tickets: List<Ticket>) {
+                avl_send_message.visibility = View.INVISIBLE
 
-            if (status == 0) {
-                //          MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
-            } else {
+                if (status == 0) {
+                    //          MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
+                } else {
 
 
-                if (tickets.size > 0) {
+                    if (tickets.size > 0) {
 
-                    if (first_ticket_id != tickets[0].id) {
-                        first_ticket_id = tickets[0].id
-                        Collections.reverse(tickets)
-                        adapter = TicketAdapter(this@ActivityTicket, ArrayList())
-                        is_create_adapter = true
-                        rcv_tickets.adapter = adapter
-                        adapter.notifyData(tickets)
-                        rcv_tickets.scrollToPosition(adapter.itemCount - 1)
-                        setSeenTickets()
+                        if (first_ticket_id != tickets[0].id) {
+                            first_ticket_id = tickets[0].id
+                            Collections.reverse(tickets)
+                            adapter = TicketAdapter(this@ActivityTicket, ArrayList())
+                            is_create_adapter = true
+                            rcv_tickets.adapter = adapter
+                            adapter.notifyData(tickets)
+                            rcv_tickets.scrollToPosition(adapter.itemCount - 1)
+                            setSeenTickets()
+                        }
                     }
-                }
 
+                }
             }
         }
+
+        apiService.getTickets(onTicketsReceived)
 
     }
 
 
     private fun setSeenTickets() {
         apiService = TicketService(this@ActivityTicket)
-        apiService.seenTickets { status, message ->
-            //no thing :)
+        val onSeenTicket = object : TicketService.onSeenTicket{
+            override fun onReceived(status: Int, message: String) {
+                //nothing
+            }
         }
+
+        apiService.seenTickets(onSeenTicket)
     }
 
     private fun checkEntry(): Boolean {
@@ -140,24 +148,21 @@ class ActivityTicket : AppCompatActivity() {
 
     private fun sendTicket() {
         val `object` = JSONObject()
-        try {
-            `object`.put("text", edt_message.text.toString())
-            `object`.put("is_user_sent", 1)
-            edt_message.setText("")
-            apiService = TicketService(this@ActivityTicket)
-            apiService.sendTicket(`object`, TicketService.onSendTicket { status, message, ticket ->
+        `object`.put("text", edt_message.text.toString())
+        `object`.put("is_user_sent", 1)
+        edt_message.setText("")
+        apiService = TicketService(this@ActivityTicket)
+        val onSendTicket = object : TicketService.onSendTicket {
+            override fun onReceived(status: Int, message: String, ticket: Ticket) {
                 avl_send_message.visibility = View.INVISIBLE
                 if (status == 1) {
-                    //            getTickets();
-
                     val tickets = ArrayList<Ticket>()
                     tickets.add(ticket)
-
                     //for first ticket send
                     if (!is_create_adapter) {
                         adapter = TicketAdapter(this@ActivityTicket, ArrayList())
                         getTickets()
-                        return@onSendTicket
+                        return
                     }
 
                     first_ticket_id = ticket.id
@@ -167,10 +172,10 @@ class ActivityTicket : AppCompatActivity() {
                 } else {
                     MyViews.makeText(this@ActivityTicket, message, Toast.LENGTH_SHORT)
                 }
-            })
-        } catch (e: JSONException) {
-            e.printStackTrace()
+            }
         }
+
+        apiService.sendTicket(`object`, onSendTicket)
 
     }
 

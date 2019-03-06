@@ -27,7 +27,7 @@ class ListCommentAdapter(private val context: Context, private val comments: Mut
 
 
         holder.txt_full_name.text = comment.user!!.full_name
-        holder.txt_date.text = HelperText.toPersianNumber(HelperDate().timestampToPersian(comment.created_at))
+        holder.txt_date.text = HelperText.toPersianNumber(HelperDate().timestampToPersian(comment.created_at!!))
         holder.expand_text_view.text = comment.text
 
 
@@ -56,9 +56,9 @@ class ListCommentAdapter(private val context: Context, private val comments: Mut
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val txt_full_name: TextView
-        private val txt_date: TextView
-        private val expand_text_view: ExpandableTextView
+        val txt_full_name: TextView
+        val txt_date: TextView
+        val expand_text_view: ExpandableTextView
         private val expandable_text: TextView
 
         init {

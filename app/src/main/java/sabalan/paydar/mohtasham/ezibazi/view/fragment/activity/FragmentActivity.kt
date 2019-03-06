@@ -1,5 +1,6 @@
 package sabalan.paydar.mohtasham.ezibazi.view.fragment.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -23,18 +24,21 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation
 
 class FragmentActivity : Fragment() {
 
-    internal var txt_rents: TextView
-    internal var txt_buys: TextView
-    internal var rcv_rents: RecyclerView
-    internal var rcv_buys: RecyclerView
-    internal var service: UserRequestsService
-    internal var avl_rents: AVLoadingIndicatorView
-    internal var avl_buys: AVLoadingIndicatorView
+    internal lateinit var txt_rents: TextView
+    internal lateinit var txt_buys: TextView
+    internal lateinit var rcv_rents: RecyclerView
+    internal lateinit var rcv_buys: RecyclerView
+    internal lateinit var service: UserRequestsService
+    internal lateinit var avl_rents: AVLoadingIndicatorView
+    internal lateinit var avl_buys: AVLoadingIndicatorView
+    internal lateinit var context: Context
 
-    internal var view: View
+    internal lateinit var view: View
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view = inflater.inflate(R.layout.fragment_activity, container, false)
         //    View view1 = this.getActivity().findViewById(R.id.drawerLayout);
+        context = getContext()!!
+
         setupViews()
         setTypeFace()
 
@@ -62,36 +66,44 @@ class FragmentActivity : Fragment() {
     }
 
     private fun setTypeFace() {
-        txt_rents.typeface = MyViews.getIranSansMediumFont(context!!)
-        txt_buys.typeface = MyViews.getIranSansMediumFont(context!!)
+        txt_rents.typeface = MyViews.getIranSansMediumFont(context)
+        txt_buys.typeface = MyViews.getIranSansMediumFont(context)
     }
 
     private fun getUserRentRequests() {
         service = UserRequestsService(context)
-        service.getRentRequests { status, message, requests ->
-            avl_rents.visibility = View.INVISIBLE
-            if (status != 0) {
-                val adapter = ListRentRequestAdapter(context, requests)
-                val alphaAdapter = AlphaInAnimationAdapter(adapter)
-                rcv_rents.adapter = AlphaInAnimationAdapter(alphaAdapter)
-            } else {
-                //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+        val onRentRequestsReceived = object : UserRequestsService.onRentRequestsReceived{
+            override fun onReceived(status: Int, message: String, requests: List<RentRequest>) {
+                avl_rents.visibility = View.INVISIBLE
+                if (status != 0) {
+                    val adapter = ListRentRequestAdapter(context, requests as MutableList<RentRequest>)
+                    val alphaAdapter = AlphaInAnimationAdapter(adapter)
+                    rcv_rents.adapter = AlphaInAnimationAdapter(alphaAdapter)
+                } else {
+                    //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+                }
             }
         }
+
+        service.getRentRequests(onRentRequestsReceived)
     }
 
     private fun getUserShopRequests() {
         service = UserRequestsService(context)
-        service.getShopRequests { status, message, requests ->
-            avl_buys.visibility = View.INVISIBLE
-            if (status == 1) {
-                val adapter = ListShopRequestAdapter(context, requests)
-                val alphaAdapter = AlphaInAnimationAdapter(adapter)
-                rcv_buys.adapter = AlphaInAnimationAdapter(alphaAdapter)
-            } else {
-                //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+        val onShopRequestsReceived = object : UserRequestsService.onShopRequestsReceived{
+            override fun onReceived(status: Int, message: String, requests: List<ShopRequest>) {
+                avl_buys.visibility = View.INVISIBLE
+                if (status == 1) {
+                    val adapter = ListShopRequestAdapter(context, requests as MutableList<ShopRequest>)
+                    val alphaAdapter = AlphaInAnimationAdapter(adapter)
+                    rcv_buys.adapter = AlphaInAnimationAdapter(alphaAdapter)
+                } else {
+                    //          MyViews.makeText((AppCompatActivity) getActivity(), message, Toast.LENGTH_SHORT);
+                }
             }
         }
+
+        service.getShopRequests(onShopRequestsReceived)
     }
 
 
@@ -109,8 +121,5 @@ class FragmentActivity : Fragment() {
         //    getUserShopRequests();
     }
 
-    companion object {
 
-        private val TAG = "FragmentActivity"
-    }
 }

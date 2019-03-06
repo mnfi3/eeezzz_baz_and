@@ -26,18 +26,18 @@ import sabalan.paydar.mohtasham.ezibazi.view.fragment.intro.FragmentIntro3
 //create intro view for first time
 class ActivityIntro : AppCompatActivity() {
 
-    internal var btn_per: Button
-    internal var btn_next: Button
+    internal lateinit var btn_per: Button
+    internal lateinit var btn_next: Button
 
     internal var current_fragment = 1
     internal var ft: FragmentTransaction? = null
-    internal var prefManager: AppUsagePrefManager
-    internal var intro1: FragmentIntro1
-    internal var intro2: FragmentIntro2
-    internal var intro3: FragmentIntro3
+    internal lateinit var prefManager: AppUsagePrefManager
+    internal lateinit var intro1: FragmentIntro1
+    internal lateinit var intro2: FragmentIntro2
+    internal lateinit var intro3: FragmentIntro3
 
-    internal var lyt_root: RelativeLayout
-    internal var lyt_intro: FrameLayout
+    internal lateinit var lyt_root: RelativeLayout
+    internal lateinit var lyt_intro: FrameLayout
 
     internal val fm = supportFragmentManager
 

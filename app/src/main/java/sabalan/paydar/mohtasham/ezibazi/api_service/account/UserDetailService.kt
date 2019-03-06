@@ -51,7 +51,7 @@ class UserDetailService(private val context: Context) {
 
     fun getUserFinance(onFinanceReceivedComplete: onFinanceReceivedComplete) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.USER_FINANCE, null!!, true, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.USER_FINANCE, JSONObject(), true, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onFinanceReceivedComplete.onComplete(status, message, Finance())
@@ -73,7 +73,7 @@ class UserDetailService(private val context: Context) {
 
     fun getUserLastAddress(onLastAddressReceived: onLastAddressReceived) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.USER_LAST_ADDRESS, null!!, true, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.USER_LAST_ADDRESS, JSONObject(), true, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onLastAddressReceived.onComplete(status, message, Address())

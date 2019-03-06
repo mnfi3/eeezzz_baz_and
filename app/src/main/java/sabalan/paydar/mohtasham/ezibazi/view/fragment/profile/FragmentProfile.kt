@@ -2,6 +2,7 @@ package sabalan.paydar.mohtasham.ezibazi.view.fragment.profile
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -47,34 +48,37 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 
 
 class FragmentProfile : Fragment() {
-    internal var btn_login: Button
-    internal var lyt_user_detail: LinearLayout
-    internal var lyt_logout: LinearLayout
-    internal var lyt_ticket: LinearLayout
-    internal var txt_full_name: TextView
-    internal var txt_user_balance: TextView
-    internal var txt_show_user_balance: TextView
-    internal var btn_charge_account: Button
-    internal var txt_ticket: TextView
-    internal var txt_logout: TextView
-    internal var txt_show_admin_accounts: TextView
-    internal var txt_rules: TextView
-    internal var txt_new_ticket_count: TextView
-    internal var txt_show_setting: TextView
-    internal var txt_show_video: TextView
-    internal var swch_show_video: SwitchCompat
+
+    internal lateinit var context: Context
+
+    internal lateinit var btn_login: Button
+    internal lateinit var lyt_user_detail: LinearLayout
+    internal lateinit var lyt_logout: LinearLayout
+    internal lateinit var lyt_ticket: LinearLayout
+    internal lateinit var txt_full_name: TextView
+    internal lateinit var txt_user_balance: TextView
+    internal lateinit var txt_show_user_balance: TextView
+    internal lateinit var btn_charge_account: Button
+    internal lateinit var txt_ticket: TextView
+    internal lateinit var txt_logout: TextView
+    internal lateinit var txt_show_admin_accounts: TextView
+    internal lateinit var txt_rules: TextView
+    internal lateinit var txt_new_ticket_count: TextView
+    internal lateinit var txt_show_setting: TextView
+    internal lateinit var txt_show_video: TextView
+    internal lateinit var swch_show_video: SwitchCompat
 
 
-    internal var view: View
+    internal lateinit var view: View
 
-    internal var prefManager: UserPrefManager
-    internal var settingPrefManager: SettingPrefManager
+    internal lateinit var prefManager: UserPrefManager
+    internal lateinit var settingPrefManager: SettingPrefManager
 
-    internal var dialog: Dialog
-    internal var btn_go_to_bank: Button
-    internal var txt_dialog_head: TextView
-    internal var edt_amount: EditText
-    internal var avl_pay: AVLoadingIndicatorView
+    internal lateinit var dialog: Dialog
+    internal lateinit var btn_go_to_bank: Button
+    internal lateinit var txt_dialog_head: TextView
+    internal lateinit var edt_amount: EditText
+    internal lateinit var avl_pay: AVLoadingIndicatorView
     internal var amount = 0
     internal var is_to_change = true
 
@@ -87,6 +91,10 @@ class FragmentProfile : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        context = getContext()!!
+
+        G.initializeLogin()
 
         setupViews()
         setTypeFace()
@@ -103,18 +111,7 @@ class FragmentProfile : Fragment() {
 
 
 
-        Auth.loginCheck { user, isLoggedIn ->
-            if (!isLoggedIn) {
-                lyt_user_detail.visibility = View.GONE
-                btn_login.visibility = View.VISIBLE
-            } else {
-                lyt_user_detail.visibility = View.VISIBLE
-                btn_login.visibility = View.GONE
-                //          getUserDetail();
-                txt_full_name.text = UserPrefManager(context!!).user.full_name
-                getUserFinance()
-            }
-        }
+
 
 
 
@@ -131,13 +128,15 @@ class FragmentProfile : Fragment() {
 
         lyt_logout.setOnClickListener {
             val service = AccountService(context)
-            service.logout { status, message ->
-                if (status == 1) {
-                    logoutUser()
-                } else {
-                    MyViews.makeText(activity as AppCompatActivity?, message, Toast.LENGTH_SHORT)
+            service.logout(onLogoutComplete = object : AccountService.onLogoutComplete{
+                override fun onComplete(status: Int, message: String) {
+                    if (status == 1) {
+                        logoutUser()
+                    } else {
+                        MyViews.makeText((activity as AppCompatActivity?)!!, message, Toast.LENGTH_SHORT)
+                    }
                 }
-            }
+            });
         }
 
 
@@ -286,34 +285,38 @@ class FragmentProfile : Fragment() {
 
     private fun getUserFinance() {
         val service = UserDetailService(context)
-        service.getUserFinance { status, message, finance ->
-            if (status == 1) {
-                txt_user_balance.text = HelperText.split_price(finance.user_balance) + "  تومان  "
+        service.getUserFinance(onFinanceReceivedComplete = object : UserDetailService.onFinanceReceivedComplete{
+            override fun onComplete(status: Int, message: String, finance: Finance) {
+                if (status == 1) {
+                    txt_user_balance.text = HelperText.split_price(finance.user_balance) + "  تومان  "
+                }
             }
-        }
+        })
     }
 
 
     private fun getNewTicketsCount() {
         val service = TicketService(context)
-        service.getNewTicketsCount { status, message, count ->
-            if (status == 1) {
-                if (count > 0) {
-                    txt_new_ticket_count.text = Integer.toString(count)
-                    txt_new_ticket_count.visibility = View.VISIBLE
+        service.getNewTicketsCount(onNewTicketsCount = object : TicketService.onNewTicketsCount{
+            override fun onReceived(status: Int, message: String, count: Int) {
+                if (status == 1) {
+                    if (count > 0) {
+                        txt_new_ticket_count.text = Integer.toString(count)
+                        txt_new_ticket_count.visibility = View.VISIBLE
+                    }
                 }
             }
-        }
+        })
     }
 
 
     private fun checkEntry(): Boolean {
         val text = edt_amount.text.toString()
         if (text.length < 1) {
-            MyViews.makeText(activity as AppCompatActivity?, "هیچ مبلغی وارد نشده است", Toast.LENGTH_SHORT)
+            MyViews.makeText((activity as AppCompatActivity?)!!, "هیچ مبلغی وارد نشده است", Toast.LENGTH_SHORT)
             return false
         } else if (Integer.parseInt(text) < 100) {
-            MyViews.makeText(activity as AppCompatActivity?, "مبلغ وارد شده حداقل باید 100 تومان باشد", Toast.LENGTH_SHORT)
+            MyViews.makeText((activity as AppCompatActivity?)!!, "مبلغ وارد شده حداقل باید 100 تومان باشد", Toast.LENGTH_SHORT)
             return false
         }
         return true
@@ -366,19 +369,19 @@ class FragmentProfile : Fragment() {
             e.printStackTrace()
         }
 
-        service.getPayUrl(`object`) { status, message, url ->
-            avl_pay.visibility = View.INVISIBLE
-            if (status == 1) {
-                edt_amount.setText("")
-                dialog.dismiss()
-
-
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(browserIntent)
-            } else {
-                MyViews.makeText(activity as AppCompatActivity?, message, Toast.LENGTH_SHORT)
+        service.getPayUrl(`object`,  object : FinanceService.onCreditComplete{
+            override fun onComplete(status: Int, message: String, url: String) {
+                avl_pay.visibility = View.INVISIBLE
+                if (status == 1) {
+                    edt_amount.setText("")
+                    dialog.dismiss()
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(browserIntent)
+                } else {
+                    MyViews.makeText((activity as AppCompatActivity?)!!, message, Toast.LENGTH_SHORT)
+                }
             }
-        }
+        })
 
     }
 
@@ -412,10 +415,5 @@ class FragmentProfile : Fragment() {
         getUserFinance()
     }
 
-    companion object {
-
-
-        private val TAG = "FragmentProfile"
-    }
 
 }

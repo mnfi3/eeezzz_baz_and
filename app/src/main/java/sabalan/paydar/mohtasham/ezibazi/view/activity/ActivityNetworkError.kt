@@ -16,10 +16,10 @@ import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 class ActivityNetworkError : AppCompatActivity() {
 
 
-    internal var txt_network_error: TextView
+    internal lateinit var txt_network_error: TextView
 
     internal var connectivityListener: ConnectivityListener? = null
-    internal var lyt_root: CoordinatorLayout
+    internal lateinit var lyt_root: CoordinatorLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

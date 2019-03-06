@@ -19,7 +19,7 @@ class AddressService(private val context: Context) {
 
     fun getStates(onStatesReceived: onStatesReceived) {
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, Urls.ADDRESS_STATES, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, Urls.ADDRESS_STATES, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onStatesReceived.onComplete(status, message, ArrayList<State>())
@@ -53,7 +53,7 @@ class AddressService(private val context: Context) {
         url = url.replace("{id}", id)
 
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onStateCitiesReceived.onComplete(status, message, ArrayList<City>())

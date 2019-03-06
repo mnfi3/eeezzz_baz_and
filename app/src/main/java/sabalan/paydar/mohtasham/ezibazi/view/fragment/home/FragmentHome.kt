@@ -17,7 +17,7 @@ class FragmentHome : Fragment() {
 
     //  DrawerLayout drawerLayout;
 
-    internal var view: View
+    internal lateinit var view: View
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view = inflater.inflate(R.layout.fragment_home, container, false)
         //    View view1 = this.getActivity().findViewById(R.id.drawerLayout);

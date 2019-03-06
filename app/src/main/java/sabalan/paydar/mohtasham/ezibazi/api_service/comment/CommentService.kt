@@ -20,7 +20,7 @@ class CommentService(private val context: Context) {
         val url = Urls.GAME_INFO_COMMENTS + "/" + Integer.toString(game_info_id) + "?page=" + Integer.toString(page_num)
 
         val apiRequest = ApiRequest(context)
-        apiRequest.request(ApiRequest.GET, url, null!!, false, object : ApiRequest.onDataReceived {
+        apiRequest.request(ApiRequest.GET, url, JSONObject(), false, object : ApiRequest.onDataReceived {
             override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
                 if (error) {
                     onCommentsReceived.onReceived(status, message, ArrayList<Comment>(), Paginate())
