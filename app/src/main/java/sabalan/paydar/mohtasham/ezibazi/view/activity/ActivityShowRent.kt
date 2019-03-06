@@ -95,7 +95,6 @@ class ActivityShowRent : AppCompatActivity() {
     internal var rent_price_percent_30: Int = 0
     internal var is_ready_rent_types = false
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_rent)
@@ -230,7 +229,7 @@ class ActivityShowRent : AppCompatActivity() {
         val onSpecialRentReceived = object : RentService.onSpecialRentReceived{
             override fun onReceived(status: Int, message: String, game: Game) {
                 if (status != 1) {
-                    //          MyViews.makeText(ActivityShowRent.this, message, Toast.LENGTH_SHORT);
+//                    MyViews.makeText(this@ActivityShowRent, message, Toast.LENGTH_SHORT);
                 } else {
                     this@ActivityShowRent.game = game
                     getRentTypes()
@@ -248,7 +247,16 @@ class ActivityShowRent : AppCompatActivity() {
         val service = RentService(this@ActivityShowRent)
         val onRentTypesReceived = object : RentService.onRentTypesReceived{
             override fun onReceived(status: Int, message: String, rentTypes: List<RentType>) {
-                this@ActivityShowRent.rentTypes = rentTypes
+                if (status == 1) {
+                    this@ActivityShowRent.rentTypes = rentTypes
+                    G.rentTypes = rentTypes
+                    initializeRentPricePercent()
+                    fillViews()
+                    setRentDay(rent_day_7)
+                    is_ready_rent_types = true
+                } else {
+                    MyViews.makeText(this@ActivityShowRent, message, Toast.LENGTH_SHORT)
+                }
             }
         }
         service.getRentTypes(onRentTypesReceived)
@@ -294,6 +302,7 @@ class ActivityShowRent : AppCompatActivity() {
         }
 
         txt_detail_release_date.text = game!!.production_date!!.substring(0, 4)
+
 
     }
 
@@ -385,7 +394,6 @@ class ActivityShowRent : AppCompatActivity() {
     }
 
 
-    @SuppressLint("SetTextI18n")
     private fun setRentDay(day: Int) {
         resetChoose()
 
@@ -456,7 +464,4 @@ class ActivityShowRent : AppCompatActivity() {
         unregisterReceiver(G.connectivityListener)
     }
 
-    companion object {
-        private val TAG = "ActivityShowRent"
-    }
 }

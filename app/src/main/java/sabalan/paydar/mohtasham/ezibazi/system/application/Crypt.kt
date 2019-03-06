@@ -64,7 +64,7 @@ object Crypt {
             @SuppressLint("GetInstance") val cipher = Cipher.getInstance(AES)
             cipher.init(Cipher.DECRYPT_MODE, secretKey)
             val decrypted = cipher.doFinal(Base64.decode(strEncrypted, Base64.DEFAULT))
-            strEncrypted = String(decrypted, "UTF-8" as Charset)
+            strEncrypted = String(decrypted,  charset("UTF-8"))
             return strEncrypted
         } catch (e: Exception) {
             e.printStackTrace()
@@ -82,7 +82,7 @@ object Crypt {
             @SuppressLint("GetInstance") val cipher = Cipher.getInstance(AES)
             cipher.init(Cipher.DECRYPT_MODE, secretKey)
             val decrypted = cipher.doFinal(Base64.decode(strEncrypted, Base64.DEFAULT))
-            strEncrypted = String(decrypted, "UTF-8" as Charset)
+            strEncrypted = String(decrypted, charset("UTF-8"))
             return strEncrypted
         } catch (e: Exception) {
             e.printStackTrace()

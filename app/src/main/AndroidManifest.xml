@@ -115,16 +115,12 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".view.activity.ActivityShowRent"
+            android:name=".view.activity.ActivityShowShop"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-            <intent-filter>
-                <action android:name="ActivityShowRent"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.ActivityShowShop"
+            android:name=".view.activity.ActivityShowRent"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
         </activity>

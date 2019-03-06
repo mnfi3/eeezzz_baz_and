@@ -27,6 +27,7 @@ import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.CityPrefManager
 import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.UserPrefManager
 import sabalan.paydar.mohtasham.ezibazi.model.RentType
 import sabalan.paydar.mohtasham.ezibazi.model.User
+import kotlin.math.log
 
 
 class G : Application() {
@@ -59,6 +60,8 @@ class G : Application() {
 
 
         G.context = applicationContext
+
+
         initializeLogin()
 
         getRentTypes()

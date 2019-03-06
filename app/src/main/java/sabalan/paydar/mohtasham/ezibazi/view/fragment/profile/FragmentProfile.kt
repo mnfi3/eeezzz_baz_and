@@ -30,6 +30,7 @@ import org.json.JSONObject
 
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.AccountService
+import sabalan.paydar.mohtasham.ezibazi.api_service.account.LoginCheckerService
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.UserDetailService
 import sabalan.paydar.mohtasham.ezibazi.api_service.payment.FinanceService
 import sabalan.paydar.mohtasham.ezibazi.api_service.ticket.TicketService
@@ -94,7 +95,7 @@ class FragmentProfile : Fragment() {
 
         context = getContext()!!
 
-        G.initializeLogin()
+        initializeLogin()
 
         setupViews()
         setTypeFace()
@@ -111,7 +112,16 @@ class FragmentProfile : Fragment() {
 
 
 
-
+        if(!G.isLoggedIn){
+            lyt_user_detail.setVisibility(View.GONE);
+            btn_login.setVisibility(View.VISIBLE);
+        }else {
+            lyt_user_detail.setVisibility(View.VISIBLE);
+            btn_login.setVisibility(View.GONE);
+//          getUserDetail();
+            txt_full_name.text =  UserPrefManager(getContext()!!).user.full_name;
+            getUserFinance();
+        }
 
 
 
@@ -249,6 +259,15 @@ class FragmentProfile : Fragment() {
 
     }
 
+
+    private fun initializeLogin(){
+        val loginCheckerService = LoginCheckerService(context)
+        loginCheckerService.check(User(), object : LoginCheckerService.onLoginCheckComplete{
+            override fun onComplete(isLoggedIn: Boolean, full_name: String) {
+                G.isLoggedIn = isLoggedIn
+            }
+        })
+    }
 
     private fun initializeSetting() {
         val is_play_video = settingPrefManager.playVideos
