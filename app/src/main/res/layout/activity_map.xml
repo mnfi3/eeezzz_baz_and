@@ -1,8 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryLight"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/back_search_edit_text"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+
+            <!--<ImageView-->
+                <!--android:id="@+id/img_search"-->
+                <!--android:layout_width="48dp"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:src="@drawable/ic_search_small"-->
+                <!--android:layout_gravity="center_vertical|left"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:padding="16dp"-->
+                <!--android:background="@drawable/back_buttons_ripple_effect"/>-->
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_search"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:textColor="@color/search_text_color"
+                android:hint="آدرس مورد نظر"
+                android:maxLines="1"
+                android:textSize="@dimen/font_size_medium"
+                android:textColorHint="@color/search_text_color"
+
+                android:popupBackground="@color/colorPrimaryLight"
+                android:completionThreshold="1"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:singleLine="true"
+                android:pointerIcon="wait"
+                />
+
+        </LinearLayout>
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avl_search"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_margin="2dp"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            app:indicatorColor="@color/colorAccent"
+            app:indicatorName="BallPulseIndicator"/>
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -37,20 +105,33 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/colorPrimaryLight">
         <Button
+            android:id="@+id/btn_go_to_user_location"
             android:layout_gravity="center"
-            android:id="@+id/btn"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="get location"/>
+            android:text="برو به مکان فعلی"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/main_text_color"
+            android:background="@drawable/back_button_login"/>
 
         <Button
             android:id="@+id/btn_select"
             android:layout_gravity="center"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="select this "/>
+            android:text="انتخاب این مکان"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/main_text_color"
+            android:background="@drawable/back_button_login"/>
     </LinearLayout>
 
 

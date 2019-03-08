@@ -105,6 +105,8 @@ class ActivityPurchase : AppCompatActivity() {
 
     private var states = ArrayList<State>()
     private var cities = ArrayList<City>()
+    private var selected_state = ""
+    private var selected_city = ""
 
     private var state_id = 0
     private var city_id = 0
@@ -112,40 +114,7 @@ class ActivityPurchase : AppCompatActivity() {
     private var sum_price = 0
 
 
-    private val rentPrice: Int
-        get() {
-            for (i in G.rentTypes!!.indices) {
-                if (G.rentTypes!![i].id == rent_type_id) {
-                    return game.price * G.rentTypes!![i].price_percent / 100
-                }
-            }
-            return 0
-        }
 
-
-    private val newAddressObject: JSONObject?
-        get() {
-            if (!checkEntry()) return null
-            val content = edt_address_content.text.toString()
-            val phone = edt_phone_number.text.toString()
-            var post_code = edt_postcode.text.toString()
-            if (post_code.length < 1) post_code = ""
-
-            val `object` = JSONObject()
-            try {
-                `object`.put("state_id", state_id)
-                `object`.put("city_id", city_id)
-                `object`.put("post_code", post_code)
-                `object`.put("home_phone_number", phone)
-                `object`.put("content", content)
-                `object`.put("latitude", 0)
-                `object`.put("longitude", 0)
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-
-            return `object`
-        }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -201,6 +170,8 @@ class ActivityPurchase : AppCompatActivity() {
 
         btn_open_map.setOnClickListener {
             val intent = Intent(this@ActivityPurchase, ActivityMap::class.java)
+            intent.putExtra("STATE", selected_state)
+            intent.putExtra("CITY", selected_city)
             startActivityForResult(intent, 1)
         }
 
@@ -208,6 +179,7 @@ class ActivityPurchase : AppCompatActivity() {
         spinner_state.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 state_id = states[i].id
+                selected_state = states[i].name!!
                 avl_wait.visibility = View.VISIBLE
                 getStateCities(state_id)
             }
@@ -221,10 +193,12 @@ class ActivityPurchase : AppCompatActivity() {
         spinner_city.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 city_id = cities[i].id
+                selected_city = cities[i].name!!
+                btn_open_map.visibility = View.VISIBLE
             }
 
             override fun onNothingSelected(adapterView: AdapterView<*>) {
-
+                btn_open_map.visibility = View.INVISIBLE
             }
         }
 
@@ -325,6 +299,44 @@ class ActivityPurchase : AppCompatActivity() {
         service.getUserLastAddress(onLastAddressReceived)
 
     }
+
+
+    private val rentPrice: Int
+        get() {
+            for (i in G.rentTypes!!.indices) {
+                if (G.rentTypes!![i].id == rent_type_id) {
+                    return game.price * G.rentTypes!![i].price_percent / 100
+                }
+            }
+            return 0
+        }
+
+
+    private val newAddressObject: JSONObject?
+        get() {
+            if (!checkEntry()) return null
+            val content = edt_address_content.text.toString()
+            val phone = edt_phone_number.text.toString()
+            var post_code = edt_postcode.text.toString()
+            if (post_code.length < 1) post_code = ""
+
+            val `object` = JSONObject()
+            try {
+                `object`.put("state_id", state_id)
+                `object`.put("city_id", city_id)
+                `object`.put("post_code", post_code)
+                `object`.put("home_phone_number", phone)
+                `object`.put("content", content)
+                `object`.put("latitude", 0)
+                `object`.put("longitude", 0)
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+            return `object`
+        }
+
+
 
     private fun fillWithAddress() {
         txt_address_text.text = last_address!!.addressText

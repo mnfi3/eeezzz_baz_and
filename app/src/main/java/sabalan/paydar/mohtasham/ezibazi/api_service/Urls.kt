@@ -83,4 +83,30 @@ object Urls {
 
     val SHOP_WITH_WALLET = AppConfig.MAIN_URL + "/shop-game-with-wallet"
     val SHOP_WITH_BANK = AppConfig.MAIN_URL + "/shop-game"
+
+
+
+
+
+
+
+
+    //osm
+    val OSM_SEARCH = "https://nominatim.openstreetmap.org/search" +
+            "?format=json" +
+            "&accept-language={language}" +
+            "&country={country}" +
+            "&sate={state}" +
+            "&city={city}" +
+            "&street={street}" +
+            "&limit={limit}" +
+            "&addressdetails={addressdetails}" +
+            "&q={query}"
+
+
+    val OSM_REVERSE = "https://nominatim.openstreetmap.org/reverse" +
+            "?format=json" +
+            "&accept-language=persian" +
+            "&lat={lat}" +
+            "&lon={lon}"
 }
