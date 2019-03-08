@@ -36,8 +36,8 @@ import sabalan.paydar.mohtasham.ezibazi.R
 class ActivityMap : AppCompatActivity(), LocationListener {
 
     companion object {
-        private val MIN_UPDATE_TIME: Long = 500
-        private val MIN_UPDATE_DISTANCE = 5.0f
+        private val MIN_UPDATE_TIME: Long = 0
+        private val MIN_UPDATE_DISTANCE = 0.0f
     }
 
     private var context: Context? = null
@@ -53,6 +53,7 @@ class ActivityMap : AppCompatActivity(), LocationListener {
     private var locationManager: LocationManager? = null
     //  private LocationListener locationListener;
     private var isGPSEnabled = false
+    private var isShowAllert = false;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -145,15 +146,15 @@ class ActivityMap : AppCompatActivity(), LocationListener {
                 onLocationChanged(location2)
             } else if (location3 != null) {
                 onLocationChanged(location3)
-            }
-
-            if (Build.VERSION.SDK_INT < 23) {
-                locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_UPDATE_TIME, MIN_UPDATE_DISTANCE, this)
-            } else {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
-                } else {
+            }else {
+                if (Build.VERSION.SDK_INT < 23) {
                     locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_UPDATE_TIME, MIN_UPDATE_DISTANCE, this)
+                } else {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+                    } else {
+                        locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_UPDATE_TIME, MIN_UPDATE_DISTANCE, this)
+                    }
                 }
             }
 
@@ -249,6 +250,16 @@ class ActivityMap : AppCompatActivity(), LocationListener {
     public override fun onPause() {
         super.onPause()
         map!!.onPause()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        initLocation()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initLocation()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

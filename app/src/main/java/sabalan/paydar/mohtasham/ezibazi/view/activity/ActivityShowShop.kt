@@ -298,11 +298,11 @@ class ActivityShowShop : AppCompatActivity() {
         vdo_game.setVideoURI(Uri.parse(game!!.videos!![0].url))
         vdo_game.requestFocus()
         vdo_game.setOnPreparedListener { mediaPlayer ->
-            mediaPlayer.setVolume(0f, 0f)
+//            mediaPlayer.setVolume(0f, 0f)
             vdo_game.start()
         }
         vdo_game.setOnCompletionListener { mediaPlayer ->
-            mediaPlayer.setVolume(0f, 0f)
+//            mediaPlayer.setVolume(0f, 0f)
             vdo_game.start()
         }
     }

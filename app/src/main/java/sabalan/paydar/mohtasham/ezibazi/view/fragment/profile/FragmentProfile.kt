@@ -95,7 +95,7 @@ class FragmentProfile : Fragment() {
 
         context = getContext()!!
 
-        initializeLogin()
+
 
         setupViews()
         setTypeFace()
@@ -103,26 +103,19 @@ class FragmentProfile : Fragment() {
         getNewTicketsCount()
         getUserFinance()
 
-        prefManager = UserPrefManager(context!!)
-        settingPrefManager = SettingPrefManager(context!!)
+        prefManager = UserPrefManager(context)
+        settingPrefManager = SettingPrefManager(context)
 
         //get new tickets count (async)
         //    receiveNewTicketsCount();
         initializeSetting()
 
 
+        initDetailViews()
 
-        if(!G.isLoggedIn){
-            lyt_user_detail.setVisibility(View.GONE);
-            btn_login.setVisibility(View.VISIBLE);
-        }else {
-            lyt_user_detail.setVisibility(View.VISIBLE);
-            btn_login.setVisibility(View.GONE);
-//          getUserDetail();
-            txt_full_name.text =  UserPrefManager(getContext()!!).user.full_name;
-            getUserFinance();
+        if(G.isLoggedIn == false){
+            initializeLogin()
         }
-
 
 
 
@@ -265,8 +258,22 @@ class FragmentProfile : Fragment() {
         loginCheckerService.check(User(), object : LoginCheckerService.onLoginCheckComplete{
             override fun onComplete(isLoggedIn: Boolean, full_name: String) {
                 G.isLoggedIn = isLoggedIn
+                initDetailViews()
             }
         })
+    }
+
+    private fun initDetailViews(){
+        if(G.isLoggedIn == false){
+            lyt_user_detail.setVisibility(View.GONE);
+            btn_login.setVisibility(View.VISIBLE);
+        }else {
+            lyt_user_detail.setVisibility(View.VISIBLE);
+            btn_login.setVisibility(View.GONE);
+//          getUserDetail();
+            txt_full_name.text =  UserPrefManager(getContext()!!).user.full_name;
+            getUserFinance();
+        }
     }
 
     private fun initializeSetting() {

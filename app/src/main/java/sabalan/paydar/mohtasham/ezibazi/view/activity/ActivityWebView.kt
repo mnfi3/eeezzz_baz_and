@@ -89,27 +89,29 @@ class ActivityWebView : AppCompatActivity() {
         web_view.settings.setAppCacheEnabled(true)
 
         web_view.loadUrl(url)
+        this@ActivityWebView.url = url
+        txt_page_name.text = this@ActivityWebView.url
 
-        if (!swipe.isRefreshing) {
-            avl_webview.visibility = View.VISIBLE
-        }
+//        if (!swipe.isRefreshing) {
+//            avl_webview.visibility = View.VISIBLE
+//        }
 
-        web_view.webViewClient = object : WebViewClient() {
-            override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
-                //        web_view.loadUrl("file:///android_assets/error.html");
-            }
-
-            override fun onPageFinished(view: WebView, url: String) {
-                swipe.isRefreshing = false
-                avl_webview.visibility = View.INVISIBLE
-            }
-
-            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
-                super.onPageStarted(view, url, favicon)
-                this@ActivityWebView.url = url
-                txt_page_name.text = this@ActivityWebView.url
-            }
-        }
+//        web_view.webViewClient = object : WebViewClient() {
+//            override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
+//                //        web_view.loadUrl("file:///android_assets/error.html");
+//            }
+//
+//            override fun onPageFinished(view: WebView, url: String) {
+//                swipe.isRefreshing = false
+//                avl_webview.visibility = View.INVISIBLE
+//            }
+//
+//            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
+//                super.onPageStarted(view, url, favicon)
+//                this@ActivityWebView.url = url
+//                txt_page_name.text = this@ActivityWebView.url
+//            }
+//        }
 
 //        web_view.webChromeClient = object : WebChromeClient(){
 //            override fun onProgressChanged(view: WebView?, newProgress: Int) {
