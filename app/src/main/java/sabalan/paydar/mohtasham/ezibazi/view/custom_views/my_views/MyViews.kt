@@ -2,26 +2,22 @@ package sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 
 import sabalan.paydar.mohtasham.ezibazi.R
+import jp.wasabeef.blurry.Blurry
 
 
-class MyViews : AppCompatActivity() {
+class MyViews {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
     companion object {
 
@@ -42,10 +38,34 @@ class MyViews : AppCompatActivity() {
 
             val toast = Toast(contextWrapper.applicationContext)
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
-            toast.duration = Toast.LENGTH_LONG
+            toast.duration = duration
             toast.view = layout
             toast.show()
         }
+
+
+        fun freezeEnable(activity: AppCompatActivity){
+            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+//            activity.window.decorView.alpha = 0.5f
+
+            var view_group: ViewGroup
+            view_group = activity.findViewById(android.R.id.content)
+            view_group = view_group.getChildAt(0) as ViewGroup
+            Blurry.with(activity).radius(25).sampling(2).animate(400).onto(view_group)
+        }
+
+        fun freezeDisable(activity: AppCompatActivity){
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+//            activity.window.decorView.alpha = 1.0f
+
+            Blurry.delete(activity.window.decorView.rootView as ViewGroup?)
+
+        }
+
+
+
+
 
 
         fun getIranSansFont(context: Context): Typeface {

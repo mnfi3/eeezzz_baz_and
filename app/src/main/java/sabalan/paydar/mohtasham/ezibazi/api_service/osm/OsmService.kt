@@ -54,7 +54,7 @@ class OsmService(private val context: Context) {
     fun search(limit:Int, state: String, city: String, search: String, onOsmSearchedPlaceReceived: onOsmPlacesReceived) {
         val url = Urls.OSM_SEARCH;
         AndroidNetworking.initialize(context)
-//        AndroidNetworking.cancel("osm_search")
+        AndroidNetworking.cancel("osm_search")
         AndroidNetworking.get(url)
                 .addPathParameter("language", "persian")
                 .addPathParameter("country", "iran")

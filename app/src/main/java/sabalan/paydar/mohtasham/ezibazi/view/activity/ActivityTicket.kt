@@ -57,6 +57,7 @@ class ActivityTicket : AppCompatActivity() {
         //    layoutManager.setReverseLayout(true);
         rcv_tickets.layoutManager = layoutManager
         avl_send_message.visibility = View.VISIBLE
+        MyViews.freezeEnable(this@ActivityTicket)
         setSeenTickets()
 
         getTickets()
@@ -69,6 +70,7 @@ class ActivityTicket : AppCompatActivity() {
         imb_send_message.setOnClickListener {
             if (checkEntry()) {
                 avl_send_message.visibility = View.VISIBLE
+                MyViews.freezeEnable(this@ActivityTicket)
                 sendTicket()
             }
         }
@@ -95,6 +97,7 @@ class ActivityTicket : AppCompatActivity() {
         val onTicketsReceived = object : TicketService.onTicketsReceived{
             override fun onReceived(status: Int, message: String, paginate: Paginate, tickets: List<Ticket>) {
                 avl_send_message.visibility = View.INVISIBLE
+                MyViews.freezeDisable(this@ActivityTicket)
 
                 if (status == 0) {
                     //          MyViews.makeText(ActivityTicket.this, message, Toast.LENGTH_SHORT);
@@ -155,6 +158,7 @@ class ActivityTicket : AppCompatActivity() {
         val onSendTicket = object : TicketService.onSendTicket {
             override fun onReceived(status: Int, message: String, ticket: Ticket) {
                 avl_send_message.visibility = View.INVISIBLE
+                MyViews.freezeDisable(this@ActivityTicket)
                 if (status == 1) {
                     val tickets = ArrayList<Ticket>()
                     tickets.add(ticket)

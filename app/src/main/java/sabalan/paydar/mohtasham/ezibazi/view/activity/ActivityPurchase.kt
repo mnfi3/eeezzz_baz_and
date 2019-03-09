@@ -123,7 +123,10 @@ class ActivityPurchase : AppCompatActivity() {
 
         setupViews()
         setTypeFace()
+
         avl_wait.visibility = View.VISIBLE
+        MyViews.freezeEnable(this@ActivityPurchase)
+
 
         getUserLastAddress()
         getUserBalance()
@@ -181,6 +184,7 @@ class ActivityPurchase : AppCompatActivity() {
                 state_id = states[i].id
                 selected_state = states[i].name!!
                 avl_wait.visibility = View.VISIBLE
+                MyViews.freezeEnable(this@ActivityPurchase)
                 getStateCities(state_id)
             }
 
@@ -206,6 +210,7 @@ class ActivityPurchase : AppCompatActivity() {
 
         btn_bank_pay.setOnClickListener {
             avl_wait.visibility = View.VISIBLE
+            MyViews.freezeEnable(this@ActivityPurchase)
             if (type == TYPE_RENT) {
                 rentGameWithBank()
             } else {
@@ -217,6 +222,7 @@ class ActivityPurchase : AppCompatActivity() {
 
         btn_wallet_pay.setOnClickListener {
             avl_wait.visibility = View.VISIBLE
+            MyViews.freezeEnable(this@ActivityPurchase)
             if (type == TYPE_RENT) {
                 rentGameWithWallet()
             } else {
@@ -288,6 +294,7 @@ class ActivityPurchase : AppCompatActivity() {
         val onLastAddressReceived = object : UserDetailService.onLastAddressReceived{
             override fun onComplete(status: Int, message: String, address: Address?) {
                 avl_wait.visibility = View.INVISIBLE
+                MyViews.freezeDisable(this@ActivityPurchase)
                 this@ActivityPurchase.last_address = address
                 if (address != null) {
                     fillWithAddress()
@@ -382,6 +389,7 @@ class ActivityPurchase : AppCompatActivity() {
         val onStateCitiesReceived = object : AddressService.onStateCitiesReceived{
             override fun onComplete(status: Int, message: String, cities: ArrayList<City>) {
                 avl_wait.visibility = View.INVISIBLE
+                MyViews.freezeDisable(this@ActivityPurchase)
                 this@ActivityPurchase.cities = cities
                 val city_array = ArrayList<String>()
                 for (i in cities.indices) {
@@ -450,6 +458,7 @@ class ActivityPurchase : AppCompatActivity() {
             val onRentWithWalletComplete = object : RentPayService.onRentWithWalletComplete{
                 override fun onComplete(status: Int, message: String) {
                     avl_wait.visibility = View.INVISIBLE
+                    MyViews.freezeDisable(this@ActivityPurchase)
                     if (status == 0) {
                         MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                     } else {
@@ -482,6 +491,7 @@ class ActivityPurchase : AppCompatActivity() {
                         val onRentWithWalletComplete = object : RentPayService.onRentWithWalletComplete{
                             override fun onComplete(status: Int, message: String) {
                                 avl_wait.visibility = View.INVISIBLE
+                                MyViews.freezeDisable(this@ActivityPurchase)
                                 if (status == 0) {
                                     MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                                 } else {
@@ -646,6 +656,7 @@ class ActivityPurchase : AppCompatActivity() {
             val onShopWithBankComplete = object : ShopPayService.onShopWithBankComplete{
                 override fun onComplete(status: Int, message: String, pay_url: String) {
                     avl_wait.visibility = View.INVISIBLE
+                    MyViews.freezeDisable(this@ActivityPurchase)
                     if (status == 0) {
                         MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                     } else {
@@ -677,6 +688,7 @@ class ActivityPurchase : AppCompatActivity() {
                         val onShopWithBankComplete = object : ShopPayService.onShopWithBankComplete{
                             override fun onComplete(status: Int, message: String, pay_url: String) {
                                 avl_wait.visibility = View.INVISIBLE
+                                MyViews.freezeDisable(this@ActivityPurchase)
                                 if (status == 0) {
                                     MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                                 } else {

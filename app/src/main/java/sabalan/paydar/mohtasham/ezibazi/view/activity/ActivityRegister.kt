@@ -48,7 +48,7 @@ class ActivityRegister : AppCompatActivity() {
 
         setupViews()
         setTypeFace()
-        txt_page_name.text = "یجاد حساب کاربری"
+        txt_page_name.text = "ایجاد حساب کاربری"
 
         img_back.setOnClickListener { this@ActivityRegister.finish() }
 
@@ -68,6 +68,7 @@ class ActivityRegister : AppCompatActivity() {
         btn_register.setOnClickListener(View.OnClickListener {
             if (!checkEntry()) return@OnClickListener
             avl_register.visibility = View.VISIBLE
+            MyViews.freezeEnable(this@ActivityRegister)
             val full_name = edt_full_name.text.toString()
             val email = edt_email.text.toString()
             val password = edt_password.text.toString()
@@ -85,6 +86,7 @@ class ActivityRegister : AppCompatActivity() {
             val onRegisterComplete = object : AccountService.onRegisterComplete{
                 override fun onComplete(status: Int, message: String, token: String, user: User) {
                     avl_register.visibility = View.INVISIBLE
+                    MyViews.freezeDisable(this@ActivityRegister)
                     MyViews.makeText(this@ActivityRegister, message, Toast.LENGTH_SHORT)
                     if (status == 1) {
                         MyViews.makeText(this@ActivityRegister, "لطفا وارد حساب کاربری خود شوید", Toast.LENGTH_SHORT)

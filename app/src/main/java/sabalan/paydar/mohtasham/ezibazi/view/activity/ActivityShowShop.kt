@@ -80,6 +80,9 @@ class ActivityShowShop : AppCompatActivity() {
         setupViews()
         setTypeFace()
 
+        //disable activity
+        MyViews.freezeEnable(this@ActivityShowShop)
+
         val extras = intent.extras
         prepareGame(extras, savedInstanceState)
 
@@ -228,6 +231,11 @@ class ActivityShowShop : AppCompatActivity() {
 
 
         expand_text_view.text = game!!.description
+
+
+
+        //enable activity
+        MyViews.freezeDisable(this@ActivityShowShop)
     }
 
     private fun setRelatedFragments() {

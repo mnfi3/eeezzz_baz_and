@@ -33,6 +33,7 @@ import sabalan.paydar.mohtasham.ezibazi.model.User
 import sabalan.paydar.mohtasham.ezibazi.system.application.G
 import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig
 import sabalan.paydar.mohtasham.ezibazi.system.hardware.ConnectivityListener
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.Hardware
 import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.FcmPrefManager
 import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.UserPrefManager
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
@@ -115,7 +116,8 @@ class ActivityLogin : AppCompatActivity() {
         btn_login.setOnClickListener(View.OnClickListener {
             if (!checkEntry()) return@OnClickListener
             avl_login.visibility = View.VISIBLE
-
+            MyViews.freezeEnable(this@ActivityLogin)
+            Hardware.hideKeyboard(this@ActivityLogin)
             val email = edt_email.text.toString()
             val password = edt_password.text.toString()
 
@@ -131,6 +133,7 @@ class ActivityLogin : AppCompatActivity() {
             val onLoginComplete = object : AccountService.onLoginComplete{
                 override fun onComplete(status: Int, message: String, token: String, user: User) {
                     avl_login.visibility = View.INVISIBLE
+                    MyViews.freezeDisable(this@ActivityLogin)
 //                    MyViews.makeText(this@ActivityLogin, message, Toast.LENGTH_SHORT)
                     if (status == 1) {
                         val prefManager = UserPrefManager(this@ActivityLogin)

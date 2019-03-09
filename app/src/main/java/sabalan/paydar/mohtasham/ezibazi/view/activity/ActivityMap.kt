@@ -10,6 +10,8 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.preference.PreferenceManager
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
@@ -17,7 +19,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
@@ -28,15 +29,15 @@ import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
-import org.osmdroid.views.overlay.ItemizedOverlay
 import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.OverlayItem
 
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.osm.OsmService
 import sabalan.paydar.mohtasham.ezibazi.model.OsmSearchedPlace
 import sabalan.paydar.mohtasham.ezibazi.system.hardware.Hardware
+import sabalan.paydar.mohtasham.ezibazi.view.custom_views.layout_behavior.MyArrayAdapter
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
+import java.util.*
 
 
 class ActivityMap : AppCompatActivity(), LocationListener {
@@ -49,6 +50,7 @@ class ActivityMap : AppCompatActivity(), LocationListener {
     private var context: Context? = null
 
     private lateinit var actv_search: AutoCompleteTextView
+    private var actv_search_current_text = ""
     private lateinit var btn_go_to_user_location: Button
     private lateinit var btn_select: Button
     private lateinit var avl_search: AVLoadingIndicatorView
@@ -74,7 +76,7 @@ class ActivityMap : AppCompatActivity(), LocationListener {
     private var city = ""
     private var street = ""
 
-    private lateinit var adapter: ArrayAdapter<String>
+    private lateinit var adapter: MyArrayAdapter
 
     private lateinit var  searchedPlaces: List<OsmSearchedPlace>
 
@@ -128,7 +130,7 @@ class ActivityMap : AppCompatActivity(), LocationListener {
                 map_latitude = searchedPlaces[p2].lat
                 map_longitude = searchedPlaces[p2].lon
                 goToLocation(15)
-//                Toast.makeText(this@ActivityMap, ""+searchedPlaces[p2].display_name, Toast.LENGTH_SHORT).show()
+                avl_search.visibility = View.INVISIBLE
             }
         })
 
@@ -139,12 +141,28 @@ class ActivityMap : AppCompatActivity(), LocationListener {
             false
         }
 
+
+        val handler =  Handler(Looper.getMainLooper());
+        var workRunnable: Runnable
         actv_search.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
-                if (actv_search.text.toString().length > 2){
-//                    searchedPlaces = ArrayList<OsmSearchedPlace>()
-//                    searchLocation()
+                if(actv_search.text.toString().contains('@')) return
+                if (actv_search.text.toString() == actv_search_current_text) return
+
+                actv_search_current_text = actv_search.text.toString()
+                if (actv_search_current_text.length > 2){
+                    avl_search.visibility = View.VISIBLE
+                    workRunnable = object : Runnable{
+                        override fun run() {
+                            searchLocation()
+                        }
+                    }
+                    handler.removeCallbacks(workRunnable);
+                    handler.postDelayed(workRunnable, 500);
                 }
+
+                actv_search.showDropDown()
+                actv_search.setSelection(actv_search_current_text.length)
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -152,17 +170,7 @@ class ActivityMap : AppCompatActivity(), LocationListener {
             }
         })
 
-        actv_search.setOnTouchListener(object :  View.OnTouchListener{
-            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-                if (searchedPlaces.size > 0) {
-                    // show all suggestions
-                    if (!actv_search.getText().toString().equals(""))
-                        adapter.getFilter().filter(null);
-                    actv_search.showDropDown();
-                }
-                return false;
-            }
-        })
+
 
     }
 
@@ -255,7 +263,6 @@ class ActivityMap : AppCompatActivity(), LocationListener {
         val osmService = OsmService(context!!)
         osmService.search(5, state, city, text, object : OsmService.onOsmPlacesReceived{
             override fun onReceived(status: Int, message: String, places: List<OsmSearchedPlace>) {
-                avl_search.visibility = View.INVISIBLE
                 this@ActivityMap.searchedPlaces = places
                 fillSearchedLocationResults()
             }
@@ -267,11 +274,21 @@ class ActivityMap : AppCompatActivity(), LocationListener {
         for (i in 0..searchedPlaces.size - 1){
             placesList.add(searchedPlaces[i].display_name)
         }
-        adapter =  ArrayAdapter<String>(this@ActivityMap, R.layout.item_map_search_result, placesList)
-        adapter.filter.filter(null)
+//        adapter =  ArrayAdapter<String>(this@ActivityMap, R.layout.item_map_search_result, placesList)
+        adapter = MyArrayAdapter(this@ActivityMap, R.layout.item_map_search_result, placesList)
         actv_search.setThreshold(1)
         actv_search.showDropDown()
         actv_search.setAdapter(adapter)
+        //hack autocompletetext bug(just show dialog on text change)
+        val str1 =  actv_search.text.toString()
+        val str2 = str1 + "@"
+        actv_search.setText(str2)
+        actv_search.setText(str1)
+        val position = str1.length
+        actv_search.setSelection(position)
+        //disable progress
+        avl_search.visibility = View.INVISIBLE
+
     }
 
 
@@ -382,7 +399,8 @@ class ActivityMap : AppCompatActivity(), LocationListener {
     public override fun onResume() {
         super.onResume()
         map!!.onResume()
-//        initUserLocation()
+        if(isGPSEnabled)
+            initUserLocation()
     }
 
     public override fun onPause() {
@@ -402,7 +420,8 @@ class ActivityMap : AppCompatActivity(), LocationListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-//        initUserLocation()
+        if(isGPSEnabled)
+            initUserLocation()
     }
 
 

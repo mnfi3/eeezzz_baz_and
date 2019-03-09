@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -107,7 +108,8 @@ class ActivityShowRent : AppCompatActivity() {
         val extras = intent.extras
         prepareGame(extras, savedInstanceState)
 
-
+        //disable actvit
+        MyViews.freezeEnable(this@ActivityShowRent)
 
 
 
@@ -304,6 +306,8 @@ class ActivityShowRent : AppCompatActivity() {
         txt_detail_release_date.text = game!!.production_date!!.substring(0, 4)
 
 
+        //enable activity
+        MyViews.freezeDisable(this@ActivityShowRent)
     }
 
 
