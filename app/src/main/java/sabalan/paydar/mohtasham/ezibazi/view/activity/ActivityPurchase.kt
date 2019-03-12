@@ -462,7 +462,7 @@ class ActivityPurchase : AppCompatActivity() {
                     if (status == 0) {
                         MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                     } else {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+//                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                         restartApp()
                     }
                 }
@@ -495,7 +495,7 @@ class ActivityPurchase : AppCompatActivity() {
                                 if (status == 0) {
                                     MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                                 } else {
-                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+//                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                                     restartApp()
                                 }
                             }
@@ -534,7 +534,7 @@ class ActivityPurchase : AppCompatActivity() {
                     if (status == 0) {
                         MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                     } else {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+//                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                         restartApp()
                     }
                 }
@@ -566,7 +566,7 @@ class ActivityPurchase : AppCompatActivity() {
                                 if (status == 0) {
                                     MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                                 } else {
-                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+//                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
                                     restartApp()
                                 }
                             }

@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.text.Html
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -164,8 +165,8 @@ class ActivityShowShop : AppCompatActivity() {
 
 
     private fun setTypeFace() {
-        txt_page_name.typeface = MyViews.getRobotoLightFont(this@ActivityShowShop)
-        txt_name.typeface = MyViews.getRobotoLightFont(this@ActivityShowShop)
+        txt_page_name.typeface = MyViews.getRobotoRegularFont(this@ActivityShowShop)
+        txt_name.typeface = MyViews.getRobotoRegularFont(this@ActivityShowShop)
         txt_rate.typeface = MyViews.getRobotoLightFont(this@ActivityShowShop)
         txt_show_region.typeface = MyViews.getRobotoLightFont(this@ActivityShowShop)
         txt_region.typeface = MyViews.getRobotoLightFont(this@ActivityShowShop)
@@ -230,8 +231,8 @@ class ActivityShowShop : AppCompatActivity() {
         }
 
 
-        expand_text_view.text = game!!.description
-
+//        expand_text_view.text = game!!.description
+        expand_text_view.text = Html.fromHtml(game!!.description)
 
 
         //enable activity

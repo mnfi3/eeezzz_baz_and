@@ -12,6 +12,7 @@ import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import android.text.Html
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
@@ -201,8 +202,8 @@ class ActivityShowRent : AppCompatActivity() {
     }
 
     private fun setTypeFace() {
-        txt_page_name.typeface = MyViews.getRobotoLightFont(this@ActivityShowRent)
-        txt_name.typeface = MyViews.getRobotoLightFont(this@ActivityShowRent)
+        txt_page_name.typeface = MyViews.getRobotoRegularFont(this@ActivityShowRent)
+        txt_name.typeface = MyViews.getRobotoRegularFont(this@ActivityShowRent)
         txt_rate.typeface = MyViews.getRobotoLightFont(this@ActivityShowRent)
         txt_region.typeface = MyViews.getRobotoLightFont(this@ActivityShowRent)
         txt_show_region.typeface = MyViews.getRobotoLightFont(this@ActivityShowRent)
@@ -295,7 +296,8 @@ class ActivityShowRent : AppCompatActivity() {
 
 
         //game detail
-        expand_text_view.text = game!!.description
+//        expand_text_view.text = game!!.description
+        expand_text_view.text = Html.fromHtml(game!!.description)
         txt_detail_age_class.text = "+" + game!!.age_class
         if (game!!.console_name!!.contains("xbox")) {
             img_detail_console_icon.setImageResource(R.drawable.ic_xbox)

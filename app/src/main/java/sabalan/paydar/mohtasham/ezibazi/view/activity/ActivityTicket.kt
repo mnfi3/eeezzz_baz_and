@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 
 import com.wang.avi.AVLoadingIndicatorView
+import me.leolin.shortcutbadger.ShortcutBadger
 
 import org.json.JSONException
 import org.json.JSONObject
@@ -131,7 +132,8 @@ class ActivityTicket : AppCompatActivity() {
         apiService = TicketService(this@ActivityTicket)
         val onSeenTicket = object : TicketService.onSeenTicket{
             override fun onReceived(status: Int, message: String) {
-                //nothing
+                //remove notification count from app icon shortcut
+                ShortcutBadger.removeCount(this@ActivityTicket)
             }
         }
 

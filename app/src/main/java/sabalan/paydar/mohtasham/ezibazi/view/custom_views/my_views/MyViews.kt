@@ -2,7 +2,6 @@ package sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views
 
 import android.content.Context
 import android.content.ContextWrapper
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -49,17 +48,17 @@ class MyViews {
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 //            activity.window.decorView.alpha = 0.5f
 
-            var view_group: ViewGroup
-            view_group = activity.findViewById(android.R.id.content)
-            view_group = view_group.getChildAt(0) as ViewGroup
-            Blurry.with(activity).radius(25).sampling(2).animate(400).onto(view_group)
+//            var view_group: ViewGroup
+//            view_group = activity.findViewById(android.R.id.content)
+//            view_group = view_group.getChildAt(0) as ViewGroup
+//            Blurry.with(activity).radius(25).sampling(2).animate(400).onto(view_group)
         }
 
         fun freezeDisable(activity: AppCompatActivity){
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 //            activity.window.decorView.alpha = 1.0f
 
-            Blurry.delete(activity.window.decorView.rootView as ViewGroup?)
+//            Blurry.delete(activity.window.decorView.rootView as ViewGroup?)
 
         }
 

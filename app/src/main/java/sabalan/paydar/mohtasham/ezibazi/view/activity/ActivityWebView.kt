@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageView
@@ -65,7 +66,6 @@ class ActivityWebView : AppCompatActivity() {
             WebAction()
         }
 
-//        web_view.loadUrl(url)
         WebAction()
 
     }
@@ -88,17 +88,22 @@ class ActivityWebView : AppCompatActivity() {
         web_view.settings.javaScriptEnabled = true
         web_view.settings.setAppCacheEnabled(true)
 
-        web_view.loadUrl(url)
-        this@ActivityWebView.url = url
+        web_view.loadUrl(url);
+
         txt_page_name.text = this@ActivityWebView.url
 
-//        if (!swipe.isRefreshing) {
-//            avl_webview.visibility = View.VISIBLE
-//        }
 
+
+        if (!swipe.isRefreshing) {
+            avl_webview.visibility = View.VISIBLE
+        }
+
+
+
+//        swipe.setRefreshing(true);
 //        web_view.webViewClient = object : WebViewClient() {
 //            override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
-//                //        web_view.loadUrl("file:///android_assets/error.html");
+//                        web_view.loadUrl("file:///android_assets/error.html");
 //            }
 //
 //            override fun onPageFinished(view: WebView, url: String) {
@@ -111,15 +116,20 @@ class ActivityWebView : AppCompatActivity() {
 //                this@ActivityWebView.url = url
 //                txt_page_name.text = this@ActivityWebView.url
 //            }
-//        }
-
-//        web_view.webChromeClient = object : WebChromeClient(){
-//            override fun onProgressChanged(view: WebView?, newProgress: Int) {
-//                super.onProgressChanged(view, newProgress)
-//                avl_webview.visibility = View.INVISIBLE
-//            }
+//
 //
 //        }
+
+
+
+        web_view.webChromeClient = object : WebChromeClient(){
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                super.onProgressChanged(view, newProgress)
+                avl_webview.visibility = View.INVISIBLE
+                swipe.setRefreshing(false);
+            }
+
+        }
 
     }
 

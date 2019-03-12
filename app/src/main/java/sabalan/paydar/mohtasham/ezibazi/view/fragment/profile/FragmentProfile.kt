@@ -24,6 +24,7 @@ import android.widget.TextView
 import android.widget.Toast
 
 import com.wang.avi.AVLoadingIndicatorView
+import me.leolin.shortcutbadger.ShortcutBadger
 
 import org.json.JSONException
 import org.json.JSONObject
@@ -327,8 +328,10 @@ class FragmentProfile : Fragment() {
             override fun onReceived(status: Int, message: String, count: Int) {
                 if (status == 1) {
                     if (count > 0) {
-                        txt_new_ticket_count.text = Integer.toString(count)
+                        txt_new_ticket_count.text = count.toString()
                         txt_new_ticket_count.visibility = View.VISIBLE
+                        //add notification count to app icon
+                        ShortcutBadger.applyCount(context, count)
                     }
                 }
             }

@@ -105,6 +105,9 @@ dependencies {
 
     //blury
     implementation 'jp.wasabeef:blurry:+'
+
+    //notification count in app shortcut icon
+    implementation "me.leolin:ShortcutBadger:1.1.22@aar"
 }
 
 //firebase
