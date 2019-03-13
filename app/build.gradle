@@ -39,6 +39,7 @@ android {
         }
 
         debug{
+            ext.enableCrashlytics = false
 //            minifyEnabled true
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -48,7 +49,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$sdk_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     //slider
     implementation 'com.daimajia.slider:library:1.1.5@aar'
@@ -57,10 +58,10 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$sdk_version"
 
     //volley
-    implementation 'com.android.volley:volley:1.0.0'
+    implementation 'com.android.volley:volley:1.1.1'
 
     implementation "com.android.support:design:$sdk_version"
-    implementation 'com.android.support:support-v4:+'
+    implementation "com.android.support:support-v4:$sdk_version"
     //noinspection GradleCompatible
     implementation("com.android.support:support-v4:$sdk_version") {
         force = true;
@@ -80,18 +81,18 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     //maps
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
 
     //firebase
-    implementation 'com.google.firebase:firebase-core:16.0.4'
-    implementation 'com.google.firebase:firebase-messaging:17.3.3'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-messaging:17.4.0'
 //    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 
     //crash reporting
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
-    implementation 'com.google.firebase:firebase-crash:11.8.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
     //fabric answer
-    implementation 'com.crashlytics.sdk.android:answers:1.4.3'
+    implementation 'com.crashlytics.sdk.android:answers:1.4.7'
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     kapt "org.androidannotations:androidannotations:4.3.1"
@@ -104,7 +105,7 @@ dependencies {
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
 
     //blury
-    implementation 'jp.wasabeef:blurry:+'
+    implementation 'jp.wasabeef:blurry:3.0.0'
 
     //notification count in app shortcut icon
     implementation "me.leolin:ShortcutBadger:1.1.22@aar"

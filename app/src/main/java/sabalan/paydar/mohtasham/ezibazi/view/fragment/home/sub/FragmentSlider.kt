@@ -45,16 +45,12 @@ class FragmentSlider : Fragment() {
                     .image(sliders[i].image_url)
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener {
-                        // Toast.makeText(G.context, "slider " + sliders.get(finalI).getId(), Toast.LENGTH_SHORT).show();
                         val intent = Intent(context, ActivityWebView::class.java)
                         intent.putExtra("URL", sliders[i].on_click)
                         startActivity(intent)
                     }
 
 
-            //          textSliderView
-            //            .bundle(new Bundle())
-            //            .getBundle().putInt("extra", sliders.get(i).getId());
 
             sliderLayout.addSlider(textSliderView)
         }

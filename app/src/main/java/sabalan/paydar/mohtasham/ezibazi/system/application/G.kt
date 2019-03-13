@@ -55,7 +55,10 @@ class G : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Fabric.with(this, Crashlytics())
+        val crashlyticsKit = Crashlytics.Builder()
+                .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+                .build()
+        Fabric.with(this, crashlyticsKit)
         Fabric.with(this, Answers())
 
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:padding="20dp"
-        android:src="@drawable/ic_intro1"
+        android:src="@drawable/ic_activity"
         android:scaleType="fitXY"
         android:layout_marginBottom="40dp"
         />
