@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.model.Game
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityShowShop
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 
@@ -37,6 +38,15 @@ class RelatedShopAdapter(private val context: Context, private val games: Mutabl
 
         holder.txt_game_name.text = game.name
         holder.txt_release_date.text = game.production_date
+
+        if (game.count == 0) {
+            holder.txt_game_price.setBackgroundResource(R.drawable.back_menu_game_price_finished)
+            holder.txt_game_price.text = "ناموجود"
+        } else {
+            holder.txt_game_price.setBackgroundResource(R.drawable.back_menu_game_price)
+            holder.txt_game_price.text = HelperText.split_price(game.price) + " تومان "
+        }
+
 
 
 
@@ -63,11 +73,13 @@ class RelatedShopAdapter(private val context: Context, private val games: Mutabl
         internal val img_game: RoundedImageView
         internal val txt_game_name: TextView
         internal val txt_release_date: TextView
+        internal val txt_game_price: TextView
 
         init {
             img_game = itemView.findViewById(R.id.img_game)
             txt_game_name = itemView.findViewById(R.id.txt_game_name)
             txt_release_date = itemView.findViewById(R.id.txt_release_date)
+            txt_game_price = itemView.findViewById(R.id.txt_game_price)
 
 
             setTypeFace()
@@ -77,6 +89,7 @@ class RelatedShopAdapter(private val context: Context, private val games: Mutabl
         private fun setTypeFace() {
             txt_game_name.typeface = MyViews.getRobotoLightFont(context)
             txt_release_date.typeface = MyViews.getIranSansMediumFont(context)
+            txt_game_price.typeface = MyViews.getIranSansLightFont(context)
         }
 
 

@@ -12,7 +12,7 @@
         android:id="@+id/txt_related_posts"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="پست های پیشنهادی"
+        android:text="اخبار پیشنهادی"
         android:gravity="right|center_vertical"
         android:layout_gravity="right"
         android:layout_marginTop="15dp"

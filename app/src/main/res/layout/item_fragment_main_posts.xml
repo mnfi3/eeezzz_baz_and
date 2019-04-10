@@ -41,9 +41,8 @@
         android:padding="3dp"
         android:layout_marginRight="3dp"
         android:layout_marginTop="2dp"
-        android:typeface="serif"
         android:textColor="@color/main_text_color"
-        android:textSize="@dimen/font_size_very_small"
+        android:textSize="@dimen/font_size_small"
         />
 
     <TextView

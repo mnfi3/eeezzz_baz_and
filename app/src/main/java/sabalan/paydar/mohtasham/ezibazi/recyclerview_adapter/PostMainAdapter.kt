@@ -70,7 +70,7 @@ class PostMainAdapter(private val context: Context, private val posts: MutableLi
 
 
         private fun setTypeFace() {
-            txt_post_title.typeface = MyViews.getIranSansMediumFont(context)
+            txt_post_title.typeface = MyViews.getIranSansUltraLightFont(context)
             txt_post_date.typeface = MyViews.getIranSansMediumFont(context)
         }
 
