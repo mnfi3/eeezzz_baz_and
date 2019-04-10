@@ -34,14 +34,15 @@
         android:id="@+id/txt_game_name"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:maxLines="2"
+        android:maxLines="1"
         tools:text="دسترسی کامل به پروفایل کاربران و قابلیت حذف و ویرایش تگ های موجود و حذف کاربراندسترسی کامل به پروفایل کاربران و قابلیت حذف و ویرایش تگ های موجود و حذف کاربراندسترسی کامل به پروفایل کاربران و قابلیت حذف و ویرایش تگ های موجود و حذف کاربران"
         android:gravity="left"
         android:padding="1dp"
         android:layout_marginLeft="3dp"
         android:typeface="serif"
         android:textColor="@color/main_text_color"
-        android:textSize="@dimen/font_size_very_small"
+        android:textSize="@dimen/font_size_small"
+
         />
 
 
@@ -58,6 +59,19 @@
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/font_size_very_small"
         android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/txt_game_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:padding="2dp"
+        android:gravity="center"
+        android:background="@drawable/back_menu_game_price"
+        tools:text="20,000 تومان"
+        android:textSize="@dimen/font_size_very_small"
+        android:textColor="@color/main_text_color"
         />
 
 
