@@ -16,7 +16,7 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_main"/>
+    <include layout="@layout/toolbar_public"/>
 
 
     <ScrollView

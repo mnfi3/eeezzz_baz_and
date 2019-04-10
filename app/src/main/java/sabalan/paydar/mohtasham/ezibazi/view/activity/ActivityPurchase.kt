@@ -10,14 +10,7 @@ import android.support.v7.widget.AppCompatSpinner
 import android.support.v7.widget.SwitchCompat
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.CompoundButton
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
@@ -25,6 +18,7 @@ import com.wang.avi.AVLoadingIndicatorView
 
 import org.json.JSONException
 import org.json.JSONObject
+import org.w3c.dom.Text
 
 import java.util.ArrayList
 
@@ -89,6 +83,10 @@ class ActivityPurchase : AppCompatActivity() {
     //buttons
     internal lateinit var btn_wallet_pay: AppCompatButton
     internal lateinit var btn_bank_pay: AppCompatButton
+
+    //toolbar
+    lateinit var txt_page_name: TextView
+    lateinit var img_back: ImageView
 
 
     internal var type: String? = null
@@ -157,6 +155,9 @@ class ActivityPurchase : AppCompatActivity() {
             }
         }
 
+        img_back.setOnClickListener {
+            this@ActivityPurchase.finish();
+        }
 
 
         swch_use_last_address.setOnCheckedChangeListener { compoundButton, b ->
@@ -269,6 +270,11 @@ class ActivityPurchase : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun fillViews() {
+        if (type == TYPE_RENT) {
+            txt_page_name.text = game.name + "  اجاره  "
+        }else{
+            txt_page_name.text = game.name + "  خرید  "
+        }
         Picasso.with(this@ActivityPurchase).load(game.app_cover_photo_url)
                 //      .placeholder()
                 .into(img_game)
@@ -727,6 +733,8 @@ class ActivityPurchase : AppCompatActivity() {
     }
 
     private fun setupViews() {
+        txt_page_name = findViewById(R.id.txt_page_name)
+        img_back = findViewById(R.id.img_back)
         avl_wait = findViewById(R.id.avl_wait)
         txt_show_product = findViewById(R.id.txt_show_product)
         img_game = findViewById(R.id.img_game)
@@ -764,6 +772,7 @@ class ActivityPurchase : AppCompatActivity() {
 
 
     private fun setTypeFace() {
+        txt_page_name.typeface =  MyViews.getIranSansMediumFont(this@ActivityPurchase)
         txt_show_product.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchase)//medium
         txt_region.typeface = MyViews.getRobotoLightFont(this@ActivityPurchase)
         txt_name.typeface = MyViews.getRobotoLightFont(this@ActivityPurchase)
