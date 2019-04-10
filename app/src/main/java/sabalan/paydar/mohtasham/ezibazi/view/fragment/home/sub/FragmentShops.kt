@@ -31,6 +31,7 @@ class FragmentShops : Fragment() {
     internal lateinit var apiService: ShopService
     internal var page_num = 1
     internal lateinit var txt_show_shops_list: TextView
+    internal lateinit var txt_show_list: TextView
     internal lateinit var view: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,7 +44,7 @@ class FragmentShops : Fragment() {
         rcv_shops.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
         getShops()
 
-        txt_show_shops_list.setOnClickListener {
+        txt_show_list.setOnClickListener {
             val intent = Intent(context, ActivityListShop::class.java)
             startActivity(intent)
         }
@@ -55,6 +56,7 @@ class FragmentShops : Fragment() {
     private fun setupViews() {
         rcv_shops = view.findViewById(R.id.rcv_shops)
         txt_show_shops_list = view.findViewById(R.id.txt_show_shops_list)
+        txt_show_list = view.findViewById(R.id.txt_show_list)
         lyt_shops = view.findViewById(R.id.lyt_shops)
     }
 
@@ -85,6 +87,7 @@ class FragmentShops : Fragment() {
 
     private fun setTypeFace() {
         txt_show_shops_list.typeface = MyViews.getIranSansMediumFont(context!!)
+        txt_show_list.typeface = MyViews.getIranSansLightFont(context!!)
     }
 
 

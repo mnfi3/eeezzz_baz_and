@@ -34,6 +34,7 @@ class FragmentPosts : Fragment() {
     internal lateinit var apiService: PostService
     internal var page_num = 1
     internal lateinit var txt_show_posts: TextView
+    internal lateinit var txt_show_list: TextView
     internal lateinit var view: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,7 +49,7 @@ class FragmentPosts : Fragment() {
         rcv_posts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
         getPosts()
 
-        txt_show_posts.setOnClickListener {
+        txt_show_list.setOnClickListener {
             val intent = Intent(context, ActivityListPost::class.java)
             startActivity(intent)
         }
@@ -60,6 +61,7 @@ class FragmentPosts : Fragment() {
     private fun setupViews() {
         rcv_posts = view.findViewById(R.id.rcv_posts)
         txt_show_posts = view.findViewById(R.id.txt_show_posts)
+        txt_show_list = view.findViewById(R.id.txt_show_list)
         lyt_posts = view.findViewById(R.id.lyt_posts)
     }
 
@@ -91,6 +93,7 @@ class FragmentPosts : Fragment() {
 
     private fun setTypeFace() {
         txt_show_posts.typeface = MyViews.getIranSansMediumFont(context!!)
+        txt_show_list.typeface = MyViews.getIranSansLightFont(context!!)
     }
 
 

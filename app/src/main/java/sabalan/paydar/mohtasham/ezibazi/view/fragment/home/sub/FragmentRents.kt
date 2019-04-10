@@ -34,6 +34,7 @@ class FragmentRents : Fragment() {
     internal lateinit var apiService: RentService
     internal var page_num = 1
     internal lateinit var txt_show_rent_list: TextView
+    internal lateinit var txt_show_list: TextView
     internal lateinit var view: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,7 +46,9 @@ class FragmentRents : Fragment() {
         rcv_rents.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
         getRents()
 
-        txt_show_rent_list.setOnClickListener {
+
+
+        txt_show_list.setOnClickListener {
             val intent = Intent(context, ActivityListRent::class.java)
             startActivity(intent)
         }
@@ -60,6 +63,7 @@ class FragmentRents : Fragment() {
     private fun setupViews() {
         rcv_rents = view.findViewById(R.id.rcv_rents)
         txt_show_rent_list = view.findViewById(R.id.txt_show_rent_list)
+        txt_show_list = view.findViewById(R.id.txt_show_list)
         lyt_rents = view.findViewById(R.id.lyt_rents)
     }
 
@@ -91,6 +95,7 @@ class FragmentRents : Fragment() {
 
     private fun setTypeFace() {
         txt_show_rent_list.typeface = MyViews.getIranSansMediumFont(context!!)
+        txt_show_list.typeface = MyViews.getIranSansLightFont(context!!)
     }
 
 
