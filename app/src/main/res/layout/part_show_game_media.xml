@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/vdo_game"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="-65dp"
                 android:padding="5dp"
                 tools:text="Portal2"
@@ -259,7 +259,8 @@
                         android:layout_gravity="right"
                         android:gravity="center_vertical|right"
                         android:paddingRight="20dp"
-                        android:text="page name"
+                        android:layout_marginRight="20dp"
+                        tools:text="page name"
                         android:textColor="#ffffff"
                         android:textSize="14dp"/>
 
