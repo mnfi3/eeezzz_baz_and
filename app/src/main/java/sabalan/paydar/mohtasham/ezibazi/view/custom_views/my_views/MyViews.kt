@@ -28,9 +28,8 @@ class MyViews {
             //AppCompatActivity appCompatActivity=context;
             val contextWrapper = ContextWrapper(appCompatActivity)
             val inflater = appCompatActivity.layoutInflater
-            val layout = inflater.inflate(R.layout.custom_view_toast,
-                    appCompatActivity.findViewById<View>(R.id.lyt_toast) as ViewGroup)
-            val txt_toast_text = layout.findViewById<View>(R.id.txt_toast_text) as TextView
+            val layout = inflater.inflate(R.layout.custom_view_toast, appCompatActivity.findViewById(R.id.lyt_toast) as? ViewGroup)
+            val txt_toast_text = layout.findViewById(R.id.txt_toast_text) as TextView
             txt_toast_text.text = text
             //add new
             txt_toast_text.typeface = MyViews.getIranSansLightFont(appCompatActivity)

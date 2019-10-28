@@ -27,3 +27,7 @@
 -keep class * {
     public private *;
 }
+
+
+#-dontwarn okhttp3.internal.platform.*
+#-dontwarn org.conscrypt.*
