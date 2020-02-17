@@ -3,14 +3,13 @@ package sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views
 import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Typeface
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.*
+import android.view.Gravity
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
-
 import sabalan.paydar.mohtasham.ezibazi.R
-import jp.wasabeef.blurry.Blurry
 
 
 class MyViews {
@@ -32,7 +31,7 @@ class MyViews {
             val txt_toast_text = layout.findViewById(R.id.txt_toast_text) as TextView
             txt_toast_text.text = text
             //add new
-            txt_toast_text.typeface = MyViews.getIranSansLightFont(appCompatActivity)
+            txt_toast_text.typeface = getIranSansLightFont(appCompatActivity)
 
             val toast = Toast(contextWrapper.applicationContext)
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)

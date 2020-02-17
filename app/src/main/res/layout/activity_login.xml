@@ -47,6 +47,7 @@
                     android:drawableRight="@drawable/ic_email"
                     android:drawablePadding="16dp"
                     android:textSize="@dimen/font_size_medium"
+                    android:backgroundTint="@color/main_text_color"
                     />
 
 
@@ -68,6 +69,7 @@
                     android:drawablePadding="16dp"
                     android:inputType="textPassword"
                     android:textSize="@dimen/font_size_medium"
+                    android:backgroundTint="@color/main_text_color"
                     />
 
 
@@ -97,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginRight="24sp"
+                    android:buttonTint="@color/main_text_color"
                     />
 
             </LinearLayout>

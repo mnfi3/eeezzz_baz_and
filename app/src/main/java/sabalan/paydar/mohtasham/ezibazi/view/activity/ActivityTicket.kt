@@ -1,26 +1,16 @@
 package sabalan.paydar.mohtasham.ezibazi.view.activity
 
 import android.content.IntentFilter
+import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-
+import android.widget.*
 import com.wang.avi.AVLoadingIndicatorView
 import me.leolin.shortcutbadger.ShortcutBadger
-
-import org.json.JSONException
 import org.json.JSONObject
-
-import java.util.ArrayList
-import java.util.Collections
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.ticket.TicketService
 import sabalan.paydar.mohtasham.ezibazi.model.Paginate
@@ -28,6 +18,7 @@ import sabalan.paydar.mohtasham.ezibazi.model.Ticket
 import sabalan.paydar.mohtasham.ezibazi.recyclerview_adapter.TicketAdapter
 import sabalan.paydar.mohtasham.ezibazi.system.application.G
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
+import java.util.*
 
 class ActivityTicket : AppCompatActivity() {
 
@@ -154,7 +145,6 @@ class ActivityTicket : AppCompatActivity() {
     private fun sendTicket() {
         val `object` = JSONObject()
         `object`.put("text", edt_message.text.toString())
-        `object`.put("is_user_sent", 1)
         edt_message.setText("")
         apiService = TicketService(this@ActivityTicket)
         val onSendTicket = object : TicketService.onSendTicket {

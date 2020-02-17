@@ -1,16 +1,14 @@
 package sabalan.paydar.mohtasham.ezibazi.model
 
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-
-import java.util.ArrayList
+import java.util.*
 
 class Game {
     var id: Int = 0
     var game_info_id: Int = 0
     var price: Int = 0
-    private var is_pending: Int = 0
+//    private var is_pending: Int = 0
     var name: String? = null
     var console_type_id: Int = 0
     var age_class: Int = 0
@@ -38,7 +36,7 @@ class Game {
                 game.id = jsonObject.getInt("id")
                 game.game_info_id = jsonObject.getInt("game_info_id")
                 game.price = jsonObject.getInt("price")
-                game.setIs_pending(jsonObject.getInt("is_pending"))
+//                game.setIs_pending(jsonObject.getInt("is_pending"))
                 game.region = jsonObject.getString("region")
                 game.count = jsonObject.getInt("count")
 
@@ -99,13 +97,13 @@ class Game {
     }
 
 
-    fun isIs_pending(): Int {
-        return is_pending
-    }
+//    fun isIs_pending(): Int {
+//        return is_pending
+//    }
 
-    fun setIs_pending(is_pending: Int) {
-        this.is_pending = is_pending
-    }
+//    fun setIs_pending(is_pending: Int) {
+//        this.is_pending = is_pending
+//    }
 
     fun isCan_play_online(): Int {
         return can_play_online
@@ -116,9 +114,9 @@ class Game {
     }
 
 
-    fun getIs_pending(): Int {
-        return is_pending
-    }
+//    fun getIs_pending(): Int {
+//        return is_pending
+//    }
 
     fun getCan_play_online(): Int {
         return can_play_online
