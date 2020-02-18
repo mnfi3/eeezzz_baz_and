@@ -2,25 +2,16 @@ package sabalan.paydar.mohtasham.ezibazi.view.activity
 
 import android.content.Intent
 import android.content.IntentFilter
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.text.InputType
 import android.util.Patterns
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-
+import android.widget.*
 import com.wang.avi.AVLoadingIndicatorView
-
+import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONException
 import org.json.JSONObject
-
-import java.util.regex.Pattern
-
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.AccountService
 import sabalan.paydar.mohtasham.ezibazi.model.User
@@ -42,9 +33,20 @@ class ActivityRegister : AppCompatActivity() {
     internal lateinit var avl_register: AVLoadingIndicatorView
 
 
+    lateinit var mobile: String;
+    lateinit var token: String;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+
+        val extras = intent.extras
+        if (extras != null) {
+            mobile = extras.getString("MOBILE")
+            token = extras.getString("TOKEN")
+        }
+
 
         setupViews()
         setTypeFace()
@@ -71,27 +73,31 @@ class ActivityRegister : AppCompatActivity() {
             MyViews.freezeEnable(this@ActivityRegister)
             val full_name = edt_full_name.text.toString()
             val email = edt_email.text.toString()
+            val national_code = edt_national_code.text.toString()
             val password = edt_password.text.toString()
 
             val `object` = JSONObject()
             try {
+                `object`.put("token", token)
                 `object`.put("full_name", full_name)
                 `object`.put("email", email)
+                `object`.put("national_code", national_code)
+                `object`.put("mobile", mobile)
                 `object`.put("password", password)
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
 
             service = AccountService(this@ActivityRegister)
-            val onRegisterComplete = object : AccountService.onRegisterComplete{
+            val onRegisterComplete = object : AccountService.onRegisterComplete {
                 override fun onComplete(status: Int, message: String, token: String, user: User) {
-                    avl_register.visibility = View.INVISIBLE
+                    avl_register.visibility = View.GONE
                     MyViews.freezeDisable(this@ActivityRegister)
                     MyViews.makeText(this@ActivityRegister, message, Toast.LENGTH_SHORT)
                     if (status == 1) {
                         MyViews.makeText(this@ActivityRegister, "لطفا وارد حساب کاربری خود شوید", Toast.LENGTH_SHORT)
                         val intent = Intent(this@ActivityRegister, ActivityLogin::class.java)
-                        intent.putExtra("EMAIL", edt_email.text.toString())
+                        intent.putExtra("MOBILE", mobile)
                         intent.putExtra("PASSWORD", edt_password.text.toString())
                         startActivity(intent)
                         this@ActivityRegister.finish()
@@ -185,6 +191,5 @@ class ActivityRegister : AppCompatActivity() {
 
         unregisterReceiver(G.connectivityListener)
     }
-
 
 }

@@ -150,6 +150,30 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+              android:layout_width="300dp"
+              android:layout_height="wrap_content"
+              >
+
+                <EditText
+                  android:id="@+id/edt_national_code"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="20dp"
+                  android:layout_marginLeft="16dp"
+                  android:layout_marginRight="16dp"
+                  android:drawablePadding="16dp"
+                  android:hint="کد ملی"
+                  android:inputType=""
+                  android:textColor="@color/main_text_color"
+                  android:textColorHint="@color/main_text_color"
+                  android:textSize="@dimen/font_size_medium"
+                  android:backgroundTint="@color/main_text_color"/>
+
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 >
@@ -220,6 +244,18 @@
             </LinearLayout>
 
 
+            <com.wang.avi.AVLoadingIndicatorView
+              android:id="@+id/avl_register"
+              android:layout_width="48dp"
+              android:layout_height="48dp"
+              app:indicatorName="LineSpinFadeLoaderIndicator"
+              app:indicatorColor="@color/colorAccent"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginTop="10dp"
+              android:visibility="gone"
+              />
+
+
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="200dp"
@@ -243,16 +279,7 @@
                 <!--/>-->
 
 
-            <com.wang.avi.AVLoadingIndicatorView
-                android:id="@+id/avl_register"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:indicatorName="LineSpinFadeLoaderIndicator"
-                app:indicatorColor="@color/colorAccent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:visibility="invisible"
-                />
+
 
 
         </LinearLayout>

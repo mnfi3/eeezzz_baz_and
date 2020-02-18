@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  android:id="@+id/lyt_root"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".view.activity.ActivityLogin"
+  android:background="@color/colorPrimary"
+  android:orientation="vertical"
+  >
+
+
+
+
+  <include layout="@layout/toolbar_public"/>
+
+  <android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:gravity="center_horizontal|center_vertical"
+      android:padding="5dp"
+      android:layout_marginTop="100dp">
+
+      <android.support.design.widget.TextInputLayout
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:hint="09..."
+        >
+
+        <EditText
+          android:id="@+id/edt_mobile"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginRight="16dp"
+          android:layout_marginLeft="16dp"
+          android:layout_marginBottom="30sp"
+          android:hint="شماره موبایل "
+          android:textAlignment="center"
+          android:maxLines="1"
+          android:maxLength="11"
+          android:inputType="number"
+          android:textColorHint="@color/main_text_color"
+          android:textColor="@color/main_text_color"
+          android:drawableRight="@android:drawable/stat_sys_phone_call"
+          android:drawablePadding="16dp"
+          android:textSize="@dimen/font_size_very_large"
+          android:backgroundTint="@color/main_text_color"
+          />
+
+
+      </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+
+
+      <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="تایید"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/back_button_login"
+        android:textColor="@color/main_text_color"
+        />
+
+
+
+
+
+
+      <!--<ProgressBar-->
+      <!--style="@style/AppTheme"-->
+      <!--android:id="@+id/prg_login"-->
+      <!--android:layout_width="48dp"-->
+      <!--android:layout_height="48dp"-->
+      <!--android:layout_marginTop="10dp"-->
+      <!--android:padding="10dp"-->
+      <!--android:layout_gravity="center_horizontal"-->
+      <!--android:visibility="invisible"-->
+      <!--/>-->
+
+      <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avl_mobile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="invisible"
+        />
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+  </android.support.v4.widget.NestedScrollView>
+
+
+
+</LinearLayout>

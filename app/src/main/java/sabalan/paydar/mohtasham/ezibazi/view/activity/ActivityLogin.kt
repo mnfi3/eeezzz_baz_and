@@ -3,32 +3,19 @@ package sabalan.paydar.mohtasham.ezibazi.view.activity
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.text.InputType
-import android.util.Patterns
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
-
+import android.widget.*
 import com.wang.avi.AVLoadingIndicatorView
-
 import org.json.JSONException
 import org.json.JSONObject
-
-import java.util.regex.Pattern
-
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.Urls
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.AccountService
 import sabalan.paydar.mohtasham.ezibazi.api_service.firebase.FireBaseApiService
 import sabalan.paydar.mohtasham.ezibazi.model.Device
-import sabalan.paydar.mohtasham.ezibazi.model.Fcm
 import sabalan.paydar.mohtasham.ezibazi.model.User
 import sabalan.paydar.mohtasham.ezibazi.system.application.G
 import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig
@@ -43,12 +30,12 @@ class ActivityLogin : AppCompatActivity() {
 
     internal var connectivityListener: ConnectivityListener? = null
     internal lateinit var lyt_root: LinearLayout
-    internal lateinit var txt_register: TextView
+    internal lateinit var btn_register: Button
     internal lateinit var txt_page_name: TextView
     internal lateinit var txt_show_pass: TextView
     internal lateinit var txt_forget_password: TextView
     internal lateinit var img_back: ImageView
-    internal lateinit var edt_email: EditText
+    internal lateinit var edt_mobile: EditText
     internal lateinit var edt_password: EditText
     internal lateinit var btn_login: Button
     internal lateinit var service: AccountService
@@ -69,16 +56,11 @@ class ActivityLogin : AppCompatActivity() {
         if (savedInstanceState == null) {
             val extras = intent.extras
             if (extras != null) {
-                val email = extras.getString("EMAIL")
+                val mobile = extras.getString("MOBILE")
                 val password = extras.getString("PASSWORD")
-                edt_email.setText(email)
+                edt_mobile.setText(mobile)
                 edt_password.setText(password)
             }
-        } else {
-            val email = savedInstanceState.getSerializable("EMAIL") as String
-            val password = savedInstanceState.getSerializable("PASSWORD") as String
-            edt_email.setText(email)
-            edt_password.setText(password)
         }
 
 
@@ -107,8 +89,9 @@ class ActivityLogin : AppCompatActivity() {
 
 
 
-        txt_register.setOnClickListener {
-            val intent = Intent(this@ActivityLogin, ActivityRegister::class.java)
+        btn_register.setOnClickListener {
+            val intent = Intent(this@ActivityLogin, ActivityMobile::class.java)
+            intent.putExtra("TARGET", "register");
             startActivity(intent)
         }
 
@@ -118,12 +101,12 @@ class ActivityLogin : AppCompatActivity() {
             avl_login.visibility = View.VISIBLE
             MyViews.freezeEnable(this@ActivityLogin)
             Hardware.hideKeyboard(this@ActivityLogin)
-            val email = edt_email.text.toString()
+            val mobile = edt_mobile.text.toString()
             val password = edt_password.text.toString()
 
             val `object` = JSONObject()
             try {
-                `object`.put("email", email)
+                `object`.put("mobile", mobile)
                 `object`.put("password", password)
             } catch (e: JSONException) {
                 e.printStackTrace()
@@ -132,7 +115,7 @@ class ActivityLogin : AppCompatActivity() {
             service = AccountService(this@ActivityLogin)
             val onLoginComplete = object : AccountService.onLoginComplete{
                 override fun onComplete(status: Int, message: String, token: String, user: User) {
-                    avl_login.visibility = View.INVISIBLE
+                    avl_login.visibility = View.GONE
                     MyViews.freezeDisable(this@ActivityLogin)
 //                    MyViews.makeText(this@ActivityLogin, message, Toast.LENGTH_SHORT)
                     if (status == 1) {
@@ -148,13 +131,15 @@ class ActivityLogin : AppCompatActivity() {
                         val intent = Intent(this@ActivityLogin, ActivityMenu::class.java)
                         startActivity(intent)
                         this@ActivityLogin.finish()
+                    }else{
+                        MyViews.makeText(this@ActivityLogin, message, Toast.LENGTH_SHORT)
                     }
                 }
             }
 
             service.login(`object`, onLoginComplete)
 //            service.login(`object`) { status, message, token, user ->
-//                avl_login.visibility = View.INVISIBLE
+//                avl_login.visibility = View.GONE
 //                MyViews.makeText(this@ActivityLogin, message, Toast.LENGTH_SHORT)
 //                if (status == 1) {
 //                    val prefManager = UserPrefManager(this@ActivityLogin)
@@ -190,9 +175,9 @@ class ActivityLogin : AppCompatActivity() {
 
     private fun setupViews() {
         lyt_root = findViewById(R.id.lyt_root)
-        txt_register = findViewById(R.id.txt_register)
+        btn_register = findViewById(R.id.btn_register)
         img_back = findViewById(R.id.img_back)
-        edt_email = findViewById(R.id.edt_email)
+        edt_mobile = findViewById(R.id.edt_mobile)
         edt_password = findViewById(R.id.edt_password)
         btn_login = findViewById(R.id.btn_login)
         chk_show_pass = findViewById(R.id.chk_show_pass)
@@ -204,12 +189,12 @@ class ActivityLogin : AppCompatActivity() {
 
     private fun setTypeFace() {
         txt_page_name.typeface = MyViews.getIranSansLightFont(this@ActivityLogin)
-        edt_email.typeface = MyViews.getIranSansLightFont(this@ActivityLogin)
+        edt_mobile.typeface = MyViews.getIranSansLightFont(this@ActivityLogin)
         edt_password.typeface = MyViews.getIranSansLightFont(this@ActivityLogin)
         btn_login.typeface = MyViews.getIranSansLightFont(this@ActivityLogin)
         txt_show_pass.typeface = MyViews.getIranSansLightFont(this@ActivityLogin)
         txt_forget_password.typeface = MyViews.getIranSansMediumFont(this@ActivityLogin)
-        txt_register.typeface = MyViews.getIranSansMediumFont(this@ActivityLogin)
+        btn_register.typeface = MyViews.getIranSansMediumFont(this@ActivityLogin)
     }
 
 
@@ -234,13 +219,13 @@ class ActivityLogin : AppCompatActivity() {
 
 
     private fun checkEntry(): Boolean {
-        if (edt_email.text.toString().length < 1 || edt_password.text.toString().length < 1) {
+        if (edt_mobile.text.toString().length < 1 || edt_password.text.toString().length < 1) {
             MyViews.makeText(this@ActivityLogin, "لطفا اطلاعات خود را کامل وارد کنید", Toast.LENGTH_SHORT)
             return false
         } else if (edt_password.text.toString().length < 6) {
             MyViews.makeText(this@ActivityLogin, "کلمه عبور خود را بادقت وارد کنید", Toast.LENGTH_SHORT)
             return false
-        } else if (!validEmail(edt_email.text.toString())) {
+        } else if (!validateMobile(edt_mobile.text.toString())) {
             MyViews.makeText(this@ActivityLogin, "ایمیل وارد شده صحیح نمی باشد", Toast.LENGTH_SHORT)
             return false
         }
@@ -248,10 +233,14 @@ class ActivityLogin : AppCompatActivity() {
     }
 
 
-    private fun validEmail(email: String): Boolean {
-        val pattern = Patterns.EMAIL_ADDRESS
-        return pattern.matcher(email).matches()
+    private fun validateMobile(text: String): Boolean {
+        if(text.length != 11){
+            MyViews.makeText(this@ActivityLogin, "شماره موبایل وارد شده صحیح نمی باشد", Toast.LENGTH_SHORT)
+            return false;
+        }
+        return true;
     }
+
 
 
     override fun onStart() {

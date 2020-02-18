@@ -35,16 +35,19 @@
                 android:layout_marginTop="20dp">
 
                 <EditText
-                    android:id="@+id/edt_email"
+                    android:id="@+id/edt_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginBottom="30sp"
-                    android:hint="ایمیل"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:hint="شماره موبایل"
                     android:textColorHint="@color/main_text_color"
                     android:textColor="@color/main_text_color"
-                    android:drawableRight="@drawable/ic_email"
+                    android:drawableRight="@android:drawable/stat_sys_phone_call"
                     android:drawablePadding="16dp"
                     android:textSize="@dimen/font_size_medium"
                     android:backgroundTint="@color/main_text_color"
@@ -65,8 +68,9 @@
                     android:hint="کلمه عبور"
                     android:textColor="@color/main_text_color"
                     android:textColorHint="@color/main_text_color"
-                    android:drawableRight="@drawable/ic_lock"
+                    android:drawableRight="@android:drawable/ic_lock_idle_lock"
                     android:drawablePadding="16dp"
+                    android:maxLines="1"
                     android:inputType="textPassword"
                     android:textSize="@dimen/font_size_medium"
                     android:backgroundTint="@color/main_text_color"
@@ -107,6 +111,17 @@
 
 
 
+            <com.wang.avi.AVLoadingIndicatorView
+              android:id="@+id/avl_login"
+              android:layout_width="48dp"
+              android:layout_height="48dp"
+              app:indicatorName="LineSpinFadeLoaderIndicator"
+              app:indicatorColor="@color/colorAccent"
+              android:layout_marginTop="10dp"
+              android:layout_gravity="center_horizontal"
+              android:visibility="gone"
+              />
+
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="200dp"
@@ -117,33 +132,34 @@
                 android:textColor="@color/main_text_color"
                 />
 
-
-
-
             <TextView
-                android:id="@+id/txt_forget_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="کلمه عبور را فراموش کرده ام"
-                android:textStyle="bold"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/main_link_color"
-                android:padding="4dp"
-                />
+              android:id="@+id/txt_forget_password"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="20dp"
+              android:text="کلمه عبور را فراموش کرده ام"
+              android:textStyle="bold"
+              android:textSize="@dimen/font_size_medium"
+              android:textColor="@color/main_danger_color"
+              android:padding="4dp"
+              />
 
-            <TextView
-                android:id="@+id/txt_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:textStyle="bold"
-                android:text="ایجاد حساب کاربری"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/colorAccent"
-                android:padding="4dp"
-                android:elevation="2dp"
-                />
+
+            <Button
+              android:id="@+id/btn_register"
+              android:layout_width="200dp"
+              android:layout_height="40dp"
+              android:text="ایجاد حساب کاربری"
+              android:layout_marginTop="30sp"
+              android:background="@drawable/back_button_register"
+              android:textColor="@color/main_text_color"
+              />
+
+
+
+
+
+
 
             <!--<ProgressBar-->
                 <!--style="@style/AppTheme"-->
@@ -156,16 +172,7 @@
                 <!--android:visibility="invisible"-->
                 <!--/>-->
 
-            <com.wang.avi.AVLoadingIndicatorView
-                android:id="@+id/avl_login"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:indicatorName="LineSpinFadeLoaderIndicator"
-                app:indicatorColor="@color/colorAccent"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:visibility="invisible"
-                />
+
 
 
 

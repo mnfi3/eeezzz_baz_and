@@ -2,17 +2,14 @@ package sabalan.paydar.mohtasham.ezibazi.system.application
 
 import android.annotation.SuppressLint
 import android.util.Base64
-
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.Hardware
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-
 import javax.crypto.Cipher
-import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
-import sabalan.paydar.mohtasham.ezibazi.system.hardware.Hardware
-import java.nio.charset.Charset
+
 
 object Crypt {
     private val SALT = "7c3d596ed03ab9116c547b0eb678b247"
@@ -161,4 +158,19 @@ object Crypt {
         val ENCRYPTION_KEY = getHashedString(generateClientKey()).toByteArray()
         return SecretKeySpec(ENCRYPTION_KEY, AES)
     }
+
+
+
+
+
+
+
+
+    private val RSA_PUBLIC_KEY = "-----BEGIN PUBLIC KEY----- MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDkkehbJ/ipNwH8MhhCRktoiHS XqmgWoG6q9gBjwO6Nx7dMI3NKnEWegLnu0Yk8VYHX88b3ALRtxL6W2nf+sWVo0O8 Ci7tcKnrJIywXyHJCO/8T9R1WfLijJM7AAKomviBpd7Mc5Nt3UK8aHA0+7HnSHXy 1RN9MLHU4mpfTRApWwIDAQAB -----END PUBLIC KEY-----"
+
+    //RSA
+
+
+
+
 }

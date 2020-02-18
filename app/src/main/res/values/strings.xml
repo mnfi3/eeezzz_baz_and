@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">ایزی بازی</string>
+  <string name="app_name">ایزی بازی</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="user_name">user name</string>
-    <string name="password">password</string>
-    <string name="sign_up">sign up</string>
-    <string name="if_you_dont_have_account_please_signup">if you dont have account please signup</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="user_name">user name</string>
+  <string name="password">password</string>
+  <string name="sign_up">sign up</string>
+  <string name="if_you_dont_have_account_please_signup">if you dont have account please signup</string>
 
 
-    <!--firebase notifications string-->
-    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+  <!--firebase notifications string-->
+  <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>
