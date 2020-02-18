@@ -41,7 +41,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginBottom="30sp"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:maxLines="1"
                     android:hint="شماره موبایل"
@@ -139,7 +139,7 @@
               android:layout_marginTop="20dp"
               android:text="کلمه عبور را فراموش کرده ام"
               android:textStyle="bold"
-              android:textSize="@dimen/font_size_medium"
+              android:textSize="@dimen/font_size_small"
               android:textColor="@color/main_danger_color"
               android:padding="4dp"
               />

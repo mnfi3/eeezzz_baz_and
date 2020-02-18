@@ -41,9 +41,13 @@ class ActivityVerificationCode : AppCompatActivity() {
 
         btn_ok.setOnClickListener{
             code = edt_code.text.toString()
-            avl_code.visibility = View.VISIBLE
-            if(target == "register"){
-                validateRegisterCode()
+            if (validateCode()) {
+                avl_code.visibility = View.VISIBLE
+                if (target == "register") {
+                    validateRegisterCode()
+                } else if (target == "reset-password") {
+                    validatePasswordResetCode()
+                }
             }
         }
 
@@ -51,10 +55,12 @@ class ActivityVerificationCode : AppCompatActivity() {
 
     }
 
-    private fun validateCode(){
+    private fun validateCode(): Boolean{
         if(edt_code.text.toString().length < 5){
             MyViews.makeText(this@ActivityVerificationCode, "کد وارد شده اشتباه است", Toast.LENGTH_SHORT)
+            return false
         }
+        return true
     }
 
     private fun validateRegisterCode(){
@@ -65,22 +71,35 @@ class ActivityVerificationCode : AppCompatActivity() {
         val onVerifyCodeComplete = object : VerificationCodeService.onVerifyCodeComplete{
             override fun onComplete(status: Int, message: String, vc: VerificationCode) {
                 avl_code.visibility = View.GONE
-                if(status == 0) MyViews.makeText(this@ActivityVerificationCode, message, Toast.LENGTH_SHORT)
-                else {
+                MyViews.makeText(this@ActivityVerificationCode, message, Toast.LENGTH_SHORT)
+                if(status == 1) {
                     var intent = Intent(this@ActivityVerificationCode, ActivityRegister::class.java)
                     intent.putExtra("MOBILE", mobile)
                     intent.putExtra("TOKEN", vc.token)
                     startActivity(intent)
                 }
             }
-
-
         }
-
         service.verifyCode(json, onVerifyCodeComplete);
     }
 
-    private fun validatePasswordRressetCode(){
-
+    private fun validatePasswordResetCode(){
+        var service = VerificationCodeService(this@ActivityVerificationCode)
+        var json = JSONObject()
+        json.put("mobile", mobile)
+        json.put("code", code)
+        val onVerifyCodeComplete = object : VerificationCodeService.onVerifyCodeComplete{
+            override fun onComplete(status: Int, message: String, vc: VerificationCode) {
+                avl_code.visibility = View.GONE
+                MyViews.makeText(this@ActivityVerificationCode, message, Toast.LENGTH_SHORT)
+                if(status == 1) {
+                    var intent = Intent(this@ActivityVerificationCode, ActivityResetPassword::class.java)
+                    intent.putExtra("MOBILE", mobile)
+                    intent.putExtra("TOKEN", vc.token)
+                    startActivity(intent)
+                }
+            }
+        }
+        service.verifyCode(json, onVerifyCodeComplete);
     }
 }

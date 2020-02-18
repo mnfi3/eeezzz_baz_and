@@ -83,6 +83,19 @@ class AccountService(private val context: Context) {
     }
 
 
+    fun resetPassword(jsonObject: JSONObject, onRessetPasswordComplete: onResetPasswordComplete) {
+        val apiRequest = ApiRequest(context)
+        apiRequest.request(ApiRequest.POST, Urls.RESET_PASSWORD, jsonObject, false, object : ApiRequest.onDataReceived {
+            override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
+                onRessetPasswordComplete.onComplete(status, message)
+            }
+        })
+
+    }
+
+
+
+
     interface onLoginComplete {
         fun onComplete(status: Int, message: String, token: String, user: User)
     }
@@ -94,6 +107,11 @@ class AccountService(private val context: Context) {
 
     interface onRegisterComplete {
         fun onComplete(status: Int, message: String, token: String, user: User)
+    }
+
+
+    interface onResetPasswordComplete {
+        fun onComplete(status: Int, message: String)
     }
 
 

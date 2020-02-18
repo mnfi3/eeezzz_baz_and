@@ -41,6 +41,7 @@ object Urls {
     val USER = AppConfig.MAIN_URL + "/user"
     val LOGOUT = AppConfig.MAIN_URL + "/logout"
     val LOGIN_CHECK = AppConfig.MAIN_URL + "/login-check"
+    val RESET_PASSWORD = AppConfig.MAIN_URL + "/reset-password"
 
     //password reset
     val PASSWORD_RESET = "/password/reset"

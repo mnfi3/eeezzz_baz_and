@@ -41,6 +41,8 @@ class ActivityMobile : AppCompatActivity() {
             avl_mobile.visibility = View.VISIBLE
             if (target == "register"){
                 getRegisterCode()
+            }else if(target == "reset-password"){
+                getPasswordResetCode()
             }
         }
 
@@ -86,8 +88,8 @@ class ActivityMobile : AppCompatActivity() {
         val onSendCodeComplete = object : VerificationCodeService.onSendCodeComplete{
             override fun onComplete(status: Int, message: String) {
                 avl_mobile.visibility = View.GONE
-                if(status == 0) MyViews.makeText(this@ActivityMobile, message, Toast.LENGTH_SHORT)
-                else {
+                MyViews.makeText(this@ActivityMobile, message, Toast.LENGTH_SHORT)
+                if(status == 1) {
                    var intent = Intent(this@ActivityMobile, ActivityVerificationCode::class.java)
                     intent.putExtra("MOBILE", mobile)
                     intent.putExtra("TARGET", target)
@@ -101,8 +103,24 @@ class ActivityMobile : AppCompatActivity() {
 
 
 
-    private fun getPasswordRessetCode(){
+    private fun getPasswordResetCode(){
+        var service = VerificationCodeService(this@ActivityMobile)
+        var json = JSONObject()
+        json.put("mobile", mobile)
+        val onSendCodeComplete = object : VerificationCodeService.onSendCodeComplete{
+            override fun onComplete(status: Int, message: String) {
+                avl_mobile.visibility = View.GONE
+                MyViews.makeText(this@ActivityMobile, message, Toast.LENGTH_SHORT)
+                if(status == 1) {
+                    var intent = Intent(this@ActivityMobile, ActivityVerificationCode::class.java)
+                    intent.putExtra("MOBILE", mobile)
+                    intent.putExtra("TARGET", target)
+                    startActivity(intent)
+                }
+            }
+        }
 
+        service.requestPasswordRessetCode(json, onSendCodeComplete);
     }
 
 
