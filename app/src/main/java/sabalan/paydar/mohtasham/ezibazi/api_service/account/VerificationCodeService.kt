@@ -36,8 +36,12 @@ class VerificationCodeService (private val context: Context)
                 if (error){
                     onVerifyCodeComplete.onComplete(status, message, VerificationCode())
                 }else{
-                    var json = response!!.getJSONObject("data").getJSONObject("verification_code")
-                    var vc = VerificationCode.Parser.parse(json)
+                    var vc = VerificationCode()
+                    if(status == 1){
+                        var json = response!!.getJSONObject("data")
+                        json = json.getJSONObject("verification_code")
+                        vc = VerificationCode.Parser.parse(json)
+                    }
                     onVerifyCodeComplete.onComplete(status, message, vc)
                 }
             }

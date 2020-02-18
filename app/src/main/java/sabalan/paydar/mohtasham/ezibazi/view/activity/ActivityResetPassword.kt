@@ -28,7 +28,7 @@ class ActivityResetPassword : AppCompatActivity() {
             token = extras.getString("TOKEN")
         }
 
-        txt_page_name.text = "ایجاد حساب کاربری"
+        txt_page_name.text = "بروزرسانی رمز عبور"
 
         img_back.setOnClickListener { this@ActivityResetPassword.finish() }
 
