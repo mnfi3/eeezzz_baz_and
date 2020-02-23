@@ -142,15 +142,27 @@
 
                         <Button
                             android:id="@+id/btn_charge_account"
-                            android:layout_width="150dp"
+                            android:layout_width="130dp"
                             android:layout_height="match_parent"
-                            android:text="شارژ حساب کاربری"
+                            android:text="شارژ حساب"
                             android:textColor="@color/main_text_color"
                             android:background="@drawable/back_list_game_price"
-                            android:textSize="@dimen/font_size_medium"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="2dp"
+                            android:textSize="@dimen/font_size_small"
+                            android:layout_margin="3dp"
                             />
+
+
+
+                        <Button
+                          android:id="@+id/btn_settlement"
+                          android:layout_width="130dp"
+                          android:layout_height="match_parent"
+                          android:text="تسویه حساب"
+                          android:textColor="@color/main_text_color"
+                          android:background="@drawable/back_button_register"
+                          android:textSize="@dimen/font_size_small"
+                          android:layout_margin="3dp"
+                          />
 
 
 

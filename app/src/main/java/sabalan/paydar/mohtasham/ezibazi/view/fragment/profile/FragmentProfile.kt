@@ -1,6 +1,5 @@
 package sabalan.paydar.mohtasham.ezibazi.view.fragment.profile
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -12,23 +11,14 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SwitchCompat
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CompoundButton
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
-
+import android.widget.*
 import com.wang.avi.AVLoadingIndicatorView
 import me.leolin.shortcutbadger.ShortcutBadger
-
 import org.json.JSONException
 import org.json.JSONObject
-
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.AccountService
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.LoginCheckerService
@@ -38,7 +28,6 @@ import sabalan.paydar.mohtasham.ezibazi.api_service.ticket.TicketService
 import sabalan.paydar.mohtasham.ezibazi.model.Finance
 import sabalan.paydar.mohtasham.ezibazi.model.User
 import sabalan.paydar.mohtasham.ezibazi.system.application.G
-import sabalan.paydar.mohtasham.ezibazi.system.auth.Auth
 import sabalan.paydar.mohtasham.ezibazi.system.config.AppConfig
 import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText
 import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.SettingPrefManager
@@ -47,6 +36,7 @@ import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityLogin
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityMenu
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityTicket
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
+import sabalan.paydar.mohtasham.ezibazi.view.fragment.activity.ActivitySettlement
 
 
 class FragmentProfile : Fragment() {
@@ -61,6 +51,7 @@ class FragmentProfile : Fragment() {
     internal lateinit var txt_user_balance: TextView
     internal lateinit var txt_show_user_balance: TextView
     internal lateinit var btn_charge_account: Button
+    internal lateinit var btn_settlement: Button
     internal lateinit var txt_ticket: TextView
     internal lateinit var txt_logout: TextView
     internal lateinit var txt_show_admin_accounts: TextView
@@ -154,6 +145,11 @@ class FragmentProfile : Fragment() {
             }
         }
 
+        btn_settlement.setOnClickListener {
+            val intent = Intent(context, ActivitySettlement::class.java)
+            startActivity(intent)
+        }
+
 
 
         btn_login.setOnClickListener {
@@ -214,6 +210,7 @@ class FragmentProfile : Fragment() {
         txt_user_balance = view.findViewById(R.id.txt_user_balance)
         txt_show_user_balance = view.findViewById(R.id.txt_show_user_balance)
         btn_charge_account = view.findViewById(R.id.btn_charge_account)
+        btn_settlement = view.findViewById(R.id.btn_settlement)
         txt_ticket = view.findViewById(R.id.txt_ticket)
         txt_logout = view.findViewById(R.id.txt_logout)
         txt_show_admin_accounts = view.findViewById(R.id.txt_show_admin_accounts)
@@ -239,6 +236,7 @@ class FragmentProfile : Fragment() {
         txt_user_balance.typeface = MyViews.getIranSansLightFont(context!!)
         txt_show_user_balance.typeface = MyViews.getIranSansLightFont(context!!)
         btn_charge_account.typeface = MyViews.getIranSansLightFont(context!!)
+        btn_settlement.typeface = MyViews.getIranSansLightFont(context!!)
         txt_ticket.typeface = MyViews.getIranSansLightFont(context!!)
         txt_logout.typeface = MyViews.getIranSansLightFont(context!!)
         txt_show_admin_accounts.typeface = MyViews.getIranSansLightFont(context!!)

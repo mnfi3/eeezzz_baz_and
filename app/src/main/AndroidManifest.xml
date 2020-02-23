@@ -24,6 +24,8 @@
     android:supportsRtl="false"
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true">
+    <activity android:name=".view.fragment.activity.ActivitySettlement">
+    </activity>
     <activity android:name=".view.activity.ActivityResetPassword">
     </activity>
     <activity android:name=".view.activity.ActivityMobile">

@@ -97,6 +97,10 @@ object Urls {
 
 
 
+    //settlement
+    val LAST_SETTLEMENT = AppConfig.MAIN_URL + "/last-settlement"
+    val SETTLEMENT_REQUEST = AppConfig.MAIN_URL + "/settlement-request"
+
 
 
 

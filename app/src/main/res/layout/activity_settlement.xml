@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  android:id="@+id/lyt_root"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".view.activity.ActivityLogin"
+  android:background="@color/colorPrimary"
+  android:orientation="vertical"
+  >
+
+
+  <include layout="@layout/toolbar_public"/>
+
+  <android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:gravity="center_horizontal"
+      android:padding="10dp"
+      android:layout_margin="10dp"
+      android:background="@drawable/back_profile_user_detail">
+
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="55dp"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_margin="10dp">
+
+
+
+
+          <EditText
+            android:id="@+id/edt_owner_name"
+            android:layout_width="0dp"
+            android:layout_weight=".7"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:hint="نام دارنده حساب را وارد کنید"
+            android:layout_margin="20dp"
+            android:background="@drawable/back_search_edit_text"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/main_text_color"
+            android:textColorHint="@color/main_text_color"
+            />
+
+          <TextView
+            android:id="@+id/txt_owner_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:text="نام دارنده حساب"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"/>
+
+        </LinearLayout>
+
+        <TextView
+          android:id="@+id/txt_field_message"
+          android:layout_width="match_parent"
+          android:layout_height="30dp"
+          android:text=" * حداقل یکی از فیلد های زیر را با دقت وارد کنید"
+          android:textColor="@color/main_danger_color"
+          android:layout_margin="10dp"
+          android:gravity="center_vertical"
+          android:textSize="@dimen/font_size_medium"/>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="55dp"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_margin="10dp">
+
+
+
+
+          <EditText
+            android:id="@+id/edt_card_number"
+            android:layout_width="0dp"
+            android:layout_weight=".7"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:hint="شماره کارت را وارد کنید"
+            android:layout_margin="20dp"
+            android:background="@drawable/back_search_edit_text"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/main_text_color"
+            android:textColorHint="@color/main_text_color"
+            android:inputType="number"
+            />
+
+          <TextView
+            android:id="@+id/txt_card_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:text="شماره کارت"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="55dp"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_margin="10dp">
+
+
+
+
+          <EditText
+            android:id="@+id/edt_account_number"
+            android:layout_width="0dp"
+            android:layout_weight=".7"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:hint="شماره حساب را وارد کنید"
+            android:layout_margin="20dp"
+            android:background="@drawable/back_search_edit_text"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/main_text_color"
+            android:textColorHint="@color/main_text_color"
+            android:inputType="number"
+            />
+
+          <TextView
+            android:id="@+id/txt_account_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:text="شماره حساب"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="55dp"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_margin="10dp">
+
+
+
+
+          <EditText
+            android:id="@+id/edt_shba_number"
+            android:layout_width="0dp"
+            android:layout_weight=".7"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:hint="شماره شبا را وارد کنید"
+            android:layout_margin="20dp"
+            android:background="@drawable/back_search_edit_text"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/main_text_color"
+            android:textColorHint="@color/main_text_color"
+            android:inputType="number"
+            />
+
+          <TextView
+            android:id="@+id/txt_shba_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:text="شماره شبا"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/font_size_small"/>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+
+
+
+      <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avl_loading"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+
+        />
+
+      <Button
+        android:id="@+id/btn_settlement"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:text="ثبت درخواست"
+        android:textSize="@dimen/font_size_small"
+        android:textColor="@color/main_text_color"
+        android:background="@drawable/back_button_register"
+        android:layout_margin="20dp"/>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+  </android.support.v4.widget.NestedScrollView>
+
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+

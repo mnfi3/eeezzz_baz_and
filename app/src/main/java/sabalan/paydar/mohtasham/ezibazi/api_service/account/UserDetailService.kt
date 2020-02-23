@@ -58,9 +58,8 @@ class UserDetailService(private val context: Context) {
                     return
                 }
 
-                var finance = Finance()
                 try {
-                    finance = Finance.Parser.parse(response!!.getJSONObject("data"))
+                    val finance = Finance.Parser.parse(response!!.getJSONObject("data"))
                     onFinanceReceivedComplete.onComplete(status, message, finance)
                 } catch (e: JSONException) {
                     e.printStackTrace()

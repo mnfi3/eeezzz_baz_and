@@ -4,30 +4,18 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.core.CrashlyticsCore
 import com.google.firebase.analytics.FirebaseAnalytics
-
-import sabalan.paydar.mohtasham.ezibazi.BuildConfig
-
 import io.fabric.sdk.android.Fabric
-import org.json.JSONObject
-import sabalan.paydar.mohtasham.ezibazi.api_service.ApiRequest
-import sabalan.paydar.mohtasham.ezibazi.api_service.account.AccountService
+import sabalan.paydar.mohtasham.ezibazi.BuildConfig
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.LoginCheckerService
-
 import sabalan.paydar.mohtasham.ezibazi.api_service.main.RentService
-import sabalan.paydar.mohtasham.ezibazi.system.auth.Auth
-import sabalan.paydar.mohtasham.ezibazi.system.hardware.ConnectivityListener
-import sabalan.paydar.mohtasham.ezibazi.system.hardware.Storage
-import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.CityPrefManager
-import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.UserPrefManager
 import sabalan.paydar.mohtasham.ezibazi.model.RentType
 import sabalan.paydar.mohtasham.ezibazi.model.User
-import kotlin.math.log
+import sabalan.paydar.mohtasham.ezibazi.system.hardware.ConnectivityListener
+import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.CityPrefManager
 
 
 class G : Application() {
@@ -84,7 +72,7 @@ class G : Application() {
 
     private fun setFakeCity() {
         //    new CityPrefManager(context).setCityId(AppConfig.DEFAULT_CITY_ID);
-        CityPrefManager(context).cityId = 329
+        CityPrefManager(context).cityId = 14
     }
 
 

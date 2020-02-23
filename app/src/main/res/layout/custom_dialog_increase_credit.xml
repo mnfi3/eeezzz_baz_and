@@ -53,6 +53,19 @@
         />
 
 
+    <com.wang.avi.AVLoadingIndicatorView
+      android:id="@+id/avl_pay"
+      android:layout_width="36dp"
+      android:layout_height="36dp"
+      app:indicatorName="LineSpinFadeLoaderIndicator"
+      app:indicatorColor="@color/colorAccent"
+      android:layout_marginTop="10dp"
+      android:layout_marginBottom="10dp"
+      android:layout_gravity="center_horizontal"
+      android:visibility="gone"
+
+      />
+
     <Button
         android:id="@+id/btn_go_to_bank"
         android:layout_width="120dp"
@@ -62,20 +75,9 @@
         android:textSize="@dimen/font_size_small"
         android:textColor="@color/main_text_color"
         android:background="@drawable/back_button_increase_credit"
-        android:layout_marginBottom="20dp"/>
+        android:layout_margin="20dp"/>
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/avl_pay"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        app:indicatorName="LineSpinFadeLoaderIndicator"
-        app:indicatorColor="@color/colorAccent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_gravity="center_horizontal"
-        android:visibility="invisible"
 
-        />
 
 
 
