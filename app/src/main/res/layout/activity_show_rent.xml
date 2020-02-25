@@ -239,6 +239,8 @@
                        android:padding="12dp"
                        />
 
+
+
                    <TextView
                        android:id="@+id/txt_detail_release_date"
                        android:layout_width="48dp"

@@ -64,7 +64,7 @@ class ActivitySettlement : AppCompatActivity() {
 
         service.requestSettlement(json, object :SettlementService.onSettlementRequestComplete{
             override fun onComplete(status: Int, message: String, settlement: Settlement) {
-                MyViews.makeText(this@ActivitySettlement, message, Toast.LENGTH_SHORT)
+                MyViews.makeText(this@ActivitySettlement, message, Toast.LENGTH_LONG)
                 avl_loading.visibility = View.GONE
                 if(status == 1){
                     this@ActivitySettlement.finish()

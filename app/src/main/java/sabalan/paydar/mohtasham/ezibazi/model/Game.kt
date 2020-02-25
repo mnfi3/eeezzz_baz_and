@@ -15,6 +15,7 @@ class Game {
     var production_date: String? = null
     var region: String? = null
     var count: Int = 0
+    var is_second_hand = 0
     private var can_play_online: Int = 0
     var company_name: String? = null
     var description: String? = null
@@ -39,6 +40,7 @@ class Game {
 //                game.setIs_pending(jsonObject.getInt("is_pending"))
                 game.region = jsonObject.getString("region")
                 game.count = jsonObject.getInt("count")
+                game.is_second_hand = jsonObject.getInt("is_second_hand")
 
                 //game_info
                 game.name = game_info_obj.getString("name")

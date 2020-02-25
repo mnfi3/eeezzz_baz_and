@@ -1,27 +1,19 @@
 package sabalan.paydar.mohtasham.ezibazi.view.activity
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.content.IntentFilter
-import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.text.Html
 import android.view.View
-import android.view.WindowManager
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import android.widget.VideoView
-
-
+import android.widget.*
 import com.daimajia.slider.library.Animations.DescriptionAnimation
 import com.daimajia.slider.library.SliderLayout
 import com.daimajia.slider.library.SliderTypes.BaseSliderView
@@ -29,7 +21,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView
 import com.makeramen.roundedimageview.RoundedImageView
 import com.ms.square.android.expandabletextview.ExpandableTextView
 import com.squareup.picasso.Picasso
-
+import kotlinx.android.synthetic.main.part_show_game_media.*
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.main.RentService
 import sabalan.paydar.mohtasham.ezibazi.model.Game
@@ -58,14 +50,11 @@ class ActivityShowRent : AppCompatActivity() {
     internal lateinit var txt_console: TextView
     internal lateinit var txt_genres: TextView
     internal lateinit var txt_show_genres: TextView
-    internal lateinit var txt_release_date: TextView
-    internal lateinit var txt_rate: TextView
     internal lateinit var txt_detail_age_class: TextView
     internal lateinit var txt_region: TextView
     internal lateinit var txt_show_region: TextView
     internal lateinit var img_detail_console_icon: RoundedImageView
     internal lateinit var txt_detail_release_date: TextView
-    internal lateinit var img_rate_star: ImageView
     internal lateinit var expand_text_view: ExpandableTextView
 
     internal var game: Game? = null
@@ -176,9 +165,6 @@ class ActivityShowRent : AppCompatActivity() {
         txt_console = findViewById<View>(R.id.txt_console) as TextView
         txt_genres = findViewById<View>(R.id.txt_genres) as TextView
         txt_show_genres = findViewById<View>(R.id.txt_show_genres) as TextView
-        txt_release_date = findViewById<View>(R.id.txt_release_date) as TextView
-        txt_rate = findViewById<View>(R.id.txt_rate) as TextView
-        img_rate_star = findViewById<View>(R.id.img_rate_star) as ImageView
         txt_region = findViewById(R.id.txt_region)
         txt_show_region = findViewById(R.id.txt_show_region)
 
@@ -204,7 +190,6 @@ class ActivityShowRent : AppCompatActivity() {
     private fun setTypeFace() {
         txt_page_name.typeface = MyViews.getRobotoRegularFont(this@ActivityShowRent)
         txt_name.typeface = MyViews.getRobotoRegularFont(this@ActivityShowRent)
-        txt_rate.typeface = MyViews.getRobotoLightFont(this@ActivityShowRent)
         txt_region.typeface = MyViews.getRobotoLightFont(this@ActivityShowRent)
         txt_show_region.typeface = MyViews.getRobotoLightFont(this@ActivityShowRent)
         txt_show_genres.typeface = MyViews.getIranSansLightFont(this@ActivityShowRent)
@@ -273,12 +258,13 @@ class ActivityShowRent : AppCompatActivity() {
 
         var genres = ""
         for (i in 0 until game!!.genres!!.size) {
-            genres += game!!.genres!![i]
+            genres += game!!.genres!![i] + ","
         }
         txt_genres.text = genres
-        txt_release_date.text = "تاریخ عرضه: " + game!!.production_date!!
-        //    txt_rate.setText("rate : 4.6");
         txt_region.text = game!!.region
+        if(game!!.is_second_hand == 1) txt_second_hand.text = "خیر"
+        else  txt_second_hand.text = "بله"
+
 
         val cover_image = game!!.app_cover_photo_url
         Picasso.with(this@ActivityShowRent).load(cover_image)

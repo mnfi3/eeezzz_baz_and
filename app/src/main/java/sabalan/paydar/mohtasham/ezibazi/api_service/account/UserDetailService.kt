@@ -79,7 +79,7 @@ class UserDetailService(private val context: Context) {
                     return
                 }
 
-                var address: Address? = null
+                var address = Address()
                 if (status == 1) {
                     try {
                         address = Address.Parser.parse(response!!.getJSONObject("data"))

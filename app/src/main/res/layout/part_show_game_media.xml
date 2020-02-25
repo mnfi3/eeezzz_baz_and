@@ -24,8 +24,6 @@
 
 
         <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/lyt_game_info_head"
             android:layout_width="match_parent"
             android:layout_height="@dimen/show_detail_media_height"
@@ -99,96 +97,143 @@
                 />
 
 
-            <TextView
-                android:id="@+id/txt_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/vdo_game"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="-65dp"
-                android:padding="5dp"
-                tools:text="Portal2"
-                android:textColor="@color/main_text_color"
-                android:textSize="@dimen/font_size_large"
-                android:textStyle="bold"/>
-
-
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/txt_name"
-                >
-
-                <ImageView
-                    android:id="@+id/img_rate_star"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="5dp"
-                    android:adjustViewBounds="true"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_star"
-                    android:visibility="gone"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/main_text_color"
-                    android:textSize="@dimen/font_size_medium"
-                    tools:text="rate : 4.6"
-                    android:visibility="gone"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_show_region"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/main_text_color"
-                    android:textSize="@dimen/font_size_medium"
-                    android:text=" Region : "
-                    android:layout_marginLeft="10dp"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_region"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/main_text_color"
-                    android:textSize="@dimen/font_size_medium"
-                    tools:text="all"
-                    />
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:layout_alignParentBottom="true"
+              >
 
 
                 <TextView
-                    android:id="@+id/txt_show_genres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_toEndOf="@+id/txt_rate"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/main_text_color"
-                    android:textSize="@dimen/font_size_medium"
-                    android:visibility="visible"
-                    android:text=" Genres : "/>
+                  android:id="@+id/txt_name"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:padding="5dp"
+                  tools:text="Portal2"
+                  android:textColor="@color/main_text_color"
+                  android:textSize="@dimen/font_size_large"
+                  android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_genres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_toEndOf="@+id/txt_rate"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/main_text_color"
-                    android:textSize="@dimen/font_size_medium"
-                    android:visibility="visible"
-                    tools:text="shooter"/>
+
+
+                <LinearLayout
+                  android:id="@+id/lyt_genres"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="left"
+                  >
+
+
+
+
+
+                    <TextView
+                      android:id="@+id/txt_genres"
+                      android:layout_width="wrap_content"
+                      android:layout_height="24dp"
+                      android:layout_marginStart="5dp"
+                      android:gravity="center_vertical"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_medium"
+                      android:visibility="visible"
+                      tools:text="جنگی استراتژیک"/>
+
+
+                    <TextView
+                      android:id="@+id/txt_show_genres"
+                      android:layout_width="wrap_content"
+                      android:layout_height="24dp"
+                      android:gravity="center_vertical"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_medium"
+                      android:visibility="visible"
+                      android:text="ژانر : "/>
+
+                    <TextView
+                      android:id="@+id/txt_region"
+                      android:layout_width="wrap_content"
+                      android:layout_height="24dp"
+                      android:layout_marginStart="50dp"
+                      android:gravity="center_vertical"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_medium"
+                      tools:text="همه"
+                      />
+
+
+
+                    <TextView
+                      android:id="@+id/txt_show_region"
+                      android:layout_width="wrap_content"
+                      android:layout_height="24dp"
+                      android:gravity="center_vertical"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_medium"
+                      android:text="ریجن : "
+                      />
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+                <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  >
+
+                    <TextView
+                      android:id="@+id/txt_console"
+                      android:layout_width="wrap_content"
+                      android:layout_height="24dp"
+                      android:layout_marginStart="5dp"
+                      android:gravity="center_vertical"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_medium"
+                      android:visibility="visible"
+                      tools:text="پلی استیشن 1"/>
+
+                    <TextView
+                      android:id="@+id/txt_show_console"
+                      android:layout_width="wrap_content"
+                      android:layout_height="24dp"
+                      android:gravity="center_vertical"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_medium"
+                      android:visibility="visible"
+                      android:text="کنسول : "/>
+
+                    <TextView
+                      android:id="@+id/txt_second_hand"
+                      android:layout_width="wrap_content"
+                      android:layout_height="24dp"
+                      android:layout_marginStart="50dp"
+                      android:gravity="center_vertical"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_medium"
+                      android:visibility="visible"
+                      tools:text="خیر"/>
+
+                    <TextView
+                      android:id="@+id/txt_show_second_hand"
+                      android:layout_width="wrap_content"
+                      android:layout_height="24dp"
+                      android:gravity="center_vertical"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_medium"
+                      android:visibility="visible"
+                      android:text="آکبند : "/>
+
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -200,31 +245,12 @@
 
 
 
-            <TextView
-                android:id="@+id/txt_console"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_margin="3dp"
-                android:background="#8f000000"
-                android:padding="5dp"
-                android:text="PS3"
-                android:textColor="@color/main_text_color"
-                android:textSize="@dimen/font_size_small"
-                android:visibility="gone"/>
 
 
-            <TextView
-                android:id="@+id/txt_release_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:padding="5dp"
-                android:text="release date : 2018-05-09"
-                android:textColor="@color/gray_text_color"
-                android:textSize="@dimen/font_size_small"
-                android:visibility="gone"/>
+
+
+
+
 
 
         </RelativeLayout>
