@@ -24,7 +24,7 @@ class Game {
     var genres: ArrayList<String>? = null
     var console_name: String? = null
     var app_main_photos_url: ArrayList<String>? = null
-    var app_cover_photo_url: String? = null
+    var app_cover_photo_url: String? = ""
 
     object Parser {
 

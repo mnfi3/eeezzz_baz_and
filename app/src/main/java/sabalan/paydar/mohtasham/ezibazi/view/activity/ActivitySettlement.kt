@@ -1,4 +1,4 @@
-package sabalan.paydar.mohtasham.ezibazi.view.fragment.activity
+package sabalan.paydar.mohtasham.ezibazi.view.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

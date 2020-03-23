@@ -9,10 +9,10 @@ import kotlinx.android.synthetic.main.activity_mobile.btn_ok
 import kotlinx.android.synthetic.main.activity_verification_code.*
 import kotlinx.android.synthetic.main.question.*
 import org.json.JSONObject
-import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.VerificationCodeService
 import sabalan.paydar.mohtasham.ezibazi.model.VerificationCode
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
+
 
 class ActivityVerificationCode : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class ActivityVerificationCode : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_verification_code)
+        setContentView(sabalan.paydar.mohtasham.ezibazi.R.layout.activity_verification_code)
 
 
         val extras = intent.extras
@@ -35,6 +35,10 @@ class ActivityVerificationCode : AppCompatActivity() {
 
         txt_page_name.text = " کد تایید به شماره " + mobile + " ارسال شد "
         img_back.setOnClickListener {
+            var intent = Intent(this@ActivityVerificationCode, ActivityMobile::class.java)
+            intent.putExtra("TARGET", target)
+            intent.putExtra("MOBILE", mobile)
+            startActivity(intent)
             this@ActivityVerificationCode.finish();
         }
 
@@ -47,12 +51,22 @@ class ActivityVerificationCode : AppCompatActivity() {
                     validateRegisterCode()
                 } else if (target == "reset-password") {
                     validatePasswordResetCode()
+                }else if (target == "settlement") {
+                    validateSettlementCode()
                 }
             }
         }
 
 
 
+    }
+
+    override fun onBackPressed() {
+        var intent = Intent(this@ActivityVerificationCode, ActivityMobile::class.java)
+        intent.putExtra("TARGET", target)
+        intent.putExtra("MOBILE", mobile)
+        startActivity(intent)
+        this@ActivityVerificationCode.finish();
     }
 
     private fun validateCode(): Boolean{
@@ -94,6 +108,26 @@ class ActivityVerificationCode : AppCompatActivity() {
                 MyViews.makeText(this@ActivityVerificationCode, message, Toast.LENGTH_SHORT)
                 if(status == 1) {
                     var intent = Intent(this@ActivityVerificationCode, ActivityResetPassword::class.java)
+                    intent.putExtra("MOBILE", mobile)
+                    intent.putExtra("TOKEN", vc.token)
+                    startActivity(intent)
+                }
+            }
+        }
+        service.verifyCode(json, onVerifyCodeComplete);
+    }
+
+    private fun validateSettlementCode(){
+        var service = VerificationCodeService(this@ActivityVerificationCode)
+        var json = JSONObject()
+        json.put("mobile", mobile)
+        json.put("code", code)
+        val onVerifyCodeComplete = object : VerificationCodeService.onVerifyCodeComplete{
+            override fun onComplete(status: Int, message: String, vc: VerificationCode) {
+                avl_code.visibility = View.GONE
+                MyViews.makeText(this@ActivityVerificationCode, message, Toast.LENGTH_SHORT)
+                if(status == 1) {
+                    var intent = Intent(this@ActivityVerificationCode, ActivitySettlement::class.java)
                     intent.putExtra("MOBILE", mobile)
                     intent.putExtra("TOKEN", vc.token)
                     startActivity(intent)

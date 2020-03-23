@@ -11,8 +11,10 @@ class RentRequest {
     var game_price: Int = 0
     var rent_price: Int = 0
     var is_sent: Int = 0
-    var is_success: Int = 0
+//    var is_delivered: Int = 0
+    var is_delivered: Int = 0
     var is_finish: Int = 0
+    var is_returned: Int = 0
     var finished_at: String? = null
     var created_at: String? = null
     var rent_day_count: Int = 0
@@ -30,8 +32,9 @@ class RentRequest {
                 request.game_price = `object`.getInt("game_price")
                 request.rent_price = `object`.getInt("rent_price")
                 request.is_sent = `object`.getInt("is_sent")
-                request.is_success = `object`.getInt("is_success")
+                request.is_delivered = `object`.getInt("is_delivered")
                 request.is_finish = `object`.getInt("is_finish")
+                request.is_returned = `object`.getInt("is_returned")
                 request.finished_at = `object`.getString("finished_at")
                 request.created_at = `object`.getString("created_at")
                 request.rent_day_count = `object`.getJSONObject("rent_type").getInt("day_count")

@@ -34,9 +34,9 @@ import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.SettingPrefManager
 import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.UserPrefManager
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityLogin
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityMenu
+import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityMobile
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityTicket
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
-import sabalan.paydar.mohtasham.ezibazi.view.fragment.activity.ActivitySettlement
 
 
 class FragmentProfile : Fragment() {
@@ -146,7 +146,11 @@ class FragmentProfile : Fragment() {
         }
 
         btn_settlement.setOnClickListener {
-            val intent = Intent(context, ActivitySettlement::class.java)
+//            val intent = Intent(context, ActivitySettlement::class.java)
+//            startActivity(intent)
+
+            val intent = Intent(context, ActivityMobile::class.java)
+            intent.putExtra("TARGET", "settlement");
             startActivity(intent)
         }
 

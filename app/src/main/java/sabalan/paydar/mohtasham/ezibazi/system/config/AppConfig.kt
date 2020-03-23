@@ -7,8 +7,8 @@ object AppConfig {
 //      val MAIN_URL="http://ittiktak.ir/public/api";
     //  val MAIN_URL="http://localhost/izi-bazi.ud/api";
     //  val MAIN_URL="http://ezibazi.com/webservice/public/api";
-//      val MAIN_URL="http://ittiktak.ir/public/api";
-    val MAIN_URL = "http://192.168.30.24:8080/izibazi/api"
+      val MAIN_URL="https://easybazi.ir/api";
+//    val MAIN_URL = "http://192.168.30.24:8080/izibazi/api"
 
 
     val DEFAULT_CITY_ID = 14//TABRIZ

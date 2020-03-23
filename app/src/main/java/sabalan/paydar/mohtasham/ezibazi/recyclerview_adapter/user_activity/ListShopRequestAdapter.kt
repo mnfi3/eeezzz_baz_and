@@ -9,14 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
-
 import sabalan.paydar.mohtasham.ezibazi.R
+import sabalan.paydar.mohtasham.ezibazi.model.ShopRequest
 import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperDate
 import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText
-import sabalan.paydar.mohtasham.ezibazi.model.ShopRequest
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityShowShop
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 
@@ -30,14 +28,17 @@ class ListShopRequestAdapter(private val context: Context, private val requests:
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val request = requests[position]
-        val image_url = request.game!!.app_cover_photo_url
-        Picasso.with(context).load(image_url)
-                //      .noFade()
-                //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                //      .skipMemoryCache()
-                //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
-                //.error(context.getResources().getDrawable(R.drawable.default_no_image))
-                .into(holder.img_game)
+        if(request.game == null) return;
+        if(request.game!!.app_cover_photo_url!!.length > 0) {
+            val image_url = request.game!!.app_cover_photo_url
+            Picasso.with(context).load(image_url)
+                    //      .noFade()
+                    //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                    //      .skipMemoryCache()
+                    //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
+                    //.error(context.getResources().getDrawable(R.drawable.default_no_image))
+                    .into(holder.img_game)
+        }
 
         holder.txt_name.text = request.game!!.name
         //      holder.txt_release_date.setText("تاریخ ارائه : " + game.getProduction_date());
@@ -48,11 +49,11 @@ class ListShopRequestAdapter(private val context: Context, private val requests:
 
         if (request.is_finish === 1) {
             holder.txt_status.text = "تمام شده"
-        } else if (request.is_finish === 0 && request.is_success === 1) {
+        } else if (request.is_finish === 0 && request.is_delivered === 1) {
             holder.txt_status.text = "دریافت شده"
-        } else if (request.is_finish === 0 && request.is_success === 0 && request.is_sent === 1) {
+        } else if (request.is_finish === 0 && request.is_delivered === 0 && request.is_sent === 1) {
             holder.txt_status.text = "ارسال شده"
-        } else if (request.is_finish === 0 && request.is_success === 0 && request.is_sent === 0) {
+        } else if (request.is_finish === 0 && request.is_delivered === 0 && request.is_sent === 0) {
             holder.txt_status.text = "در حال ارسال"
         }
 

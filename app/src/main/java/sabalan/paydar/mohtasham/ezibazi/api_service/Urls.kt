@@ -54,6 +54,7 @@ object Urls {
 
     val VERIFICATION_CODE_REGISTER = AppConfig.MAIN_URL + "/verification/code-request/register"
     val VERIFICATION_CODE_RESET_PASSWORD = AppConfig.MAIN_URL + "/verification/code-request/reset-password"
+    val VERIFICATION_CODE_SETLLEMENT_REQUEST = AppConfig.MAIN_URL + "/verification/code-request/settlement"
     val VERIFICATION_CODE_VERIFY = AppConfig.MAIN_URL + "/verification/code-verify"
 
     //===verification code===//

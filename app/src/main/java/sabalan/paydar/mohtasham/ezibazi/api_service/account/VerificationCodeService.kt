@@ -29,6 +29,18 @@ class VerificationCodeService (private val context: Context)
 
     }
 
+
+
+    fun requestSettlementCode(jsonObject: JSONObject, onSendCodeComplete: onSendCodeComplete) {
+        val apiRequest = ApiRequest(context)
+        apiRequest.request(ApiRequest.GET, Urls.VERIFICATION_CODE_SETLLEMENT_REQUEST, jsonObject, false, object : ApiRequest.onDataReceived {
+            override fun onReceived(response: JSONObject?, status: Int, message: String, error: Boolean) {
+                onSendCodeComplete.onComplete(status, message)
+            }
+        })
+
+    }
+
     fun verifyCode(jsonObject: JSONObject, onVerifyCodeComplete: onVerifyCodeComplete) {
         val apiRequest = ApiRequest(context)
         apiRequest.request(ApiRequest.POST, Urls.VERIFICATION_CODE_VERIFY, jsonObject, false, object : ApiRequest.onDataReceived {

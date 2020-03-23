@@ -27,6 +27,9 @@ class ActivityMobile : AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             target = extras.getString("TARGET")
+            if (extras.getString("MOBILE") != null){
+                edt_mobile.setText(extras.getString("MOBILE"))
+            }
         }
 
 
@@ -43,6 +46,8 @@ class ActivityMobile : AppCompatActivity() {
                 getRegisterCode()
             }else if(target == "reset-password"){
                 getPasswordResetCode()
+            }else if(target == "settlement"){
+                getSettlementCode()
             }
         }
 
@@ -94,6 +99,7 @@ class ActivityMobile : AppCompatActivity() {
                     intent.putExtra("MOBILE", mobile)
                     intent.putExtra("TARGET", target)
                     startActivity(intent)
+                    this@ActivityMobile.finish()
                 }
             }
         }
@@ -116,6 +122,7 @@ class ActivityMobile : AppCompatActivity() {
                     intent.putExtra("MOBILE", mobile)
                     intent.putExtra("TARGET", target)
                     startActivity(intent)
+                    this@ActivityMobile.finish()
                 }
             }
         }
@@ -123,6 +130,26 @@ class ActivityMobile : AppCompatActivity() {
         service.requestPasswordRessetCode(json, onSendCodeComplete);
     }
 
+
+    private fun getSettlementCode(){
+        var service = VerificationCodeService(this@ActivityMobile)
+        var json = JSONObject()
+        val onSendCodeComplete = object : VerificationCodeService.onSendCodeComplete{
+            override fun onComplete(status: Int, message: String) {
+                avl_mobile.visibility = View.GONE
+                MyViews.makeText(this@ActivityMobile, message, Toast.LENGTH_SHORT)
+                if(status == 1) {
+                    var intent = Intent(this@ActivityMobile, ActivityVerificationCode::class.java)
+                    intent.putExtra("MOBILE", mobile)
+                    intent.putExtra("TARGET", target)
+                    startActivity(intent)
+                    this@ActivityMobile.finish()
+                }
+            }
+        }
+
+        service.requestSettlementCode(json, onSendCodeComplete);
+    }
 
 
 
