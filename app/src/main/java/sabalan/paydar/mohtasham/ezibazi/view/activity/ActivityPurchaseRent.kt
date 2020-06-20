@@ -3,25 +3,18 @@ package sabalan.paydar.mohtasham.ezibazi.view.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.AppCompatButton
-import android.support.v7.widget.AppCompatSpinner
-import android.support.v7.widget.SwitchCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.widget.*
-
-import com.makeramen.roundedimageview.RoundedImageView
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.squareup.picasso.Picasso
-import com.wang.avi.AVLoadingIndicatorView
-
+import kotlinx.android.synthetic.main.activity_purchase_shop.*
+import kotlinx.android.synthetic.main.toolbar_public.*
 import org.json.JSONException
 import org.json.JSONObject
-import org.w3c.dom.Text
-
-import java.util.ArrayList
-
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.account.UserDetailService
 import sabalan.paydar.mohtasham.ezibazi.api_service.address.AddressService
@@ -29,64 +22,13 @@ import sabalan.paydar.mohtasham.ezibazi.api_service.main.RentService
 import sabalan.paydar.mohtasham.ezibazi.api_service.main.ShopService
 import sabalan.paydar.mohtasham.ezibazi.api_service.payment.RentPayService
 import sabalan.paydar.mohtasham.ezibazi.api_service.payment.ShopPayService
-import sabalan.paydar.mohtasham.ezibazi.model.Address
-import sabalan.paydar.mohtasham.ezibazi.model.City
-import sabalan.paydar.mohtasham.ezibazi.model.Finance
-import sabalan.paydar.mohtasham.ezibazi.model.Game
-import sabalan.paydar.mohtasham.ezibazi.model.RentType
-import sabalan.paydar.mohtasham.ezibazi.model.State
+import sabalan.paydar.mohtasham.ezibazi.model.*
 import sabalan.paydar.mohtasham.ezibazi.system.application.G
 import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
+import java.util.*
 
-class ActivityPurchase : AppCompatActivity() {
-
-    //center
-    internal lateinit var avl_wait: AVLoadingIndicatorView
-
-    //first block
-    internal lateinit var txt_show_product: TextView
-    internal lateinit var img_game: RoundedImageView
-    internal lateinit var txt_region: TextView
-    internal lateinit var txt_name: TextView
-    internal lateinit var txt_rent_day: TextView
-    internal lateinit var txt_game_status: TextView
-
-    //second block
-    internal lateinit var lyt_last_address: LinearLayout
-    internal lateinit var txt_show_address: TextView
-    internal lateinit var txt_last_address_show: TextView
-    internal lateinit var txt_address_text: TextView
-    internal lateinit var txt_use_last_address: TextView
-    internal lateinit var swch_use_last_address: SwitchCompat
-
-    internal lateinit var lyt_new_address: LinearLayout
-    internal lateinit var spinner_state: AppCompatSpinner
-    internal lateinit var spinner_city: AppCompatSpinner
-    internal lateinit var txt_show_state: TextView
-    internal lateinit var txt_show_city: TextView
-    internal lateinit var edt_address_content: EditText
-    internal lateinit var edt_phone_number: EditText
-    internal lateinit var edt_postcode: EditText
-    internal lateinit var btn_open_map: Button
-
-    //third block
-    internal lateinit var txt_show_payment: TextView
-    internal lateinit var txt_game_price: TextView
-    internal lateinit var txt_show_game_price: TextView
-    internal lateinit var lyt_rent_price: LinearLayout
-    internal lateinit var txt_rent_price: TextView
-    internal lateinit var txt_show_rent_price: TextView
-    internal lateinit var txt_sum_price: TextView
-    internal lateinit var txt_show_sum_price: TextView
-
-    //buttons
-    internal lateinit var btn_wallet_pay: AppCompatButton
-    internal lateinit var btn_bank_pay: AppCompatButton
-
-    //toolbar
-    lateinit var txt_page_name: TextView
-    lateinit var img_back: ImageView
+class ActivityPurchaseRent : AppCompatActivity() {
 
 
     internal var type: String? = null
@@ -117,13 +59,12 @@ class ActivityPurchase : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_purchase)
+        setContentView(R.layout.activity_purchase_rent)
 
-        setupViews()
         setTypeFace()
 
         avl_wait.visibility = View.VISIBLE
-        MyViews.freezeEnable(this@ActivityPurchase)
+        MyViews.freezeEnable(this@ActivityPurchaseRent)
 
 
         getUserLastAddress()
@@ -151,12 +92,12 @@ class ActivityPurchase : AppCompatActivity() {
             TYPE_SHOP -> setShop()
             else -> {
                 Log.i(TAG, "onCreate: " + "data error")
-                this@ActivityPurchase.finish()
+                this@ActivityPurchaseRent.finish()
             }
         }
 
         img_back.setOnClickListener {
-            this@ActivityPurchase.finish();
+            this@ActivityPurchaseRent.finish();
         }
 
 
@@ -173,7 +114,7 @@ class ActivityPurchase : AppCompatActivity() {
         }
 
         btn_open_map.setOnClickListener {
-            val intent = Intent(this@ActivityPurchase, ActivityMap::class.java)
+            val intent = Intent(this@ActivityPurchaseRent, ActivityMap::class.java)
             intent.putExtra("STATE", selected_state)
             intent.putExtra("CITY", selected_city)
             startActivityForResult(intent, 1)
@@ -185,7 +126,7 @@ class ActivityPurchase : AppCompatActivity() {
                 state_id = states[i].id
                 selected_state = states[i].name!!
                 avl_wait.visibility = View.VISIBLE
-                MyViews.freezeEnable(this@ActivityPurchase)
+                MyViews.freezeEnable(this@ActivityPurchaseRent)
                 getStateCities(state_id)
             }
 
@@ -211,7 +152,7 @@ class ActivityPurchase : AppCompatActivity() {
 
         btn_bank_pay.setOnClickListener {
             avl_wait.visibility = View.VISIBLE
-            MyViews.freezeEnable(this@ActivityPurchase)
+            MyViews.freezeEnable(this@ActivityPurchaseRent)
             if (type == TYPE_RENT) {
                 rentGameWithBank()
             } else {
@@ -223,7 +164,7 @@ class ActivityPurchase : AppCompatActivity() {
 
         btn_wallet_pay.setOnClickListener {
             avl_wait.visibility = View.VISIBLE
-            MyViews.freezeEnable(this@ActivityPurchase)
+            MyViews.freezeEnable(this@ActivityPurchaseRent)
             if (type == TYPE_RENT) {
                 rentGameWithWallet()
             } else {
@@ -234,11 +175,11 @@ class ActivityPurchase : AppCompatActivity() {
 
 
     private fun setRent() {
-        val service = RentService(this@ActivityPurchase)
+        val service = RentService(this@ActivityPurchaseRent)
         val onSpecialRentReceived = object : RentService.onSpecialRentReceived{
             override fun onReceived(status: Int, message: String, game: Game) {
                 if (status == 1) {
-                    this@ActivityPurchase.game = game
+                    this@ActivityPurchaseRent.game = game
                     rent_price = rentPrice
                     //fill rent views
                     fillViews()
@@ -253,11 +194,11 @@ class ActivityPurchase : AppCompatActivity() {
 
 
     private fun setShop() {
-        val shopService = ShopService(this@ActivityPurchase)
+        val shopService = ShopService(this@ActivityPurchaseRent)
         val onSpecialShopReceived = object : ShopService.onSpecialShopReceived{
             override fun onReceived(status: Int, message: String, game: Game) {
                 if (status == 1) {
-                    this@ActivityPurchase.game = game
+                    this@ActivityPurchaseRent.game = game
                     //fill shop views
                     fillViews()
                 }
@@ -275,7 +216,7 @@ class ActivityPurchase : AppCompatActivity() {
         }else{
             txt_page_name.text = game.name + "  خرید  "
         }
-        Picasso.with(this@ActivityPurchase).load(game.app_cover_photo_url)
+        Picasso.with(this@ActivityPurchaseRent).load(game.app_cover_photo_url)
                 //      .placeholder()
                 .into(img_game)
         txt_name.text = game.name
@@ -296,12 +237,12 @@ class ActivityPurchase : AppCompatActivity() {
 
 
     private fun getUserLastAddress() {
-        val service = UserDetailService(this@ActivityPurchase)
+        val service = UserDetailService(this@ActivityPurchaseRent)
         val onLastAddressReceived = object : UserDetailService.onLastAddressReceived{
             override fun onComplete(status: Int, message: String, address: Address?) {
                 avl_wait.visibility = View.INVISIBLE
-                MyViews.freezeDisable(this@ActivityPurchase)
-                this@ActivityPurchase.last_address = address
+                MyViews.freezeDisable(this@ActivityPurchaseRent)
+                this@ActivityPurchaseRent.last_address = address
                 if (address != null) {
                     fillWithAddress()
                 } else {
@@ -372,15 +313,15 @@ class ActivityPurchase : AppCompatActivity() {
 
 
     private fun getStates() {
-        val service = AddressService(this@ActivityPurchase)
+        val service = AddressService(this@ActivityPurchaseRent)
         val onStatesReceived = object : AddressService.onStatesReceived{
             override fun onComplete(status: Int, message: String, states: ArrayList<State>) {
-                this@ActivityPurchase.states = states
+                this@ActivityPurchaseRent.states = states
                 val states_array = ArrayList<String>()
                 for (i in states.indices) {
                     states_array.add(states[i].name!!)
                 }
-                val adapter = ArrayAdapter(this@ActivityPurchase, R.layout.item_style_spinner, states_array)
+                val adapter = ArrayAdapter(this@ActivityPurchaseRent, R.layout.item_style_spinner, states_array)
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinner_state.adapter = adapter
             }
@@ -391,18 +332,18 @@ class ActivityPurchase : AppCompatActivity() {
 
 
     private fun getStateCities(state_id: Int) {
-        val service = AddressService(this@ActivityPurchase)
+        val service = AddressService(this@ActivityPurchaseRent)
         val onStateCitiesReceived = object : AddressService.onStateCitiesReceived{
             override fun onComplete(status: Int, message: String, cities: ArrayList<City>) {
                 avl_wait.visibility = View.INVISIBLE
-                MyViews.freezeDisable(this@ActivityPurchase)
-                this@ActivityPurchase.cities = cities
+                MyViews.freezeDisable(this@ActivityPurchaseRent)
+                this@ActivityPurchaseRent.cities = cities
                 val city_array = ArrayList<String>()
                 for (i in cities.indices) {
                     city_array.add(cities[i].name!!)
                 }
 
-                val adapter = ArrayAdapter(this@ActivityPurchase, R.layout.item_style_spinner, city_array)
+                val adapter = ArrayAdapter(this@ActivityPurchaseRent, R.layout.item_style_spinner, city_array)
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinner_city.adapter = adapter
             }
@@ -413,7 +354,7 @@ class ActivityPurchase : AppCompatActivity() {
 
 
     private fun getUserBalance() {
-        val service = UserDetailService(this@ActivityPurchase)
+        val service = UserDetailService(this@ActivityPurchaseRent)
         val onFinanceReceivedComplete = object : UserDetailService.onFinanceReceivedComplete{
             override fun onComplete(status: Int, message: String, finance: Finance) {
                 if (status == 1) {
@@ -445,12 +386,12 @@ class ActivityPurchase : AppCompatActivity() {
     //wallet
     private fun rentGameWithWallet() {
         if (sum_price > user_balance) {
-            MyViews.makeText(this@ActivityPurchase, "موجودی کیف پول شما کمتر میباشد. لطفا اقدام به شارژ کیف پول خود نمایید", Toast.LENGTH_LONG)
+            MyViews.makeText(this@ActivityPurchaseRent, "موجودی کیف پول شما کمتر میباشد. لطفا اقدام به شارژ کیف پول خود نمایید", Toast.LENGTH_LONG)
             return
         }
 
 
-        val service = RentPayService(this@ActivityPurchase)
+        val service = RentPayService(this@ActivityPurchaseRent)
         if (is_use_last_address) {
             val `object` = JSONObject()
             try {
@@ -464,11 +405,11 @@ class ActivityPurchase : AppCompatActivity() {
             val onRentWithWalletComplete = object : RentPayService.onRentWithWalletComplete{
                 override fun onComplete(status: Int, message: String) {
                     avl_wait.visibility = View.INVISIBLE
-                    MyViews.freezeDisable(this@ActivityPurchase)
+                    MyViews.freezeDisable(this@ActivityPurchaseRent)
                     if (status == 0) {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                     } else {
-//                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+//                        MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                         restartApp()
                     }
                 }
@@ -478,11 +419,11 @@ class ActivityPurchase : AppCompatActivity() {
 
         } else {
             if (newAddressObject == null) return
-            val addressService = AddressService(this@ActivityPurchase)
+            val addressService = AddressService(this@ActivityPurchaseRent)
             val onAddressSaved = object : AddressService.onAddressSaved{
                 override fun onComplete(status: Int, message: String, address: Address) {
                     if (status == 0) {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                     } else {
                         new_address_id = address.id
                         val `object` = JSONObject()
@@ -497,11 +438,11 @@ class ActivityPurchase : AppCompatActivity() {
                         val onRentWithWalletComplete = object : RentPayService.onRentWithWalletComplete{
                             override fun onComplete(status: Int, message: String) {
                                 avl_wait.visibility = View.INVISIBLE
-                                MyViews.freezeDisable(this@ActivityPurchase)
+                                MyViews.freezeDisable(this@ActivityPurchaseRent)
                                 if (status == 0) {
-                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                    MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                                 } else {
-//                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+//                                    MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                                     restartApp()
                                 }
                             }
@@ -520,12 +461,12 @@ class ActivityPurchase : AppCompatActivity() {
 
     fun shopGameWithWallet() {
         if (sum_price > user_balance) {
-            MyViews.makeText(this@ActivityPurchase, "موجودی کیف پول شما کمتر میباشد. لطفا اقدام به شارژ کیف پول خود نمایید", Toast.LENGTH_LONG)
+            MyViews.makeText(this@ActivityPurchaseRent, "موجودی کیف پول شما کمتر میباشد. لطفا اقدام به شارژ کیف پول خود نمایید", Toast.LENGTH_LONG)
             return
         }
 
 
-        val service = ShopPayService(this@ActivityPurchase)
+        val service = ShopPayService(this@ActivityPurchaseRent)
         if (is_use_last_address) {
             val `object` = JSONObject()
             try {
@@ -538,9 +479,9 @@ class ActivityPurchase : AppCompatActivity() {
             val onShopWithWalletComplete = object : ShopPayService.onShopWithWalletComplete{
                 override fun onComplete(status: Int, message: String) {
                     if (status == 0) {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                     } else {
-//                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+//                        MyViews.makeText(this@ActivityPurchaseShop, message, Toast.LENGTH_SHORT)
                         restartApp()
                     }
                 }
@@ -551,11 +492,11 @@ class ActivityPurchase : AppCompatActivity() {
 
         } else {
             if (newAddressObject == null) return
-            val addressService = AddressService(this@ActivityPurchase)
+            val addressService = AddressService(this@ActivityPurchaseRent)
             val onAddressSaved = object : AddressService.onAddressSaved{
                 override fun onComplete(status: Int, message: String, address: Address) {
                     if (status == 0) {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                     } else {
                         new_address_id = address.id
                         val `object` = JSONObject()
@@ -570,9 +511,9 @@ class ActivityPurchase : AppCompatActivity() {
                         val onShopWithWalletComplete = object : ShopPayService.onShopWithWalletComplete{
                             override fun onComplete(status: Int, message: String) {
                                 if (status == 0) {
-                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                    MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                                 } else {
-//                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+//                                    MyViews.makeText(this@ActivityPurchaseShop, message, Toast.LENGTH_SHORT)
                                     restartApp()
                                 }
                             }
@@ -592,7 +533,7 @@ class ActivityPurchase : AppCompatActivity() {
     //bank
 
     fun rentGameWithBank() {
-        val service = RentPayService(this@ActivityPurchase)
+        val service = RentPayService(this@ActivityPurchaseRent)
         if (is_use_last_address) {
             val `object` = JSONObject()
             try {
@@ -606,7 +547,7 @@ class ActivityPurchase : AppCompatActivity() {
             val onRentWithBankComplete = object : RentPayService.onRentWithBankComplete{
                 override fun onComplete(status: Int, message: String, pay_url: String) {
                     if (status == 0) {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                     } else {
                         openBrowser(pay_url)
                     }
@@ -616,7 +557,7 @@ class ActivityPurchase : AppCompatActivity() {
 
         } else {
             if (newAddressObject == null) return
-            val addressService = AddressService(this@ActivityPurchase)
+            val addressService = AddressService(this@ActivityPurchaseRent)
             val onAddressSaved = object : AddressService.onAddressSaved{
                 override fun onComplete(status: Int, message: String, address: Address) {
                     val `object` = JSONObject()
@@ -631,7 +572,7 @@ class ActivityPurchase : AppCompatActivity() {
                     val onRentWithBankComplete = object : RentPayService.onRentWithBankComplete{
                         override fun onComplete(status: Int, message: String, pay_url: String) {
                             if (status == 0) {
-                                MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                             } else {
                                 openBrowser(pay_url)
                             }
@@ -649,7 +590,7 @@ class ActivityPurchase : AppCompatActivity() {
 
 
     fun shopGameWithBank() {
-        val service = ShopPayService(this@ActivityPurchase)
+        val service = ShopPayService(this@ActivityPurchaseRent)
         if (is_use_last_address) {
             val `object` = JSONObject()
             try {
@@ -662,9 +603,9 @@ class ActivityPurchase : AppCompatActivity() {
             val onShopWithBankComplete = object : ShopPayService.onShopWithBankComplete{
                 override fun onComplete(status: Int, message: String, pay_url: String) {
                     avl_wait.visibility = View.INVISIBLE
-                    MyViews.freezeDisable(this@ActivityPurchase)
+                    MyViews.freezeDisable(this@ActivityPurchaseRent)
                     if (status == 0) {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                     } else {
                         openBrowser(pay_url)
                     }
@@ -676,11 +617,11 @@ class ActivityPurchase : AppCompatActivity() {
 
         } else {
             if (newAddressObject == null) return
-            val addressService = AddressService(this@ActivityPurchase)
+            val addressService = AddressService(this@ActivityPurchaseRent)
             val onAddressSaved = object : AddressService.onAddressSaved{
                 override fun onComplete(status: Int, message: String, address: Address) {
                     if (status == 0) {
-                        MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                        MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                     } else {
                         new_address_id = address.id
                         val `object` = JSONObject()
@@ -694,9 +635,9 @@ class ActivityPurchase : AppCompatActivity() {
                         val onShopWithBankComplete = object : ShopPayService.onShopWithBankComplete{
                             override fun onComplete(status: Int, message: String, pay_url: String) {
                                 avl_wait.visibility = View.INVISIBLE
-                                MyViews.freezeDisable(this@ActivityPurchase)
+                                MyViews.freezeDisable(this@ActivityPurchaseRent)
                                 if (status == 0) {
-                                    MyViews.makeText(this@ActivityPurchase, message, Toast.LENGTH_SHORT)
+                                    MyViews.makeText(this@ActivityPurchaseRent, message, Toast.LENGTH_SHORT)
                                 } else {
                                     openBrowser(pay_url)
                                 }
@@ -719,93 +660,57 @@ class ActivityPurchase : AppCompatActivity() {
         val phone = edt_phone_number.text.toString()
         val post_code = edt_postcode.text.toString()
         if (address.length < 2) {
-            MyViews.makeText(this@ActivityPurchase, "آدرس وارد شده بسیار کوتاه میباشد", Toast.LENGTH_SHORT)
+            MyViews.makeText(this@ActivityPurchaseRent, "آدرس وارد شده بسیار کوتاه میباشد", Toast.LENGTH_SHORT)
             return false
         } else if (address.length > 1990) {
-            MyViews.makeText(this@ActivityPurchase, "آدرس وارد شده بسیار طولانی میباشد", Toast.LENGTH_SHORT)
+            MyViews.makeText(this@ActivityPurchaseRent, "آدرس وارد شده بسیار طولانی میباشد", Toast.LENGTH_SHORT)
             return false
         } else if (phone.length < 9 || phone.length > 14) {
-            MyViews.makeText(this@ActivityPurchase, "شماره تلفن وارد شده صحیح نمیباشد", Toast.LENGTH_SHORT)
+            MyViews.makeText(this@ActivityPurchaseRent, "شماره تلفن وارد شده صحیح نمیباشد", Toast.LENGTH_SHORT)
             return false
         }
 
         return true
     }
 
-    private fun setupViews() {
-        txt_page_name = findViewById(R.id.txt_page_name)
-        img_back = findViewById(R.id.img_back)
-        avl_wait = findViewById(R.id.avl_wait)
-        txt_show_product = findViewById(R.id.txt_show_product)
-        img_game = findViewById(R.id.img_game)
-        txt_region = findViewById(R.id.txt_region)
-        txt_name = findViewById(R.id.txt_name)
-        txt_rent_day = findViewById(R.id.txt_rent_day)
-        txt_game_status = findViewById(R.id.txt_game_status)
-        lyt_last_address = findViewById(R.id.lyt_last_address)
-        txt_show_address = findViewById(R.id.txt_show_address)
-        txt_last_address_show = findViewById(R.id.txt_last_address_show)
-        txt_address_text = findViewById(R.id.txt_address_text)
-        txt_use_last_address = findViewById(R.id.txt_use_last_address)
-        swch_use_last_address = findViewById(R.id.swch_use_last_address)
-        lyt_new_address = findViewById(R.id.lyt_new_address)
-        spinner_state = findViewById(R.id.spinner_state)
-        spinner_city = findViewById(R.id.spinner_city)
-        txt_show_state = findViewById(R.id.txt_show_state)
-        txt_show_city = findViewById(R.id.txt_show_city)
-        edt_address_content = findViewById(R.id.edt_address_content)
-        edt_phone_number = findViewById(R.id.edt_phone_number)
-        edt_postcode = findViewById(R.id.edt_postcode)
-        btn_open_map = findViewById(R.id.btn_open_map)
-        lyt_rent_price = findViewById(R.id.lyt_rent_price)
-        txt_show_payment = findViewById(R.id.txt_show_payment)
-        txt_game_price = findViewById(R.id.txt_game_price)
-        txt_show_game_price = findViewById(R.id.txt_show_game_price)
-        txt_rent_price = findViewById(R.id.txt_rent_price)
-        txt_show_rent_price = findViewById(R.id.txt_show_rent_price)
-        txt_sum_price = findViewById(R.id.txt_sum_price)
-        txt_show_sum_price = findViewById(R.id.txt_show_sum_price)
-        btn_wallet_pay = findViewById(R.id.btn_wallet_pay)
-        btn_bank_pay = findViewById(R.id.btn_bank_pay)
 
-    }
 
 
     private fun setTypeFace() {
-        txt_page_name.typeface =  MyViews.getIranSansMediumFont(this@ActivityPurchase)
-        txt_show_product.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchase)//medium
-        txt_region.typeface = MyViews.getRobotoLightFont(this@ActivityPurchase)
-        txt_name.typeface = MyViews.getRobotoLightFont(this@ActivityPurchase)
-        txt_rent_day.typeface = MyViews.getRobotoLightFont(this@ActivityPurchase)
-        txt_game_status.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        txt_show_address.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchase)//medium
-        txt_last_address_show.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchase)//medium
-        txt_address_text.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchase)//medium
-        txt_use_last_address.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchase)//medium
-        txt_show_state.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        txt_show_city.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        edt_address_content.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        edt_phone_number.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        edt_postcode.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        btn_open_map.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        txt_show_payment.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchase)//medium
-        txt_game_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        txt_show_game_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        txt_rent_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        txt_show_rent_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        txt_sum_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        txt_show_sum_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchase)
-        btn_wallet_pay.typeface = MyViews.getIranSansUltraLightFont(this@ActivityPurchase)
-        btn_bank_pay.typeface = MyViews.getIranSansUltraLightFont(this@ActivityPurchase)
+        txt_page_name.typeface =  MyViews.getIranSansMediumFont(this@ActivityPurchaseRent)
+        txt_show_product.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchaseRent)//medium
+        txt_region.typeface = MyViews.getRobotoLightFont(this@ActivityPurchaseRent)
+        txt_name.typeface = MyViews.getRobotoLightFont(this@ActivityPurchaseRent)
+        txt_rent_day.typeface = MyViews.getRobotoLightFont(this@ActivityPurchaseRent)
+        txt_game_status.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        txt_show_address.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchaseRent)//medium
+        txt_last_address_show.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchaseRent)//medium
+        txt_address_text.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchaseRent)//medium
+        txt_use_last_address.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchaseRent)//medium
+        txt_show_state.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        txt_show_city.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        edt_address_content.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        edt_phone_number.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        edt_postcode.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        btn_open_map.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        txt_show_payment.typeface = MyViews.getIranSansMediumFont(this@ActivityPurchaseRent)//medium
+        txt_game_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        txt_show_game_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        txt_rent_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        txt_show_rent_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        txt_sum_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        txt_show_sum_price.typeface = MyViews.getIranSansLightFont(this@ActivityPurchaseRent)
+        btn_wallet_pay.typeface = MyViews.getIranSansUltraLightFont(this@ActivityPurchaseRent)
+        btn_bank_pay.typeface = MyViews.getIranSansUltraLightFont(this@ActivityPurchaseRent)
     }
 
 
     private fun restartApp() {
         if (ActivityMenu.instance != null) {
             ActivityMenu.instance!!.finish()
-            val intent = Intent(this@ActivityPurchase, ActivityMenu::class.java)
+            val intent = Intent(this@ActivityPurchaseRent, ActivityMenu::class.java)
             startActivity(intent)
-            this@ActivityPurchase.finish()
+            this@ActivityPurchaseRent.finish()
         }
     }
 
@@ -822,7 +727,7 @@ class ActivityPurchase : AppCompatActivity() {
 
     companion object {
 
-        private val TAG = "ActivityPurchase"
+        private val TAG = "ActivityPurchaseRent"
 
         private val TYPE_RENT = "RENT"
         private val TYPE_SHOP = "SHOP"

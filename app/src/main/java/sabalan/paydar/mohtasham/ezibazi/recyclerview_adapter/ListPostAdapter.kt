@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
-
 import sabalan.paydar.mohtasham.ezibazi.R
-import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperDate
 import sabalan.paydar.mohtasham.ezibazi.model.Post
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperDate
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityWebView
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 
@@ -42,7 +40,7 @@ class ListPostAdapter(private val context: Context, private val posts: MutableLi
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ActivityWebView::class.java)
-            intent.putExtra("URL", "https://www.google.com")
+            intent.putExtra("URL", "https://easybazi.ir/blog/" +  posts[position].id + "/" +  posts[position].title)
             context.startActivity(intent)
         }
 

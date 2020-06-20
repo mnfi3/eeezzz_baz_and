@@ -50,6 +50,24 @@
 
 
 
+
+            <!--<fragment-->
+            <!--android:id="@+id/frg_main_rents"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentRents"-->
+            <!--tools:layout="@layout/fragment_main_rents"/>-->
+
+            <FrameLayout
+              android:id="@+id/lyt_main_rents"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:visibility="gone"/>
+
+
+
+
+
             <!--<fragment-->
             <!--android:id="@+id/frg_main_shops"-->
             <!--android:layout_width="match_parent"-->
@@ -64,18 +82,6 @@
 
 
 
-
-            <!--<fragment-->
-            <!--android:id="@+id/frg_main_rents"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:name="mohtasham.paydar.sabalan.ezbazi.view.fragment.main_menu.FragmentRents"-->
-            <!--tools:layout="@layout/fragment_main_rents"/>-->
-
-            <FrameLayout
-                android:id="@+id/lyt_main_rents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
 
 

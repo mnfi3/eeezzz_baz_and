@@ -1,5 +1,6 @@
 package sabalan.paydar.mohtasham.ezibazi.view.fragment.search
 
+
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,25 +8,14 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
-
-
+import android.widget.*
 import com.wang.avi.AVLoadingIndicatorView
-
 import org.json.JSONException
 import org.json.JSONObject
-
-import java.util.ArrayList
-
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.main.PostService
 import sabalan.paydar.mohtasham.ezibazi.api_service.main.RentService
@@ -40,6 +30,7 @@ import sabalan.paydar.mohtasham.ezibazi.system.pref_manager.CityPrefManager
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation.adapters.ScaleInAnimationAdapter
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.recyclerview_animation.adapters.SlideInBottomAnimationAdapter
+import java.util.*
 
 
 class FragmentSearch : Fragment() {
@@ -64,7 +55,7 @@ class FragmentSearch : Fragment() {
     internal var rdo_shop_num = 2
     internal var rdo_post_num = 3
 
-    internal var current_rdo = rdo_rent_num
+    internal var current_rdo = rdo_shop_num
 
     internal lateinit var rentService: RentService
     internal lateinit var shopService: ShopService

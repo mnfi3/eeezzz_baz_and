@@ -113,7 +113,7 @@
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/font_size_very_small"
             android:layout_margin="10dp"
-            android:checked="false"
+            android:checked="true"
             android:buttonTint="@color/colorAccent2"/>
 
 
@@ -124,11 +124,12 @@
             android:layout_weight="0.3"
             android:layout_height="wrap_content"
             android:text="بازی های اجاره ای"
-            android:checked="true"
+            android:checked="false"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/font_size_very_small"
             android:layout_margin="10dp"
             android:buttonTint="@color/colorAccent2"
+            android:visibility="gone"
             />
 
     </RadioGroup>

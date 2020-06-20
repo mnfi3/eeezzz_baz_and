@@ -262,8 +262,8 @@ class ActivityShowRent : AppCompatActivity() {
         }
         txt_genres.text = genres
         txt_region.text = game!!.region
-        if(game!!.is_second_hand == 1) txt_second_hand.text = "خیر"
-        else  txt_second_hand.text = "بله"
+        if(game!!.is_second_hand == 1) txt_second_hand.text = "دست دوم"
+        else  txt_second_hand.text = "آکبند"
 
 
         val cover_image = game!!.app_cover_photo_url
@@ -318,7 +318,7 @@ class ActivityShowRent : AppCompatActivity() {
             }
         }
 
-        val intent = Intent(this@ActivityShowRent, ActivityPurchase::class.java)
+        val intent = Intent(this@ActivityShowRent, ActivityPurchaseShop::class.java)
         intent.putExtra("TYPE", "RENT")
         intent.putExtra("ID", game!!.id)
         intent.putExtra("RENT_TYPE_ID", rent_type_id)

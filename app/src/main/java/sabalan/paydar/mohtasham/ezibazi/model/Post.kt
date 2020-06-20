@@ -1,9 +1,7 @@
 package sabalan.paydar.mohtasham.ezibazi.model
 
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-
 import java.io.Serializable
 
 class Post : Serializable {
@@ -27,7 +25,7 @@ class Post : Serializable {
                     for (i in 0 until photoArray.length()) {
                         val photo: Photo
                         photo = Photo.Parser.parse(photoArray.getJSONObject(i))
-                        if (photo.type == "app_cover") {
+                        if (photo.type == "app_cover" || photo.type == "app_post_cover") {
                             post.image_url = photo.url
                             break
                         }

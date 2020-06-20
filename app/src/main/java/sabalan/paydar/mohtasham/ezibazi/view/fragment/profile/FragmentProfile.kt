@@ -2,11 +2,13 @@ package sabalan.paydar.mohtasham.ezibazi.view.fragment.profile
 
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SwitchCompat
 import android.text.Editable
@@ -122,16 +124,31 @@ class FragmentProfile : Fragment() {
         }
 
         lyt_logout.setOnClickListener {
-            val service = AccountService(context)
-            service.logout(onLogoutComplete = object : AccountService.onLogoutComplete{
-                override fun onComplete(status: Int, message: String) {
-                    if (status == 1) {
-                        logoutUser()
-                    } else {
-                        MyViews.makeText((activity as AppCompatActivity?)!!, message, Toast.LENGTH_SHORT)
-                    }
-                }
-            });
+
+            val alertDialog2 = AlertDialog.Builder( context)
+            alertDialog2.setTitle("خروج از حساب کاربری")
+            alertDialog2.setMessage("آیا مطمئن هستید؟")
+            alertDialog2.setIcon(sabalan.paydar.mohtasham.ezibazi.R.drawable.abc_dialog_material_background)
+            alertDialog2.setPositiveButton("بله",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        dialog.cancel()
+                        val service = AccountService(context)
+                        service.logout(onLogoutComplete = object : AccountService.onLogoutComplete{
+                            override fun onComplete(status: Int, message: String) {
+                                if (status == 1) {
+                                    logoutUser()
+                                } else {
+                                    MyViews.makeText((activity as AppCompatActivity?)!!, message, Toast.LENGTH_SHORT)
+                                }
+                            }
+                        });
+                    })
+            alertDialog2.setNegativeButton("خیر",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        dialog.cancel()
+                    })
+
+            alertDialog2.show()
         }
 
 

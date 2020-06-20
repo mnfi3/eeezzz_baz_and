@@ -2,11 +2,9 @@ package sabalan.paydar.mohtasham.ezibazi.view.fragment.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.sub.FragmentPosts
 import sabalan.paydar.mohtasham.ezibazi.view.fragment.home.sub.FragmentRents
@@ -26,8 +24,8 @@ class FragmentHome : Fragment() {
         val ft = activity!!.supportFragmentManager.beginTransaction()
         //    ft.setCustomAnimations(R.anim.anim_enter_from_left, R.anim.anim_exit_to_right);
         ft.replace(R.id.lyt_main_posts, FragmentPosts())
-        ft.replace(R.id.lyt_main_shops, FragmentRents())
-        ft.replace(R.id.lyt_main_rents, FragmentShops())
+        ft.replace(R.id.lyt_main_rents, FragmentRents())
+        ft.replace(R.id.lyt_main_shops, FragmentShops())
         ft.commit()
 
         //    FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();

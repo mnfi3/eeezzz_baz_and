@@ -28,7 +28,9 @@ class ActivityMobile : AppCompatActivity() {
         if (extras != null) {
             target = extras.getString("TARGET")
             if (extras.getString("MOBILE") != null){
-                edt_mobile.setText(extras.getString("MOBILE"))
+                mobile = extras.getString("MOBILE");
+                edt_mobile.setText(mobile)
+                checkMobile()
             }
         }
 

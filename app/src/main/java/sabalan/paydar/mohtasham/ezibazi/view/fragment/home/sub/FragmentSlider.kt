@@ -7,18 +7,15 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-
 import com.daimajia.slider.library.Animations.DescriptionAnimation
 import com.daimajia.slider.library.SliderLayout
 import com.daimajia.slider.library.SliderTypes.BaseSliderView
 import com.daimajia.slider.library.SliderTypes.TextSliderView
-
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.api_service.main.SliderMainService
 import sabalan.paydar.mohtasham.ezibazi.model.MainSlider
-import sabalan.paydar.mohtasham.ezibazi.system.application.G
+import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityShowShop
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityWebView
 
 
@@ -45,9 +42,19 @@ class FragmentSlider : Fragment() {
                     .image(sliders[i].image_url)
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener {
-                        val intent = Intent(context, ActivityWebView::class.java)
-                        intent.putExtra("URL", sliders[i].on_click)
-                        startActivity(intent)
+                        if (sliders[i].on_click!!.length > 3){
+                            val params = sliders[i].on_click!!.split(":::")
+                            if(params[0] == "URL"  && params[1].length > 2){
+                                val intent = Intent(context, ActivityWebView::class.java)
+                                intent.putExtra("URL", params[1])
+                                startActivity(intent)
+                            }else if(params[0] == "INAPP_SHOP" && params[1].length > 0){
+                                val intent = Intent(context, ActivityShowShop::class.java)
+                                intent.putExtra("ID", params[1])
+                                startActivity(intent)
+                            }
+                        }
+
                     }
 
 

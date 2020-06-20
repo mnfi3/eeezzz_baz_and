@@ -9,13 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
-
 import sabalan.paydar.mohtasham.ezibazi.R
-import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText
 import sabalan.paydar.mohtasham.ezibazi.model.Game
+import sabalan.paydar.mohtasham.ezibazi.system.helper.HelperText
 import sabalan.paydar.mohtasham.ezibazi.view.activity.ActivityShowShop
 import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 
@@ -29,13 +27,15 @@ class ListShopAdapter(private val context: Context, private val games: MutableLi
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val game = games[position]
-        Picasso.with(context).load(game.app_cover_photo_url)
-                //      .noFade()
-                //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                //      .skipMemoryCache()
-                //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
-                //.error(context.getResources().getDrawable(R.drawable.default_no_image))
-                .into(holder.img_game)
+        try {
+            Picasso.with(context).load(game.app_cover_photo_url)
+                    //      .noFade()
+                    //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                    //      .skipMemoryCache()
+                    //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
+                    //.error(context.getResources().getDrawable(R.drawable.default_no_image))
+                    .into(holder.img_game)
+        }catch (e: Exception){}
 
         holder.txt_name.text = game.name
         holder.txt_release_date.text = "تاریخ ارائه : " + game.production_date!!

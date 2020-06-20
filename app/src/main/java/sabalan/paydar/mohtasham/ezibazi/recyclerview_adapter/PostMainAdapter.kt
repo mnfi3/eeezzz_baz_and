@@ -42,7 +42,7 @@ class PostMainAdapter(private val context: Context, private val posts: MutableLi
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ActivityWebView::class.java)
-            intent.putExtra("URL", "https://www.google.com")
+            intent.putExtra("URL", "https://easybazi.ir/blog/" +  posts[position].id + "/" +  posts[position].title)
             context.startActivity(intent)
         }
 

@@ -27,13 +27,15 @@ class ShopMainAdapter(private val context: Context, private val games: MutableLi
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val game = games[position]
         val id = game.id
-        Picasso.with(context).load(game.app_cover_photo_url)
-                //      .noFade()
-                //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                //      .skipMemoryCache()
-                //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
-                //.error(context.getResources().getDrawable(R.drawable.default_no_image))
-                .into(holder.img_game)
+        try {
+            Picasso.with(context).load(game.app_cover_photo_url)
+                    //      .noFade()
+                    //      .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                    //      .skipMemoryCache()
+                    //.placeholder(context.getResources().getDrawable(R.drawable.default_good_image)).
+                    //.error(context.getResources().getDrawable(R.drawable.default_no_image))
+                    .into(holder.img_game)
+        }catch (e:Exception){}
 
         holder.txt_game_name.text = game.name
         holder.txt_release_date.text = game.production_date

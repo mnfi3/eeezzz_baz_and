@@ -17,7 +17,7 @@
   <application
     android:name=".system.application.G"
     android:allowBackup="false"
-    android:icon="@mipmap/icon"
+    android:icon="@mipmap/icon2"
     android:label="@string/app_name"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:screenOrientation="portrait"
@@ -160,7 +160,7 @@
       android:screenOrientation="portrait">
     </activity>
     <activity
-      android:name=".view.activity.ActivityPurchase"
+      android:name=".view.activity.ActivityPurchaseShop"
       android:screenOrientation="portrait">
     </activity>
     <activity android:name=".view.activity.ActivityMap">

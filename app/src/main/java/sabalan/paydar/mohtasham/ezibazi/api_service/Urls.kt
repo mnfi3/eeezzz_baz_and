@@ -95,6 +95,9 @@ object Urls {
     val SHOP_WITH_WALLET = AppConfig.MAIN_URL + "/shop-game-with-wallet"
     val SHOP_WITH_BANK = AppConfig.MAIN_URL + "/shop-game"
 
+    //validate discount
+    val DISCOUNT_VALIDATE = AppConfig.MAIN_URL + "/discount-check"
+
 
 
 

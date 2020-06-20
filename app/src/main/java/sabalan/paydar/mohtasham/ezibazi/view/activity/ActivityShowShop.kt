@@ -189,8 +189,8 @@ class ActivityShowShop : AppCompatActivity() {
         }
         txt_genres.text = genres
         txt_region.text = game!!.region
-        if(game!!.is_second_hand == 1) txt_second_hand.text = "خیر"
-        else  txt_second_hand.text = "بله"
+        if(game!!.is_second_hand == 1) txt_second_hand.text = "دست دوم"
+        else  txt_second_hand.text = "آکبند"
 
         var cover_image: String? = ""
         for (i in 0 until game!!.photos!!.size) {
@@ -199,9 +199,11 @@ class ActivityShowShop : AppCompatActivity() {
             break
             //      }
         }
-        Picasso.with(this@ActivityShowShop).load(cover_image)
-                //      .placeholder()
-                .into(img_game_cover)
+        try {
+            Picasso.with(this@ActivityShowShop).load(cover_image)
+                    //      .placeholder()
+                    .into(img_game_cover)
+        }catch (e: Exception){}
 
 
         val is_play_video = SettingPrefManager(this@ActivityShowShop).playVideos
@@ -264,7 +266,7 @@ class ActivityShowShop : AppCompatActivity() {
         }
 
 
-        val intent = Intent(this@ActivityShowShop, ActivityPurchase::class.java)
+        val intent = Intent(this@ActivityShowShop, ActivityPurchaseShop::class.java)
         intent.putExtra("TYPE", "SHOP")
         intent.putExtra("ID", game!!.id)
         startActivity(intent)
