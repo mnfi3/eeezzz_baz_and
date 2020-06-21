@@ -91,6 +91,7 @@ class ActivityVerificationCode : AppCompatActivity() {
                     intent.putExtra("MOBILE", mobile)
                     intent.putExtra("TOKEN", vc.token)
                     startActivity(intent)
+                    this@ActivityVerificationCode.finish()
                 }
             }
         }
@@ -111,6 +112,7 @@ class ActivityVerificationCode : AppCompatActivity() {
                     intent.putExtra("MOBILE", mobile)
                     intent.putExtra("TOKEN", vc.token)
                     startActivity(intent)
+                    this@ActivityVerificationCode.finish()
                 }
             }
         }
@@ -131,6 +133,7 @@ class ActivityVerificationCode : AppCompatActivity() {
                     intent.putExtra("MOBILE", mobile)
                     intent.putExtra("TOKEN", vc.token)
                     startActivity(intent)
+                    this@ActivityVerificationCode.finish()
                 }
             }
         }

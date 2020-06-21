@@ -1,26 +1,21 @@
 package sabalan.paydar.mohtasham.ezibazi.view.activity
 
 //import android.annotation.SuppressLint;
+
 import android.annotation.SuppressLint
 import android.content.IntentFilter
-import android.graphics.Bitmap
+import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
 import android.webkit.WebChromeClient
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-
 import com.wang.avi.AVLoadingIndicatorView
-
 import sabalan.paydar.mohtasham.ezibazi.R
 import sabalan.paydar.mohtasham.ezibazi.system.application.G
-import sabalan.paydar.mohtasham.ezibazi.view.custom_views.my_views.MyViews
 
 class ActivityWebView : AppCompatActivity() {
 
@@ -38,6 +33,7 @@ class ActivityWebView : AppCompatActivity() {
         setContentView(R.layout.activity_web_view)
 
         setupViews()
+        web_view.webViewClient = WebViewClient()
 
         val extras = intent.extras
         if (extras != null) {

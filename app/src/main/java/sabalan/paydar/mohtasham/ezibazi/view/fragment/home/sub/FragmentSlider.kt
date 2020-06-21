@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,13 +45,14 @@ class FragmentSlider : Fragment() {
                     .setOnSliderClickListener {
                         if (sliders[i].on_click!!.length > 3){
                             val params = sliders[i].on_click!!.split(":::")
+                            Log.i("SLIDER", params.toString())
                             if(params[0] == "URL"  && params[1].length > 2){
                                 val intent = Intent(context, ActivityWebView::class.java)
                                 intent.putExtra("URL", params[1])
                                 startActivity(intent)
                             }else if(params[0] == "INAPP_SHOP" && params[1].length > 0){
                                 val intent = Intent(context, ActivityShowShop::class.java)
-                                intent.putExtra("ID", params[1])
+                                intent.putExtra("ID", params[1].toInt())
                                 startActivity(intent)
                             }
                         }
