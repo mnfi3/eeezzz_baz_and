@@ -243,7 +243,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:padding="2dp"
-                        android:text="خروج"
+                        android:text="خروج از حساب کاربری"
                         android:textColor="@color/main_text_color"
                         android:layout_marginLeft="5dp"
                         android:gravity="center_vertical|left"
@@ -299,7 +299,7 @@
                     android:layout_marginTop="20dp">
 
 
-                    <android.support.v7.widget.SwitchCompat
+                    <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/swch_show_video"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -369,6 +369,7 @@
 
 
                     <ImageView
+                      android:id="@+id/img_telegram"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_telegram"
@@ -378,6 +379,7 @@
                         />
 
                     <ImageView
+                      android:id="@+id/img_instagram"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_instagram"
@@ -392,6 +394,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                  android:id="@+id/lyt_rules"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:gravity="right"
@@ -414,6 +417,36 @@
                         android:src="@drawable/ic_law"
                         android:padding="2dp"
                         />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                  android:id="@+id/lyt_about_us"
+                  android:layout_width="match_parent"
+                  android:layout_height="20dp"
+                  android:gravity="right"
+                  android:orientation="horizontal"
+                  android:paddingRight="10dp"
+                  android:layout_marginTop="20dp">
+                    <TextView
+                      android:id="@+id/txt_about_us"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="right"
+                      android:layout_marginRight="10dp"
+                      android:text="درباره ما"
+                      android:textColor="@color/main_text_color"
+                      android:textSize="@dimen/font_size_small"/>
+
+                    <ImageView
+                      android:layout_width="20dp"
+                      android:layout_height="20dp"
+                      android:src="@android:drawable/stat_sys_phone_call"
+                      android:tint="@color/colorAccent"
+                      android:padding="2dp"
+                      />
 
 
 

@@ -272,7 +272,7 @@
                         android:visibility="invisible"
                         />
 
-                    <android.support.v7.widget.SwitchCompat
+                    <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/swch_use_last_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -309,7 +309,7 @@
                     android:layout_marginTop="10dp"
                     android:padding="5dp">
 
-                    <android.support.v7.widget.AppCompatSpinner
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_state"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -319,7 +319,7 @@
                         android:backgroundTintMode="multiply"
                         >
 
-                    </android.support.v7.widget.AppCompatSpinner>
+                    </androidx.appcompat.widget.AppCompatSpinner>
 
                     <TextView
                         android:id="@+id/txt_show_state"
@@ -341,7 +341,7 @@
                     android:layout_marginTop="10dp"
                     android:padding="5dp">
 
-                    <android.support.v7.widget.AppCompatSpinner
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_city"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -350,7 +350,7 @@
                         android:backgroundTint="@color/colorAccent"
                         android:backgroundTintMode="multiply">
 
-                    </android.support.v7.widget.AppCompatSpinner>
+                    </androidx.appcompat.widget.AppCompatSpinner>
 
                     <TextView
                         android:id="@+id/txt_show_city"
@@ -366,7 +366,7 @@
                 </LinearLayout>
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -386,9 +386,9 @@
                         />
 
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -409,10 +409,10 @@
                         />
 
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -434,9 +434,9 @@
                         />
 
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <android.support.v7.widget.AppCompatButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_open_map"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
@@ -449,7 +449,7 @@
                         android:background="@drawable/back_button_open_map"
                         >
 
-                    </android.support.v7.widget.AppCompatButton>
+                    </androidx.appcompat.widget.AppCompatButton>
 
                 </LinearLayout>
 
@@ -598,7 +598,7 @@
               android:gravity="center_horizontal">
 
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                   android:id="@+id/btn_discount"
                   android:layout_height="wrap_content"
                   android:layout_width="0dp"
@@ -614,10 +614,10 @@
                   android:layout_marginRight="20dp"
                   >
 
-                </android.support.v7.widget.AppCompatButton>
+                </androidx.appcompat.widget.AppCompatButton>
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                   android:layout_width="0dp"
                   android:layout_weight=".6"
                   android:layout_height="wrap_content"
@@ -642,7 +642,7 @@
                       />
 
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -662,7 +662,7 @@
                 android:padding="5dp"
                 >
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_wallet_pay"
                     android:layout_width="200dp"
                     android:layout_height="48dp"
@@ -679,7 +679,7 @@
                     />
 
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_bank_pay"
                     android:layout_width="200dp"
                     android:layout_height="48dp"
